@@ -1,0 +1,182 @@
+/deep/.ks-tabs-container.ks-tabs-default {
+  border: none;
+  margin-bottom: -15px;
+}
+
+.like-emo>span {
+  display: inline-block;
+  margin: -5px 0px 0px 0px;
+  width: 16px;
+  height: 16px;
+  /*border: 1px solid #EEE;*/
+  border-radius: 50%;
+}
+
+.la {
+  margin: -5px 0px 0px 0px;
+  font: normal normal normal 20px/1 LineAwesome;
+  display: inline-block;
+  margin: -5px 0px 0px 0px;
+  width: 16px;
+  height: 16px;
+  /*border: 1px solid #EEE;*/
+  border-radius: 50%;
+  color: #333;
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-all.active::before {
+  background: #333;
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-like.active::before {
+  background: rgb(88, 144, 255);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-love.active::before {
+  background: rgb(242, 82, 104);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-wow.active::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-haha.active::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-sad.active::before {
+  background: rgb(240, 186, 21);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-angry.active::before {
+  background: rgb(247, 113, 75);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-all:hover::before {
+  background: #333;
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-like:hover::before {
+  background: rgba(88, 144, 255, 0.3);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-love:hover::before {
+  background: rgba(242, 82, 104, 0.3);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-wow:hover::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-haha:hover::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-sad:hover::before {
+  background: rgba(240, 186, 21, 0.3);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-angry:hover::before {
+  background: rgba(247, 113, 75, 0.3);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-all.active:hover::before {
+  background: #333;
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-like.active:hover::before {
+  background: rgb(88, 144, 255);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-love.active:hover::before {
+  background: rgb(242, 82, 104);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-wow.active:hover::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-haha.active:hover::before,
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-sad.active:hover::before {
+  background: rgb(240, 186, 21);
+}
+
+.ks-tabs-container.ks-tabs-default.ks-tabs-no-separator>.ks-nav-tabs .nav-link.nav-angry.active:hover::before {
+  background: rgb(247, 113, 75);
+}
+
+
+.like-btn-like {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -151px;
+}
+
+.like-btn-love {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 -168px;
+}
+
+.like-btn-haha {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0 -151px;
+}
+
+.like-btn-wow {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -185px;
+}
+
+.like-btn-sad {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -168px;
+}
+
+.like-btn-angry {
+  background-image: url('../../../../../assets/img/reactions/reaction-small.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -17px -117px;
+}
+
+.icon-number {
+  position: absolute;
+  width: 100%;
+  left:0px;
+  top: 0px;
+  padding-top: 2px;
+  color:#333;
+  /*-webkit-border-radius: 9px;
+  border-radius: 9px;
+  min-width: 18px;
+  min-height: 18px;
+  text-align: center;
+  border: none;
+  padding-left: 5px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: grey;*/
+
+}
+.ks-user{
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dee0e1;
+}
+.ks-user>.badge {
+    position: relative;
+    bottom: -25px;
+    left: -20px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #dee0e1;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+}

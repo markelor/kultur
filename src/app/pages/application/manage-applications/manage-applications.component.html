@@ -1,0 +1,53 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body ks-full-height">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid">
+        <div class="ks-pricing-plans-page">
+            <!--
+          <div class="ks-header">
+            <h3 class="ks-name">Itziarko udala</h3>
+            <div class="ks-description">Deskribapen orokorra</div>
+          </div>
+            <div class="ks-plan">
+              <div class="ks-header">
+                <h5 class="ks-name">Herriko festak</h5>
+                <div class="ks-price">
+                  <div class="ks-currency">€</div>
+                  <div class="ks-amount">250</div>
+                  <div class="ks-period">/urtean</div>
+                </div>
+              </div>
+              <div class="ks-body">
+                <ul class="ks-list">
+                  <li>Aktualizaziok</li>
+                  <li>Datu basea</li>
+                  <li>Iraungitze data : 2019/08/12</li>
+                  <li>kudeatzailea:kodekoop</li>
+                </ul>
+                <a [routerLink]="['/user-route','applications-route','edit-route',application._id] | localize" href="#" class="btn btn-primary btn-block ks-light" translate>{{'application.edit-alication'}}</a>
+              </div>
+            </div>-->
+          <div class="ks-plans">
+            <div *ngFor="let application of applications" class="ks-plan ks-info">
+              <div class="ks-header">
+                <h5 class="ks-name">{{application.title}}</h5>
+                 <img src="{{application.images[0].url}}" height="200px">
+                <div class="ks-price">
+                  <div class="ks-currency">€</div>
+                  <div class="ks-amount">{{application.price}}</div>
+                  <div class="ks-period">/urtean</div>
+                </div>
+              </div>
+              <div class="ks-body">
+                <ul class="ks-list ks-success">
+                  <li *ngFor="let condition of application.conditions">{{condition}}</li>
+                </ul>
+                <a [routerLink]="['/application-route','manage-route',application._id] | localize" href="javascript:void(0);" class="btn btn-info btn-block" translate>{{'application.edit-application'}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

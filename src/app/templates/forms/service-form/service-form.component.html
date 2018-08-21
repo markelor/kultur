@@ -1,0 +1,170 @@
+<!-- Custom Success/Error Message -->
+<div *ngIf="message" class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- Service Form -->
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
+  <div class="row">
+    <!-- Title -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
+        <label for="inputTitle" translate>{{'service-form.title'}}</label>
+        <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
+        <!-- Validation -->
+        <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
+        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
+      </div>
+    </div>
+    <!-- Service type-->
+    <div class="col-sm-12">
+      <div class="form-group" [ngClass]="{'has-success': (serviceType.value)}">
+        <label for="selectServiceType" translate>{{'service-form.service-type'}}</label>
+        <select [formControl]="serviceType" class="form-control" id="selectServiceType" (change)="onSelectedServiceType($event.target.selectedIndex-1)">
+          <option value="" translate>{{'service-form.select-service-type'}}</option>
+          <ng-container>
+            <ng-container *ngFor="let serviceType of serviceTypes">
+              <option *ngIf="inputLanguage===serviceType.language" [ngValue]="serviceType._id">
+                {{serviceType.title}}
+              </option>        
+              <ng-container *ngFor="let translation of serviceType.translation">
+                <option *ngIf="inputLanguage===translation.language" [ngValue]="serviceType._id">
+                  {{translation.title}}
+                </option>
+              </ng-container>
+            </ng-container>          
+          </ng-container>    
+        </select>
+      </div>
+    </div>
+    <!-- ExpiredAt -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!expiredAt.valid && expiredAt.dirty), 'has-success': (expiredAt.value)}">
+        <label for="inputExpiredAt" translate>{{'application-form.expired-at'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="expiredAt" ngbDatepicker #calendarExpiredAt="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputExpiredAt">
+          <div class="input-group-append ">
+            <button (click)="calendarExpiredAt.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-calendar ks-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ExpiredAt time-->
+    <div class="col-sm-6 margin-top">
+      <div class="form-group required">
+        <ngb-timepicker [(ngModel)]="timeExpiredAt" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+      </div>
+    </div>
+    <!-- Province -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!province.value && province.dirty), 'has-success': (province.value)}">
+        <label for="selectProvinceService" translate>{{'event-form.province'}}</label>
+        <select [formControl]="province" class="form-control" id="selectProvinceService" (change)="onSelectedProvince($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-province'}}</option>
+          <option *ngFor="let provinceService of provincesService " [ngValue]="provinceService.name">
+            {{provinceService.name}}
+          </option>
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!province.value && province.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Municipality -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!municipality.value && municipality.dirty), 'has-success': (municipality.value)}">
+        <label for="selectMunicipalityService" translate>{{'event-form.municipality'}}</label>
+        <select [formControl]="municipality" class="form-control" id="selectMunicipalityService" (change)="onSelectedMunicipality($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-municipality'}}</option>
+          <option *ngFor="let municipalityService of municipalitiesService" [ngValue]="municipalityService.name">
+            {{municipalityService.name}}
+          </option>
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!municipality.value && municipality.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Location exists-->
+    <div *ngIf="!location.value && locationsExistsService.length > 0" class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!locationsExists.value && locationsExists.dirty), 'has-success': (locationsExists.value)}">
+        <label for="selectLocationsExistsService" translate>{{'event-form.locations-exists'}}</label>
+        <select [formControl]="locationsExists" class="form-control" id="selectLocationsExistsService" (change)="onSelectedLocationsExists($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-locations-exists'}}</option>
+          <ng-container *ngFor="let locationsExistsService of locationsExistsService">
+            <option *ngIf="inputLanguage===locationsExistsService.language" [ngValue]="locationsExistsService.location">
+            {{locationsExistsService.location}}
+            </option>
+            <ng-container *ngFor="let translation of locationsExistsService.translation">
+              <option *ngIf="inputLanguage===translation.language" [ngValue]="translation.location">
+                {{translation.location}}
+              </option>
+            </ng-container>
+            </ng-container>
+
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!locationsExists.value && locationsExists.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Location -->
+    <div *ngIf="!locationsExists.value" class="col-sm-12">
+      <div class="form-group" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
+        <label for="textareaLocation" translate>{{'event-form.location'}}</label>
+        <textarea [formControl]="location" capitalize class="form-control" id="textareaLocation"></textarea>
+        <!-- Validation -->
+        <span *ngIf="!location.value && location.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="location.errors?.maxlength && location.dirty " class="help-block form-error" translate>{{'validation.location-length'}}</span>
+      </div>
+    </div>
+    <!-- Latitude -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!lat.valid && lat.dirty), 'has-success': (lat.valid)}">
+        <label for="inputLat" translate>{{'event-form.lat'}}</label>
+        <input [formControl]="lat" type="text" class="form-control" id="inputLat">
+        <!-- Validation -->
+        <span *ngIf="lat.errors?.required && lat.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="lat.errors?.validateLatitude && lat.dirty" class="help-block form-error" translate>{{'validation.latitude-validation'}}</span>
+      </div>
+    </div>
+    <!-- Longitude -->
+    <div class="col-sm-6 ">
+      <div class="form-group required" [ngClass]="{'has-error': (!lng.valid && lng.dirty), 'has-success': (lng.valid)}">
+        <label for="inputLng" translate>{{'event-form.lng'}}</label>
+        <input [formControl]="lng" type="text" class="form-control" id="inputLng">
+        <!-- Validation -->
+        <span *ngIf="lng.errors?.required && lng.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="lng.errors?.validateLongitude && lng.dirty" class="help-block form-error" translate>{{'validation.longitude-validation'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <event-form-map></event-form-map>
+      </div>
+    </div>
+    <!-- Maps Button with class -->
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <button [disabled]="!lat.valid || !lng.valid" (click)="passCoordinates(undefined)" type="button" class="btn btn-default btn-auth" translate>{{'event-form.check'}}</button>
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!description.valid && description.dirty), 'has-success': (description.valid)}">
+        <label for="textareaDescription" translate>{{'event-form.description'}}</label>
+        <textarea [id]="'textareaDescription'+inputLanguage" [froalaEditor]="froalaOptions" (froalaInit)="initializeFroala($event)" formControlName="description" capitalize class="form-control"></textarea>
+        <!-- Validation -->
+        <span *ngIf="description.errors?.required && description.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="description.errors?.minlength && description.dirty || description.errors?.maxlength && description.dirty " class="help-block form-error" translate>{{'validation.event-description-length'}}</span>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <button [disabled]="!form.valid || submitted " type="submit" class="btn btn-default btn-auth" translate>{{'service-form.send'}}</button>
+      </div>
+    </div>
+  </div>
+</form>

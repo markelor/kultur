@@ -1,0 +1,39 @@
+<div class="form-group required">
+  <label for="fileUploadArcheology" translate>{{'event-form.images'}}</label>
+  <button class="btn btn-primary ks-btn-file d-block">
+    <span class="la la-cloud-upload ks-icon"></span>
+    <span class="ks-text" translate>{{'event-form.choose-image'}}</span>
+    <input (change)="fileChangeListener($event)" id="photos" class="form-control" type="file" ng2FileSelect [uploader]="uploader" />
+  </button>
+</div>
+<img-cropper #profileCropper [image]="data" [settings]="profileCropperSettings"></img-cropper>
+<br>
+<span class="result rounded"></span>
+<img *ngIf="data.image" [src]="data.image" [width]="profileCropperSettings.croppedWidth" [height]="profileCropperSettings.croppedHeight">
+<label for="progressbar" translate>{{'event-form.queue-progress'}}</label>
+<div class="card panel ks-widget-attachments">
+  <div class="ks-uploading-progress-block">
+    <span *ngIf="uploader.queue.length" class="ks-filename">{{uploader.queue[0].file.name}}</span>
+    <div class="ks-progress ks-progress-inline">
+      <div class="progress ks-progress-sm">
+        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+      </div>
+      <span class="ks-amount">{{uploader.progress +'%'}}</span>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-success btn-s" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length">
+  <span class="glyphicon glyphicon-upload"></span> Upload all
+</button>
+<h5 class="ks-header">Irudia igo</h5>
+<div class="ks-files">
+  <ul>
+    <li *ngFor="let avatar of avatars; let i=index" class="ks-file">
+      <img (click)="selectedAvatar = i;" [ngClass]="{'img-thumbnail':selectedAvatar===i}" class="ks-thumb" src="{{avatar}}">
+      <a (click)="deleteAvatar(i)" class="ks-icon la la-trash"></a>
+    </li>
+  </ul>
+</div>
+<button *ngIf="selectedAvatar!==false" type="button" class="btn btn-success btn-s" (click)="chooseImage(selectedAvatar)">
+  <span class="glyphicon glyphicon-upload"></span> Aukeratu irudia
+</button>

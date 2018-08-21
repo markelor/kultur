@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "kultur"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist/browser",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+        "../node_modules/froala-editor/css/froala_style.min.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/snazzy-info-window/dist/snazzy-info-window.css",
+        "../node_modules/@ngx-share/button/styles/share-buttons.css",
+        "../node_modules/@ngx-share/button/styles/variables.css",
+        "../node_modules/@ngx-share/button/styles/themes/circles/circles-dark-theme.css",
+        "../node_modules/datatables.net-dt/css/jquery.dataTables.css",
+            "../node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
+        "../node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css"
+      ],
+      "scripts": [
+        "assets/libs/jquery/jquery-ui.min.js",
+        "assets/libs/loading-overlay/loadingoverlay.min.js",
+        "assets/libs/tether/js/tether.min.js",
+        "assets/libs/bootstrap/js/bootstrap.min.js",
+        "assets/libs/jscrollpane/jquery.jscrollpane.min.js",
+        "assets/libs/jscrollpane/jquery.mousewheel.js",
+        "assets/libs/d3/d3.min.js",
+        "assets/libs/c3js/c3.min.js",
+        "assets/libs/noty/noty.min.js",
+        "assets/libs/maplace/maplace.min.js",
+        "assets/libs/momentjs/moment-with-locales.min.js",
+        "assets/libs/fullcalendar/fullcalendar.min.js",
+        "assets/libs/responsejs/response.min.js",
+        "assets/libs/flexibility/flexibility.js",
+        "assets/libs/velocity/velocity.min.js",
+        "assets/libs/flatpickr/flatpickr.min.js",
+        "assets/scripts/kosmo.widget-controls.min.js",
+        "assets/libs/count-up/count-up.min.js",
+        "assets/scripts/charts/area/area.chart.min.js",
+        "assets/scripts/charts/radial-progress/radial-progress.chart.min.js",
+        "assets/libs/jquery-confirm/jquery-confirm.min.js",
+        "assets/scripts/charts/bar/inline-bar.chart.min.js",
+        "assets/libs/select2/js/select2.min.js",
+        "assets/libs/stacktable/stacktable.js",
+        "assets/scripts/charts/bar/inline-bar.chart.js",
+        "assets/libs/plyr/plyr.js",
+        "assets/libs/bootstrap-table/bootstrap-table.min.js",
+        "assets/libs/jquery-form-validator/jquery.form-validator.min.js",
+        "assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js",
+        "assets/libs/jquery-flex-label/jquery.flex.label.js",
+        "assets/libs/jquery-mask/jquery.mask.min.js",
+        "assets/libs/flexdatalist/jquery.flexdatalist.min.js",
+        "assets/libs/typeahead/bloodhound.min.js",
+        "assets/libs/typeahead/typeahead.jquery.min.js",
+        "assets/libs/bootstrap-tokenfield/bootstrap-tokenfield.min.js",
+        "assets/libs/izi-modal/js/iziModal.min.js",
+        "assets/libs/swiper/js/swiper.jquery.min.js",
+        "assets/libs/uppy/uppy.min.js",
+        "assets/libs/dropzone/dropzone.min.js",
+        "assets/libs/jquery-minicolors/jquery.minicolors.min.js",
+        "assets/scripts/common.js",
+        "../node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+        "../node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+        "../node_modules/datatables.net-buttons/js/buttons.colVis.js",
+        "../node_modules/datatables.net-buttons/js/buttons.flash.js",
+        "../node_modules/datatables.net-buttons/js/buttons.html5.js",
+        "../node_modules/datatables.net-buttons/js/buttons.print.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

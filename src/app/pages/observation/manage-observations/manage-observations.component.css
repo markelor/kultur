@@ -1,0 +1,56 @@
+.post-img {
+    float: left;
+    margin: 5px 20px 15px 0px;
+    width: 100%;
+    height: auto;
+
+  }
+  .post-img {
+    float: left;
+    margin: 5px 20px 15px 0px;
+    width: 100%;
+    height: auto;
+
+  }
+.description p {
+  margin: 0 0 0px;
+}
+
+.description {
+  display: none;
+  margin: 5px 20px 5px 0px;
+}
+
+.right {
+  float: left;
+  margin-bottom: 15px;
+}
+
+.clear-both {
+  clear: both;
+}
+
+.autor {
+  color: #77b300;
+}
+
+@media (min-width: 450px) {
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 13rem;
+  }
+  .right {
+    float: right;
+  }
+  
+  .post-img {
+  float: left;
+  margin: 5px 20px 15px 0px;
+  width: 300px;
+  height: 225px;
+}
+}

@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+
+<div class="ks-page-container ks-dashboard-tabbed-sidebar-fixed-tabs" appAutoHeight data-is-auto-height="parent" data-is-min-height="true">
+  <!-- BEGIN DEFAULT SIDEBAR -->
+  <div class="ks-column ks-sidebar ks-info">
+      <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="ks-column ks-page">
+      <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div class="ks-mobile-overlay"></div>

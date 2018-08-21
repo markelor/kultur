@@ -1,0 +1,14 @@
+<div class="ks-page">
+    <div class="ks-page-content">
+        <div class="card panel panel-default ks-light ks-panel ks-confirm ks-auth">
+            <div class="card-block">
+                <div class="ks-header" translate>{{'auth-form.activate-account-state'}}</div>
+                <div class="ks-description" [ngClass]="messageClass">
+                    {{ message }}
+                </div>
+                    <div class="ks-text-center"><a [routerLink]="['/sign-in-route'] | localize" translate>{{'auth-form.sign-up-sign-in-link'}}</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

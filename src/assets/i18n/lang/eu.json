@@ -1,0 +1,323 @@
+{
+  "authentication": "autentifikazioa",
+  "sign-up-route": "erregistratu",
+  "activate-route": "aktibatu",
+  "sign-in-route": "saioa-hasi",
+  "resend-route": "birbidali",
+  "reset-username-route": "berrezarri-erabiltzaile-izena",
+  "reset-password-route": "berrezarri-pasahitza",
+  "new-password-route": "pasahitz-berria",
+  "search-route": "bilatu",
+  "see-route": "ikusi",
+  "create-route": "sortu",
+  "manage-route": "kudeatu",
+  "edit-route": "aldatu",
+  "category-route": "kategoria",
+  "event-route": "ekintza",
+  "events-route": "ekintzak",
+  "application-route": "aplikazioa",
+  "applications-route": "aplikazioak",
+  "service-route": "zerbitzua",
+  "services-route": "zerbitzuak",
+  "service-type-route": "zerbitzu-mota",
+  "observation-route": "oharra",
+  "observations-route": "oharrak",
+  "details-route": "xehetasunak",
+  "region-route": "eskualdea",
+  "user-route": "erabiltzailea",
+  "map-route": "mapa",
+  "all-route": "denak",
+  "admin-route": "admin",
+  "users-route": "erabiltzaileak",
+  "menu":
+  {
+    "home": "Hasiera",
+    "create": "Sortu",
+    "manage": "Kudeatu",
+    "category": "Kategoria",
+    "event": "Ekintza",
+    "map":"Mapa",
+    "application": "Aplikazioa",
+    "applications": "Aplikazioak",
+    "service":"Zerbitzua",
+    "services":"Zerbitzuak",
+    "service-type":"Gehitu Mota",
+    "observation":"Oharra",
+    "observations":"Oharrak",
+    "administrator": "Administratzailea",
+    "users": "Erabiltzaileak",
+    "events": "Ekintzak"
+  },
+  "dashboard":
+  {
+    "acquisition_channels": "Acquisition Channels",
+    "users_by_country": "Users by Country",
+    "revenue": "Revenue",
+    "feed": "Feed",
+    "todo_list": "To Do List",
+    "calendar": "Calendar",
+    "new_visits": "New Visits",
+    "purchases": "Purchases",
+    "active_users": "Active Users",
+    "returned": "Returned",
+    "popular_app":
+    {
+      "super_app": "Super App",
+      "most_popular_app": "Most Popular App",
+      "total_visits": "Total Visits",
+      "new_visits": "New Visits",
+      "sales": "Sales"
+    },
+    "todo":
+    {
+      "task_todo": "Task to do.."
+    },
+    "traffic_chart":
+    {
+      "view_total": "Views Total"
+    }
+  },
+  "tree_view":
+  {
+    "title": "basic",
+    "programming": "Programming languages by programming paradigm",
+    "oop": "Object-oriented programming",
+    "java": "Java",
+    "c_plus_plus": "C++",
+    "c_sharp": "C#",
+    "prototype": "Prototype-based programming",
+    "java_script": "JavaScript",
+    "coffee_script": "CoffeeScript",
+    "lua": "Lua"
+  },
+  "chart":
+  {
+    "lines": "Lines",
+    "bars": "Bars",
+    "simple_line_chart": "Simple line chart",
+    "line_chart": "Line chart with area",
+    "bi_polar_line_chart": "Bi-polar line chart with area only",
+    "simple_bar_chart": "Simple bar chart",
+    "multi_line_labels_bar_chart": "Multi-line labels bar chart",
+    "stacked_bar_chart": "Stacked bar chart",
+    "pies_and_donuts": "Pies & Donuts",
+    "simple_pie": "Simple Pie",
+    "pie_with_labels": "Pie with labels",
+    "donut": "Donut"
+  },
+  "navbar":
+  {
+    "es": "Gaztelera",
+    "en": "Ingelesa",
+    "eu": "Euskara",
+    "es-short": "Es",
+    "en-short": "En",
+    "eu-short": "Eu",
+    "user": "Erabiltzailea",
+    "events": "Ekintzak",
+    "applications": "Aplikazioak",
+    "observations": "Oharrak",
+    "services": "Zerbitzuak",
+    "search": "Bilatu..."
+  },
+  "events":
+  {
+    "events": "Ekintzak",
+    "applications": "Aplikazioak"
+  },
+  "event":
+  {
+    "created-by": "Publikatzailea:",
+    "read-more": "Gehiago Irakurri",
+    "see-event": "Ekintza Ikusi",
+    "see-map": "Mapa Ikusi",
+    "edit-event": "Ekintza Aldatu",
+    "general-info": "Informazio Orokorra",
+    "like": "Atsegin dut",
+    "comment": "Iruzkina utzi",
+    "share": "Partekatu",
+    "free": "Doan"
+
+  },
+  "application":
+  {
+    "edit-application": "Aplikazioa Aldatu"
+  },
+  "auth-form":
+  {
+    "name": "Izena",
+    "username": "Erabiltzailea",
+    "email": "Posta",
+    "password": "Pasahitza",
+    "repeat-password": "Errepikatu pasahitza",
+    "about-yourself": "Zuri buruz",
+    "sign-up-title": "Eman izena kultura.eus-en",
+    "sign-up-sign-in-link": "Dagoeneko kultura.eus-en kontu bat duzu? Hasi saioa!",
+    "sign-up": "Eman izena",
+    "sign-in-title": "Saioa hasi kultura.eus-en",
+    "sign-in-sign-up-link": "Berria zara kultura.eus-en? Eman izena!",
+    "sign-in": "Saioa hasi",
+    "resend-link": "Birbidali aktibatzeko esteka",
+    "forgot-username": "Erabiltzaile izena ahaztu al duzu?",
+    "forgot-password": "Pasahitza ahaztu al duzu?",
+    "activate-account-title": "Kontua aktibatu",
+    "activate-account-state": "Kontuaren egoera.",
+    "reset-username-title": "Erabiltzaile izena berreskuratu",
+    "reset-password-title": "Pasahitza berreskuratu",
+    "new-password": "Pasahitz berria.",
+    "new-password-success": "Mesedez, sar ezazu pasahitz berria.",
+    "send": "Bidali",
+    "guard-error": "Saioa hasi behar duzu orrialde hau ikusteko."
+  },
+  "category-form":
+  {
+    "title": "Izenburua",
+    "description": "Deskribapena",
+    "parent-category": "Guraso Kategoria",
+    "select-parent-category": "-- AUKERATU KATEGORIA --",
+    "send": "Bidali"
+  },
+  "event-form":
+  {
+    "created-by": "Publikatzailea",
+    "title": "Izenburua",
+    "category": "Kategoria",
+    "participants": "Parte Hartzaileak",
+    "start": "Hasiera",
+    "end": "Amaiera",
+    "images": "Irudiak",
+    "choose-image": "Aukeratu irudia",
+    "choose-images": "Aukeratu irudiak",
+    "list-images": "Irudi zerrenda: ",
+    "preview": "Aurreikusi",
+    "name": "Izena",
+    "size": "Tamaina",
+    "status": "Egoera",
+    "delete": "Ezabatu",
+    "queue-progress": "Ilararen progresioa",
+    "delete-all": "Ezabatu denak",
+    "province": "Probintzia",
+    "municipality": "Udalerria",
+    "lat": "Koordenatuak I-H (Lat)",
+    "lng": "Koordenatuak E-M (Lng)",
+    "check": "Egiaztatau",
+    "locations-exists":"Existitzen diren kokapenak",
+    "location": "Kokapena",
+    "description": "Deskribapena",
+    "observations": "Oharrak",
+    "discovery": "Aurkikuntza",
+    "bibliography": "Bibliografia",
+    "select-category": "-- AUKERATU KATEGORIA --",
+    "select-province": "-- AUKERATU PROBINTZIA --",
+    "select-municipality": "-- AUKERATU UDALERRIA --",
+    "select-locations-exists": "-- AUKERATU KOKAPENA --",
+    "send": "Bidali"
+  },
+  "application-form":
+  {
+    "title": "Titulua",
+    "entity-name": "Entitate izena",
+    "events": "Ekintzak",
+    "users": "Erabiltzaileak",
+    "license": "Lizentzia",
+    "conditions": "Baldintzak",
+    "price": "Prezioa",
+    "expired-at": "Iraungitze data",
+    "send": "Bidali"
+  },
+  "service-form":
+  {
+    "title": "Izenburua",
+    "service-type": "Zerbitzu mota",
+    "select-service-type": "-- AUKERATU ZERBITZU MOTA --",
+    "description": "Deskribapena",
+    "lat": "Koordenatuak I-H (Lat)",
+    "lng": "Koordenatuak E-M (Lng)",
+    "send": "Bidali"
+  },
+  "service-type-form":
+  {
+    "title": "Izenburua",
+    "icon": "Ikonoa",
+    "send": "Bidali"
+  },
+    "crud":
+  {
+    "add": "Gehitu",
+    "delete": "Ezabatu",
+    "edit": "Aldatu",
+    "edit-delete": "Aldatu/Ezabatu"
+  },
+  "comment":
+  {
+    "leaveComment": "Idatzi iruzkin bat.",
+    "delete": "Delete",
+    "edit": "Edit",
+    "reply": "Reply",
+    "hideReplies": "Hide Replies",
+    "deleted":"Ezabatuta",
+    "deleted-text":"Erabiltzaileak iruzkina ezabatu du."
+  },
+  "validation":
+  {
+    "required": "Eremu hau derrigorrezkoa da.",
+    "start-validation": "Hasiera data __/__/____ formatuan.",
+    "end-validation": "Bukaera data __/__/____ formatuan.",
+    "compare-date-validation": "Bukaera datak, hasierakoak baino handiagoa izan beahar du.",
+    "name-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
+    "name-validation": "Izenak ezin du karaktere berezirik izan.",
+    "username-length": "Gutxienezko karaktereak: 3, Gehienezko karaktereak: 15.",
+    "username-validation": "Erabiltzaileak ezin du hutsune edo karaktere berezirik izan.",
+    "email-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 30.",
+    "email-validation": "Posta elektronikoak baliozkoa izan behar du.",
+    "password-length": "Gutxienezko karaktereak: 8, Gehienezko karaktereak: 35.",
+    "password-valid": "Gutxienez, maiuskula, minuskula, zenbaki eta karaktere berezi bat izan behar du.",
+    "password-match": "Pasahitzak ez datoz bat.",
+    "about-yourself-length": "Gehienezko karaktereak: 500.",
+    "title-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
+    "title-validation": "Tituluak ezin du karaktere berezirik izan.",
+    "coordinator-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
+    "coordinator-validation": "Koordinatzaileak ezin du karaktere berezirik izan.",
+    "latitude-validation": "Sar ezazu latitudea hamartar formatuan.",
+    "longitude-validation": "Sar ezazu luzeera hamartar formatuan.",
+    "location-length": "Gehienezko karaktereak: 1000.",
+    "event-description-length": "Gutxienezko karaktereak: 50, Gehienezko karaktereak: 20000.",
+    "category-description-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 200.",
+    "observations-length": "Gehienezko karaktereak: 1000.",
+    "discovery-length": "Gehienezko karaktereak: 1000.",
+    "bibliography-length": "Gehienezko karaktereak: 1000.",
+    "comment-length": "Gehienezko karaktereak: 300.",
+    "entityName-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
+    "entityName-validation": "Entitatearen izenak ezin du karaktere berezirik izan."
+  },
+  "map-icon":
+  {
+    "Trikuharriak": "Dolmen",
+    "Zutarriak": "Menhir",
+    "Tumuluak": "Tumulus",
+    "Harrespilak": "Cromlech",
+    "Lauak": "Smooth",
+    "Mailakatuak": "Stepped",
+    "Kobazuloak": "Cave",
+    "Tenpluak": "Temple"
+  },
+  "reaction":
+  {
+    "like": "Atsegin dut",
+    "love": "Zoragarria!",
+    "haha": "Kar-kar-kar",
+    "wow": "Harrigarria!",
+    "sad": "Hau tristura",
+    "angry": "Hau amorrua!",
+    "you": "Zu",
+    "you-and": "Zu eta beste ",
+    "others": ""
+  },
+    "dates": {
+        "month": {
+            "short": {"1":"Urt","2":"Ots","3":"Mar","4":"Api","5":"Mai","6":"Eka","7":"Uzt","8":"Abu","9":"Ira","10":"Urr","11":"Aza","12":"Abe"},
+            "long": {"1":"Urtarrila","2":"Ots","3":"Mar","4":"Api","5":"Mai","6":"Eka","7":"Uzt","8":"Abu","9":"Ira","10":"Urr","11":"Aza","12":"Abe"}
+        }
+    }
+
+}

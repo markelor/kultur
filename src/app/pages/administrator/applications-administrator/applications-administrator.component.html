@@ -1,0 +1,35 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th translate>{{'application-form.title'}}</th>
+              <th translate>{{'application-form.entity-name'}}</th>
+              <th translate>{{'application-form.conditions'}}</th>
+              <th translate>{{'application-form.license'}}</th>
+              <th translate>{{'application-form.price'}}</th>
+              <th translate>{{'application-form.expired-at'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let application of applications; let i=index">
+              <td>{{application.title}}</td>
+              <td>{{application.entityName}}</td>
+              <td>{{application.conditions}}</td>
+              <td>{{application.licenseName}}</td>
+              <td>{{application.price}}</td>
+              <td>{{application.expiredAt | timezone}}</td>
+              <td class="ks-status">
+                <a href="javascript:void(0)" [routerLink]="['/admin-route','applications-route','edit-route',application._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                <a href="javascript:void(0)" (click)="applicationDeleteClick(i,application)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

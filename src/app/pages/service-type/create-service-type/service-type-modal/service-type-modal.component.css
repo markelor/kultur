@@ -1,0 +1,63 @@
+/deep/.ks-tabs-container.ks-tabs-default {
+  border: none;
+  margin-bottom: -15px;
+}
+.la {
+  margin: -5px 0px 0px 0px;
+  font: normal normal normal 20px/1 LineAwesome;
+  display: inline-block;
+  margin: -5px 0px 0px 0px;
+  width: 16px;
+  height: 16px;
+  /*border: 1px solid #EEE;*/
+  border-radius: 50%;
+  color: #333;
+}
+
+.icon-number {
+  position: absolute;
+  width: 100%;
+  left:0px;
+  top: 0px;
+  padding-top: 2px;
+  color:#333;
+  /*-webkit-border-radius: 9px;
+  border-radius: 9px;
+  min-width: 18px;
+  min-height: 18px;
+  text-align: center;
+  border: none;
+  padding-left: 5px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: grey;*/
+
+}
+.ks-user{
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dee0e1;
+}
+.ks-user>.badge {
+    position: relative;
+    bottom: -25px;
+    left: -20px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #dee0e1;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+}

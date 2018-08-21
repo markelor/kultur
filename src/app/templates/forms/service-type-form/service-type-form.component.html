@@ -1,0 +1,83 @@
+<!-- Custom Success/Error Message -->
+<div *ngIf="message" class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- ServiceType Form -->
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
+  <div class="row">
+    <!-- Title -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
+        <label for="inputTitle" translate>{{'service-type-form.title'}}</label>
+        <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
+        <!-- Validation -->
+        <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
+        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
+      </div>
+    </div>
+    <!-- File upload start-->
+    <div class="col-sm-12">
+      <div class="form-group required">
+        <label for="fileUploadImages" translate>{{'event-form.images'}}</label>
+        <button class="btn btn-primary ks-btn-file d-block">
+          <span class="la la-cloud-upload ks-icon"></span>
+          <span class="ks-text" translate>{{'event-form.choose-images'}}</span>
+          <input id="photos" class="form-control" type="file" ng2FileSelect [uploader]="uploader" />
+        </button>
+      </div>
+      <div *ngIf="uploader?.queue?.length>0">
+        <h3 translate>{{'event-form.list-images'}} <span>{{ uploader?.queue?.length }}</span> </h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th translate>{{'event-form.preview'}}</th>
+              <th translate>{{'event-form.name'}}</th>
+              <th translate>{{'event-form.size'}}</th>
+              <th translate>{{'event-form.delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td>
+                <div class="media-left">
+                  <span *ngIf="item.isUploaded" class="img-rounded" [inlineSVG]="'https://s3.eu-west-1.amazonaws.com/culture-bucket%2Fservice-type-icon/'+item.file.name" [onSVGLoaded]="handleSVG" class="media-object"></span>
+                  <img *ngIf="!item.isUploaded" class="img-rounded" width="80" height="80" src="" appImagePreview [image]="item?._file" class="media-object" />
+                </div>
+              </td>
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              <td nowrap>
+                <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                  <span class="fa fa-trash" translate>{{'event-form.delete'}}</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <label for="progressbar" translate>{{'event-form.queue-progress'}}</label>
+          <div class="card panel ks-widget-attachments">
+            <div class="ks-uploading-progress-block">
+              <div class="ks-progress ks-progress-inline">
+                <div class="progress ks-progress-sm">
+                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+                <span class="ks-amount">{{uploader.progress +'%'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- File upload end-->
+    <!-- Submit Button -->
+    <div class="col-sm-12" *ngIf="inputOperation==='create'">
+      <div class="form-group text-center">
+        <button [disabled]="!form.valid || submitted || uploader.queue.length<=0 " type="submit" class="btn btn-default btn-auth" translate>{{'service-type-form.send'}}</button>
+      </div>
+    </div>
+  </div>
+</form>

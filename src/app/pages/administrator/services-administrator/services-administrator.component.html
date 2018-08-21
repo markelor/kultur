@@ -1,0 +1,73 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <!-- Custom Success/Error Message -->
+        <div *ngIf="message" class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{ message }}
+          </div>
+        </div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th translate>{{'service-form.title'}}</th>
+              <th translate>{{'service-form.description'}}</th>
+              <th translate>{{'service-form.service-type'}}</th>
+              <th translate>{{'service-type-form.icon'}}</th>
+              <th translate>{{'application-form.expired-at'}}</th>
+              <th translate>{{'event-form.province'}}</th>
+              <th translate>{{'event-form.municipality'}}</th>
+              <th translate>{{'event-form.location'}}</th>
+              <th translate>{{'event-form.created-by'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let service of services; let i=index">
+              <!--Title and Description-->
+              <td *ngIf="service.language===localizeService.parser.currentLang">{{service.title}}</td>
+              <td *ngIf="service.language===localizeService.parser.currentLang" [innerHTML]="service.description"></td>
+              <ng-container *ngFor="let translation of service.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>
+              </ng-container>
+              <!--Service type-->
+              <td *ngIf="service.serviceType.language===localizeService.parser.currentLang">{{service.serviceType.title}}</td>
+              <ng-container *ngFor="let translation of service.serviceType.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">
+                  {{translation.title}}
+                </td>
+              </ng-container>
+              <!--Service type icon-->
+              <td *ngIf="service.serviceType.icons.length>0" [inlineSVG]="service.serviceType.icons[0].url" [onSVGLoaded]="handleSVG"></td>
+              <!--Expired at-->
+              <td>{{service.expiredAt | timezone}}</td>
+              <!--Province and Municipality-->
+              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.province.name}}</td>
+              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.municipality.name }}</td>
+              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.location}}</td>
+              <ng-container *ngFor="let translation of service.place.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location}}</td>
+              </ng-container>
+              <!--CreatedBy-->
+              <td *ngIf="service.language===localizeService.parser.currentLang">{{service.createdBy}}</td>
+              <ng-container *ngFor="let translation of service.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">
+                  {{translation.createdBy}}
+                </td>
+              </ng-container>
+              <!--Edit/Delete-->
+              <td class="ks-status">
+                <a href="javascript:void(0)" [routerLink]="['/service-route','manage-route','edit-route',service._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                <a href="javascript:void(0)" (click)="serviceDeleteClick(i,service)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

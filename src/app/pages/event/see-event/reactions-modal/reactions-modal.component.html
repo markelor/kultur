@@ -1,0 +1,115 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="ks-tabs-container ks-tabs-default ks-tabs-no-separator">
+      <ul class="nav ks-nav-tabs">
+        <li *ngIf="allBy" class="nav-item">   
+	      <a class="nav-link nav-all" href="#" data-toggle="tab" data-target="#tab1" translate>
+	      	<span class="la la-users">
+	      	  <span class="icon-number badge">{{allBy.length}}</span>
+	      	</span>
+	      </a>
+        </li>
+        <li *ngIf="likeBy" class="nav-item nav-emo">   
+          <a class="nav-link nav-like like-emo" href="#" data-toggle="tab" data-target="#tab2" translate>
+          	<span class="like-btn-like">
+          	  <span class="icon-number badge">{{likeBy.length}}</span>
+          	</span>
+          </a>
+        </li>
+        <li *ngIf="loveBy" class="nav-item">
+          <a class="nav-link nav-love like-emo" href="#" data-toggle="tab" data-target="#tab3">
+            <span class="like-btn-love">
+              <span class="icon-number badge">{{loveBy.length}}</span>
+            </span>
+          </a>
+        </li>
+        <li *ngIf="hahaBy" class="nav-item">
+          <a class="nav-link nav-haha like-emo" href="#" data-toggle="tab" data-target="#tab4">
+            <span class="like-btn-haha">
+              <span class="icon-number badge">{{hahaBy.length}}</span>
+            </span>
+          </a>
+        </li>
+        <li *ngIf="wowBy" class="nav-item">
+          <a class="nav-link nav-wow like-emo" href="#" data-toggle="tab" data-target="#tab5">
+            <span class="like-btn-wow">
+              <span class="icon-number badge">{{wowBy.length}}</span>
+            </span>
+          </a>
+        </li>
+        <li *ngIf="sadBy" class="nav-item">
+          <a class="nav-link nav-sad like-emo" href="#" data-toggle="tab" data-target="#tab6">
+            <span class="like-btn-sad">
+            	<span class="icon-number badge">{{sadBy.length}}</span>
+            </span>
+          </a>
+        </li>
+        <li *ngIf="angryBy" class="nav-item">
+          <a class="nav-link nav-angry like-emo" href="#" data-toggle="tab" data-target="#tab7">
+            <span class="like-btn-angry">
+              <span class="icon-number badge">{{angryBy.length}}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+	<div class="tab-content">
+	  <div class="tab-pane nav-all" id="tab1" role="tabpanel" >
+	    <div *ngFor="let allReactions of allBy; let i=index">
+	  	  <div class="ks-user" *ngFor="let allUsername of allReactions.usernames; let j=index">               
+	        <img *ngIf="allBy[i].avatars" src="{{allBy[i].avatars[j].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	        <span class="badge badge-pill badge-default ks-label la" [ngClass]="'like-btn-'+allReactions.reaction"></span>
+            <span class="ks-name">{{allUsername}}</span> 	
+	      </div>
+	  	</div>  
+	  </div>
+	  <div class="tab-pane nav-like" id="tab2" role="tabpanel" >
+	    <div class="ks-user" *ngFor="let likeUsername of likeBy; let i=index">
+	  	  <img *ngIf="likeByImages" src="{{likeByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-like"></span>
+          <span class="ks-name">{{likeUsername}}</span> 	
+	    </div>
+	  </div>
+	  <div class="tab-pane nav-love" id="tab3" role="tabpanel">
+	    <div class="ks-user" *ngFor="let loveUsername of loveBy; let i=index">
+	  	  <img *ngIf="loveByImages" src="{{loveByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-love"></span>
+          <span class="ks-name">{{loveUsername}}</span> 	
+	    </div>
+	  </div>
+	  <div class="tab-pane nav-haha" id="tab4" role="tabpanel">
+	    <div class="ks-user" *ngFor="let hahaUsername of hahaBy; let i=index">
+	  	  <img *ngIf="hahaByImages" src="{{hahaByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-haha"></span>
+          <span class="ks-name">{{hahaUsername}}</span> 	
+	    </div>
+	  </div>
+	  <div class="tab-pane nav-wow" id="tab5" role="tabpanel" >
+	    <div class="ks-user" *ngFor="let wowUsername of wowBy; let i=index">
+	  	  <img *ngIf="wowByImages" src="{{wowByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-wow"></span>
+          <span class="ks-name">{{wowUsername}}</span> 	
+	    </div>
+	  </div>
+	  <div class="tab-pane nav-sad" id="tab6" role="tabpanel">
+	    <div class="ks-user" *ngFor="let sadUsername of sadBy; let i=index">
+	  	  <img *ngIf="sadByImages" src="{{sadByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-sad"></span>
+          <span class="ks-name">{{sadUsername}}</span> 	
+	    </div>
+	  </div>
+	  <div class="tab-pane nav-angry" id="tab7" role="tabpanel">
+	    <div class="ks-user" *ngFor="let angryUsername of angryBy; let i=index">
+	  	  <img *ngIf="angryByImages" src="{{angryByImages[i].currentAvatar}}" class="ks-avatar" width="55" height="55">
+	  	  <span class="badge badge-pill badge-default ks-label la like-btn-angry"></span>
+          <span class="ks-name">{{angryUsername}}</span> 	
+	    </div>
+	  </div>
+	</div>  
+  </div>
+</div>

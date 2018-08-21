@@ -1,0 +1,73 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <!-- Custom Success/Error Message -->
+        <div *ngIf="message" class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{ message }}
+          </div>
+        </div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th translate>{{'event-form.title'}}</th>
+              <th translate>{{'event-form.description'}}</th>
+              <th translate>{{'event-form.category'}}</th>
+              <th translate>{{'service-type-form.icon'}}</th>
+              <th translate>{{'application-form.price'}}</th>
+              <th translate>{{'event-form.province'}}</th>
+              <th translate>{{'event-form.municipality'}}</th>
+              <th translate>{{'event-form.location'}}</th>
+              <th translate>{{'event-form.created-by'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let event of events; let i=index">
+              <!--Title and Description-->
+              <td *ngIf="event.language===localizeService.parser.currentLang">{{event.title}}</td>
+              <td *ngIf="event.language===localizeService.parser.currentLang" [innerHTML]="event.description"></td>
+              <ng-container *ngFor="let translation of event.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>
+              </ng-container>
+              <!--Category-->
+              <td *ngIf="event.categories[event.categories.length-1].language===localizeService.parser.currentLang">{{event.categories[event.categories.length-1].title}}</td>
+              <ng-container *ngFor="let translation of event.categories[event.categories.length-1].translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">
+                  {{translation.title}}
+                </td>
+              </ng-container>
+              <!--Category icon-->
+              <td *ngIf="event.categories[event.categories.length-1].icons.length>0" [inlineSVG]="event.categories[event.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
+              <!--Price-->
+              <td>{{event.price}}€</td>
+              <!--Province and Municipality and location-->
+              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.province.name}}</td>
+              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.municipality.name }}</td>
+              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.location }}</td>
+              <ng-container *ngFor="let translation of event.place.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location }}</td>
+              </ng-container>
+              <!--CreatedBy-->
+              <td *ngIf="event.language===localizeService.parser.currentLang">{{event.createdBy}}</td>
+              <ng-container *ngFor="let translation of event.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">
+                  {{translation.createdBy}}
+                </td>
+              </ng-container>
+              <!--Edit/Delete-->
+              <td class="ks-status">
+                <a href="javascript:void(0)" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                <a href="javascript:void(0)" (click)="eventDeleteClick(i,event)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

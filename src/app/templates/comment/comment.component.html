@@ -1,0 +1,87 @@
+<div class="card panel panel-default ks-comments-section" [ngClass]="{'ks-no-arrow' : !isArrow}">
+  <div *ngIf="comments" class="ks-comment">
+    <ng-container *ngFor="let firstComments of comments; let i=index;">
+      <ng-container *ngFor="let comment of firstComments.groupComments">
+        <div *ngIf="comment.level===0" class="ks-body">
+          <a href="javascript:void(0);" class="ks-avatar">
+            <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" width="36" height="36">
+            <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" width="36" height="36">  
+          </a>
+          <div class="ks-comment-box">
+            <div class="ks-name">
+              <a *ngIf="!comment.deleted" href="javascript:void(0);">{{comment.createdBy}}</a>
+              <a *ngIf="comment.deleted" href="javascript:void(0);" translate>{{'comment.deleted'}}</a>
+              <span class="ks-time">{{comment.createdAt | timezone}}</span>
+            </div>
+            <div *ngIf="!comment.deleted" [innerHTML]="comment.comment" class="ks-message"></div>
+            <div *ngIf="comment.deleted" class="ks-message" translate>{{'comment.deleted-text'}}</div>
+            <div class="ks-controls">
+              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control">Reply</a>
+              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.createdBy===authService.user.username" (click)="editComment(comment)" class="ks-control">Edit</a>
+              <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.createdBy===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control">Delete</a>
+              <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">Hide Replies</a>
+              <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">View 36 Replies</a>
+              <a href="javascript:void(0);" *ngIf="authService.user && comment.deleted && comment.createdBy===authService.user.username" (click)="recoverComment(comment)" class="ks-control">Berreskuratu</a>
+            </div>
+          </div>
+        </div> 
+        <div *ngIf="comment.level!==0" class="ks-replies">
+          <div class="ks-reply">
+            <a href="javascript:void(0);" class="ks-avatar">
+              <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" width="36" height="36">
+              <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" width="36" height="36">
+            </a>
+            <div class="ks-reply-box">
+              <div class="ks-name">
+                <a *ngIf="!comment.deleted" href="javascript:void(0);">{{comment.createdBy}}</a>
+                <a *ngIf="comment.deleted" href="javascript:void(0);" translate>{{'comment.deleted'}}</a>
+                <span class="ks-time">{{comment.createdAt | timezone}}</span>
+              </div>
+              <div *ngIf="!comment.deleted"[innerHTML]="comment.comment" class="ks-message"></div>
+              <div *ngIf="comment.deleted" class="ks-message" translate>{{'comment.deleted-text'}}</div>
+              <div class="ks-controls">
+                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control">Reply</a>
+                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.createdBy===authService.user.username" (click)="editComment(comment)" class="ks-control">Edit</a>
+                <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.createdBy===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control">Delete</a>
+                <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">Hide Replies</a>
+                <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">View 36 Replies</a>
+                 <a href="javascript:void(0);" *ngIf="authService.user && comment.deleted && comment.createdBy===authService.user.username" (click)="recoverComment(comment)" class="ks-control">Berreskuratu</a>
+              </div>
+            </div>
+          </div>
+        </div> 
+        <!-- Comment Edit Form -->
+        <form *ngIf="editId===comment._id" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
+          <div class="ks-new-comment">
+            <!-- Comment Edit textarea -->
+            <div class="form-group" [ngClass]="{'has-error': (!commentEdit.valid && commentEdit.dirty), 'has-success': (commentEdit.value && commentEdit.valid)}">
+              <textarea *ngIf="browser" [froalaEditor]="froalaOptions" (froalaInit)="initializeFroala($event)" formControlName="commentEdit" capitalize class="form-control"></textarea>
+              <!-- Validation -->
+              <span *ngIf="commentEdit.errors?.required && commentEdit.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+              <span *ngIf="commentEdit.errors?.maxlength && commentEdit.dirty " class="help-block form-error" translate>{{'validation.comment-length'}}</span>
+            </div>     
+          </div>
+          <div class="form-group text-center">
+            <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'auth-form.sign-up'}}</button>
+          </div>
+        </form>
+      </ng-container>  
+    </ng-container>
+  </div>
+  <!-- Comment Form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="ks-new-comment">
+      <!-- Comment textarea -->
+      <div id="textareaScroll" class="form-group" [ngClass]="{'has-error': (!comment.valid && comment.dirty), 'has-success': (comment.value && comment.valid)}">
+        <textarea *ngIf="browser" id="textareaComment" [froalaEditor]="froalaOptions" (froalaInit)="initializeFroala($event)" formControlName="comment" capitalize class="form-control"></textarea>
+        <!-- Validation -->
+        <span *ngIf="comment.errors?.required && comment.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="comment.errors?.maxlength && comment.dirty " class="help-block form-error" translate>{{'validation.comment-length'}}</span>
+      </div>     
+    </div>
+    <div class="form-group text-center">
+      <button [disabled]="!form.valid || submitted " type="submit" class="btn btn-default" translate>{{'auth-form.sign-up'}}</button>
+    </div>
+  </form>
+ 
+</div>

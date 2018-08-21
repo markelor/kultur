@@ -1,0 +1,37 @@
+<div class="ks-page">
+    <div class="ks-page-content">
+        <div class="card panel panel-default light ks-panel ks-forgot-password ks-auth">
+            <div class="card-block">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+                	<!-- Custom Success/Error Message -->
+					<div [ngClass]="messageClass">
+					{{ message }}
+					</div>			    
+                    <h4 class="ks-header" translate>{{'auth-form.reset-username-title'}}
+                    </h4>          
+                    <!-- Email Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!email.valid && email.dirty), 'has-success': (email.valid)}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="email" type="text" class="form-control" [placeholder]="'auth-form.email'| translate">
+                        <span class="icon-addon">
+                            <span class="la la-at"></span>
+                        </span>
+                        </div>
+                        <!-- Validation -->
+                        <span *ngIf="email.errors?.required && email.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+
+                    </div>
+					<div class="form-group">
+                        <button [disabled]="!form.valid || submitted " type="submit" class="btn btn-primary btn-block" translate>{{'auth-form.send'}}</button>
+                    </div>
+                    <div class="ks-text-center">
+                        <a [routerLink]="['/sign-in-route'] | localize" translate>{{'auth-form.sign-up-sign-in-link'}}</a>
+                    </div>
+                    <div class="ks-text-center">
+                        <a [routerLink]="['/reset-password-route'] | localize" translate>{{'auth-form.forgot-password'}}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

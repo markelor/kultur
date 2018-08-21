@@ -1,0 +1,62 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalHeader}}</h4>
+    <div class="ks-tabs-container ks-tabs-default ks-tabs-no-separator">
+      <ul class="nav ks-nav-tabs">
+        <li class="nav-item">   
+        <a class="nav-link nav-eu" href="#" data-toggle="tab" data-target="#tab1" translate>
+          <span class="la la-users">
+            <span class="icon-number badge" translate>{{'navbar.eu-short'}}</span>
+          </span>
+        </a>
+        </li>
+        <li class="nav-item">   
+          <a class="nav-link nav-es" href="#" data-toggle="tab" data-target="#tab2" translate>
+            <span class="la la-users">
+              <span class="icon-number badge" translate>{{'navbar.es-short'}}</span>
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-en" href="#" data-toggle="tab" data-target="#tab3">
+            <span class="la la-users">
+              <span class="icon-number badge" translate>{{'navbar.en-short'}}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <div class="tab-content">
+    <div (click)="clickLanguage('eu')" class="tab-pane nav-eu" id="tab1" role="tabpanel">
+      <app-service-type-form 
+        [inputOperation]="'edit'" 
+        [inputServiceType]="inputServiceType"  
+        [inputLanguage]="'eu'">
+      </app-service-type-form>   
+    </div>
+    <div (click)="clickLanguage('es')" class="tab-pane nav-es" id="tab2" role="tabpanel" >
+      <app-service-type-form 
+        [inputOperation]="'edit'" 
+        [inputServiceType]="inputServiceType"  
+        [inputLanguage]="'es'">
+      </app-service-type-form>  
+    </div>
+    <div (click)="clickLanguage('en')" class="tab-pane nav-en" id="tab3" role="tabpanel">
+      <app-service-type-form 
+        [inputOperation]="'edit'" 
+        [inputServiceType]="inputServiceType"  
+        [inputLanguage]="'en'">
+      </app-service-type-form>   
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary confirm-btn" (click)="confirmModal()">Acept</button>
+    <button class="btn btn-primary confirm-btn" (click)="cancelModal()">Close</button>
+  </div>
+</div>
+

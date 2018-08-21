@@ -1,0 +1,26 @@
+
+import { Injectable, Inject } from '@angular/core';
+import { Subject }    from 'rxjs/Subject';
+@Injectable()
+export class ObservableService {
+  public mapType;
+  public mapClickType;
+  public modalType;
+  public avatarType;
+  public modalCount=0;
+  private notify = new Subject<any>();
+  /**
+   * Observable string streams
+   */
+  notifyObservable = this.notify.asObservable();
+
+  constructor(){}
+
+  public notifyOther(data: any) {
+    if (data) {
+      this.notify.next(data);
+    }
+  }
+}
+
+

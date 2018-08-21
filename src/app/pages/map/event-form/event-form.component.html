@@ -1,0 +1,10 @@
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div *ngIf="browser">
+<agm-map [latitude]="lat" [longitude]="lng" [usePanning]='true' [zoom]="zoom" [fullscreenControl]="true" [mapTypeControl]="true" [keyboardShortcuts]="false" (mapClick)="placeClick($event)">
+  <ng-container *ngFor="let m of markers">
+    <agm-marker [hidden]="!m.icon" (markerClick)="clickedMarker(m.label)" [latitude]="m.lat" [longitude]="m.lng" [label]="m.labelOptions" [inlineSVG]="m.customInfo" [onSVGLoaded]="handleSVG" (onSVGInserted)="onSvgInserted($event,m,i)" [iconUrl]="m.icon">
+    </agm-marker>
+  </ng-container>
+</agm-map>
+</div>

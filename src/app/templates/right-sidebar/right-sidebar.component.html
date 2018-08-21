@@ -1,0 +1,28 @@
+<!--<article [hidden]="location.showAll" *ngFor="let location of locations" class="card panel ks-widget ks-widget-post">
+  <h5 class="card-header">
+    <span class="ks-text"> {{location.key}}</span>
+    <div class="ks-controls">
+		<!-- showCollapse-->
+        <!--<a *ngIf="!location.showCollapse" (click)="location.showCollapse = !location.showCollapse" class="ks-control">
+            <span class="ks-icon la la-minus"></span>
+        </a>
+        <a *ngIf="location.showCollapse" (click)="location.showCollapse = !location.showCollapse" class="ks-control">
+            <span class="ks-icon la la-expand"></span>
+        </a>
+        <a (click)="location.showAll = !location.showAll" class="ks-control">
+            <span class="ks-icon la la-close"></span>
+        </a>
+    </div>
+  </h5>
+  <div *ngIf="!location.showCollapse" class="card-block">
+   <ul class="icono">
+        <li *ngFor="let country of location.value | groupBy : 'region'">
+            <a (click)="saveRouteTranslate(country.value[0].regionGeonameId,'region')" [routerLink]="['/region-route',location.key | lowercase | space : '-' | space : ' ',country.key | lowercase | space : '-' | space : ' '] | localize" routerLinkActive="ks-active">
+               {{country.key+country.value.length}}
+            </a>
+            <span></span>
+        </li>
+    </ul>
+    
+  </div>
+</article>-->

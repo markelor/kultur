@@ -1,0 +1,54 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <app-category-form *ngIf="parentCategories" [inputOperation]="'create'" [inputParentCategories]="parentCategories"></app-category-form>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Parent ID</th>
+              <th>Level</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Icon</th>
+              <th>Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let categoryGroup of categories">
+              <tr *ngFor="let category of categoryGroup.value | sort :'level':false let i=index">
+              <ng-container *ngIf="localizeService.parser.currentLang===category.language">
+               <td>{{category._id }}</td>
+                <td>{{category.parentId}}</td>
+                <td>{{category.level}}</td>
+                <td>{{category.title }}</td>
+                <td>{{category.description}}</td>
+                <td *ngIf="category.icons.length>0" [inlineSVG]="category.icons[0].url" [onSVGLoaded]="handleSVG"></td>
+                <td class="ks-status">
+                  <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info">Edit</span></a>
+                  <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+                </td>
+              </ng-container>
+              <ng-container *ngFor="let translation of category.translation; let i=index;">
+                <ng-container *ngIf="localizeService.parser.currentLang===translation.language">
+                  <td>{{category._id }}</td>
+                  <td>{{category.parentId}}</td>
+                  <td>{{category.level}}</td>
+                  <td>{{translation.title }}</td>
+                  <td>{{translation.description}}</td>
+                  <td *ngIf="category.icons.length>0" [inlineSVG]="category.icons[0].url" [onSVGLoaded]="handleSVG"></td>
+                  <td class="ks-status">
+                    <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info">Edit</span></a>
+                    <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+                  </td>             
+                </ng-container>
+              </ng-container>     
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

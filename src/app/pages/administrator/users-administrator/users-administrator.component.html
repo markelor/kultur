@@ -1,0 +1,45 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <div class="row">
+          <div [ngClass]="messageClass">
+            {{message}}
+          </div>
+        </div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Permission</th>
+              <th>Username</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>AboutYourself</th>
+              <th>Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i=index">
+              <td>{{ user._id }}</td>
+              <td>{{ user.permission}}</td>
+              <td>
+                <div class="ks-user">
+                  <img class="ks-avatar" src="{{user.currentAvatar}}" width="24" height="24">
+                  <span class="ks-name">{{ user.username }}</span>
+                </div>
+              </td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email}}</td>
+              <td>{{ user.aboutYourself}}</td>
+              <td class="ks-status">
+                <a href="javascript:void(0)" (click)="userEditClick(user)"><span class="fa fa-edit ks-color-info">Edit</span></a>
+                <a href="javascript:void(0)" (click)="userDeleteClick(i,user)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

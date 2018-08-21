@@ -1,0 +1,323 @@
+{
+  "authentication": "autentificacion",
+  "sign-up-route": "registrar",
+  "activate-route": "activar",
+  "sign-in-route": "iniciar-sesion",
+  "resend-route": "reenviar",
+  "reset-username-route": "reestablecer-usuario",
+  "reset-password-route": "reestablecer-contraseña",
+  "new-password-route": "nueva-contraseña",
+  "search-route": "buscar",
+  "see-route": "ver",
+  "create-route": "crear",
+  "manage-route": "gestionar",
+  "edit-route": "editar",
+  "category-route": "categoria",
+  "event-route": "evento",
+  "events-route": "eventos",
+  "application-route": "aplicacion",
+  "applications-route": "aplicaciones",
+  "service-route": "servicio",
+  "services-route": "servicios",
+  "service-type-route": "tipo-servicio",
+  "observations-route": "observaciones",
+  "observation-route": "observaciones",
+  "details-route": "detalles",
+  "region-route": "region",
+  "user-route": "usuario",
+  "map-route": "mapa",
+  "all-route": "todos",
+  "admin-route": "admin",
+  "users-route": "usuarios",
+  "menu":
+  {
+    "home": "Inicio",
+    "create": "Crear",
+    "manage": "Gestionar",
+    "category": "Categoría",
+    "event": "Evento",
+    "map":"Mapa",
+    "application": "Aplicación",
+    "applications": "Aplicaciones",
+    "service": "Servicio",
+    "services": "Servicios",
+    "service-type": "Añadir tipo",
+    "observation": "Observación",
+    "observations": "Observaciones",
+    "administrator": "Administrador",
+    "users": "Usuarios",
+    "events": "Eventos"
+  },
+  "dashboard":
+  {
+    "acquisition_channels": "Acquisition Channels",
+    "users_by_country": "Users by Country",
+    "revenue": "Revenue",
+    "feed": "Feed",
+    "todo_list": "To Do List",
+    "calendar": "Calendar",
+    "new_visits": "New Visits",
+    "purchases": "Purchases",
+    "active_users": "Active Users",
+    "returned": "Returned",
+    "popular_app":
+    {
+      "super_app": "Super App",
+      "most_popular_app": "Most Popular App",
+      "total_visits": "Total Visits",
+      "new_visits": "New Visits",
+      "sales": "Sales"
+    },
+    "todo":
+    {
+      "task_todo": "Task to do.."
+    },
+    "traffic_chart":
+    {
+      "view_total": "Views Total"
+    }
+  },
+  "tree_view":
+  {
+    "title": "basic",
+    "programming": "Programming languages by programming paradigm",
+    "oop": "Object-oriented programming",
+    "java": "Java",
+    "c_plus_plus": "C++",
+    "c_sharp": "C#",
+    "prototype": "Prototype-based programming",
+    "java_script": "JavaScript",
+    "coffee_script": "CoffeeScript",
+    "lua": "Lua"
+  },
+  "chart":
+  {
+    "lines": "Lines",
+    "bars": "Bars",
+    "simple_line_chart": "Simple line chart",
+    "line_chart": "Line chart with area",
+    "bi_polar_line_chart": "Bi-polar line chart with area only",
+    "simple_bar_chart": "Simple bar chart",
+    "multi_line_labels_bar_chart": "Multi-line labels bar chart",
+    "stacked_bar_chart": "Stacked bar chart",
+    "pies_and_donuts": "Pies & Donuts",
+    "simple_pie": "Simple Pie",
+    "pie_with_labels": "Pie with labels",
+    "donut": "Donut"
+  },
+  "navbar":
+  {
+    "es": "Castellano",
+    "eu": "Euskara",
+    "en": "Inglés",
+    "es-short": "Es",
+    "en-short": "En",
+    "eu-short": "Eu",
+    "user": "Usuario",
+    "events": "Eventos",
+    "applications": "Aplicaciones",
+    "observations": "Observaciones",
+    "services": "Servicios",
+    "search": "Buscar..."
+  },
+  "events":
+  {
+    "events": "Eventos",
+    "applications": "Aplicaciones"
+  },
+  "event":
+  {
+    "created-by": "Creado por:",
+    "read-more": "Leer Mas",
+    "see-event": "Ver Evento",
+    "see-map": "Ver Mapa",
+    "edit-event": "Editar Evento",
+    "general-info": "Información General",
+    "like": "Me gusta",
+    "comment": "Comentar",
+    "share": "Compartir",
+    "free": "Gratis"
+  },
+  "application":
+  {
+    "edit-application": "Editar Aplicación"
+  },
+  "auth-form":
+  {
+    "name": "Nombre",
+    "username": "Usuario",
+    "email": "Correo",
+    "password": "Contraseña",
+    "repeat-password": "Repite la contraseña",
+    "about-yourself": "Acerca de ti",
+    "sign-up-title": "Regístrate en kultura.eus",
+    "sign-up-sign-in-link": "¿Ya tiene una cuenta de kultura.eus? ¡Inicia sesión!",
+    "sign-up": "Regístrate",
+    "sign-in-title": "Inicia sesión en kultura.eus",
+    "sign-in-sign-up-link": "¿Eres nuevo en kultura.eus? ¡Regístrate!",
+    "sign-in": "Iniciar sesión",
+    "resend-link": "Reenviar enlace de activación",
+    "forgot-username": "¿Olvidaste tu nombre de usuario?",
+    "forgot-password": "¿Olvidaste tu contraseña?",
+    "activate-account-title": "Activar la cuenta",
+    "activate-account-state": "Estado de la cuenta.",
+    "reset-username-title": "Recuperar el nombre de usuario",
+    "reset-password-title": "Recuperar la contraseña",
+    "new-password": "Nueva contraseña.",
+    "new-password-success": "Por favor, introduzca una nueva contraseña.",
+    "send": "Enviar",
+    "guard-error": "Debes iniciar sesión para ver esa página."
+  },
+  "category-form":
+  {
+    "title": "Título",
+    "description": "Descripción",
+    "parent-category": "Categoría Padre",
+    "select-parent-category": "-- SELECCIONE UNA CATEGORÍA --",
+    "send": "Enviar"
+  },
+  "event-form":
+  {
+    "created-by": "Creado por",
+    "title": "Título",
+    "category": "Categoría",
+    "participants": "Participantes",
+    "start": "Inicio",
+    "end": "Fin",
+    "images": "Imágenes",
+    "choose-image": "Elegir imagen",
+    "choose-images": "Elegir imágenes",
+    "list-images": "Lista de imágenes: ",
+    "preview": "Avance",
+    "name": "Nombre",
+    "size": "Tamaño",
+    "status": "Estado",
+    "delete": "Eliminar",
+    "queue-progress": "Progreso de la cola",
+    "delete-all": "Eliminar todos",
+    "province": "Provincia",
+    "municipality": "Municipio",
+    "lat": "Coordenadas N-S (Lat)",
+    "lng": "Coordenada E-O (Lng)",
+    "check": "Comprobar",
+    "locations-exists": "Localización existente",
+    "location": "Localización",
+    "description": "Descripción",
+    "observations": "Observaciones",
+    "select-category": "-- SELECCIONE UNA CATEGORÍA --",
+    "select-province": "-- SELECCIONE UNA PROVINCIA --",
+    "select-municipality": "-- SELECCIONE UN MUNICIPIO --",
+    "select-locations-exists": "-- SELECCIONE UNA LOCALIZACIÓN --",
+    "send": "Enviar",
+    "entity-name": "Nombre de la entidad",
+    "price": "Prezioa"
+  },
+  "application-form":
+  {
+    "title": "Título",
+    "entity-name": "Nombre de la entidad",
+    "events": "Eventos",
+    "users": "Usuarios",
+    "license": "Licencia",
+    "conditions": "Condiciones",
+    "price": "Precio",
+    "expired-at": "Fecha de caducidad",
+    "send": "Enviar"
+  },
+  "service-form":
+  {
+    "title": "Título",
+    "service-type": "Tipo de servicio",
+    "select-service-type": "-- SELECCIONE EL TIPO DE SERVICO --",
+    "description": "Descripción",
+    "lat": "Coordenadas N-S (Lat)",
+    "lng": "Coordenada E-O (Lng)",
+    "send": "Enviar"
+  },
+  "service-type-form":
+  {
+    "title": "Título",
+    "icon": "Icono",
+    "send": "Enviar"
+  },
+  "crud":
+  {
+    "add": "Añadir",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "edit-delete": "Editar/Eliminar"
+  },
+  "comment":
+  {
+    "leaveComment": "Escribe un comentario.",
+    "delete": "Delete",
+    "edit": "Edit",
+    "reply": "Reply",
+    "hideReplies": "Hide Replies",
+    "deleted": "Eliminado",
+    "deleted-text": "El usuario ha eliminado el comentario."
+  },
+  "validation":
+  {
+    "required": "Este campo es requerido",
+    "start-validation": "Fecha de inicio en formato __ / __ / ____.",
+    "end-validation": "Fecha de fin en formato __ / __ / ____.",
+    "compare-date-validation": "La fecha final tiene que ser mayor que la de inicio.",
+    "name-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
+    "name-validation": "El nombre no debe tener caracteres especiales.",
+    "username-length": "Mínimo de caracteres: 3, Máximo de caracteres: 15.",
+    "username-validation": "El nombre de usuario no debe tener espacios y caracteres especiales.",
+    "email-length": "Mínimo de caracteres: 5, Máximo de caracteres: 30.",
+    "email-validation": "Debe ser un correo electrónico válido.",
+    "password-length": "Mínimo de caracteres: 8, Máximo de caracteres: 35.",
+    "password-valid": "Debe tener al menos una mayúscula, minúscula, carácter especial y número.",
+    "password-match": "Las contraseñas no coinciden.",
+    "about-yourself-length": "Máximo de caracteres: 500.",
+    "title-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
+    "title-validation": "El título no debe tener caracteres especiales.",
+    "coordinator-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
+    "coordinator-validation": "El coordinador no debe tener caracteres especiales.",
+    "latitude-validation": "Inserte la latitud en formato decimal.",
+    "longitude-validation": "Inserte la longitud en formato decimal.",
+    "location-length": "Máximo de caracteres: 1000.",
+    "event-description-length": "Mínimo de caracteres: 50, Máximo de caracteres: 20000.",
+    "category-description-length": "Mínimo de caracteres: 5, Máximo de caracteres: 200.",
+    "observations-length": "Máximo de caracteres: 1000.",
+    "discovery-length": "Máximo de caracteres: 1000.",
+    "bibliography-length": "Máximo de caracteres: 1000.",
+    "comment-length": "Máximo de caracteres: 300.",
+    "entityName-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
+    "entityName-validation": "El nombre de la entidad no debe tener caracteres especiales."
+  },
+  "map-icon":
+  {
+    "Dolmenes": "Dolmen",
+    "Menhires": "Menhir",
+    "Túmulos": "Tumulus",
+    "Cromleches": "Cromlech",
+    "Lisas": "Smooth",
+    "Escalonadas": "Stepped",
+    "Cuevas": "Cave",
+    "Templos": "Temple"
+  },
+  "reaction":
+  {
+    "like": "Me gusta",
+    "love": "Me encanta",
+    "haha": "Me divierte",
+    "wow": "Me asombra",
+    "sad": "Me entristece",
+    "angry": "Me enoja",
+    "you": "Tú",
+    "you-and": "Tú y",
+    "others": "personas más"
+  },
+  "dates":
+  {
+    "month":
+    {
+      "short": ["Urt", "Ots", "Mar", "Api", "Mai", "Eka", "Uzt", "Abu", "Ira", "Urr", "Aza", "Abe"],
+      "long": ["Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina", "Uztaila", "Abuztua", "Iraila", "Urria", "Azaroa", "Abendua"]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+<div *ngIf="browser" class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <div class="row">
+          <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+            <h1>{{ title }}</h1>
+            <!-- this creates a google map on the page with the given lat/lng from -->
+            <!-- the component as the initial center of the map: -->
+            <agm-map [latitude]="lat" [longitude]="lng" [usePanning]='true' [zoom]="zoom" [fullscreenControl]="true" [mapTypeControl]="true" [keyboardShortcuts]="false">
+              <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng" [label]="m.labelOptions" [inlineSVG]="m.customInfo.icon" [onSVGLoaded]="handleSVG" (onSVGInserted)="onSvgInserted($event,m,i)" [iconUrl]="m.icon">
+                <agm-snazzy-info-window [maxWidth]="500" [closeWhenOthersOpen]="true">
+                  <ng-template>
+                    <div id="iw-container">
+                      <div class="iw-title"><a href="">{{m.customInfo.title}}</a></div>
+                      <div class="iw-content">
+                        <div class="iw-subTitle">{{m.customInfo.createdBy}}</div>
+                        <span class="map-window"><a href=""><img class="info-img" [src]="m.customInfo.images"> </a></span>
+                        <div [innerHTML]="m.customInfo.description"></div>
+                      </div>
+                      <div class="iw-bottom-gradient"></div>
+                    </div>
+                  </ng-template>
+                </agm-snazzy-info-window>
+              </agm-marker>
+            </agm-map>
+          </section>
+          <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+          <!-- Event Form -->
+          <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
+            <div class="row">
+                <!-- Category -->
+                <div class="col-sm-12">
+                    <div class="form-group required" [ngClass]="{'has-error': (!category.value && category.dirty), 'has-success': (category.value && category.valid)}">
+                      <label for="selectCategoryEvent" translate>{{'event-form.category'}}</label>
+                      <select [formControl]="category" class="form-control" id="selectCategoryEvent" (change)="onSelectedCategory($event.target.value)">
+                        <option value="" translate>{{'event-form.select-category'}}</option>
+                        <ng-container *ngFor="let categoryGroup of categories">
+                          <option *ngFor="let categoryEvent of categoryGroup.value | sort :'level':false" [ngValue]="categoryEvent.title">
+                          {{categoryEvent.title}}
+                        </option>
+                        </ng-container>
+                      </select>
+                      <!-- Validation -->
+                      <span *ngIf="!category.value && category.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                    </div>
+                </div>
+                <!-- Start date-->
+                <div class="col-sm-6">
+                  <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
+                    <label for="inputStart" translate>{{'event-form.start'}}</label>
+                    <div class="input-group icon">
+                      <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
+                      <div class="input-group-append ">
+                        <button (click)="calendarStart.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+                          <span class="la la-calendar ks-icon"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- Validation -->
+                    <span *ngIf="start.errors?.required && start.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                    <!--<span *ngIf="start.errors?.validateDate && start.dirty" class="help-block form-error" translate>
+                                {{'validation.start-validation'}}</span>-->
+                  </div>
+                </div>
+                <!-- End date -->
+                <div class="col-sm-6">
+                  <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
+                    <label for="inputEnd" translate>{{'event-form.end'}}</label>
+                    <div class="input-group icon">
+                      <input [formControl]="end" ngbDatepicker #calendarEnd="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputEnd">
+                      <div class="input-group-append ">
+                        <button (click)="calendarEnd.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+                          <span class="la la-calendar ks-icon"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- Validation -->
+                    <span *ngIf="end.errors?.required && end.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                    <span *ngIf="end.valid && end.value | compareDate:timeEnd :start.value:timeStart" class="help-block form-error" translate>
+                    {{'validation.compare-date-validation'}}</span>
+                  </div>
+                </div>
+                <!-- Price -->
+                <div class="col-sm-12">
+                  <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
+                    <label for="inputPrice" translate>{{'application-form.price'}}</label>
+                    <input [formControl]="price" type="number" class="form-control" id="inputPrice">
+                  </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="col-sm-12">
+                  <div class="form-group text-center">
+                    <button [disabled]="!form.valid || (end.value | compareDate:timeEnd :start.value:timeStart)" type="submit" class="btn btn-default btn-auth" translate>{{'event-form.send'}}</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

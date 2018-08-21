@@ -1,0 +1,103 @@
+.ks-navbar>.ks-wrapper>.nav .ks-navbar-menu.ks-open .nav-item {
+  visibility: visible;
+}
+
+.ks-navbar .nav-item.ks-active,
+.ks-navbar .nav-item.show,
+.ks-navbar .nav-item:hover {
+  background: none;
+}
+
+.ks-navbar .nav-item.show .search-container {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  margin: 0;
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ks-navbar .dropdown .search-container {
+  min-width: 230px;
+  overflow: visible;
+}
+
+.dropdown .search-container {
+  font-size: 12px;
+  padding: 0;
+  border: solid 1px #c4cbe1;
+  margin: 4px 0;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.show>.search-container {
+  display: block;
+}
+
+.search-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: .5rem 0;
+  margin: .125rem 0 0;
+  font-size: 1rem;
+  color: #292b2c;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: .25rem;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  width: 360px;
+  max-height: 342px;
+  background: #fff;
+}
+
+.ks-wrapper-search .ks-message {
+  padding: 12px 20px;
+  height: 85px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  border-bottom: 1px solid #dee0e1;
+}
+
+
+.ks-wrapper-search .ks-message>.ks-info>.ks-user-name {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.ks-wrapper-search .ks-message>.ks-info>.ks-text {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.ks-wrapper-search .ks-message>.ks-info>.ks-datetime {
+  font-size: 11px;
+  color: #858585;
+}
+
+.ks-wrapper-search .ks-message:hover {
+  background: #f5f7fa;
+  -webkit-transition: background .3s ease;
+  transition: background .3s ease;
+}
+
+.ks-wrapper-search .ks-info {
+  margin-left: 10px;
+}
+

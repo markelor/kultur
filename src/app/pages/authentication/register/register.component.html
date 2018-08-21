@@ -1,0 +1,100 @@
+<div class="ks-page">
+    <div class="ks-page-content">
+        <div class="card panel panel-default ks-light ks-panel ks-signup ks-auth">
+            <div class="card-block">
+            	<!-- Registration Form -->
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+                     <!-- Custom Success/Error Message -->    
+                    <div [ngClass]="messageClass">
+                    {{message}}
+                    </div>
+                    <h4 class="ks-header" translate>{{'auth-form.sign-up-title'}}</h4>
+                    <!-- Name Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!name.valid && name.dirty), 'has-success': name.valid}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="name" capitalize type="text" class="form-control"[placeholder]="'auth-form.name'| translate">
+	                        <span class="icon-addon">
+	                            <span class="la la-user"></span>
+	                        </span>
+                        </div>
+                        <!-- Validation -->
+						<span *ngIf="name.errors?.required && name.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+						<span *ngIf="name.errors?.minlength && name.dirty || name.errors?.maxlength && name.dirty " class="help-block form-error" translate>{{'validation.name-length'}}</span>
+						<span *ngIf="name.errors?.validateTitle && name.dirty" class="help-block form-error" translate>{{'validation.name-validation'}}</span>
+                    </div>
+                    <!-- Username Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!username.valid && username.dirty) || (!usernameValid), 'has-success': username.valid && usernameValid}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="username" capitalize type="text" class="form-control"[placeholder]="'auth-form.username'| translate" (blur)="checkUsername()">
+                        <span class="icon-addon">
+                            <span class="la la-user"></span>
+                        </span>
+                        </div>
+                        <!-- Validation -->
+                        <span *ngIf="username.errors?.required && username.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                        <span *ngIf="username.errors?.minlength && username.dirty || username.errors?.maxlength && username.dirty " class="help-block form-error" translate>{{'validation.username-length'}}</span>
+                        <span *ngIf="username.errors?.validateUsername && username.dirty" class="help-block form-error" translate>{{'validation.username-validation'}}</span>
+                        <span *ngIf="usernameMessage" class="help-block form-error">{{usernameMessage}}</span>
+                    </div>
+                    
+                    <!-- Email Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!email.valid && email.dirty) || (!emailValid), 'has-success': email.valid && emailValid}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="email" type="text" class="form-control" [placeholder]="'auth-form.email'| translate" (blur)="checkEmail()">
+                        <span class="icon-addon">
+                            <span class="la la-at"></span>
+                        </span>
+                        </div>
+                        <!-- Validation -->
+                        <span *ngIf="email.errors?.required && email.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                        <span *ngIf="(email.errors?.minlength && email.dirty || email.errors?.maxlength && email.dirty ) && email.dirty" class="help-block form-error" translate>{{'validation.email-length'}}</span>
+                        <span *ngIf="email.errors?.validateEmail && email.dirty" class="help-block form-error" translate>{{'validation.email-validation'}}</span>
+                        <span *ngIf="emailMessage" class="help-block form-error">{{emailMessage}}</span>
+                    </div>
+                     <!-- Password Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!password.valid && password.dirty), 'has-success': (password.valid)}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="password" type="password" class="form-control" [placeholder]="'auth-form.password'| translate">
+                            <span class="icon-addon">
+                                <span class="la la-key"></span>
+                            </span>
+                        </div>
+                        <!-- Validation -->
+                        <span *ngIf="password.errors?.required && password.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                        <span *ngIf="password.errors?.minlength && password.dirty || password.errors?.maxlength && password.dirty " class="help-block form-error" translate>{{'validation.password-length'}}</span>
+                        <span *ngIf="password.errors?.validatePassword && password.dirty" class="help-block form-error" translate>{{'validation.password-valid'}}</span>
+                    </div>
+                    <!-- Confirm Password Input -->
+                    <div class="form-group" [ngClass]="{'has-error': (!passwords.valid && (password.dirty || repeatPassword.dirty)), 'has-success': (passwords.valid && (password.dirty || repeatPassword.dirty))}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                            <input [formControl]="repeatPassword" type="password" class="form-control" [placeholder]="'auth-form.repeat-password'| translate">
+                            <span class="icon-addon">
+                                <span class="la la-key"></span>
+                            </span>
+                        </div>
+                        <!-- Validation -->
+                        <span *ngIf="repeatPassword.errors?.required && repeatPassword.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+                        <span *ngIf="!passwords.valid && (password.dirty || repeatPassword.dirty)" class="help-block form-error" translate>{{'validation.password-match'}}</span>
+                    </div>
+                    <!-- About Yourself textarea -->
+                    <div class="form-group" [ngClass]="{'has-error': (!aboutYourself.valid && aboutYourself.dirty), 'has-success': (aboutYourself.valid && aboutYourself.value)}">
+                        <div class="input-icon icon-left icon-lg icon-color-primary">
+                        	<textarea [formControl]="aboutYourself" capitalize class="form-control" rows="6"[placeholder]="'auth-form.about-yourself'| translate"></textarea>
+                        </div>
+                        <span *ngIf="aboutYourself.errors?.maxlength && aboutYourself.dirty " class="help-block form-error" translate>{{'validation.about-yourself-length'}}</span>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="!form.valid||submitted || !emailValid || !usernameValid" type="submit" class="btn btn-primary btn-block" translate>{{'auth-form.sign-up'}}</button>
+                    </div>
+                    <div class="ks-text-center">
+                        <span class="text-muted">By clicking "Sign Up" I agree the </span> <a href="pages-signup.html">Terms Of Service</a>
+                    </div>
+                    <div class="ks-text-center">
+                        <a [routerLink]="['/sign-in-route'] | localize" translate>{{'auth-form.sign-up-sign-in-link'}}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  
+    

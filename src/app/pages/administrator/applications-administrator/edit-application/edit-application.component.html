@@ -1,0 +1,52 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <div class="row">
+          <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card panel ks-widget ks-widget-post">
+              <h5 class="card-header">
+              <span class="ks-text" translate>{{'navbar.user'}}</span>
+            </h5>
+              <div class="card-block">
+                <div class="ks-tabs-container ks-tabs-default ks-tabs-no-separator ks-widget-attachments">
+                  <ul class="nav ks-nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link nav-eu" href="#" data-toggle="tab" data-target="#tab1" translate>
+                        <span class="ks-icon la la-user text-info"></span>
+                        {{'navbar.eu'}}
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-es" href="#" data-toggle="tab" data-target="#tab2" translate>
+                        <span class="ks-icon la la-camera text-success"></span>
+                        {{'navbar.es'}}
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-en" href="#" data-toggle="tab" data-target="#tab3" translate>
+                        <span class="ks-icon la la-file-text-o text-danger"></span>
+                        {{'navbar.en'}}
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane nav-eu" id="tab1" role="tabpanel">
+                      <app-application-form *ngIf="application" [inputOperation]="'edit'" [inputLanguage]="'eu'" [inputApplication]="application"></app-application-form>
+                    </div>
+                    <div class="tab-pane nav-es" id="tab2" role="tabpanel">
+                      <app-application-form *ngIf="application" [inputOperation]="'edit'" [inputLanguage]="'es'" [inputApplication]="application"></app-application-form>
+                    </div>
+                    <div class="tab-pane nav-en" id="tab3" role="tabpanel">
+                     <app-application-form *ngIf="application" [inputOperation]="'edit'" [inputLanguage]="'en'" [inputApplication]="application"></app-application-form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+/** sass/scss/less code */
+:host /deep/ .widgets .smart-table-container {
+    width: 100%;
+}
+
+:host /deep/ ng2-smart-table {
+    color: black;
+}
+
+:host /deep/ ng2-smart-table th, :host /deep/ ng2-smart-table td {
+    border: 1px solid #e9ebec !important;
+    line-height: 35px;
+    vertical-align: middle;
+}
+
+:host /deep/ ng2-smart-table table tr td {
+    padding: 0 8px;
+}
+
+:host /deep/ ng2-smart-table input {
+    line-height: 1.5 !important;
+}
+
+:host /deep/ ng2-smart-table ng2-smart-table-cell {
+    color: black;
+    line-height: 35px;
+}
+
+:host /deep/ ng2-smart-table tbody tr {
+    color: black;
+}
+
+:host /deep/ ng2-smart-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+:host /deep/ ng2-smart-table a.ng2-smart-sort-link {
+    font-size: 14px !important;
+    color: #1e6bb8;
+    font-weight: 500;
+}
+
+:host /deep/ ng2-smart-table a.ng2-smart-sort-link.sort {
+    font-weight: 500 !important;
+}
+
+:host /deep/ ng2-smart-table a.ng2-smart-sort-link.sort::after {
+    border-bottom-color: black !important;
+}
+
+:host /deep/ ng2-smart-table .ng2-smart-actions {
+    width: 70px;
+    text-align: center;
+}
+
+:host /deep/ ng2-smart-table .ng2-smart-actions .actions {
+    float: none;
+    text-align: center;
+}
+
+:host /deep/ ng2-smart-table .ng2-smart-actions-title-add {
+    text-align: center;
+}
+
+:host /deep/ ng2-smart-table a.ng2-smart-action, :host /deep/ ng2-smart-table .ng2-smart-title {
+    font-size: 14px !important;
+    color: black;
+    padding: 0 5px;
+    display: inline-block;
+}
+
+:host /deep/ ng2-smart-table a.ng2-smart-action.ng2-smart-action-add-add, :host /deep/ ng2-smart-table .ng2-smart-title.ng2-smart-action-add-add {
+    font-size: 25px !important;
+}
+
+:host /deep/ ng2-smart-table nav.ng2-smart-pagination-nav {
+    display: flex;
+    justify-content: center;
+}

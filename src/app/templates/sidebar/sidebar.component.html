@@ -1,0 +1,114 @@
+<div class="ks-sidebar-wrapper">
+  <ul class="nav nav-pills nav-stacked">
+    <!--Home item-->
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/'] | localize">
+        <span class="ks-icon la la-home"></span>
+        <span translate>{{'menu.home'}}</span>
+    </a>
+    </li>
+    <!--Category item-->
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-tags"></span>
+        <span translate>{{'menu.category'}}</span>
+      </div>
+      <!--Create category-->
+      <div class="dropdown-menu"> 
+        <a class="dropdown-item" [routerLink]="['/category-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+      </div>
+    </li>
+    <!--Event item-->
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-calendar-o"></span>
+        <span translate>{{'menu.event'}}</span>
+      </div>
+      <!--Create event-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/event-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-calendar-plus-o"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" [routerLink]="['/event-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+      </div>
+    </li>
+    <!--Map item-->
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/map-route'] | localize">
+        <span class="ks-icon la la-map"></span>
+        <span translate>{{'menu.map'}}</span>
+    </a>
+    </li>
+    <!--Application item-->
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-mobile-phone"></span>
+        <span translate>{{'menu.application'}}</span>
+      </div>
+      <!--Create application-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/application-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" [routerLink]="['/application-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+      </div>
+    </li>
+     <!--Service item-->
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-map-marker"></span>
+        <span translate>{{'menu.service'}}</span>
+      </div>
+      <!--Create service & type-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/service-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" [routerLink]="['/service-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+        <a class="dropdown-item" [routerLink]="['/service-type-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.service-type'}}</a>
+      </div>
+    </li>   
+     <!--Observation item-->
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-map-marker"></span>
+        <span translate>{{'menu.observation'}}</span>
+      </div>
+      <!--Create service-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/observation-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" [routerLink]="['/observation-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+      </div>
+    </li>   
+    <!--Administrator item-->
+    <li [hidden]="!permission" class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-cog"></span>
+        <span translate>{{'menu.administrator'}}</span>
+      </div>
+      <!--Administrator users-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/admin-route','users-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.users'}}</a>
+      </div>
+      <!--Administrator events-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/admin-route','events-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.events'}}</a>
+      </div>
+      <!--Administrator services-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/admin-route','services-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.services'}}</a>
+      </div>
+      <!--Administrator observations-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/admin-route','observations-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.observations'}}</a>
+      </div>
+      <!--Administrator applications-->
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/admin-route','applications-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.applications'}}</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="ks-icon la la-dashboard"></span>
+        <span>Dashboard</span>
+      </div>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" routerLink="" routerLinkActive="ks-active">Default</a>
+      </div>
+    </li>
+  </ul>
+</div>

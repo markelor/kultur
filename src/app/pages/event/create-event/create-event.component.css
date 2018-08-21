@@ -1,0 +1,19 @@
+.form-group.has-error .form-control {
+  border-color: #ef5350;
+}
+
+.form-group.has-success>.help-block.form-error {
+    color: #5cb85c
+}
+.ks-widget-attachments .ks-uploading-progress-block {
+    margin-bottom: 0px;
+}
+.btn-s{
+	margin-bottom: 15px;
+}
+.ks-widget-attachments {
+    margin-bottom: 20px;
+}
+.margin-top {
+	margin-top:-5px;
+}

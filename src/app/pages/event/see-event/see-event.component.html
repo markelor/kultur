@@ -1,0 +1,284 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <div class="row">
+          <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+            <article *ngIf="event" class="card panel ks-widget ks-widget-post">
+              <h5 class="card-header">
+                <span class="ks-text" *ngIf="event.title">{{event.title}}</span>
+              </h5>
+              <div class="card-block">
+                <ngx-gallery *ngIf="galleryImages" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                <div class="ks-actions">
+                  <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
+                    <!--<span class="ks-amount">3Like</span>-->
+                  <!-- Reaction system start -->
+                  <div class="facebook-reaction">
+                    <!-- container div for reaction system -->
+                    <span class="like-btn"> <!-- Default like button -->
+                        <span class="like-btn-emo like-btn-default"></span>
+                    <!-- Default like button emotion-->
+                    <span (click)="deleteReaction()" class="ks-icon like-btn-text" translate>{{'event.like'}}</span>
+                    <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                    <ul class="reactions-box">
+                      <!-- Reaction buttons container-->
+                      <li (click)="addReaction('like')" class="reaction reaction-like" [attr.data-reaction]="'reaction.like' | translate"></li>
+                      <li (click)="addReaction('love')" class="reaction reaction-love" [attr.data-reaction]="'reaction.love' | translate"></li>
+                      <li (click)="addReaction('haha')" class="reaction reaction-haha" [attr.data-reaction]="'reaction.haha' | translate"></li>
+                      <li (click)="addReaction('wow')" class="reaction reaction-wow" [attr.data-reaction]="'reaction.wow' | translate"></li>
+                      <li (click)="addReaction('sad')" class="reaction reaction-sad" [attr.data-reaction]="'reaction.sad' | translate"></li>
+                      <li (click)="addReaction('angry')" class="reaction reaction-angry" [attr.data-reaction]="'reaction.angry' | translate"></li>
+                    </ul>
+                    </span>
+                  </div>
+                  <!-- Reaction system end -->
+                  </span>
+                  <span (click)="scrollComment()" class="ks-control">
+                    <span class="comment-btn"> <!-- Default like button -->
+                        <span class="comment-btn-emo comment-btn-default"></span>
+                  <!-- Default like button emotion-->
+                  <span class="ks-icon" translate>{{'event.comment'}}</span>
+                  <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                  </span>
+                  </span>
+                  <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
+                    <!--<span class="ks-amount">3Like</span>-->
+                  <!-- Reaction system start -->
+                  <div class="facebook-reaction">
+                    <!-- container div for reaction system -->
+                    <span class="like-btn"> <!-- Default like button -->
+                        <span class="comment-btn-emo share-btn-default"></span>
+                    <!-- Default like button emotion-->
+                    <span class="ks-icon" translate>{{'event.share'}}</span>
+                    <!-- Default like button text,(Like, wow, sad..) default:Like  -->
+                    <ul class="reactions-box">
+                      <!-- Reaction buttons container-->
+                      <li class="reaction reaction-facebook" data-reaction="Facebook">
+                        <share-button [theme]="'circles-dark'" [button]="'facebook'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                      <li class="reaction reaction-twitter" data-reaction="Twitter">
+                        <share-button [theme]="'circles-dark'" [button]="'twitter'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                      <li class="reaction reaction-google" data-reaction="Google">
+                        <share-button [theme]="'circles-dark'" [button]="'google'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                      <li class="reaction reaction-whats-up" data-reaction="Whats Up">
+                        <share-button [theme]="'circles-dark'" [button]="'whatsapp'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                      <li class="reaction reaction-telegram" data-reaction="Telegram">
+                        <share-button [theme]="'circles-dark'" [button]="'telegram'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                      <li class="reaction reaction-pinterest" data-reaction="Pinterest">
+                        <share-button [theme]="'circles-dark'" [button]="'pinterest'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                      </li>
+                    </ul>
+                    </span>
+                  </div>
+                  <!-- Reaction system end -->
+                  </span>
+                  <div *ngIf="event" class="like-stat">
+                    <!-- Like statistic container-->
+                    <!--like reaction-->
+                    <ng-template #likeReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'likeBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--love reaction-->
+                    <ng-template #loveReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'loveBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--haha reaction-->
+                    <ng-template #hahaReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'hahaBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--wow reaction-->
+                    <ng-template #wowReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'wowBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--sad reaction-->
+                    <ng-template #sadReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'sadBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--angry reaction-->
+                    <ng-template #angryReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'angryBy'">{{reactionUsername}}</li>
+                      </ul>
+                    </ng-template>
+                    <ng-template #allReaction>
+                      <ul class="reaction-names">
+                        <li *ngFor="let reaction of allReactions">{{reaction}}</li>
+                      </ul>
+                    </ng-template>
+                    <!--like reaction-->
+                    <a (click)="reactionClick('like')" href="javascript:void(0);" placement="top" [ngbTooltip]="likeReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'likeBy').length" [ngClass]="'like-btn-like'"></span>
+                    </a>
+                    <!--love reaction-->
+                    <a (click)="reactionClick('love')" href="javascript:void(0);" placement="top" [ngbTooltip]="loveReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'loveBy').length" [ngClass]="'like-btn-love'"></span>
+                    </a>
+                    <!--haha reaction-->
+                    <a (click)="reactionClick('haha')" href="javascript:void(0);" placement="top" [ngbTooltip]="hahaReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'hahaBy').length" [ngClass]="'like-btn-haha'"></span>
+                    </a>
+                    <!--wow reaction-->
+                    <a (click)="reactionClick('wow')" href="javascript:void(0);" placement="top" [ngbTooltip]="wowReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'wowBy').length" [ngClass]="'like-btn-wow'"></span>
+                    </a>
+                    <!--sad reaction-->
+                    <a (click)="reactionClick('sad')" href="javascript:void(0);" placement="top" [ngbTooltip]="sadReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'sadBy').length" [ngClass]="'like-btn-sad'"></span>
+                    </a>
+                    <!--angry reaction-->
+                    <a (click)="reactionClick('angry')" href="javascript:void(0);" placement="top" [ngbTooltip]="angryReaction" class="like-emo">
+                      <!-- like emotions container -->
+                      <span *ngIf="(event | safeHtml : 'reactions' : 'angryBy').length" [ngClass]="'like-btn-angry'"></span>
+                    </a>
+                    <a (click)="reactionClick('all')" href="javascript:void(0);" placement="top" [ngbTooltip]="allReaction" class="like-details">
+                    </a>
+                    <!-- HTML to write -->
+                  </div>
+                </div>
+                <br>
+                <h2 translate>{{'event.general-info'}}</h2>
+                <div *ngIf="event" class="row">
+                  <!-- Category info-->
+                  <div class="col-sm-6">
+                    <p>
+                      <span>
+                        <strong translate>{{'event-form.category'}}</strong>: 
+                      </span>
+                      <ng-container *ngFor="let category of categories">
+                        <span *ngIf="category.language===localizeService.parser.currentLang&&!category.firstParentId">{{category.title}}</span>
+                        <span *ngIf="category.language===localizeService.parser.currentLang&&category.firstParentId">- {{category.title}} </span>
+                        <ng-container *ngFor="let translation of category.translation">
+                          <span *ngIf="translation.language===localizeService.parser.currentLang&&!translation.firstParentId">{{translation.title}}</span>
+                          <span *ngIf="translation.language===localizeService.parser.currentLang&&translation.firstParentId">- {{translation.title}} </span>
+                        </ng-container>
+                      </ng-container>
+                    </p>
+                  </div>
+                  <!--Participants info-->
+                  <div *ngFor="let participant of event.participants" class="col-sm-6">
+                    <p>
+                      <span>
+                        <strong translate>{{'event-form.participants'}}</strong>: 
+                      </span>{{participant }}
+                    </p>
+                  </div>
+                  <!--Start-->
+                  <div class="col-sm-6">
+                    <p *ngIf="event.start">
+                      <span>
+                        <strong translate>{{'event-form.start'}}</strong>: 
+                      </span>{{event.start | timezone}}
+                    </p>
+                  </div>
+                  <!--End info-->
+                  <div class="col-sm-6">
+                    <p *ngIf="event.end">
+                      <span>
+                        <strong translate>{{'event-form.end'}}</strong>: 
+                      </span>{{event.end | timezone}}
+                    </p>
+                  </div>
+                  <!--Price info-->
+                  <div class="col-sm-12">
+                    <p *ngIf="event.price">
+                      <span>
+                        <strong translate>{{'application-form.price'}}</strong>: 
+                      </span>{{event.price}}€
+                    </p>
+                  </div>
+                  <!--Province info-->
+                  <div class="col-sm-6">
+                    <p *ngIf="event.place.province.name">
+                      <span>
+                        <strong translate>{{'event-form.province'}}</strong>: 
+                      </span>{{event.place.province.name}}
+                    </p>
+                  </div>
+                  <!--Municipality info-->
+                  <div class="col-sm-12">
+                    <p *ngIf="event.place.municipality.name">
+                      <span>
+                        <strong translate>{{'event-form.municipality'}}</strong>: 
+                      </span>{{event.place.municipality.name}}
+                    </p>
+                  </div>
+                  <!--Location info-->
+                  <div class="col-sm-12">
+                    <p *ngIf="event.place.location ">
+                      <span>
+                        <strong translate>{{'event-form.location'}}</strong>: 
+                      </span>{{event.place.location }}
+                    </p>
+                  </div>
+                  <!--Latitude info-->
+                  <div class="col-sm-6">
+                    <p *ngIf="event.place.coordinates.lat">
+                      <span>
+                        <strong translate>{{'event-form.lat'}}</strong>: 
+                      </span>{{event.place.coordinates.lat}}
+                    </p>
+                  </div>
+                  <!--Longitude info-->
+                  <div class="col-sm-6">
+                    <p *ngIf="event.place.coordinates.lng">
+                      <span>
+                        <strong translate>{{'event-form.lng'}}</strong>: 
+                      </span>{{event.place.coordinates.lng}}
+                    </p>
+                  </div>
+                  <!--Description info-->
+                  <div class="col-sm-12">
+                    <p *ngIf="event.description">
+                      <span>
+                        <strong translate>{{'event-form.description'}}</strong>: 
+                      </span>
+                      <span [innerHTML]="event.description"></span>
+                    </p>
+                  </div>
+                  <!--Observations info-->
+                  <div class="col-sm-12">
+                    <p *ngIf="event.observations">
+                      <span>
+                        <strong translate>{{'event-form.observations'}}</strong>: 
+                      </span> {{event.observations}}
+                    </p>
+                  </div>
+                </div>
+                <div  class="col-sm-12">
+                  <div class="form-group text-center">
+                    <button (click)="showMap = !showMap" type="submit" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
+                    <event-form-map [hidden]="!showMap"></event-form-map>
+                  </div>
+                </div>
+                <app-comment [inputEventId]="event._id"></app-comment>
+              </div>
+            </article>
+          </section>
+          <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <right-sidebar></right-sidebar>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

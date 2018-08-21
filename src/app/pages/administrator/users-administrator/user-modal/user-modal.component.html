@@ -1,0 +1,89 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalHeader}}</h4>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Registration Form -->
+    <form [formGroup]="form" class="form-container">
+      <!-- Permission -->
+      <div class="form-group required" [ngClass]="{'has-error': (!permission.valid && permission.dirty), 'has-success': (permission.valid)}">
+        <div class="input-icon icon-left icon-lg icon-color-primary">
+          <select [formControl]="permission" class="form-control" id="permission">
+            <option [value]="'user'" [selected]="permission.value === 'user'">
+              User
+            </option>
+            <option [value]="'contributor'" [selected]="permission.value === 'admin'">
+              Contributor
+            </option>
+            <option [value]="'moderator'" [selected]="permission.value === 'moderator'">
+              Moderator
+            </option>
+            <option [value]="'admin'" [selected]="permission.value === 'admin'">
+              Admin
+            </option>
+          </select>
+          <span class="icon-addon">
+                    <span class="la la-key"></span>
+          </span>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="permission.errors?.required && permission.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+      <!-- Username Input -->
+      <div class="form-group" [ngClass]="{'has-error': (!username.valid && username.dirty) || (!usernameValid), 'has-success': username.valid && usernameValid}">
+        <div class="input-icon icon-left icon-lg icon-color-primary">
+          <input [formControl]="username" capitalize type="text" class="form-control" [placeholder]="'auth-form.username'| translate" (blur)="checkUsername()">
+          <span class="icon-addon">
+                    <span class="la la-user"></span>
+          </span>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="username.errors?.required && username.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="username.errors?.minlength && username.dirty || username.errors?.maxlength && username.dirty " class="help-block form-error" translate>{{'validation.username-length'}}</span>
+        <span *ngIf="username.errors?.validateAlphanumeric && username.dirty" class="help-block form-error" translate>{{'validation.username-validation'}}</span>
+        <span *ngIf="usernameMessage" class="help-block form-error">{{usernameMessage}}</span>
+      </div>
+      <!-- Name Input -->
+      <div class="form-group" [ngClass]="{'has-error': (!name.valid && name.dirty), 'has-success': name.valid}">
+        <div class="input-icon icon-left icon-lg icon-color-primary">
+          <input [formControl]="name" capitalize type="text" class="form-control" [placeholder]="'auth-form.name'| translate">
+          <span class="icon-addon">
+                    <span class="la la-user"></span>
+          </span>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="name.errors?.required && name.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="name.errors?.minlength && name.dirty || name.errors?.maxlength && name.dirty " class="help-block form-error" translate>{{'validation.name-length'}}</span>
+        <span *ngIf="name.errors?.validateAlphanumeric && name.dirty" class="help-block form-error" translate>{{'validation.name-validation'}}</span>
+      </div>
+      <!-- Email Input -->
+      <div class="form-group" [ngClass]="{'has-error': (!email.valid && email.dirty) || (!emailValid), 'has-success': email.valid && emailValid}">
+        <div class="input-icon icon-left icon-lg icon-color-primary">
+          <input [formControl]="email" type="text" class="form-control" [placeholder]="'auth-form.email'| translate" (blur)="checkEmail()">
+          <span class="icon-addon">
+                <span class="la la-at"></span>
+          </span>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="email.errors?.required && email.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="(email.errors?.minlength && email.dirty || email.errors?.maxlength && email.dirty ) && email.dirty" class="help-block form-error" translate>{{'validation.email-length'}}</span>
+        <span *ngIf="email.errors?.validateEmail && email.dirty" class="help-block form-error" translate>{{'validation.email-validation'}}</span>
+        <span *ngIf="emailMessage" class="help-block form-error">{{emailMessage}}</span>
+      </div>
+      <!-- About Yourself textarea -->
+      <div class="form-group" [ngClass]="{'has-error': (!aboutYourself.valid && aboutYourself.dirty), 'has-success': (aboutYourself.value && aboutYourself.valid)}">
+        <div class="input-icon icon-left icon-lg icon-color-primary">
+          <textarea [formControl]="aboutYourself" capitalize class="form-control" rows="6" [placeholder]="'auth-form.about-yourself'| translate"></textarea>
+        </div>
+        <span *ngIf="aboutYourself.errors?.maxlength && aboutYourself.dirty " class="help-block form-error" translate>{{'validation.about-yourself-length'}}</span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary confirm-btn" (click)="confirmModal()">Acept</button>
+    <button class="btn btn-primary confirm-btn" (click)="cancelModal()">Close</button>
+  </div>
+</div>

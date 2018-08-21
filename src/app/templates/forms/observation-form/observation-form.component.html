@@ -1,0 +1,58 @@
+<!-- Custom Success/Error Message -->
+<div *ngIf="message" class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- Service Form -->
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
+  <div class="row">
+    <!-- Title -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
+        <label for="inputTitle" translate>{{'service-form.title'}}</label>
+        <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
+        <!-- Validation -->
+        <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
+        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
+      </div>
+    </div>
+    <!-- ExpiredAt -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!expiredAt.valid && expiredAt.dirty), 'has-success': (expiredAt.value)}">
+        <label for="inputExpiredAt" translate>{{'application-form.expired-at'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="expiredAt" ngbDatepicker #calendarExpiredAt="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputExpiredAt">
+          <div class="input-group-append ">
+            <button (click)="calendarExpiredAt.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-calendar ks-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ExpiredAt time-->
+    <div class="col-sm-6 margin-top">
+      <div class="form-group required">
+        <ngb-timepicker [(ngModel)]="timeExpiredAt" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!description.valid && description.dirty), 'has-success': (description.valid)}">
+        <label for="textareaDescription" translate>{{'event-form.description'}}</label>
+        <textarea [id]="'textareaDescription'+inputLanguage" [froalaEditor]="froalaOptions" (froalaInit)="initializeFroala($event)" formControlName="description" capitalize class="form-control"></textarea>
+        <!-- Validation -->
+        <span *ngIf="description.errors?.required && description.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="description.errors?.minlength && description.dirty || description.errors?.maxlength && description.dirty " class="help-block form-error" translate>{{'validation.event-description-length'}}</span>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <button [disabled]="!form.valid || submitted " type="submit" class="btn btn-default btn-auth" translate>{{'service-form.send'}}</button>
+      </div>
+    </div>
+  </div>
+</form>

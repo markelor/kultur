@@ -1,0 +1,916 @@
+{
+    "totalResultsCount": 41,
+    "geonames": [
+        {
+            "adminCode1": "75",
+            "lng": "-1.57191",
+            "geonameId": 3038565,
+            "toponymName": "Ahetze",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1422,
+            "countryCode": "FR",
+            "name": "Ahetze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.40432",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.29744",
+            "geonameId": 2971333,
+            "toponymName": "Urt",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1858,
+            "countryCode": "FR",
+            "name": "Ahurti",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.49009",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.5",
+            "geonameId": 3038406,
+            "toponymName": "Ainhoa",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 662,
+            "countryCode": "FR",
+            "name": "Ainhoa",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.3",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.51346",
+            "geonameId": 3037612,
+            "toponymName": "Anglet",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 40658,
+            "countryCode": "FR",
+            "name": "Anglet",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.47664",
+            "fcode": "PPL"
+        },,
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.55118",
+            "geonameId": 3037282,
+            "toponymName": "Arbonne",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1479,
+            "countryCode": "FR",
+            "name": "Arbonne",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.43248",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.52237",
+            "geonameId": 3037245,
+            "toponymName": "Arcangues",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2947,
+            "countryCode": "FR",
+            "name": "Arrangoitze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.43124",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.62073",
+            "geonameId": 3036596,
+            "toponymName": "Ascain",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 3365,
+            "countryCode": "FR",
+            "name": "Azkaine",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.34521",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.48333",
+            "geonameId": 3034475,
+            "toponymName": "Bayonne",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 44396,
+            "countryCode": "FR",
+            "name": "Baiona",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "seat of a third-order administrative division",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.48333",
+            "fcode": "PPLA3"
+        }
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.20347",
+            "geonameId": 3034964,
+            "toponymName": "Bardos",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1453,
+            "countryCode": "FR",
+            "name": "Bardoze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.47392",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.51647",
+            "geonameId": 3034649,
+            "toponymName": "Bassussarry",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2429,
+            "countryCode": "FR",
+            "name": "Basusarri",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.44272",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.33353",
+            "geonameId": 3029987,
+            "toponymName": "Briscous",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2160,
+            "countryCode": "FR",
+            "name": "Beskoitze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.45958",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.59127",
+            "geonameId": 3032767,
+            "toponymName": "Bidart",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 5021,
+            "countryCode": "FR",
+            "name": "Bidarte",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.4376",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.74331",
+            "geonameId": 3032567,
+            "toponymName": "Biriatou",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 898,
+            "countryCode": "FR",
+            "name": "Biriatu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.33346",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.46556",
+            "geonameId": 3031389,
+            "toponymName": "Boucau",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 7532,
+            "countryCode": "FR",
+            "name": "Bokale",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.5277",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.66267",
+            "geonameId": 2979309,
+            "toponymName": "Saint-Jean-de-Luz",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 14514,
+            "countryCode": "FR",
+            "name": "San Juan de Luz",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.38871",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.44737",
+            "geonameId": 3019699,
+            "toponymName": "Espelette",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2032,
+            "countryCode": "FR",
+            "name": "Ezpeleta",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.34015",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.61073",
+            "geonameId": 3014340,
+            "toponymName": "Gu\xe9thary",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1370,
+            "countryCode": "FR",
+            "name": "Getaria",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.42285",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.20546",
+            "geonameId": 3014306,
+            "toponymName": "Guiche",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 781,
+            "countryCode": "FR",
+            "name": "Gixune",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.51135",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.42436",
+            "geonameId": 3014031,
+            "toponymName": "Halsou",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 543,
+            "countryCode": "FR",
+            "name": "Haltsu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.37633",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.30499",
+            "geonameId": 3013877,
+            "toponymName": "Hasparren",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 6250,
+            "countryCode": "FR",
+            "name": "Hazparne",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.38377",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.77382",
+            "geonameId": 3013534,
+            "toponymName": "Hendaye",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 14415,
+            "countryCode": "FR",
+            "name": "Hendaya",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.37172",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.45919",
+            "geonameId": 2977472,
+            "toponymName": "Saint-Pierre-d\u2019Irube",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 0,
+            "countryCode": "FR",
+            "name": "Hiriburu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.47769",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.40617",
+            "geonameId": 3012636,
+            "toponymName": "Itxassou",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1918,
+            "countryCode": "FR",
+            "name": "Itsasu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.32893",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.4315",
+            "geonameId": 3012438,
+            "toponymName": "Jatxou",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 927,
+            "countryCode": "FR",
+            "name": "zzLapurdi-) Jatsu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.38823",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.40105",
+            "geonameId": 3029041,
+            "toponymName": "Cambo-les-Bains",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 4800,
+            "countryCode": "FR",
+            "name": "Kanbo",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.35851",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.43976",
+            "geonameId": 3006627,
+            "toponymName": "Larressore",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1426,
+            "countryCode": "FR",
+            "name": "Larresoro",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.36792",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.39101",
+            "geonameId": 3008719,
+            "toponymName": "Lahonce",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2046,
+            "countryCode": "FR",
+            "name": "Lehuntze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.48248",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.29991",
+            "geonameId": 2994612,
+            "toponymName": "Mendionde",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 779,
+            "countryCode": "FR",
+            "name": "Lekorne",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.33942",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.26649",
+            "geonameId": 3031792,
+            "toponymName": "Bonloc",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 305,
+            "countryCode": "FR",
+            "name": "Lekuine",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.36789",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.35131",
+            "geonameId": 2997437,
+            "toponymName": "Louhossoa",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 616,
+            "countryCode": "FR",
+            "name": "Luhuso",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.3164",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.32025",
+            "geonameId": 2996917,
+            "toponymName": "Macaye",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 569,
+            "countryCode": "FR",
+            "name": "Makea",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.33114",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.55558",
+            "geonameId": 3032797,
+            "toponymName": "Biarritz",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 33188,
+            "countryCode": "FR",
+            "name": "Biarriz",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.48012",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.45324",
+            "geonameId": 2968744,
+            "toponymName": "Villefranque",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2104,
+            "countryCode": "FR",
+            "name": "Milafranga",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.43631",
+            "fcode": "PPL"
+        },
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.41824",
+            "geonameId": 2991546,
+            "toponymName": "Mouguerre",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 4392,
+            "countryCode": "FR",
+            "name": "Mugerre",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.46795",
+            "fcode": "PPL"
+        },
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.58012",
+            "geonameId": 2976021,
+            "toponymName": "Sare",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 2330,
+            "countryCode": "FR",
+            "name": "Sara",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.3126",
+            "fcode": "PPL"
+        },
+
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.55013",
+            "geonameId": 2977631,
+            "toponymName": "Saint-P\xe9e-sur-Nivelle",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 4682,
+            "countryCode": "FR",
+            "name": "Senpere",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.35564",
+            "fcode": "PPL"
+        },
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.33668",
+            "geonameId": 2971357,
+            "toponymName": "Urcuit",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1936,
+            "countryCode": "FR",
+            "name": "Urketa",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.48594",
+            "fcode": "PPL"
+        },
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.69921",
+            "geonameId": 2971336,
+            "toponymName": "Urrugne",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 7580,
+            "countryCode": "FR",
+            "name": "Urru\xf1a",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.36361",
+            "fcode": "PPL"
+        },
+
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.45603",
+            "geonameId": 2971286,
+            "toponymName": "Ustaritz",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 5662,
+            "countryCode": "FR",
+            "name": "Uztaritze",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.3965",
+            "fcode": "PPL"
+        },
+
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.676",
+            "geonameId": 3024979,
+            "toponymName": "Ciboure",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 6814,
+            "countryCode": "FR",
+            "name": "Ziburu",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.38287",
+            "fcode": "PPL"
+        },
+
+
+        {
+            "adminCode1": "75",
+            "lng": "-1.47559",
+            "geonameId": 2973959,
+            "toponymName": "Soura\xefde",
+            "countryId": "3017382",
+            "fcl": "P",
+            "population": 1161,
+            "countryCode": "FR",
+            "name": "Zuraide",
+            "fclName": "city, village,...",
+            "adminCodes1":
+            {
+                "ISO3166_2": "NAQ"
+            },
+            "countryName": "Francia",
+            "fcodeName": "populated place",
+            "adminName1": "Nouvelle-Aquitaine",
+            "lat": "43.34154",
+            "fcode": "PPL"
+        }
+    ]
+}

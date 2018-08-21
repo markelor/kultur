@@ -1,0 +1,158 @@
+{
+    "totalResultsCount": 7,
+    "geonames": [
+    {
+        "adminCode1": "59",
+        "lng": "-2.75",
+        "geonameId": 3130717,
+        "toponymName": "Araba",
+        "countryId": "2510769",
+        "fcl": "A",
+        "population": 313819,
+        "numberOfChildren": 51,
+        "countryCode": "ES",
+        "name": "Araba / Álava",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "PV"
+        },
+        "countryName": "Spain",
+        "fcodeName": "second-order administrative division",
+        "adminName1": "Basque Country",
+        "lat": "42.83333",
+        "fcode": "ADM2"
+    },
+    {
+        "adminCode1": "59",
+        "lng": "-2.91667",
+        "geonameId": 3104469,
+        "toponymName": "Bizkaia",
+        "countryId": "2510769",
+        "fcl": "A",
+        "population": 1152658,
+        "numberOfChildren": 112,
+        "countryCode": "ES",
+        "name": "Biscay",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "PV"
+        },
+        "countryName": "Spain",
+        "fcodeName": "second-order administrative division",
+        "adminName1": "Basque Country",
+        "lat": "43.25",
+        "fcode": "ADM2"
+    },
+    {
+        "adminCode1": "59",
+        "lng": "-2.16667",
+        "geonameId": 3120935,
+        "toponymName": "Gipuzkoa",
+        "countryId": "2510769",
+        "fcl": "A",
+        "population": 705698,
+        "numberOfChildren": 88,
+        "countryCode": "ES",
+        "name": "Gipuzkoa",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "PV"
+        },
+        "countryName": "Spain",
+        "fcodeName": "second-order administrative division",
+        "adminName1": "Basque Country",
+        "lat": "43.16667",
+        "fcode": "ADM2"
+    },
+    {
+        "adminCode1": "32",
+        "lng": "-1.65138",
+        "geonameId": 6355235,
+        "toponymName": "Nafarroa",
+        "countryId": "2510769",
+        "fcl": "A",
+        "population": 644566,
+        "numberOfChildren": 272,
+        "countryCode": "ES",
+        "name": "Navarre",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NC"
+        },
+        "countryName": "Spain",
+        "fcodeName": "second-order administrative division",
+        "adminName1": "Navarre",
+        "lat": "42.8233",
+        "fcode": "ADM2"
+    },
+{
+        "adminCode1": "75",
+        "lng": "-1.41667",
+        "geonameId": 3034473,
+        "toponymName": "Lapurdi",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 282180,
+        "numberOfChildren": 123,
+        "countryCode": "FR",
+        "name": "Labourd",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "third-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.33333",
+        "fcode": "ADM3"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-1.41667",
+        "geonameId": 3034473,
+        "toponymName": "Nafarroa Beherea",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 282180,
+        "numberOfChildren": 123,
+        "countryCode": "FR",
+        "name": "Lower Navarre",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "third-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.33333",
+        "fcode": "ADM3"
+    },
+{
+        "adminCode1": "75",
+        "lng": "-0.75",
+        "geonameId": 2989568,
+        "toponymName": "Zuberoa",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 77909,
+        "numberOfChildren": 154,
+        "countryCode": "FR",
+        "name": "Soule",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "third-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.16667",
+        "fcode": "ADM3"
+    }]
+}

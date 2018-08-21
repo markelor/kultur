@@ -1,0 +1,314 @@
+<!-- Custom Success/Error Message -->
+<div *ngIf="message" class="row show-hide-message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- Event Form -->
+<form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
+  <div class="row">
+    <!-- Title -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
+        <label for="inputTitle" translate>{{'event-form.title'}}</label>
+        <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
+        <!-- Validation -->
+        <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
+        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
+      </div>
+    </div>
+    <!-- Category -->
+    <div formArrayName="categories" class="col-sm-12">
+      <label for="selectCategory" translate>{{'event-form.category'}}</label>
+      <div *ngFor="let category of form | formArrayPipe:'categories' | disableCategories:disableCategories; let i = index;">
+        <div class="form-group required" [ngClass]="{'has-error': (!category.valid && category.dirty), 'has-success': (category.valid)}">
+          <div [formGroupName]="i">
+            <select formControlName="category" class="form-control" id="selectCategory" (change)="onSelectedCategory($event.target.value,i)">
+              <option value="" translate>{{'event-form.select-category'}}</option>
+              <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
+                <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===levelCategory.language" [ngValue]="levelCategory.title">
+                  {{levelCategory.title}}
+                </option>
+              </ng-container>
+              <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
+                <ng-container *ngFor="let translation of levelCategory.translation">
+                  <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===translation.language" [ngValue]="translation.title">
+                    {{translation.title}}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </select>
+          </div>
+          <!-- Validation -->
+          <span *ngIf="!category.valid && category.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- Participants input -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
+        <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
+          <div class="input-group-append ">
+            <button (click)="addParticipant()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-plus ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Validation -->
+        <!--<span *ngIf="participant.errors?.minlength && participant.dirty || participant.errors?.maxlength && participant.dirty " class="help-block form-error" translate>{{'validation.participant-length'}}</span>
+        <span *ngIf="participant.errors?.validateTitle && participant.dirty" class="help-block form-error" translate>
+                    {{'validation.participant-validation'}}</span>-->
+      </div>
+    </div>
+    <!-- Participant list -->
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label *ngFor="let participant of participants; let i=index;" class="custom-control custom-checkbox">
+          <input type="checkbox" [checked]="participant" (change)="deleteParticipant(i)" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{participant}}</span>
+        </label>
+      </div>
+    </div>
+    <!-- File upload start-->
+    <div class="col-sm-12">
+      <div class="form-group required">
+        <label for="fileUploadPoster" translate>{{'event-form.images'}}</label>
+        <button [disabled]="disableUploader" class="btn btn-primary ks-btn-file d-block">
+          <span class="la la-cloud-upload ks-icon"></span>
+          <span class="ks-text" translate>{{'event-form.choose-images'}}</span>
+          <input *ngIf="!disableUploader" id="photos" class="form-control" type="file" ng2FileSelect [uploader]="uploader" />
+        </button>
+      </div>
+      <div *ngIf="uploader?.queue?.length>0">
+        <h3 translate>{{'event-form.list-images'}} <span>{{ uploader?.queue?.length }}</span> </h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th translate>{{'event-form.preview'}}</th>
+              <th translate>{{'event-form.name'}}</th>
+              <th translate>{{'event-form.size'}}</th>
+              <th translate>{{'event-form.status'}}</th>
+              <th translate>{{'event-form.delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td>
+                <div class="media-left">
+                  <img *ngIf="item.isUploaded" class="img-rounded" width="80" height="80" src="https://s3.eu-west-1.amazonaws.com/culture-bucket%2Fevent-poster/{{item.file.name}}" class="media-object" />
+                  <img *ngIf="!item.isUploaded" class="img-rounded" width="80" height="80" src="" appImagePreview [image]="item?._file" class="media-object" />
+                </div>
+              </td>
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              <td class="text-center">
+                <span *ngIf="item.isSuccess"><i class="ion-checkmark-round"></i></span>
+                <span *ngIf="item.isCancel"><i class="fa fa-exclamation-triangle"></i></span>
+                <span *ngIf="item.isError"><i class="ion-close-round"></i></span>
+              </td>
+              <td nowrap>
+                <button *ngIf="!disableUploader" type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                  <span class="fa fa-trash" translate>{{'event-form.delete'}}</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <label for="progressbar" translate>{{'event-form.queue-progress'}}</label>
+          <div class="card panel ks-widget-attachments">
+            <div class="ks-uploading-progress-block">
+              <div class="ks-progress ks-progress-inline">
+                <div class="progress ks-progress-sm">
+                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                </div>
+                <span class="ks-amount">{{uploader.progress +'%'}}</span>
+              </div>
+            </div>
+          </div>
+          <!--<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Upload all
+                      </button>-->
+          <!--<button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+            <span class="fa fa-trash" translate>{{'event-form.delete-all'}}</span>
+          </button>-->
+        </div>
+      </div>
+    </div>
+    <!-- File upload end-->
+    <!-- Start date-->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
+        <label for="inputStart" translate>{{'event-form.start'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
+          <div class="input-group-append ">
+            <button (click)="calendarStart.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-calendar ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="start.errors?.required && start.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <!--<span *ngIf="start.errors?.validateDate && start.dirty" class="help-block form-error" translate>
+                    {{'validation.start-validation'}}</span>-->
+      </div>
+    </div>
+    <!-- Start time-->
+    <div class="col-sm-6 margin-top">
+      <div class="form-group required">
+        <ngb-timepicker [(ngModel)]="timeStart" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+      </div>
+    </div>
+    <!-- End date -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
+        <label for="inputEnd" translate>{{'event-form.end'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="end" ngbDatepicker #calendarEnd="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputEnd">
+          <div class="input-group-append ">
+            <button (click)="calendarEnd.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-calendar ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Validation -->
+        <span *ngIf="end.errors?.required && end.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="end.valid && end.value | compareDate:timeEnd :start.value:timeStart" class="help-block form-error" translate>
+        {{'validation.compare-date-validation'}}</span>
+      </div>
+    </div>
+    <!-- End time-->
+    <div class="col-sm-6 margin-top">
+      <div class="form-group required">
+        <ngb-timepicker [(ngModel)]="timeEnd" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+      </div>
+    </div>
+    <!-- Price -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
+        <label for="inputPrice" translate>{{'application-form.price'}}</label>
+        <input [formControl]="price" type="number" class="form-control" id="inputPrice">
+      </div>
+    </div>
+    <!-- Province -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!province.value && province.dirty), 'has-success': (province.value && province.valid)}">
+        <label for="selectProvinceEvent" translate>{{'event-form.province'}}</label>
+        <select [formControl]="province" class="form-control" id="selectProvinceEvent" (change)="onSelectedProvince($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-province'}}</option>
+          <option *ngFor="let provinceEvent of provincesEvent " [ngValue]="provinceEvent.name">
+            {{provinceEvent.name}}
+          </option>
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!province.value && province.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Municipality -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!municipality.value && municipality.dirty), 'has-success': (municipality.value && municipality.valid)}">
+        <label for="selectMunicipalityEvent" translate>{{'event-form.municipality'}}</label>
+        <select [formControl]="municipality" class="form-control" id="selectMunicipalityEvent" (change)="onSelectedMunicipality($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-municipality'}}</option>
+          <option *ngFor="let municipalityEvent of municipalitiesEvent" [ngValue]="municipalityEvent.name">
+            {{municipalityEvent.name}}
+          </option>
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!municipality.value && municipality.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Location exists-->
+    <div *ngIf="!location.value && locationsExistsEvent.length > 0" class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!locationsExists.value && locationsExists.dirty), 'has-success': (locationsExists.value && location.valid)}">
+        <label for="selectLocationsExistsEvent" translate>{{'event-form.locations-exists'}}</label>
+        <select [formControl]="locationsExists" class="form-control" id="selectLocationsExistsEvent" (change)="onSelectedLocationsExists($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-locations-exists'}}</option>
+          <ng-container *ngFor="let locationsExistsEvent of locationsExistsEvent">
+            <option *ngIf="inputLanguage===locationsExistsEvent.language" [ngValue]="locationsExistsEvent.location">
+            {{locationsExistsEvent.location}}
+            </option>
+            <ng-container *ngFor="let translation of locationsExistsEvent.translation">
+              <option *ngIf="inputLanguage===translation.language" [ngValue]="translation.location">
+                {{translation.location}}
+              </option>
+            </ng-container>
+            </ng-container>
+
+        </select>
+        <!-- Validation -->
+        <span *ngIf="!locationsExists.value && locationsExists.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+      </div>
+    </div>
+    <!-- Location -->
+    <div *ngIf="!locationsExists.value" class="col-sm-12">
+      <div class="form-group" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
+        <label for="textareaLocation" translate>{{'event-form.location'}}</label>
+        <textarea [formControl]="location" capitalize class="form-control" id="textareaLocation"></textarea>
+        <!-- Validation -->
+        <span *ngIf="!location.value && location.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="location.errors?.maxlength && location.dirty " class="help-block form-error" translate>{{'validation.location-length'}}</span>
+      </div>
+    </div>
+    <!-- Latitude -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!lat.valid && lat.dirty), 'has-success': (lat.valid)}">
+        <label for="inputLat" translate>{{'event-form.lat'}}</label>
+        <input [formControl]="lat" type="text" class="form-control" id="inputLat">
+        <!-- Validation -->
+        <span *ngIf="lat.errors?.required && lat.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="lat.errors?.validateLatitude && lat.dirty" class="help-block form-error" translate>{{'validation.latitude-validation'}}</span>
+      </div>
+    </div>
+    <!-- Longitude -->
+    <div class="col-sm-6 ">
+      <div class="form-group required" [ngClass]="{'has-error': (!lng.valid && lng.dirty), 'has-success': (lng.valid)}">
+        <label for="inputLng" translate>{{'event-form.lng'}}</label>
+        <input [formControl]="lng" type="text" class="form-control" id="inputLng">
+        <!-- Validation -->
+        <span *ngIf="lng.errors?.required && lng.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="lng.errors?.validateLongitude && lng.dirty" class="help-block form-error" translate>{{'validation.longitude-validation'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <event-form-map></event-form-map>
+      </div>
+    </div>
+    <!-- Maps Button with class -->
+    <div *ngIf="(form | formArrayPipe:'categories').length > 0" class="col-sm-12">
+      <div class="form-group text-center">
+        <button [disabled]="!lat.valid || !lng.valid" (click)="passCoordinates()" type="button" class="btn btn-default btn-auth" translate>{{'event-form.check'}}</button>
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!description.valid && description.dirty), 'has-success': (description.valid)}">
+        <label for="textareaDescription" translate>{{'event-form.description'}}</label>
+        <textarea [id]="'textareaDescription'+inputLanguage" [froalaEditor]="froalaOptions" (froalaInit)="initializeFroala($event)" formControlName="description" capitalize class="form-control"></textarea>
+        <!-- Validation -->
+        <span *ngIf="description.errors?.required && description.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="description.errors?.minlength && description.dirty || description.errors?.maxlength && description.dirty " class="help-block form-error" translate>{{'validation.event-description-length'}}</span>
+      </div>
+    </div>
+    <!-- Observations -->
+    <div class="col-sm-12">
+      <div class="form-group" [ngClass]="{'has-error': (!observations.valid && observations.dirty), 'has-success': (observations.value)}">
+        <label for="textareaObservations" translate>{{'event-form.observations'}}</label>
+        <textarea [formControl]="observations" capitalize class="form-control" id="textareaObservations"></textarea>
+        <span *ngIf="observations.errors?.maxlength && observations.dirty " class="help-block form-error" translate>{{'validation.observations-length'}}</span>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="col-sm-12">
+      <div class="form-group text-center">
+        <button [disabled]="!form.valid  || submitted || (end.value | compareDate:timeEnd :start.value:timeStart)" type="submit" class="btn btn-default btn-auth" translate>{{'event-form.send'}}</button>
+      </div>
+    </div>
+  </div>
+</form>

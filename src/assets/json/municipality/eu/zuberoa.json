@@ -1,0 +1,908 @@
+{
+    "totalResultsCount": 43,
+    "geonames": [
+    {
+        "adminCode1": "75",
+        "lng": "-0.93028",
+        "geonameId": 6450356,
+        "toponymName": "Ainharp",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 149,
+        "countryCode": "FR",
+        "name": "Ainharbe",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.26056",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.87611",
+        "geonameId": 6617342,
+        "toponymName": "Alos-Sibas-Abense",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 274,
+        "countryCode": "FR",
+        "name": "Aloze-Ziboze-Onizegaine",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.11917",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.90889",
+        "geonameId": 6450358,
+        "toponymName": "Alçay-Alçabéhéty-Sunharette",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 228,
+        "countryCode": "FR",
+        "name": "Altzai-Altzabeheti-Zunharreta",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.095",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.93333",
+        "geonameId": 6450413,
+        "toponymName": "Aussurucq",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 250,
+        "countryCode": "FR",
+        "name": "Altzürükü",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.15",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.84",
+        "geonameId": 6440580,
+        "toponymName": "Roquiague",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 123,
+        "countryCode": "FR",
+        "name": "Arrokiaga",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.19083",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.9172",
+        "geonameId": 6617343,
+        "toponymName": "Aroue-Ithorots-Olhaïby",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 245,
+        "countryCode": "FR",
+        "name": "Arüe-Ithorrotze-Olhaibi",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.3179",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.8625",
+        "geonameId": 6440635,
+        "toponymName": "Tardets-Sorholus",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 607,
+        "countryCode": "FR",
+        "name": "Atharratze-Sorholüze",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.11639",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.77222",
+        "geonameId": 6450425,
+        "toponymName": "Barcus",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 738,
+        "countryCode": "FR",
+        "name": "Barkoxe",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.18861",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.86472",
+        "geonameId": 6440296,
+        "toponymName": "Berrogain-Laruns",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 106,
+        "countryCode": "FR",
+        "name": "Berrogaine-Larüntze",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.24472",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88111",
+        "geonameId": 6440658,
+        "toponymName": "Viodos-Abense-de-Bas",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 756,
+        "countryCode": "FR",
+        "name": "Bildoze-Onizepea",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.24111",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.96528",
+        "geonameId": 6440363,
+        "toponymName": "Domezain-Berraute",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 498,
+        "countryCode": "FR",
+        "name": "Domintxaine-Berroeta",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.32694",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.70833",
+        "geonameId": 6440375,
+        "toponymName": "Esquiule",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 534,
+        "countryCode": "FR",
+        "name": "Eskiula",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.19417",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.9271",
+        "geonameId": 6440378,
+        "toponymName": "Etcharry",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 128,
+        "countryCode": "FR",
+        "name": "Etxarri",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.3233",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.89278",
+        "geonameId": 6440379,
+        "toponymName": "Etchebar",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 66,
+        "countryCode": "FR",
+        "name": "Etxebarre",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.08222",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88028",
+        "geonameId": 6614436,
+        "toponymName": "Espès-Undurein",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 497,
+        "countryCode": "FR",
+        "name": "Ezpeize-Ündüreine",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.26722",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.90611",
+        "geonameId": 6440332,
+        "toponymName": "Camou-Cihigue",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 104,
+        "countryCode": "FR",
+        "name": "Gamere-Zihiga",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.11611",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.90556",
+        "geonameId": 6440388,
+        "toponymName": "Garindein",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 529,
+        "countryCode": "FR",
+        "name": "Garindaine",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.20861",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.90083",
+        "geonameId": 6440401,
+        "toponymName": "Gotein-Libarrenx",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 464,
+        "countryCode": "FR",
+        "name": "Gotaine-Irabarne",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.19",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.84861",
+        "geonameId": 6613384,
+        "toponymName": "Haux",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 96,
+        "countryCode": "FR",
+        "name": "Hauze",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.07778",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.91556",
+        "geonameId": 6440417,
+        "toponymName": "Idaux-Mendy",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 260,
+        "countryCode": "FR",
+        "name": "Idauze-Mendi",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.18111",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.87667",
+        "geonameId": 6440638,
+        "toponymName": "Trois-Villes",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 127,
+        "countryCode": "FR",
+        "name": "Iruri",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.13333",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88694",
+        "geonameId": 6440397,
+        "toponymName": "Gestas",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 68,
+        "countryCode": "FR",
+        "name": "Jeztaze",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.34944",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.92444",
+        "geonameId": 6440439,
+        "toponymName": "Lacarry-Arhan-Charritte-de-Haut",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 130,
+        "countryCode": "FR",
+        "name": "Lakarri-Arhane-Sarrikotagaine",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.085",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.95583",
+        "geonameId": 6440455,
+        "toponymName": "Larrau",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 204,
+        "countryCode": "FR",
+        "name": "Larraine",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.01861",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.87333",
+        "geonameId": 6440472,
+        "toponymName": "Lichans-Sunhar",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 69,
+        "countryCode": "FR",
+        "name": "Lexantzü-Zunharre",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.09278",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.87667",
+        "geonameId": 6440474,
+        "toponymName": "Licq-Athérey",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 239,
+        "countryCode": "FR",
+        "name": "Ligi-Atherei",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.06694",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.86556",
+        "geonameId": 6440444,
+        "toponymName": "Laguinge-Restoue",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 171,
+        "countryCode": "FR",
+        "name": "Liginaga-Astüe",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.09333",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.97722",
+        "geonameId": 6440477,
+        "toponymName": "Lohitzun-Oyhercq",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 207,
+        "countryCode": "FR",
+        "name": "Lohitzüne-Oihergi",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.27639",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88694",
+        "geonameId": 6440502,
+        "toponymName": "Mauléon-Licharre",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 3205,
+        "countryCode": "FR",
+        "name": "Maule-Lextarre",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.22417",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.90167",
+        "geonameId": 6440507,
+        "toponymName": "Menditte",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 217,
+        "countryCode": "FR",
+        "name": "Mendikota",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.16194",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.84806",
+        "geonameId": 6440518,
+        "toponymName": "Moncayolle-Larrory-Mendibieu",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 334,
+        "countryCode": "FR",
+        "name": "Mitikile-Larrori-Mendibile",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.26583",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.81778",
+        "geonameId": 6440523,
+        "toponymName": "Montory",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 330,
+        "countryCode": "FR",
+        "name": "Montori",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.09694",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.96611",
+        "geonameId": 6440529,
+        "toponymName": "Musculdy",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 242,
+        "countryCode": "FR",
+        "name": "Muskildi",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.19667",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.76861",
+        "geonameId": 6614662,
+        "toponymName": "L'Hôpital-Saint-Blaise",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 81,
+        "countryCode": "FR",
+        "name": "Ospitalepea",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.25139",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.95139",
+        "geonameId": 6440550,
+        "toponymName": "Osserain-Rivareyte",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 241,
+        "countryCode": "FR",
+        "name": "Ozaraine-Erribareita",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.37722",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.89083",
+        "geonameId": 6440547,
+        "toponymName": "Ossas-Suhare",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 81,
+        "countryCode": "FR",
+        "name": "Ozaze-Zühara",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.14028",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.99028",
+        "geonameId": 6440554,
+        "toponymName": "Pagolle",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 253,
+        "countryCode": "FR",
+        "name": "Pagola",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.22417",
+        "fcode": "ADM4"
+    },
+    {
+
+        "adminCode1": "75",
+        "lng": "-0.8533",
+        "geonameId": 6440587,
+        "toponymName": "Sainte-Engrâce",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 204,
+        "countryCode": "FR",
+        "name": "Santa Grazi",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.0137",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88194",
+        "geonameId": 6440350,
+        "toponymName": "Charritte-de-Bas",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 240,
+        "countryCode": "FR",
+        "name": "Sarrikotapea",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.29389",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.86833",
+        "geonameId": 6440351,
+        "toponymName": "Chéraute",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 1125,
+        "countryCode": "FR",
+        "name": "Sohüta",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.23139",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.94389",
+        "geonameId": 6440539,
+        "toponymName": "Ordiarp",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 537,
+        "countryCode": "FR",
+        "name": "Urdiñarbe",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.18583",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.85",
+        "geonameId": 6450388,
+        "toponymName": "Arrast-Larrebieu",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 102,
+        "countryCode": "FR",
+        "name": "Ürrüstoi-Larrabile",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.29333",
+        "fcode": "ADM4"
+    },
+    {
+        "adminCode1": "75",
+        "lng": "-0.88806",
+        "geonameId": 6440615,
+        "toponymName": "Sauguis-Saint-Étienne",
+        "countryId": "3017382",
+        "fcl": "A",
+        "population": 166,
+        "countryCode": "FR",
+        "name": "Zalgize-Doneztebe",
+        "fclName": "country, state, region,...",
+        "adminCodes1":
+        {
+            "ISO3166_2": "NAQ"
+        },
+        "countryName": "Frantzia",
+        "fcodeName": "fourth-order administrative division",
+        "adminName1": "Nouvelle-Aquitaine",
+        "lat": "43.15194",
+        "fcode": "ADM4"
+    }]
+}

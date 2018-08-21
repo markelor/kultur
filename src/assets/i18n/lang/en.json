@@ -1,0 +1,314 @@
+{
+  "authentication": "authentication",
+  "sign-up-route": "sign-up",
+  "activate-route": "activate",
+  "sign-in-route": "sign-in",
+  "resend-route": "resend",
+  "reset-username-route": "reset-username",
+  "reset-password-route": "reset-password",
+  "new-password-route": "new-password",
+  "search-route": "search",
+  "see-route": "see",
+  "create-route": "create",
+  "manage-route": "manage",
+  "edit-route": "edit",
+  "category-route": "category",
+  "event-route": "event",
+  "events-route": "events",
+  "application-route": "application",
+  "applications-route": "applications",
+  "service-route": "service",
+  "services-route": "services",
+  "service-type-route": "service-type",
+  "observation-route": "observation",
+  "observations-route": "observations",
+  "details-route": "details",
+  "region-route": "region",
+  "user-route": "user",
+  "map-route": "map",
+  "all-route": "all",
+  "admin-route": "admin",
+  "users-route": "users",
+  "menu":
+  {
+    "home": "Home",
+    "create": "Create",
+    "manage": "Manage",
+    "category": "Category",
+    "event": "Event",
+    "map":"Map",
+    "application": "Application",
+    "applications": "Applications",
+    "service":"Service",
+    "services":"Services",
+    "service-type":"Service Type",
+    "observation":"Observation",
+    "observations":"Observations",
+    "administrator": "Administrator",
+    "users": "Users",
+    "events": "Events"
+  },
+
+  "dashboard":
+  {
+    "acquisition_channels": "Acquisition Channels",
+    "users_by_country": "Users by Country",
+    "revenue": "Revenue",
+    "feed": "Feed",
+    "todo_list": "To Do List",
+    "calendar": "Calendar",
+    "new_visits": "New Visits",
+    "purchases": "Purchases",
+    "active_users": "Active Users",
+    "returned": "Returned",
+    "popular_app":
+    {
+      "super_app": "Super App",
+      "most_popular_app": "Most Popular App",
+      "total_visits": "Total Visits",
+      "new_visits": "New Visits",
+      "sales": "Sales"
+    },
+    "todo":
+    {
+      "task_todo": "Task to do.."
+    },
+    "traffic_chart":
+    {
+      "view_total": "Views Total"
+    }
+  },
+  "tree_view":
+  {
+    "title": "basic",
+    "programming": "Programming languages by programming paradigm",
+    "oop": "Object-oriented programming",
+    "java": "Java",
+    "c_plus_plus": "C++",
+    "c_sharp": "C#",
+    "prototype": "Prototype-based programming",
+    "java_script": "JavaScript",
+    "coffee_script": "CoffeeScript",
+    "lua": "Lua"
+  },
+  "chart":
+  {
+    "lines": "Lines",
+    "bars": "Bars",
+    "simple_line_chart": "Simple line chart",
+    "line_chart": "Line chart with area",
+    "bi_polar_line_chart": "Bi-polar line chart with area only",
+    "simple_bar_chart": "Simple bar chart",
+    "multi_line_labels_bar_chart": "Multi-line labels bar chart",
+    "stacked_bar_chart": "Stacked bar chart",
+    "pies_and_donuts": "Pies & Donuts",
+    "simple_pie": "Simple Pie",
+    "pie_with_labels": "Pie with labels",
+    "donut": "Donut"
+  },
+  "navbar":
+  {
+    "es": "Spanish",
+    "en": "English",
+    "eu": "Euskara",
+    "es-short": "Es",
+    "en-short": "En",
+    "eu-short": "Eu",
+    "user": "User",
+    "events": "Events",
+    "applications": "Applications",
+    "observations": "Observations",
+    "services": "Services",
+    "search": "Search..."
+  },
+  "events":
+  {
+    "events": "Events",
+    "applications": "Applications"
+  },
+  "event":
+  {
+    "created-by": "Created by:",
+    "read-more": "Read More",
+    "see-event": "See Event",
+    "see-map": "See Map",
+    "edit-event": "Edit Event",
+    "general-info": "General Information",
+    "like": "Like",
+    "comment": "Comment",
+    "share": "Share",
+    "free": "Free"
+  },
+  "application":
+  {
+    "edit-application": "Edit Application"
+  },
+  "auth-form":
+  {
+    "name": "Name",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "repeat-password": "Repeat password",
+    "about-yourself": "About yourself",
+    "sign-up-title": "Sign up to kultura.eus",
+    "sign-up-sign-in-link": "Already have an kultura.eus account? Sign in!",
+    "sign-up": "Sign up",
+    "sign-in-title": "Sign up to kultura.eus",
+    "sign-in-sign-up-link": "New to kultura.eus? Sign up!",
+    "sign-in": "Sign in",
+    "resend-link": "Resend activation link",
+    "forgot-username": "¿Forgot username?",
+    "forgot-password": "Forgot password?",
+    "activate-account-title": "Activate account",
+    "activate-account-state": "Account state.",
+    "reset-username-title": "Recoverd username.",
+    "reset-password-title": "Recoverd password",
+    "new-password": "New password.",
+    "new-password-success": "Pealse, enter a new password.",
+    "send": "Send",
+    "guard-error": "You must be logged in to view that page."
+  },
+  "category-form":
+  {
+    "title": "Title",
+    "description": "Description",
+    "parent-category": "Parent Category",
+    "select-parent-category": "-- SELECT CATEGORY --",
+    "send": "Send"
+  },
+  "event-form":
+  {
+    "created-by": "Created by",
+    "title": "Title",
+    "category": "Category",
+    "participants": "Participants",
+    "start": "Start",
+    "end": "End",
+    "images": "Images",
+    "choose-image": "Choose image",
+    "choose-images": "Choose images",
+    "list-images": "List of images: ",
+    "preview": "Preview",
+    "name": "Name",
+    "size": "Size",
+    "status": "Status",
+    "delete": "Delete",
+    "queue-progress": "Queue progress",
+    "delete-all": "Delete all",
+    "province": "Province",
+    "municipality": "Municipality",
+    "lat": "Coordinates N-S (Lat)",
+    "lng": "Coordinates E-W (Lng)",
+    "check": "Check",
+    "locations-exists": "Location exists",
+    "location": "Location",
+    "description": "Description",
+    "observations": "Observations",
+    "select-category": "-- SELECT A CATEGORY --",
+    "select-province": "-- SELECT A PROVINCE --",
+    "select-locations-exists": "-- SELECT A LOCATION --",
+    "select-municipality": "-- SELECT A MUNICIPALITY --",
+    "send": "Send"
+  },
+  "application-form":
+  {
+    "title": "Title",
+    "entity-name": "Entity name",
+    "events": "Events",
+    "users": "Users",
+    "license": "License",
+    "conditions": "Conditions",
+    "price": "Price",
+    "expired-at": "Expired at",
+    "send": "Send"
+  },
+  "service-form":
+  {
+    "title": "Title",
+    "service-type": "Service type",
+    "select-service-type": "-- SELECT A SERVICE TYPE --",
+    "description": "Description",
+    "lat": "Coordinates N-S (Lat)",
+    "lng": "Coordinates E-W (Lng)",
+    "send": "Send"
+  },
+  "service-type-form":
+  {
+    "title": "Title",
+    "icon": "Icon",
+    "send": "Send"
+  },
+  "crud":
+  {
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "edit-delete": "Edit/Delete"
+  },
+  "comment":
+  {
+    "leaveComment": "Write a comment.",
+    "delete": "Delete",
+    "edit": "Edit",
+    "reply": "Reply",
+    "hideReplies": "Hide Replies",
+    "deleted":"Deleted",
+    "deleted-text":"The user has deleted the comment."
+  },
+  "validation":
+  {
+    "required": "This field is required.",
+    "start-validation": "Start date in format __ / __ / ____.",
+    "end-validation": "End date in format __ / __ / ____.",
+    "compare-date-validation": "The final date must be greater than the start date.",
+    "name-length": "Minimum characters: 5, Maximum characters: 35.",
+    "name-validation": "Name must not have any special characters.",
+    "username-length": "Minimum characters: 3, Maximum characters: 15.",
+    "username-validation": "Username must not have sapaces and any special characters.",
+    "email-length": "Minimum characters: 5, Maximum characters: 30.",
+    "email-validation": "This must be a valid e-mail.",
+    "password-length": "Minimum characters: 8, Maximum characters: 35.",
+    "password-valid": "Must have at least one uppercase, lowercase, special character, and number.",
+    "password-match": "Passwords don't match.",
+    "about-yourself-length": "Maximum characters: 500.",
+    "title-length": "Minimum characters: 5, Maximum characters: 35.",
+    "title-validation": "Title must not have any special characters.",
+    "coordinator-length": "Minimum characters: 5, Maximum characters: 35.",
+    "coordinator-validation": "Coordinator must not have any special characters.",
+    "latitude-validation": "Insert latitude in decimal format.",
+    "longitude-validation": "Insert longitude in decimal format.",
+    "location-length": "Maximum characters: 1000.",
+    "event-description-length": "Minimum characters: 50, Maximum characters: 20000.",
+    "category-description-length": "Minimum characters: 5, Maximum characters: 200.",
+    "observations-length": "Maximum characters: 1000.",
+    "discovery-length": "Maximum characters: 1000.",
+    "bibliography-length": "Maximum characters: 1000.",
+    "comment-length": "Maximum characters: 300.",
+    "entityName-length": "Minimum characters: 5, Maximum characters: 35.",
+    "entityName-validation": "Entity name must not have any special characters."
+  },
+  "map-icon":
+  {
+    "Dolmens": "Dolmen",
+    "Menhirs": "Menhir",
+    "Tumulus": "Tumulus",
+    "Cromlechs": "Cromlech",
+    "Smooths": "Smooth",
+    "Steppeds": "Stepped",
+    "Caves": "Cave",
+    "Temples": "Temple"
+  },
+  "reaction":
+  {
+    "like": "Like",
+    "love": "Love",
+    "haha": "HaHa",
+    "wow": "Wow",
+    "sad": "Sad",
+    "angry": "Angry",
+    "you": "You",
+    "you-and": "You and",
+    "others": "others"
+  }
+}

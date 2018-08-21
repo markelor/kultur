@@ -1,0 +1,52 @@
+<div class="ks-page-content">
+  <div class="ks-page-content-body">
+    <div class="ks-nav-body-wrapper">
+      <div class="container-fluid ks-rows-section">
+        <!-- Custom Success/Error Message -->
+        <div *ngIf="message" class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{ message }}
+          </div>
+        </div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th translate>{{'service-form.title'}}</th>
+              <th translate>{{'service-form.description'}}</th>
+              <th translate>{{'application-form.expired-at'}}</th>
+              <th translate>{{'event-form.created-by'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let observation of observations; let i=index">
+              <!--Title and Description-->
+              <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.title}}</td>
+              <td *ngIf="observation.language===localizeService.parser.currentLang" [innerHTML]="observation.description"></td>
+              <ng-container *ngFor="let translation of observation.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
+                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
+              </ng-container> 
+              <!--Expired at-->
+              <td>{{observation.expiredAt | timezone}}</td>
+              <!--CreatedBy-->
+              <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.createdBy}}</td>
+              <ng-container *ngFor="let translation of observation.translation">
+                <td *ngIf="translation.language===localizeService.parser.currentLang">
+                  {{translation.createdBy}}
+                </td>        
+              </ng-container>
+              <!--Edit/Delete-->
+              <td class="ks-status">
+                <a href="javascript:void(0)" [routerLink]="['/observation-route','manage-route','edit-route',observation._id]| localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                <a href="javascript:void(0)" (click)="observationDeleteClick(i,observation)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
