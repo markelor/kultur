@@ -6,6 +6,7 @@ import { AuthGuard} from '../guards/auth.guard';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment-timezone';
+import { Meta,Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,12 +17,27 @@ export class HomeComponent implements OnInit {
   public events;
   private page :number = 1;
   constructor(
+    private meta: Meta,
+    private metaTitle: Title,
   	private eventService:EventService,
     private localizeService:LocalizeRouterService,
     private translate:TranslateService,
     private router:Router,
     private authGuard:AuthGuard
   ) {
+    this.translate.get('metatag.home-title').subscribe(
+      data => {   
+      console.log(data);      
+      this.metaTitle.setTitle(data);
+    });
+    this.translate.get('metatag.home-description').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'description', content: data });
+    });
+     this.translate.get('metatag.home-keywords').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'keywords', content: data });
+    });
   }
   // Function to get all user events from the database
   private getEvents() {

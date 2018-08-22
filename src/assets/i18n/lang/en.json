@@ -29,6 +29,18 @@
   "all-route": "all",
   "admin-route": "admin",
   "users-route": "users",
+  "metatag":
+  {
+    "home-title": "Home",
+    "home-description": "Create",
+    "home-keywords": "Manage",
+    "see-event-title": "Home",
+    "see-event-description": "Create",
+    "see-event-keywords": "Manage",
+    "map-title": "Home",
+    "map-description": "Create",
+    "map-keywords": "Manage"
+  },
   "menu":
   {
     "home": "Home",
@@ -48,7 +60,6 @@
     "users": "Users",
     "events": "Events"
   },
-
   "dashboard":
   {
     "acquisition_channels": "Acquisition Channels",

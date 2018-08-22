@@ -11,6 +11,7 @@ import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment-timezone';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Meta,Title } from '@angular/platform-browser';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -76,6 +77,8 @@ export class EventComponent  {
    public browser=false;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private meta: Meta,
+    private metaTitle: Title,
     private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
     private activatedRoute: ActivatedRoute,
@@ -85,6 +88,18 @@ export class EventComponent  {
     private translate:TranslateService,
     private bindPipe: BindContentPipe,
     private groupByPipe: GroupByPipe) { 
+    this.translate.get('metatag.map-title').subscribe(
+      data => {        
+      this.metaTitle.setTitle(data);
+    });
+    this.translate.get('metatag.map-description').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'description', content: data });
+    });
+     this.translate.get('metatag.map-keywords').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'keywords', content: data });
+    });
     this.createNewFilterForm();
     
   }

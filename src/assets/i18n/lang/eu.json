@@ -29,6 +29,18 @@
   "all-route": "denak",
   "admin-route": "admin",
   "users-route": "erabiltzaileak",
+  "metatag":
+  {
+    "home-title": "Hasiera",
+    "home-description": "Hasiera deskribapena",
+    "home-keywords": "Hasieragiltza1, hasiera giltza2",
+    "see-event-title": "Home",
+    "see-event-description": "Create",
+    "see-event-keywords": "Manage",
+    "map-title": "Home",
+    "map-description": "Create",
+    "map-keywords": "Manage"
+  },
   "menu":
   {
     "home": "Hasiera",

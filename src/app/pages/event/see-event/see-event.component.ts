@@ -11,6 +11,7 @@ import { BindContentPipe } from '../../../shared/pipes/bind-content.pipe';
 import { ReactionsModalComponent } from './reactions-modal/reactions-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Meta,Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-see-event',
   templateUrl: './see-event.component.html',
@@ -26,6 +27,8 @@ export class SeeEventComponent implements OnInit {
   private existReactionAndUsernames;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
+    private meta: Meta,
+    private metaTitle: Title,
     private authService:AuthService,
     private eventService:EventService,
     private observableService:ObservableService,
@@ -35,7 +38,21 @@ export class SeeEventComponent implements OnInit {
     private bindContent:BindContentPipe,
     private activatedRoute: ActivatedRoute,
     private authGuard:AuthGuard,
-    private modalService:NgbModal) { }
+    private modalService:NgbModal) {
+      this.translate.get('metatag.see-event-title').subscribe(
+        data => {   
+        console.log(data);      
+        this.metaTitle.setTitle(data);
+      });
+      this.translate.get('metatag.see-event-description').subscribe(
+        data => {         
+        this.meta.addTag({ name: 'description', content: data });
+      });
+       this.translate.get('metatag.see-event-keywords').subscribe(
+        data => {         
+        this.meta.addTag({ name: 'keywords', content: data });
+      });
+    }
   private initializeGalleryOptions(){
     this.galleryOptions = [
       { thumbnails: false },

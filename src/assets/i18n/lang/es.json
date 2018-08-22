@@ -29,6 +29,18 @@
   "all-route": "todos",
   "admin-route": "admin",
   "users-route": "usuarios",
+  "metatag":
+  {
+    "home-title": "Home",
+    "home-description": "Create",
+    "home-keywords": "Manage",
+    "see-event-title": "Home",
+    "see-event-description": "Create",
+    "see-event-keywords": "Manage",
+    "map-title": "Home",
+    "map-description": "Create",
+    "map-keywords": "Manage"
+  },
   "menu":
   {
     "home": "Inicio",
