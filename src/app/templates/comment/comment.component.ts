@@ -116,31 +116,31 @@ export class CommentComponent implements OnInit {
     }else{
       this.firstParentId=comment._id;
     }
-  	if (!this.form.get('comment').value) {
+    if (!this.form.get('comment').value) {
       this.form.controls['comment'].setValue('');
     }
-  	if(this.form.get('comment').value.search('@' + comment.createdBy)===-1){
-  		if (this.form.get('comment').value.substring(
+    if(this.form.get('comment').value.search('@' + comment.createdBy)===-1){
+      if (this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
       )[0] === '@') {
-  			console.log("a");
-  			this.form.controls['comment'].setValue(', '+this.form.get('comment').value.substring(
+        console.log("a");
+        this.form.controls['comment'].setValue(', '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));
       }else {
-      	console.log("b");
-      	this.form.controls['comment'].setValue(' '+this.form.get('comment').value.substring(
+        console.log("b");
+        this.form.controls['comment'].setValue(' '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));      
       }
-     	this.form.controls['comment'].setValue('@' + comment.createdBy + this.form.get('comment').value);
-     	if (isPlatformBrowser(this.platformId)) {
+       this.form.controls['comment'].setValue('@' + comment.createdBy + this.form.get('comment').value);
+       if (isPlatformBrowser(this.platformId)) {
         $("#textareaComment").focus();
       }  
-  	} 
+    } 
 
   }
   public onSubmitEdit(comment){

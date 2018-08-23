@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalizeRouterService } from 'localize-router';
+import { AuthGuard} from '../../guards/auth.guard';
+import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserModalComponent } from './user-modal/user-modal.component';
@@ -24,6 +26,9 @@ export class UsersAdministratorComponent implements OnInit {
     private authService:AuthService,
     private observableService:ObservableService,
     private translate: TranslateService,
+    private router:Router,
+    private activatedRoute: ActivatedRoute,
+    private authGuard:AuthGuard,
     private modalService: NgbModal
   ){ }
 
@@ -107,6 +112,13 @@ export class UsersAdministratorComponent implements OnInit {
     });  
   }
   ngOnInit() {
+    this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
+      if(!authentication.success){
+        this.authService.logout();
+        this.authGuard.redirectUrl=this.router.url;
+        this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
+      }
+    });
     this.createSettings(); 
     this.getAllUsers();
   }

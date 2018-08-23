@@ -130,7 +130,8 @@
     "applications": "Aplicaciones",
     "observations": "Observaciones",
     "services": "Servicios",
-    "search": "Buscar..."
+    "search": "Buscar...",
+    "logout":"Salir"
   },
   "events":
   {

@@ -612,14 +612,6 @@ export class ServiceFormComponent implements OnInit {
     });*/
     this.initializeForm();
     this.mapClickPlace();
-    // Get profile username on page load
-    this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
-      if(!authentication.success){
-        this.authService.logout();
-        this.authGuard.redirectUrl=this.router.url;
-        this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
-      }
-    });
     this.location.valueChanges.subscribe(data=>{
       if(data===''){
         this.locationsExists.setValidators([Validators.compose([Validators.required,Validators.maxLength(1000)])]);

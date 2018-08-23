@@ -56,7 +56,7 @@ export class ManageEventsComponent implements OnInit {
         this.authGuard.redirectUrl=this.router.url;
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
-    });
+    });  
   	this.getAllUserEvents();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;

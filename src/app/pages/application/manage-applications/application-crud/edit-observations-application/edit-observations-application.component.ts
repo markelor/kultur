@@ -32,7 +32,7 @@ export class EditObservationsApplicationComponent implements OnInit {
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationObservation:ApplicationService,
-    private authObservation:AuthService,
+    private authService:AuthService,
     private observationObservation:ObservationService,
     private translate: TranslateService,
     private router:Router,
@@ -169,9 +169,9 @@ export class EditObservationsApplicationComponent implements OnInit {
   }
   ngOnInit() {
     // Get authentication on page load
-    this.authObservation.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
+    this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
       if(!authentication.success){
-        this.authObservation.logout();
+        this.authService.logout();
         this.authGuard.redirectUrl=this.router.url;
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }

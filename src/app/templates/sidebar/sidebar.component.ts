@@ -19,19 +19,14 @@ export class SidebarComponent implements OnInit {
   ) { 
   }
 
-  private isAdmin() {
-    this.authService.getPermission(this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        if(data.permission=="admin")
-        this.permission = true; // Assign array to use in HTML
-      }else{
-        this.permission = false;
-      }
-    });
+  private getPermission() {
+    if(this.authService.user){
+      this.permission=this.authService.user.permission;
+    }
   }
 
   ngOnInit() {
-    this.isAdmin();
+    this.getPermission();
     if (isPlatformBrowser(this.platformId)) {
       sidebarObj.init();
       sidebarObj.secondLevel();    

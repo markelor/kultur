@@ -22,7 +22,6 @@ export class ModeratorGuard implements CanActivate {
     this.authService.loadToken();
     // Get permission
     return this.authService.getPermission(this.localizeService.parser.currentLang).map(data => {
-    	console.log(data);
       // Check if response was a success or error
       if (data.success && (data.permission==='moderator' ||data.permission==='admin')) {
         return true         

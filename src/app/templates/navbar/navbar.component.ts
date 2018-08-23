@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   public lag:string;
   public language:string;
   private selected:number;
-  public avatar:string;
   public search:boolean;
   public eventsSearch;
   public notificationComments;
@@ -29,7 +28,7 @@ export class NavbarComponent implements OnInit {
     private localizeService: LocalizeRouterService,
     private translate:TranslateService,
     private activatedRoute:ActivatedRoute,
-    private authService:AuthService,
+    public authService:AuthService,
     private router:Router,
     private eventService:EventService,
     private commentService:CommentService,
@@ -76,17 +75,14 @@ export class NavbarComponent implements OnInit {
     });
   }
   private getAndChangeAvatar(){
-    this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(data=>{
-      if(data.success){
-        this.avatar=data.user.currentAvatar;
-      }  
-    });
+
+
     //Change avatar
     this.observableService.avatarType="current-avatar";
     this.subscription=this.observableService.notifyObservable.subscribe(res => {    
       if (res.hasOwnProperty('option') && res.option === 'current-avatar') {
         if(res.data){  
-            this.avatar=res.data;
+            this.authService.user.currentAvatar=res.data;
           }
       }
     });

@@ -938,7 +938,7 @@ export class EventFormComponent implements OnInit {
       this.participant.setValue("");
     }
   }
-  ngOnInit() {console.log(this.authService.user);
+  ngOnInit() {
     this.initializeForm();
     this.mapClickPlace();
     this.location.valueChanges.subscribe(data=>{

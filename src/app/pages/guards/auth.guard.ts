@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   public redirectUrl;
 
   constructor(
-    private authSrvice: AuthService,
+    private authService: AuthService,
     private router: Router,
     private localize: LocalizeRouterService
   ) { }
@@ -19,11 +19,12 @@ export class AuthGuard implements CanActivate {
     router: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
+    this.authService.loadToken();
     // Check if user is logged in
-    if (this.authSrvice.loggedIn()) {
+    if (this.authService.loggedIn()) {
       return true; // Return true: User is allowed to view route
     } else {
-      this.authSrvice.logout();
+      this.authService.logout();
       this.redirectUrl = state.url; // Grab previous urul
       this.router.navigate([this.localize.translateRoute('/sign-in-route')]); // Return error and route to login page
       return false; // Return false: user not authorized to view page

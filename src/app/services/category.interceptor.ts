@@ -31,7 +31,6 @@ export class CategoryInterceptor implements HttpInterceptor {
 		request = request.clone({
 		  setHeaders: {
 		    'Content-Type': 'application/json',
-		    'Authorization': 'Bearer '+this.authService.authToken, // Attach token
 		    'language':this.localizeService.parser.currentLang
 		  }
 		});       

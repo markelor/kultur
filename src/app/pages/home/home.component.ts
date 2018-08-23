@@ -26,8 +26,7 @@ export class HomeComponent implements OnInit {
     private authGuard:AuthGuard
   ) {
     this.translate.get('metatag.home-title').subscribe(
-      data => {   
-      console.log(data);      
+      data => {       
       this.metaTitle.setTitle(data);
     });
     this.translate.get('metatag.home-description').subscribe(

@@ -130,7 +130,8 @@
     "applications": "Aplikazioak",
     "observations": "Oharrak",
     "services": "Zerbitzuak",
-    "search": "Bilatu..."
+    "search": "Bilatu...",
+    "logout":"Irten"
   },
   "events":
   {

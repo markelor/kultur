@@ -780,6 +780,8 @@ module.exports = (router) => {
             next();
         } else if (req.path === '/eventsSearch/' + route + language && req.method === 'GET') {
             next();
+        } else if (req.path === '/getCategories/' + language && req.method === 'GET') {
+            next()
         } else if (req.path === '/getEvents/' + language && req.method === 'GET') {
             next()
         } else if (req.path === '/getEvent/' + route + language && req.method === 'GET') {

@@ -139,7 +139,9 @@ export class EventComponent  {
         width: 40
       }
     }
-    m.icon=icon;
+    setTimeout(()=>{ 
+      m.icon=icon;
+    });   
   }
   private addMarker(data){
     this.lat=Number(data.place.coordinates.lat);
@@ -147,14 +149,14 @@ export class EventComponent  {
     //this.map._mapsWrapper.setCenter({lat: this.lat, lng: this.lng}));
     this.markers.push({      
       lat: Number(data.place.coordinates.lat),
-            lng: Number(data.place.coordinates.lng),
-            customInfo: {
-              icon: data.categories[0].icons[0].url,
-              title:data.title,
-              cretedBy:data.createdBy,
-              images:data.images.poster[0].url,
-              description:data.description
-            },
+      lng: Number(data.place.coordinates.lng),
+      customInfo: {
+        icon: data.categories[0].icons[0].url,
+        title:data.title,
+        cretedBy:data.createdBy,
+        images:data.images.poster[0].url,
+        description:data.description
+      },
       /*labelOptions: {
         color: '#CC0000',
         fontFamily: '',
@@ -199,26 +201,7 @@ export class EventComponent  {
           new Date(this.events[i].end)<=this.endTimestamp &&
           this.events[i].price<=this.price.value
           ){
-          this.markers.push({      
-            lat: Number(this.events[i].place.coordinates.lat),
-            lng: Number(this.events[i].place.coordinates.lng),
-            customInfo: {
-              icon:this.events[i].categories[j].icons[0].url,
-              title:this.events[i].title,
-              cretedBy:this.events[i].createdBy,
-              images:this.events[i].images.poster[0].url,
-              description:this.events[i].description
-            },
-
-            /*labelOptions: {
-              color: '#CC0000',
-              fontFamily: '',
-              fontSize: '14px',
-              fontWeight: 'bold',
-              text: data.title
-             },*/
-            draggable: true
-          });
+          this.addMarker(this.events[i]);
         }
       }
     }  

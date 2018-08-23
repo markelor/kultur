@@ -144,7 +144,7 @@ export class CreateServiceTypeComponent implements OnInit {
     return svg;
   }
   ngOnInit() {
-     // Get authentication on page load
+    // Get authentication on page load
     this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
       if(!authentication.success){
         this.authService.logout();

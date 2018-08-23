@@ -292,14 +292,6 @@ export class ObservationFormComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     });*/
     this.initializeForm();
-    // Get profile username on page load
-    this.authObservation.getAuthentication(this.localizeObservation.parser.currentLang).subscribe(authentication => {
-      if(!authentication.success){
-        this.authObservation.logout();
-        this.authGuard.redirectUrl=this.router.url;
-        this.router.navigate([this.localizeObservation.translateRoute('/sign-in-route')]); // Return error and route to login page
-      }
-    });
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeObservation.parser.currentLang=event.lang;
     }); 	  

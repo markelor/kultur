@@ -8,7 +8,7 @@
     </a>
     </li>
     <!--Category item-->
-    <li class="nav-item dropdown">
+    <li [hidden]="permission!=='admin'" class="nav-item dropdown">
       <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="ks-icon la la-tags"></span>
         <span translate>{{'menu.category'}}</span>
@@ -38,7 +38,7 @@
     </a>
     </li>
     <!--Application item-->
-    <li class="nav-item dropdown">
+    <li [hidden]="permission!=='admin' && permission!=='moderator' && permission!=='contributor'" class="nav-item dropdown">
       <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="ks-icon la la-mobile-phone"></span>
         <span translate>{{'menu.application'}}</span>
@@ -50,7 +50,7 @@
       </div>
     </li>
      <!--Service item-->
-    <li class="nav-item dropdown">
+    <li [hidden]="permission!=='admin' && permission!=='moderator' && permission!=='contributor'" class="nav-item dropdown">
       <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="ks-icon la la-map-marker"></span>
         <span translate>{{'menu.service'}}</span>
@@ -63,7 +63,7 @@
       </div>
     </li>   
      <!--Observation item-->
-    <li class="nav-item dropdown">
+    <li [hidden]="permission!=='admin' && permission!=='moderator' && permission!=='contributor'" class="nav-item dropdown">
       <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="ks-icon la la-map-marker"></span>
         <span translate>{{'menu.observation'}}</span>
@@ -75,7 +75,7 @@
       </div>
     </li>   
     <!--Administrator item-->
-    <li [hidden]="!permission" class="nav-item dropdown">
+    <li [hidden]="permission!=='admin'" class="nav-item dropdown">
       <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="ks-icon la la-cog"></span>
         <span translate>{{'menu.administrator'}}</span>
@@ -99,15 +99,6 @@
       <!--Administrator applications-->
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="['/admin-route','applications-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.applications'}}</a>
-      </div>
-    </li>
-    <li class="nav-item dropdown">
-      <div class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-        <span class="ks-icon la la-dashboard"></span>
-        <span>Dashboard</span>
-      </div>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" routerLink="" routerLinkActive="ks-active">Default</a>
       </div>
     </li>
   </ul>
