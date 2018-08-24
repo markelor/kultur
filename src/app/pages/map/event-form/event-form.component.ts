@@ -72,9 +72,9 @@ export class EventFormComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.observableService.mapType="event-form-coordinates";
+    this.observableService.mapEventForm="event-form-coordinates";
     this.subscription=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === this.observableService.mapType) {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.mapEventForm) {
         this.markers=[];
         this.addMarker(res.value);
       }

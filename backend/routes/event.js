@@ -357,11 +357,11 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             Event.aggregate([ // Join with Place table
-                {
+                /*{
                     $match: {
                         "end": { $gte: new Date() }
                     }
-                }, {
+                },*/ {
                     // Join with Place table
                     $lookup: {
                         from: "places", // other table name

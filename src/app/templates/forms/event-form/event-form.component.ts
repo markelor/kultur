@@ -81,7 +81,6 @@ export class EventFormComponent implements OnInit {
   @Input() inputCategories;
   private imagesDescription=[];
   public title:AbstractControl;
-  private categories: any[] = [];
   public participant:AbstractControl;
   public province:AbstractControl;
   public municipality:AbstractControl;
@@ -708,11 +707,14 @@ export class EventFormComponent implements OnInit {
         } 
       }
     }
-    if (index===-1){
+    if (!value){
       // remove
-        for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
-          (this.form.controls['categories'] as FormArray).removeAt(i);
-        }
+      for (var i = this.form.controls['categories'].value.length - 1; i >= level; i--) {
+        this.categoryId.splice(i+1,1);
+      } 
+      for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
+        (this.form.controls['categories'] as FormArray).removeAt(i);
+      }       
     }else{
       //hide categories
       this.categoryId[level+1] = this.levelCategories[level].value[index]._id;
@@ -734,6 +736,7 @@ export class EventFormComponent implements OnInit {
           (this.form.controls['categories'] as FormArray).removeAt(i);
         }
         if(newFormArray){
+          this.categoryId.splice(i+1,1);
          (this.form.controls['categories'] as FormArray).push(this.createItem('')); 
         }       
       }    
@@ -824,8 +827,8 @@ export class EventFormComponent implements OnInit {
         lng:this.form.get('lng').value, // Lng field
       }
     }
-    this.observableService.mapType="event-form-coordinates";
-    this.observableService.notifyOther({option: this.observableService.mapType, value: market_info});
+    this.observableService.mapEventForm="event-form-coordinates";
+    this.observableService.notifyOther({option: this.observableService.mapEventForm, value: market_info});
   }
   private setUploaderOptions(){
     const authHeader: Array<{

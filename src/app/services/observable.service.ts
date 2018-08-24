@@ -3,7 +3,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 @Injectable()
 export class ObservableService {
-  public mapType;
+  public mapEvent;
+  public mapEventForm;
   public mapClickType;
   public modalType;
   public avatarType;

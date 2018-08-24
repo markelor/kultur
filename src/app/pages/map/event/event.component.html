@@ -26,76 +26,8 @@
             </agm-map>
           </section>
           <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-          <!-- Event Form -->
-          <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
-            <div class="row">
-                <!-- Category -->
-                <div class="col-sm-12">
-                    <div class="form-group required" [ngClass]="{'has-error': (!category.value && category.dirty), 'has-success': (category.value && category.valid)}">
-                      <label for="selectCategoryEvent" translate>{{'event-form.category'}}</label>
-                      <select [formControl]="category" class="form-control" id="selectCategoryEvent" (change)="onSelectedCategory($event.target.value)">
-                        <option value="" translate>{{'event-form.select-category'}}</option>
-                        <ng-container *ngFor="let categoryGroup of categories">
-                          <option *ngFor="let categoryEvent of categoryGroup.value | sort :'level':false" [ngValue]="categoryEvent.title">
-                          {{categoryEvent.title}}
-                        </option>
-                        </ng-container>
-                      </select>
-                      <!-- Validation -->
-                      <span *ngIf="!category.value && category.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
-                    </div>
-                </div>
-                <!-- Start date-->
-                <div class="col-sm-6">
-                  <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
-                    <label for="inputStart" translate>{{'event-form.start'}}</label>
-                    <div class="input-group icon">
-                      <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
-                      <div class="input-group-append ">
-                        <button (click)="calendarStart.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
-                          <span class="la la-calendar ks-icon"></span>
-                        </button>
-                      </div>
-                    </div>
-                    <!-- Validation -->
-                    <span *ngIf="start.errors?.required && start.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
-                    <!--<span *ngIf="start.errors?.validateDate && start.dirty" class="help-block form-error" translate>
-                                {{'validation.start-validation'}}</span>-->
-                  </div>
-                </div>
-                <!-- End date -->
-                <div class="col-sm-6">
-                  <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
-                    <label for="inputEnd" translate>{{'event-form.end'}}</label>
-                    <div class="input-group icon">
-                      <input [formControl]="end" ngbDatepicker #calendarEnd="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputEnd">
-                      <div class="input-group-append ">
-                        <button (click)="calendarEnd.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
-                          <span class="la la-calendar ks-icon"></span>
-                        </button>
-                      </div>
-                    </div>
-                    <!-- Validation -->
-                    <span *ngIf="end.errors?.required && end.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
-                    <span *ngIf="end.valid && end.value | compareDate:timeEnd :start.value:timeStart" class="help-block form-error" translate>
-                    {{'validation.compare-date-validation'}}</span>
-                  </div>
-                </div>
-                <!-- Price -->
-                <div class="col-sm-12">
-                  <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
-                    <label for="inputPrice" translate>{{'application-form.price'}}</label>
-                    <input [formControl]="price" type="number" class="form-control" id="inputPrice">
-                  </div>
-                </div>
-                <!-- Submit Button -->
-                <div class="col-sm-12">
-                  <div class="form-group text-center">
-                    <button [disabled]="!form.valid || (end.value | compareDate:timeEnd :start.value:timeStart)" type="submit" class="btn btn-default btn-auth" translate>{{'event-form.send'}}</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+          <!-- Filter Form -->
+          <app-filter-form [inputEvents]="events"></app-filter-form>
           </aside>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import { Component,OnDestroy,Injectable,PLATFORM_ID, APP_ID, Inject } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder,Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from '../../../services/event.service';
-import { CategoryService } from '../../../services/category.service';
+import { ObservableService } from '../../../services/observable.service';
 import { LocalizeRouterService } from 'localize-router';
 import { TranslateService } from '@ngx-translate/core';
 import { BindContentPipe } from '../../../shared/pipes/bind-content.pipe';
@@ -56,8 +55,6 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   providers: [{provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}] // define custom NgbDatepickerI18n provider
 })
 export class EventComponent  {	
-  public form:FormGroup;
-  public category:AbstractControl;
   public title: string = 'Titulua';
   public categories;
   private startTimestamp;
@@ -69,22 +66,18 @@ export class EventComponent  {
   public timeStart = {hour: 0, minute: 0};
   public timeEnd = {hour: 0, minute: 0};
   private events;
-  public start:AbstractControl;
-  public end:AbstractControl;
-  public price:AbstractControl;
-  private subscription:Subscription;
   private selectedCategory;
-   public browser=false;
+  private subscription:Subscription;
+  public browser=false;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private meta: Meta,
     private metaTitle: Title,
-    private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private eventService:EventService,
-    private categoryService:CategoryService,
+    private observableService: ObservableService,
     private translate:TranslateService,
     private bindPipe: BindContentPipe,
     private groupByPipe: GroupByPipe) { 
@@ -100,28 +93,7 @@ export class EventComponent  {
       data => {         
       this.meta.addTag({ name: 'keywords', content: data });
     });
-    this.createNewFilterForm();
     
-  }
-  // Function to create new event form
-  private createNewFilterForm() {
-    this.form = this.fb.group({
-      category: ['', Validators.compose([
-        Validators.required
-      ])],
-      start: ['', Validators.compose([
-        Validators.required/*,DateValidator.validate*/
-      ])],
-      end: ['', Validators.compose([
-        Validators.required/*,DateValidator.validate*/
-      ])],
-      price: ['']
-    })
-    this.category = this.form.controls['category'];
-    this.start = this.form.controls['start'];
-    this.end = this.form.controls['end'];
-    this.price = this.form.controls['price'];
-    this.price.setValue(0);
   }
   private clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
@@ -147,6 +119,9 @@ export class EventComponent  {
     this.lat=Number(data.place.coordinates.lat);
     this.lng=Number(data.place.coordinates.lng);
     //this.map._mapsWrapper.setCenter({lat: this.lat, lng: this.lng}));
+    if(data.images.poster.length===0){
+      data.images.poster.push({url:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'});      
+    }
     this.markers.push({      
       lat: Number(data.place.coordinates.lat),
       lng: Number(data.place.coordinates.lng),
@@ -167,51 +142,35 @@ export class EventComponent  {
       draggable: true
     });
   }
-  public onSelectedCategory(value){
-    this.selectedCategory=value;
-  
-  }
   private getEvents() {
     this.eventService.getEvents(this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events = data.events; // Assign array to use in HTML
         this.markers=[];
-        for (var i = 0; i < this.events.length; ++i) {    
-          this.addMarker(this.events[i]);
+        var currentDate=new Date();
+        for (var i = 0; i < this.events.length; ++i) { 
+          if(new Date(this.events[i].end)>=currentDate){
+            this.addMarker(this.events[i]);
+          }             
         }
       }
     });
-  }
-  private getCategories(){
-    //Get categories
-    this.categoryService.getCategories(this.localizeService.parser.currentLang).subscribe(data=>{
-      if(data.success){
-        this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
-      }   
-    });
-  }
-  public onEventSubmit(){
-    this.markers=[];
-    this.startTimestamp=new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,0,0);
-    this.endTimestamp=new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,0,0);
-    for (var i = 0; i < this.events.length; ++i) {
-      for (var j = 0; j < this.events[i].categories.length; ++j) {
-        if(this.events[i].categories[j].title===this.selectedCategory.split(' ')[1] && 
-          new Date(this.events[i].start)>=this.startTimestamp &&
-          new Date(this.events[i].end)<=this.endTimestamp &&
-          this.events[i].price<=this.price.value
-          ){
-          this.addMarker(this.events[i]);
-        }
-      }
-    }  
   }
   ngOnInit() {
     this.getEvents();
-    this.getCategories();
      if (isPlatformBrowser(this.platformId)) {
       this.browser=true;
     }
+    this.subscription=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.mapEvent) {
+        if(res.count===0 || !res.exists){
+          this.markers=[];
+        }
+        if(res.exists ){
+          this.addMarker(res.value);
+        }       
+      }
+    }); 
   }
 }
 // just an interface for type safety.

@@ -561,8 +561,8 @@ export class ServiceFormComponent implements OnInit {
         lng:this.form.get('lng').value, // Lng field
       }
     }  
-    this.observableService.mapType="create-categories-coordinates";
-    this.observableService.notifyOther({option: this.observableService.mapType, value: market_info});
+    this.observableService.mapEventForm="create-categories-coordinates";
+    this.observableService.notifyOther({option: this.observableService.mapEventForm, value: market_info});
   }
  
   public onSubmit(){

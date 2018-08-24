@@ -13,11 +13,12 @@ import { EventFormComponent } from './event-form/event-form.component';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { InlineSVGDirective} from 'ng-inline-svg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterFormComponent } from '../../templates/forms/filter-form/filter-form.component';
 @NgModule({
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,AgmCoreModule,MapRoutingModule,TranslateModule,SharedModule,AgmSnazzyInfoWindowModule,InlineSVGModule,NgbModule
   ],
-  declarations: [EventComponent,EventFormComponent],
+  declarations: [EventComponent,EventFormComponent,FilterFormComponent],
   exports: [EventComponent,EventFormComponent],
   providers:[{provide: COMPOSITION_BUFFER_MODE, useValue: false},BindContentPipe]
 })
