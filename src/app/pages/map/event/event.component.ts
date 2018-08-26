@@ -63,8 +63,6 @@ export class EventComponent  {
   public lng: number = -1.9355555555555555;
   public zoom: number = 9;
   public markers: marker[]=[];
-  public timeStart = {hour: 0, minute: 0};
-  public timeEnd = {hour: 0, minute: 0};
   private events;
   private selectedCategory;
   private subscription:Subscription;

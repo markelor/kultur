@@ -149,7 +149,11 @@ export class FilterFormComponent  {
   }
   ngOnInit() {
     this.getCategories();
-
+    var defaultStart=new Date();
+    var defaultEnd=new Date();
+    defaultEnd.setDate(defaultStart.getDate()+7);
+    this.form.get('start').setValue({year: defaultStart.getFullYear(), month: defaultStart.getMonth()+1, day: defaultStart.getDate()});
+    this.form.get('end').setValue({year: defaultEnd.getFullYear(), month: defaultEnd.getMonth()+1, day: defaultEnd.getDate()});  
   }
 }
 
