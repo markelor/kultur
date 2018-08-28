@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
+import { LocalizeRouterService } from 'localize-router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
-  constructor(translate: TranslateService) {
-     translate.use('eu');
+  constructor(translate: TranslateService,private localizeService: LocalizeRouterService) {
+    translate.use(this.localizeService.parser.currentLang);
   }
 
 }

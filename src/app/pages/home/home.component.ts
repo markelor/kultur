@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
+import { ObservableService } from '../../services/observable.service';
 import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../guards/auth.guard';
@@ -16,10 +17,12 @@ export class HomeComponent implements OnInit {
   private subscriptionLanguage: Subscription;
   public events;
   private page :number = 1;
+  private subscription:Subscription;
   constructor(
     private meta: Meta,
     private metaTitle: Title,
   	private eventService:EventService,
+    private observableService:ObservableService,
     private localizeService:LocalizeRouterService,
     private translate:TranslateService,
     private router:Router,
@@ -33,18 +36,19 @@ export class HomeComponent implements OnInit {
       data => {         
       this.meta.addTag({ name: 'description', content: data });
     });
-     this.translate.get('metatag.home-keywords').subscribe(
+    this.translate.get('metatag.home-keywords').subscribe(
       data => {         
       this.meta.addTag({ name: 'keywords', content: data });
     });
   }
   // Function to get all user events from the database
   private getEvents() {
-    this.eventService.getEvents(this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.events = data.events; // Assign array to use in HTML
+    this.observableService.eventsEvent="event-events";
+     this.subscription=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.eventsEvent) {
+        this.events=res.value;           
       }
-    });
+    }); 
   }
   ngOnInit() {
     moment.locale(this.localizeService.parser.currentLang);
@@ -55,7 +59,8 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
+    this.subscriptionLanguage.unsubscribe();
+    this.subscription.unsubscribe();
   } 
 
 }

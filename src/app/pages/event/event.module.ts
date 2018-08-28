@@ -6,7 +6,6 @@ import { SeeEventComponent } from './see-event/see-event.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EditEventComponent } from './manage-events/edit-event/edit-event.component';
 import { DataTablesModule } from 'angular-datatables';
-import { MapModule } from '../map/map.module';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule} from "../../shared/shared.module";
@@ -20,7 +19,7 @@ import { HasBeenTranslatedPipe } from "../../shared/pipes/has-been-translated.pi
 
 @NgModule({
   imports: [
-  	CommonModule,FormsModule,EventRoutingModule,ReactiveFormsModule,TranslateModule,SharedModule,TemplatesModule,DataTablesModule,NgbModule,NgxGalleryModule,ShareButtonsModule,MapModule
+  	CommonModule,FormsModule,EventRoutingModule,ReactiveFormsModule,TranslateModule,SharedModule,TemplatesModule,DataTablesModule,NgbModule,NgxGalleryModule,ShareButtonsModule
   ],
   declarations: [SeeEventComponent,CreateEventComponent, ManageEventsComponent,EditEventComponent,ReactionsModalComponent],
   providers: [

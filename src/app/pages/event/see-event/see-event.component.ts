@@ -108,8 +108,8 @@ export class SeeEventComponent implements OnInit {
       lat:this.event.place.coordinates.lat, // Lat field
       lng:this.event.place.coordinates.lng, // Lng field
     }
-    this.observableService.mapEventForm="event-form-coordinates";
-    this.observableService.notifyOther({option: this.observableService.mapEventForm, value: market_info});
+    this.observableService.mapSingleEvent="map-single-event";
+    this.observableService.notifyOther({option: this.observableService.mapSingleEvent, value: market_info});
   }
   private initReactions(){
     this.reactions=['like','love','haha','wow','sad','angry'];

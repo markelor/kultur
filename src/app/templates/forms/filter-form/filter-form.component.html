@@ -3,7 +3,7 @@
     <!-- Category -->
     <div formArrayName="categories" class="col-sm-12">
       <label for="selectCategory" translate>{{'event-form.category'}}</label>
-      <div *ngFor="let category of form | formArrayPipe:'categories' | disableCategories:disableCategories; let i = index;">
+      <div *ngFor="let category of form | formArrayPipe:'categories'; let i = index;">
         <div class="form-group required" [ngClass]="{'has-error': (!category.valid && category.dirty), 'has-success': (category.valid)}">
           <div [formGroupName]="i">
             <select formControlName="category" class="form-control" id="selectCategory" (change)="onSelectedCategory($event.target.value,i)">
@@ -25,6 +25,30 @@
         </div>
       </div>  
     </div>  
+    <!-- Province -->
+    <div class="col-sm-6">
+      <div class="form-group required">
+        <label for="selectProvinceEvent" translate>{{'event-form.province'}}</label>
+        <select [formControl]="province" class="form-control" id="selectProvinceEvent" (change)="onSelectedProvince($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-province'}}</option>
+          <option *ngFor="let provinceEvent of provincesEvent " [ngValue]="provinceEvent.name">
+            {{provinceEvent.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- Municipality -->
+    <div class="col-sm-6">
+      <div class="form-group required">
+        <label for="selectMunicipalityEvent" translate>{{'event-form.municipality'}}</label>
+        <select [formControl]="municipality" class="form-control" id="selectMunicipalityEvent" (change)="onSelectedMunicipality($event.target.selectedIndex-1)">
+          <option value="" translate>{{'event-form.select-municipality'}}</option>
+          <option *ngFor="let municipalityEvent of municipalitiesEvent" [ngValue]="municipalityEvent.name">
+            {{municipalityEvent.name}}
+          </option>
+        </select>
+      </div>
+    </div>
     <!-- Start date-->
     <div class="col-sm-6">
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
@@ -63,7 +87,7 @@
     </div>
     <!-- Price -->
     <div class="col-sm-12">
-      <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
+      <div class="form-group required">
         <label for="inputPrice" translate>{{'application-form.price'}}</label>
         <input [formControl]="price" type="number" class="form-control" id="inputPrice">
       </div>

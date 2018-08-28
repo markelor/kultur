@@ -267,7 +267,7 @@
                 <div  class="col-sm-12">
                   <div class="form-group text-center">
                     <button (click)="showMap = !showMap" type="submit" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
-                    <event-form-map [hidden]="!showMap"></event-form-map>
+                    <single-event-map [hidden]="!showMap"></single-event-map>
                   </div>
                 </div>
                 <app-comment [inputEventId]="event._id"></app-comment>

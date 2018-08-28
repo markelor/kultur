@@ -4,22 +4,21 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { MapRoutingModule }  from './map.routing';
-import { EventComponent } from './event/event.component';
+import { EventsComponent } from './events/events.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from "../../shared/shared.module";
+import { TemplatesModule } from "../../templates/templates.module";
 import { BindContentPipe } from '../../shared/pipes/bind-content.pipe';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
-import { EventFormComponent } from './event-form/event-form.component';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { InlineSVGDirective} from 'ng-inline-svg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FilterFormComponent } from '../../templates/forms/filter-form/filter-form.component';
 @NgModule({
   imports: [
-    CommonModule,FormsModule,ReactiveFormsModule,AgmCoreModule,MapRoutingModule,TranslateModule,SharedModule,AgmSnazzyInfoWindowModule,InlineSVGModule,NgbModule
+    CommonModule,FormsModule,ReactiveFormsModule,AgmCoreModule,MapRoutingModule,TranslateModule,SharedModule,TemplatesModule,AgmSnazzyInfoWindowModule,InlineSVGModule,NgbModule
   ],
-  declarations: [EventComponent,EventFormComponent,FilterFormComponent],
-  exports: [EventComponent,EventFormComponent],
+  declarations: [EventsComponent],
+  exports: [EventsComponent],
   providers:[{provide: COMPOSITION_BUFFER_MODE, useValue: false},BindContentPipe]
 })
 

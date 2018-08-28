@@ -7,11 +7,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { BindContentPipe } from '../../../shared/pipes/bind-content.pipe';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 @Component({
-  selector: 'event-form-map',
-  templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.css']
+  selector: 'single-event-map',
+  templateUrl: './single-event.component.html',
+  styleUrls: ['./single-event.component.css']
 })
-export class EventFormComponent implements OnInit{
+export class SingleEventComponent implements OnInit{
   public lat: number = 42.88305555555556;
   public lng: number = -1.9355555555555555;
   public zoom: number = 8;
@@ -72,9 +72,9 @@ export class EventFormComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.observableService.mapEventForm="event-form-coordinates";
+    this.observableService.mapSingleEvent="map-single-event";
     this.subscription=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === this.observableService.mapEventForm) {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.mapSingleEvent) {
         this.markers=[];
         this.addMarker(res.value);
       }

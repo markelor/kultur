@@ -38,7 +38,7 @@ export class EventInterceptor implements HttpInterceptor {
           }
         });  
      }
-     else if(request.url===this.domain+"event/getEvents/"+this.localizeService.parser.currentLang){
+     else if(request.url===this.domain+"event/getEvents"){
         request = request.clone({
           setHeaders: {
             'Content-Type': 'application/json', // Format set to JSON

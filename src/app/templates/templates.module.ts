@@ -25,7 +25,7 @@ import { ServiceTypeFormComponent } from './forms/service-type-form/service-type
 import { ObservationFormComponent } from './forms/observation-form/observation-form.component';
 import { CommentComponent } from './comment/comment.component';
 import { FileUploadModule } from 'ng2-file-upload';
-import { MapModule } from '../pages/map/map.module';
+import { SingleEventComponent } from '../pages/map/single-event/single-event.component';
 import { AgmCoreModule } from '@agm/core';
 import { MomentModule } from 'ngx-moment';
 // Import the Froala Editor plugin.
@@ -35,17 +35,18 @@ import { FroalaEditorModule, FroalaViewModule,FroalaEditorDirective, FroalaViewD
 import { ApplicationFormComponent } from './forms/application-form/application-form.component';
 import { FormsComponent } from './forms/forms.component';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { FilterFormComponent } from './forms/filter-form/filter-form.component';
 @NgModule({
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,AgmCoreModule,MomentModule,
-    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),FileUploadModule,MapModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),FileUploadModule,
     SharedModule,TranslateModule,TemplatesRoutingModule,DataTablesModule,NgbModule,InlineSVGModule
   ],
   declarations: [
-    NavbarComponent,SidebarComponent,RightSidebarComponent,ModalComponent, EventFormComponent, ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent
+    NavbarComponent,SidebarComponent,RightSidebarComponent,ModalComponent, EventFormComponent,SingleEventComponent, ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
   ],
   exports: [
-    NavbarComponent,SidebarComponent,RightSidebarComponent,ModalComponent,EventFormComponent,ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent
+    NavbarComponent,SidebarComponent,RightSidebarComponent,ModalComponent,EventFormComponent,SingleEventComponent,ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
     ],
    providers:[
      GroupByPipe,SpacePipe,BindContentPipe,CompareDatePipe,DisableCategoriesPipe,FormArrayPipe,{provide: COMPOSITION_BUFFER_MODE, useValue: false}

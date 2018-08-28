@@ -121,7 +121,7 @@ export class EditEventsApplicationComponent implements OnInit {
   }
   // Function to get events from the database
   private getEventsInit() {
-    this.eventService.getEvents(this.localizeService.parser.currentLang).subscribe(data => {
+    this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events=data.events;
       }
@@ -151,7 +151,7 @@ export class EditEventsApplicationComponent implements OnInit {
   }
   // Function to get events from the database
   private getEvents() {
-    this.eventService.getEvents(this.localizeService.parser.currentLang).subscribe(data => {
+    this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
           if(index===1){

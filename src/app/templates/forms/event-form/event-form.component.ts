@@ -827,8 +827,8 @@ export class EventFormComponent implements OnInit {
         lng:this.form.get('lng').value, // Lng field
       }
     }
-    this.observableService.mapEventForm="event-form-coordinates";
-    this.observableService.notifyOther({option: this.observableService.mapEventForm, value: market_info});
+    this.observableService.mapSingleEvent="map-single-event";
+    this.observableService.notifyOther({option: this.observableService.mapSingleEvent, value: market_info});
   }
   private setUploaderOptions(){
     const authHeader: Array<{
@@ -959,7 +959,12 @@ export class EventFormComponent implements OnInit {
     this.chargeAll();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;
-        this.chargeAll();; 
+        this.categoryId=[];
+        this.createNewEventForm();
+        this.chargeAll();
     }); 
   }
+  ngOnDestroy(){
+    this.subscriptionLanguage.unsubscribe();
+  } 
 }

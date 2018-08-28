@@ -4,7 +4,7 @@
       <div class="container-fluid ks-rows-section">
         <div class="row">
           <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <ng-container *ngFor="let event of events | eventsFilter let i=index;">
+            <ng-container *ngFor="let event of events">
               <article *ngIf="event.visible" [hidden]="event.showAll"  class="card panel ks-widget ks-widget-post">
                 <div *ngIf="event.price===0" class="ribbon-free ribbon-top-left">
                   <span >{{'event.free'|translate}} </span>
@@ -121,7 +121,8 @@
             <!--<ngb-pagination *ngIf="events" [collectionSize]="events.length" [(page)]="page" [pageSize]="1" [maxSize]="5" [boundaryLinks]="true" size="lg"></ngb-pagination>-->
           </section>
           <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-            <!--<right-sidebar></right-sidebar>-->
+            <!-- Filter Form -->
+            <app-filter-form [inputType]="'events'"></app-filter-form>
           </aside>
         </div>
       </div>

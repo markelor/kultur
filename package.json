@@ -63,6 +63,7 @@
     "datatables.net-dt": "^1.10.16",
     "datatables.net-responsive": "^2.2.1",
     "datatables.net-responsive-dt": "^2.2.1",
+    "isodate": "^0.1.4",
     "jsonwebtoken": "^8.2.0",
     "localize-router": "^1.0.0-rc.3",
     "localize-router-http-loader": "^1.0.1",

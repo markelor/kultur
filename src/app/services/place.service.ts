@@ -23,6 +23,11 @@ export class PlaceService {
     this.language=language;
     return this.http.get<any>(this.domain + 'place/getPlacesCoordinates/'+this.route+language);
   }
+   // Function to get all user places from the database
+  public getPlacesGeonameId(filters,language) {
+    var data = {'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'place/getPlacesGeonameId',data);
+  }
   public getGeonamesJson(geonameType,language,name){
     return this.http.get<any>('assets/json/'+geonameType+'/'+language+'/'+name+'.json');     
   }

@@ -24,7 +24,14 @@ export class PlaceInterceptor implements HttpInterceptor {
             'language':this.placeService.language,
             'route':this.placeService.route
           }
-        });    
+        });  
+      }else if(request.url===this.domain+"place/getPlacesGeonameId"){
+        request = request.clone({
+          setHeaders: {
+            'Content-Type': 'application/json', // Format set to JSON
+            'language':this.localizeService.parser.currentLang
+          }
+        });             
       }else{       
         /*request = request.clone({
           setHeaders: {
