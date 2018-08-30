@@ -16,6 +16,10 @@ export class ManageEventsComponent implements OnInit {
   private subscriptionLanguage: Subscription;
   public events;
   private page :number = 1;
+  private range=3;
+  public maxSize=2;
+  public minSize=0;
+  public collectionSize;
   constructor(
   	private eventService:EventService,
   	private authService:AuthService,
@@ -28,9 +32,9 @@ export class ManageEventsComponent implements OnInit {
   // Function to get all user events from the database
   private getAllUserEvents() {
     this.eventService.getUserEvents(this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
-              console.log(data);
       if(data.success){
         this.events = data.events; // Assign array to use in HTML
+        this.collectionSize= Math.ceil(this.events.length/this.range);
       }
     });
   }
@@ -46,6 +50,10 @@ export class ManageEventsComponent implements OnInit {
         "hour":moment(date).tz("Europe/Madrid").format('HH:mm'),
       };
     return result;
+  }
+  public onPageChange(event){
+    this.minSize=(event*this.range)-this.range;
+    this.maxSize=(event*this.range)-1;
   }
   ngOnInit() {
   	// Get authentication on page load

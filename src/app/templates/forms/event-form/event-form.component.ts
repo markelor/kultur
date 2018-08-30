@@ -496,20 +496,16 @@ export class EventFormComponent implements OnInit {
         this.message = data.message; // Return error message
         this.submitted = false; // Enable submit button
       } else {
-        this.createNewEventForm(); // Reset all form fields
-        this.uploader.clearQueue();
-        this.imagesPoster=[];
-        this.imagesDescription=[];
-        this.participants=[];
-        this.locationsExistsEvent=[];
-        this.messageClass = 'alert alert-success ks-solid'; // Return success class
-        this.message = data.message; // Return success message
         // Clear form data after two seconds
         setTimeout(() => {
-          //this.newPost = false; // Hide form
-          this.message = false; // Erase error/success message
-          this.enableForm(); // Enable the form fields
+          this.createNewEventForm(); // Reset all form fields
+          this.uploader.clearQueue();
+          this.imagesPoster=[];
+          this.imagesDescription=[];
           this.participants=[];
+          this.locationsExistsEvent=[];
+          this.messageClass = 'alert alert-success ks-solid'; // Return success class
+          this.message = data.message; // Return success message
         }, 2000);
       }
     });  
@@ -719,28 +715,33 @@ export class EventFormComponent implements OnInit {
       //hide categories
       this.categoryId[level+1] = this.levelCategories[level].value[index]._id;
       var newFormArray=false;
-      if(this.levelCategories[level+1]){
-         for (var i = 0; i < this.levelCategories[level+1].value.length; ++i) {
-          //set icon map
-          this.categoryIcon=this.levelCategories[level+1].value[i].icons[0].url;
-          if(this.levelCategories[level+1].value[i].parentId===this.levelCategories[level].value[index]._id){
-            newFormArray=true;
-          }
-        }
-      }     
+        for (var i = 0; i < this.levelCategories[level].value.length; ++i) {
+         if(this.levelCategories[level+1] && this.levelCategories[level+1].value[i]){
+            if(this.levelCategories[level+1].value[i].parentId===this.levelCategories[level].value[index]._id){
+              newFormArray=true;
+            }
+         }
+        }     
       if((this.form.controls['categories'].value.length-1 <= level) && newFormArray===true){
         (this.form.controls['categories'] as FormArray).push(this.createItem(''));
       }else {
         // remove
         for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
           (this.form.controls['categories'] as FormArray).removeAt(i);
+          this.categoryId.splice(i+1,1);
+          this.categoryId[this.categoryId.length-1]=this.levelCategories[level].value[index]._id;
         }
         if(newFormArray){
-          this.categoryId.splice(i+1,1);
          (this.form.controls['categories'] as FormArray).push(this.createItem('')); 
         }       
-      }    
-    }
+      } 
+      for (var i = 0; i < this.levelCategories[level].value.length; ++i) {
+        //set icon map
+        if(this.levelCategories[level].value[i]._id===this.categoryId[this.categoryId.length-1]){
+          this.categoryIcon=this.levelCategories[level].value[i].icons[0].url; 
+        }
+      }   
+  }
   }   
   // Function on seleccted event Continent
   public onSelectedProvince(index){
@@ -959,9 +960,11 @@ export class EventFormComponent implements OnInit {
     this.chargeAll();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;
-        this.categoryId=[];
-        this.createNewEventForm();
-        this.chargeAll();
+        if(this.inputOperation==="create"){
+          this.categoryId=[];
+          this.createNewEventForm();
+          this.chargeAll();
+        }
     }); 
   }
   ngOnDestroy(){

@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
   private subscriptionLanguage: Subscription;
   public events;
   private page :number = 1;
+  private range=3;
+  public maxSize=2;
+  public minSize=0;
+  public collectionSize;
   private subscription:Subscription;
   constructor(
     private meta: Meta,
@@ -46,11 +50,17 @@ export class HomeComponent implements OnInit {
     this.observableService.eventsEvent="event-events";
      this.subscription=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === this.observableService.eventsEvent) {
-        this.events=res.value;           
+        this.events=res.value;
+        this.collectionSize= Math.ceil(this.events.length/this.range);         
       }
     }); 
   }
+  public onPageChange(event){
+    this.minSize=(event*this.range)-this.range;
+    this.maxSize=(event*this.range)-1;
+  }
   ngOnInit() {
+
     moment.locale(this.localizeService.parser.currentLang);
   	this.getEvents();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
