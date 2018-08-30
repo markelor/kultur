@@ -2,7 +2,7 @@ import { Component, OnInit, PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
 import { ObservableService } from '../../../services/observable.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
@@ -12,12 +12,14 @@ import { ReactionsModalComponent } from './reactions-modal/reactions-modal.compo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Meta,Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-see-event',
   templateUrl: './see-event.component.html',
   styleUrls: ['./see-event.component.css']
 })
 export class SeeEventComponent implements OnInit {
+  private subscriptionLanguage: Subscription;
   public event;
   private categories;
   private galleryOptions: NgxGalleryOptions[];
@@ -25,6 +27,7 @@ export class SeeEventComponent implements OnInit {
   private reactions;
   private allReactions;
   private existReactionAndUsernames;
+  public currentUrl;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private meta: Meta,
@@ -40,8 +43,7 @@ export class SeeEventComponent implements OnInit {
     private authGuard:AuthGuard,
     private modalService:NgbModal) {
       this.translate.get('metatag.see-event-title').subscribe(
-        data => {   
-        console.log(data);      
+        data => {       
         this.metaTitle.setTitle(data);
       });
       this.translate.get('metatag.see-event-description').subscribe(
@@ -61,16 +63,36 @@ export class SeeEventComponent implements OnInit {
   ];
 
   }
-  private initializeGalleryImages(images){
-    if(images.length>0){
-      this.galleryImages = [
-        {
-          small: images[0].url,
-          medium:images[0].url ,
-          big: images[0].url
-        }
-      ];
+  private initializeGalleryImages(){
+    var exists=false;
+    if(this.event.language===this.localizeService.parser.currentLang){
+      if(this.event.images.poster.length>0){ 
+        exists=true;
+        this.galleryImages = [
+          {
+            small: this.event.images.poster[0].url,
+            medium:this.event.images.poster[0].url ,
+            big: this.event.images.poster[0].url
+          }
+        ];
+      }
     }else{
+      for (var i = 0; i < this.event.translation.length; ++i) {
+        if(this.event.translation[i].language===this.localizeService.parser.currentLang) {
+          if(this.event.translation[i].images.poster.length>0){    
+            exists=true,    
+            this.galleryImages = [
+              {
+                small: this.event.translation[i].images.poster[0].url,
+                medium:this.event.translation[i].images.poster[0].url ,
+                big: this.event.translation[i].images.poster[0].url
+              }
+            ];
+          }
+        }           
+      }
+    }  
+    if(!exists){          
       this.galleryImages = [
         {
             small:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png',
@@ -78,7 +100,7 @@ export class SeeEventComponent implements OnInit {
             big:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'
         }
       ];
-    }    
+    }   
   }
   private addReaction(reaction){
     this.eventService.newReactionEvent(this.event._id,reaction,this.localizeService.parser.currentLang).subscribe(data=>{
@@ -183,11 +205,13 @@ export class SeeEventComponent implements OnInit {
     } 
   }
   private getEvent(){
+    this.currentUrl="http://localhost:4200"+this.router.url;
+    console.log(this.currentUrl);
     this.eventService.getEvent(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.event=data.event;
         this.categories=data.categories;
-        this.initializeGalleryImages(this.event.images.poster);
+        this.initializeGalleryImages();
         setTimeout(() => {
           this.passCoordinates();
           if (isPlatformBrowser(this.platformId)) {
@@ -223,7 +247,15 @@ export class SeeEventComponent implements OnInit {
   ngOnInit() {
     this.getEvent();
     this.initializeGalleryOptions();
+    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.localizeService.parser.currentLang=event.lang;
+      this.initializeGalleryImages();
+      this.initReactions();
+    });
   }
+  ngOnDestroy(){
+    this.subscriptionLanguage.unsubscribe();
+  } 
 }
 
 

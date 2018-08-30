@@ -322,8 +322,8 @@
     "sad": "Me entristece",
     "angry": "Me enoja",
     "you": "Tú",
-    "you-and": "Tú y",
-    "others": "personas más"
+    "you-and": "Tú y ",
+    "others": " personas más"
   },
   "dates":
   {

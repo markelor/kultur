@@ -55,22 +55,22 @@
                     <ul class="reactions-box">
                       <!-- Reaction buttons container-->
                       <li class="reaction reaction-facebook" data-reaction="Facebook">
-                        <share-button [theme]="'circles-dark'" [button]="'facebook'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="facebook" [size]="1"></share-button>
                       </li>
                       <li class="reaction reaction-twitter" data-reaction="Twitter">
-                        <share-button [theme]="'circles-dark'" [button]="'twitter'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="twitter" [size]="1"></share-button>
                       </li>
                       <li class="reaction reaction-google" data-reaction="Google">
-                        <share-button [theme]="'circles-dark'" [button]="'google'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="google" [size]="1"></share-button>
                       </li>
                       <li class="reaction reaction-whats-up" data-reaction="Whats Up">
-                        <share-button [theme]="'circles-dark'" [button]="'whatsapp'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="whatsapp" [size]="1"></share-button>
                       </li>
                       <li class="reaction reaction-telegram" data-reaction="Telegram">
-                        <share-button [theme]="'circles-dark'" [button]="'telegram'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="telegram" [size]="1"></share-button>
                       </li>
                       <li class="reaction reaction-pinterest" data-reaction="Pinterest">
-                        <share-button [theme]="'circles-dark'" [button]="'pinterest'" [size]="1" [url]="'http://twitter.com/'"></share-button>
+                        <share-button theme="circles-dark" button="pinterest" [size]="1"></share-button>
                       </li>
                     </ul>
                     </span>
@@ -208,15 +208,29 @@
                   </div>
                   <!--Province info-->
                   <div class="col-sm-6">
-                    <p *ngIf="event.place.province.name">
+                    <ng-container *ngFor="let translation of event.place.translation">
+                      <p *ngIf="translation.language===localizeService.parser.currentLang">
+                        <span>
+                          <strong translate>{{'event-form.province'}}</strong>: 
+                        </span>{{translation.province.name}}
+                      </p>
+                    </ng-container>  
+                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
                       <span>
                         <strong translate>{{'event-form.province'}}</strong>: 
                       </span>{{event.place.province.name}}
                     </p>
                   </div>
                   <!--Municipality info-->
-                  <div class="col-sm-12">
-                    <p *ngIf="event.place.municipality.name">
+                  <div class="col-sm-6">
+                    <ng-container *ngFor="let translation of event.place.translation">
+                      <p *ngIf="translation.language===localizeService.parser.currentLang">
+                        <span>
+                          <strong translate>{{'event-form.municipality'}}</strong>: 
+                        </span>{{translation.municipality.name}}
+                      </p>
+                    </ng-container>  
+                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
                       <span>
                         <strong translate>{{'event-form.municipality'}}</strong>: 
                       </span>{{event.place.municipality.name}}
@@ -224,10 +238,17 @@
                   </div>
                   <!--Location info-->
                   <div class="col-sm-12">
-                    <p *ngIf="event.place.location ">
+                    <ng-container *ngFor="let translation of event.place.translation">
+                      <p *ngIf="translation.language===localizeService.parser.currentLang">
+                        <span>
+                          <strong translate>{{'event-form.location'}}</strong>: 
+                        </span>{{translation.location}}
+                      </p>
+                    </ng-container>  
+                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
                       <span>
                         <strong translate>{{'event-form.location'}}</strong>: 
-                      </span>{{event.place.location }}
+                      </span>{{event.place.location}}
                     </p>
                   </div>
                   <!--Latitude info-->
@@ -248,7 +269,15 @@
                   </div>
                   <!--Description info-->
                   <div class="col-sm-12">
-                    <p *ngIf="event.description">
+                    <ng-container *ngFor="let translation of event.translation">
+                      <p *ngIf="translation.language===localizeService.parser.currentLang">
+                        <span>
+                          <strong translate>{{'event-form.description'}}</strong>: 
+                        </span>
+                        <span [innerHTML]="translation.description"></span>
+                      </p>
+                    </ng-container>  
+                    <p *ngIf="event.language===localizeService.parser.currentLang">
                       <span>
                         <strong translate>{{'event-form.description'}}</strong>: 
                       </span>
@@ -257,10 +286,17 @@
                   </div>
                   <!--Observations info-->
                   <div class="col-sm-12">
-                    <p *ngIf="event.observations">
+                    <ng-container *ngFor="let translation of event.translation">
+                      <p *ngIf="translation.language===localizeService.parser.currentLang">
+                        <span>
+                          <strong translate>{{'event-form.observations'}}</strong>: 
+                        </span>{{translation.observations}}
+                      </p>
+                    </ng-container>  
+                    <p *ngIf="event.language===localizeService.parser.currentLang">
                       <span>
                         <strong translate>{{'event-form.observations'}}</strong>: 
-                      </span> {{event.observations}}
+                      </span>{{event.observations}}
                     </p>
                   </div>
                 </div>
