@@ -43,7 +43,6 @@ export class EditEventsApplicationComponent implements OnInit {
   private createSettings(){
     this.dtOptions = {
       // Declare the use of the extension in the dom parameter
-      ordering: false,
       dom: 'Bfrtip',
       // Configure the buttons
       buttons: [

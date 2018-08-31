@@ -48,74 +48,17 @@
     "manage": "Kudeatu",
     "category": "Kategoria",
     "event": "Ekintza",
-    "map":"Mapa",
+    "map": "Mapa",
     "application": "Aplikazioa",
     "applications": "Aplikazioak",
-    "service":"Zerbitzua",
-    "services":"Zerbitzuak",
-    "service-type":"Gehitu Mota",
-    "observation":"Oharra",
-    "observations":"Oharrak",
+    "service": "Zerbitzua",
+    "services": "Zerbitzuak",
+    "service-type": "Gehitu Mota",
+    "observation": "Oharra",
+    "observations": "Oharrak",
     "administrator": "Administratzailea",
     "users": "Erabiltzaileak",
     "events": "Ekintzak"
-  },
-  "dashboard":
-  {
-    "acquisition_channels": "Acquisition Channels",
-    "users_by_country": "Users by Country",
-    "revenue": "Revenue",
-    "feed": "Feed",
-    "todo_list": "To Do List",
-    "calendar": "Calendar",
-    "new_visits": "New Visits",
-    "purchases": "Purchases",
-    "active_users": "Active Users",
-    "returned": "Returned",
-    "popular_app":
-    {
-      "super_app": "Super App",
-      "most_popular_app": "Most Popular App",
-      "total_visits": "Total Visits",
-      "new_visits": "New Visits",
-      "sales": "Sales"
-    },
-    "todo":
-    {
-      "task_todo": "Task to do.."
-    },
-    "traffic_chart":
-    {
-      "view_total": "Views Total"
-    }
-  },
-  "tree_view":
-  {
-    "title": "basic",
-    "programming": "Programming languages by programming paradigm",
-    "oop": "Object-oriented programming",
-    "java": "Java",
-    "c_plus_plus": "C++",
-    "c_sharp": "C#",
-    "prototype": "Prototype-based programming",
-    "java_script": "JavaScript",
-    "coffee_script": "CoffeeScript",
-    "lua": "Lua"
-  },
-  "chart":
-  {
-    "lines": "Lines",
-    "bars": "Bars",
-    "simple_line_chart": "Simple line chart",
-    "line_chart": "Line chart with area",
-    "bi_polar_line_chart": "Bi-polar line chart with area only",
-    "simple_bar_chart": "Simple bar chart",
-    "multi_line_labels_bar_chart": "Multi-line labels bar chart",
-    "stacked_bar_chart": "Stacked bar chart",
-    "pies_and_donuts": "Pies & Donuts",
-    "simple_pie": "Simple Pie",
-    "pie_with_labels": "Pie with labels",
-    "donut": "Donut"
   },
   "navbar":
   {
@@ -131,7 +74,7 @@
     "observations": "Oharrak",
     "services": "Zerbitzuak",
     "search": "Bilatu...",
-    "logout":"Irten"
+    "logout": "Irten"
   },
   "events":
   {
@@ -180,12 +123,16 @@
     "new-password": "Pasahitz berria.",
     "new-password-success": "Mesedez, sar ezazu pasahitz berria.",
     "send": "Bidali",
-    "guard-error": "Saioa hasi behar duzu orrialde hau ikusteko."
+    "guard-error": "Saioa hasi behar duzu orrialde hau ikusteko.",
+    "permission":"Baimena",
+    "id":"Id"
   },
   "category-form":
   {
     "title": "Izenburua",
     "description": "Deskribapena",
+    "parent-id":"Guraso Id",
+    "level":"Maila",
     "parent-category": "Guraso Kategoria",
     "select-parent-category": "-- AUKERATU KATEGORIA --",
     "send": "Bidali"
@@ -214,7 +161,7 @@
     "lat": "Koordenatuak I-H (Lat)",
     "lng": "Koordenatuak E-M (Lng)",
     "check": "Egiaztatau",
-    "locations-exists":"Existitzen diren kokapenak",
+    "locations-exists": "Existitzen diren kokapenak",
     "location": "Kokapena",
     "description": "Deskribapena",
     "observations": "Oharrak",
@@ -254,7 +201,7 @@
     "icon": "Ikonoa",
     "send": "Bidali"
   },
-    "crud":
+  "crud":
   {
     "add": "Gehitu",
     "delete": "Ezabatu",
@@ -263,13 +210,13 @@
   },
   "comment":
   {
-    "leaveComment": "Idatzi iruzkin bat.",
+    "leave-comment": "Idatzi iruzkin bat.",
     "delete": "Delete",
     "edit": "Edit",
     "reply": "Reply",
-    "hideReplies": "Hide Replies",
-    "deleted":"Ezabatuta",
-    "deleted-text":"Erabiltzaileak iruzkina ezabatu du."
+    "hide-replies": "Hide Replies",
+    "deleted": "Ezabatuta",
+    "deleted-text": "Erabiltzaileak iruzkina ezabatu du."
   },
   "validation":
   {
@@ -303,17 +250,6 @@
     "entityName-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
     "entityName-validation": "Entitatearen izenak ezin du karaktere berezirik izan."
   },
-  "map-icon":
-  {
-    "Trikuharriak": "Dolmen",
-    "Zutarriak": "Menhir",
-    "Tumuluak": "Tumulus",
-    "Harrespilak": "Cromlech",
-    "Lauak": "Smooth",
-    "Mailakatuak": "Stepped",
-    "Kobazuloak": "Cave",
-    "Tenpluak": "Temple"
-  },
   "reaction":
   {
     "like": "Atsegin dut",
@@ -326,11 +262,60 @@
     "you-and": "Zu eta beste ",
     "others": ""
   },
-    "dates": {
-        "month": {
-            "short": {"1":"Urt","2":"Ots","3":"Mar","4":"Api","5":"Mai","6":"Eka","7":"Uzt","8":"Abu","9":"Ira","10":"Urr","11":"Aza","12":"Abe"},
-            "long": {"1":"Urtarrila","2":"Ots","3":"Mar","4":"Api","5":"Mai","6":"Eka","7":"Uzt","8":"Abu","9":"Ira","10":"Urr","11":"Aza","12":"Abe"}
-        }
+  "modal":
+  {
+    "delete-user-header": "Erabiltzailea ezabatu",
+    "delete-user-content": "Ziur zaude erabiltzailea ezabatzeaz?",
+    "delete-category-header": "Kategoria ezabatu",
+    "delete-category-content": "Ziur zaude kategoria ezabatzeaz?",
+    "delete-event-header": "Ekintza ezabatu",
+    "delete-event-content": "Ziur zaude ekintza ezabatzeaz?",
+    "delete-service-header": "Zerbitzua ezabatu",
+    "delete-service-content": "Ziur zaude zerbitzua ezabatzeaz?",
+    "delete-service-type-header": "Zerbitzu mota ezabatu",
+    "delete-service-type-content": "Ziur zaude zerbitzu mota ezabatzeaz?",
+    "delete-observation-header": "Oharra ezabatu",
+    "delete-observation-content": "Ziur zaude oharra ezabatzeaz?",
+    "delete-application-header": "Aplikazioa ezabatu",
+    "delete-application-content": "Ziur zaude aplikazioa ezabatzeaz?",
+    "acept":"Onartu",
+    "cancel":"Ezeztatu"
+  },
+  "dates":
+  {
+    "month":
+    {
+      "short":
+      {
+        "1": "Urt",
+        "2": "Ots",
+        "3": "Mar",
+        "4": "Api",
+        "5": "Mai",
+        "6": "Eka",
+        "7": "Uzt",
+        "8": "Abu",
+        "9": "Ira",
+        "10": "Urr",
+        "11": "Aza",
+        "12": "Abe"
+      },
+      "long":
+      {
+        "1": "Urtarrila",
+        "2": "Ots",
+        "3": "Mar",
+        "4": "Api",
+        "5": "Mai",
+        "6": "Eka",
+        "7": "Uzt",
+        "8": "Abu",
+        "9": "Ira",
+        "10": "Urr",
+        "11": "Aza",
+        "12": "Abe"
+      }
     }
+  }
 
 }

@@ -48,74 +48,17 @@
     "manage": "Manage",
     "category": "Category",
     "event": "Event",
-    "map":"Map",
+    "map": "Map",
     "application": "Application",
     "applications": "Applications",
-    "service":"Service",
-    "services":"Services",
-    "service-type":"Service Type",
-    "observation":"Observation",
-    "observations":"Observations",
+    "service": "Service",
+    "services": "Services",
+    "service-type": "Service Type",
+    "observation": "Observation",
+    "observations": "Observations",
     "administrator": "Administrator",
     "users": "Users",
     "events": "Events"
-  },
-  "dashboard":
-  {
-    "acquisition_channels": "Acquisition Channels",
-    "users_by_country": "Users by Country",
-    "revenue": "Revenue",
-    "feed": "Feed",
-    "todo_list": "To Do List",
-    "calendar": "Calendar",
-    "new_visits": "New Visits",
-    "purchases": "Purchases",
-    "active_users": "Active Users",
-    "returned": "Returned",
-    "popular_app":
-    {
-      "super_app": "Super App",
-      "most_popular_app": "Most Popular App",
-      "total_visits": "Total Visits",
-      "new_visits": "New Visits",
-      "sales": "Sales"
-    },
-    "todo":
-    {
-      "task_todo": "Task to do.."
-    },
-    "traffic_chart":
-    {
-      "view_total": "Views Total"
-    }
-  },
-  "tree_view":
-  {
-    "title": "basic",
-    "programming": "Programming languages by programming paradigm",
-    "oop": "Object-oriented programming",
-    "java": "Java",
-    "c_plus_plus": "C++",
-    "c_sharp": "C#",
-    "prototype": "Prototype-based programming",
-    "java_script": "JavaScript",
-    "coffee_script": "CoffeeScript",
-    "lua": "Lua"
-  },
-  "chart":
-  {
-    "lines": "Lines",
-    "bars": "Bars",
-    "simple_line_chart": "Simple line chart",
-    "line_chart": "Line chart with area",
-    "bi_polar_line_chart": "Bi-polar line chart with area only",
-    "simple_bar_chart": "Simple bar chart",
-    "multi_line_labels_bar_chart": "Multi-line labels bar chart",
-    "stacked_bar_chart": "Stacked bar chart",
-    "pies_and_donuts": "Pies & Donuts",
-    "simple_pie": "Simple Pie",
-    "pie_with_labels": "Pie with labels",
-    "donut": "Donut"
   },
   "navbar":
   {
@@ -131,7 +74,7 @@
     "observations": "Observations",
     "services": "Services",
     "search": "Search...",
-    "logout":"Logout"
+    "logout": "Logout"
   },
   "events":
   {
@@ -179,12 +122,16 @@
     "new-password": "New password.",
     "new-password-success": "Pealse, enter a new password.",
     "send": "Send",
-    "guard-error": "You must be logged in to view that page."
+    "guard-error": "You must be logged in to view that page.",
+    "permission":"Permission",
+    "id":"Id"
   },
   "category-form":
   {
     "title": "Title",
     "description": "Description",
+    "padre-id":"Guraso Id",
+    "level":"Level",
     "parent-category": "Parent Category",
     "select-parent-category": "-- SELECT CATEGORY --",
     "send": "Send"
@@ -260,13 +207,13 @@
   },
   "comment":
   {
-    "leaveComment": "Write a comment.",
+    "leave-comment": "Write a comment.",
     "delete": "Delete",
     "edit": "Edit",
     "reply": "Reply",
-    "hideReplies": "Hide Replies",
-    "deleted":"Deleted",
-    "deleted-text":"The user has deleted the comment."
+    "hide-replies": "Hide Replies",
+    "deleted": "Deleted",
+    "deleted-text": "The user has deleted the comment."
   },
   "validation":
   {
@@ -300,17 +247,6 @@
     "entityName-length": "Minimum characters: 5, Maximum characters: 35.",
     "entityName-validation": "Entity name must not have any special characters."
   },
-  "map-icon":
-  {
-    "Dolmens": "Dolmen",
-    "Menhirs": "Menhir",
-    "Tumulus": "Tumulus",
-    "Cromlechs": "Cromlech",
-    "Smooths": "Smooth",
-    "Steppeds": "Stepped",
-    "Caves": "Cave",
-    "Temples": "Temple"
-  },
   "reaction":
   {
     "like": "Like",
@@ -322,5 +258,24 @@
     "you": "You",
     "you-and": "You and",
     "others": "others"
+  },
+  "modal":
+  {
+    "delete-user-header": "Delete user",
+    "delete-user-content": "Are you sure to delete the user?",
+    "delete-category-header": "Delete category",
+    "delete-category-content": "Are you sure to delete the category?",
+    "delete-event-header": "Delete event",
+    "delete-event-content": "Are you sure to delete the event?",
+    "delete-service-header": "Delete service",
+    "delete-service-content": "Are you sure to delete the service?",
+    "delete-service-type-header": "Delete service type",
+    "delete-service-type-content": "Are you sure to delete the service type?",
+    "delete-observation-header": "Delete observation",
+    "delete-observation-content": "Are you sure to delete the observation?",
+    "delete-application-header": "Delete application",
+    "delete-application-content": "Are you sure to delete the application?",
+    "acept":"Acept",
+    "cancel":"Cancel"
   }
 }

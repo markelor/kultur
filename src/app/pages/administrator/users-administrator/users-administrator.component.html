@@ -10,13 +10,13 @@
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Permission</th>
-              <th>Username</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>AboutYourself</th>
-              <th>Edit/Delete</th>
+              <th translate>{{'auth-form.id'}}</th>
+              <th translate>{{'auth-form.permission'}}</th>
+              <th translate>{{'auth-form.username'}}</th>
+              <th translate>{{'auth-form.name'}}</th>
+              <th translate>{{'auth-form.email'}}</th>
+              <th translate>{{'auth-form.about-yourself'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
             </tr>
           </thead>
           <tbody>
@@ -33,8 +33,8 @@
               <td>{{ user.email}}</td>
               <td>{{ user.aboutYourself}}</td>
               <td class="ks-status">
-                <a href="javascript:void(0)" (click)="userEditClick(user)"><span class="fa fa-edit ks-color-info">Edit</span></a>
-                <a href="javascript:void(0)" (click)="userDeleteClick(i,user)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+                <a href="javascript:void(0)" (click)="userEditClick(user)"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                <a href="javascript:void(0)" (click)="userDeleteClick(i,user)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
               </td>
             </tr>
           </tbody>

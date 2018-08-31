@@ -6,13 +6,13 @@
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Parent ID</th>
-              <th>Level</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Icon</th>
-              <th>Edit/Delete</th>
+              <th translate>{{'auth-form.id'}}</th>
+              <th translate>{{'category-form.parent-id'}}</th>
+              <th translate>{{'category-form.level'}}</th>
+              <th translate>{{'category-form.title'}}</th>
+              <th translate>{{'category-form.description'}}</th>
+              <th translate>{{'service-type-form.icon'}}</th>
+              <th translate>{{'crud.edit-delete'}}</th>
             </tr>
           </thead>
           <tbody>
@@ -26,8 +26,8 @@
                 <td>{{category.description}}</td>
                 <td *ngIf="category.icons.length>0" [inlineSVG]="category.icons[0].url" [onSVGLoaded]="handleSVG"></td>
                 <td class="ks-status">
-                  <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info">Edit</span></a>
-                  <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+                  <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
+                  <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
                 </td>
               </ng-container>
               <ng-container *ngFor="let translation of category.translation; let i=index;">
@@ -39,8 +39,8 @@
                   <td>{{translation.description}}</td>
                   <td *ngIf="category.icons.length>0" [inlineSVG]="category.icons[0].url" [onSVGLoaded]="handleSVG"></td>
                   <td class="ks-status">
-                    <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info">Edit</span></a>
-                    <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger">Delete</span></a>
+                    <a href="javascript:void(0)" (click)="categoryEditClick(category)"><span class="fa fa-edit ks-color-info" translate>{{'crud.delete'}}</span></a>
+                    <a href="javascript:void(0)" (click)="categoryDeleteClick(i,category)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
                   </td>             
                 </ng-container>
               </ng-container>     

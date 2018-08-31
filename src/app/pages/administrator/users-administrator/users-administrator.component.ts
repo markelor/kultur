@@ -39,12 +39,15 @@ export class UsersAdministratorComponent implements OnInit {
   }
   private staticModalShow() {
     const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
-    activeModal.componentInstance.modalHeader = 'Modal user';
-    activeModal.componentInstance.modalContent = `This is static modal, backdrop click
- will not close it. Click × or confirmation button to close modal.`;
-
-  }
-
+    this.translate.get('modal.delete-user-header').subscribe(
+      data => {   
+        activeModal.componentInstance.modalHeader = data;
+    });
+    this.translate.get('modal.delete-user-content').subscribe(
+      data => {   
+       activeModal.componentInstance.modalContent = data;
+    });      
+  }   
   private createSettings(){
     this.dtOptions = {
       // Declare the use of the extension in the dom parameter
@@ -55,10 +58,18 @@ export class UsersAdministratorComponent implements OnInit {
         'colvis',
         'copy',
         'print',
-        'csv',
-
+        'csv'
       ],
-      responsive: true
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 3, targets: 0 },
+        { responsivePriority: 4, targets: 1 },
+        { responsivePriority: 1, targets: 2 },
+        { responsivePriority: 5, targets: 3 },
+        { responsivePriority: 6, targets: 4 },
+        { responsivePriority: 7, targets: 5 },
+        { responsivePriority: 2, targets: 6 }
+      ]
     };
   }
   private userEditClick(user): void {
@@ -87,7 +98,6 @@ export class UsersAdministratorComponent implements OnInit {
       this.staticModalShow();
       this.subscription=this.observableService.notifyObservable.subscribe(res => {
         this.subscription.unsubscribe();
-        console.log(this.users);
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-user') {
           this.authService.deleteUser(user.username,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  

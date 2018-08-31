@@ -37,17 +37,20 @@ export class ApplicationsAdministratorComponent implements OnInit {
     private authGuard:AuthGuard,
     private modalService: NgbModal
   ) { }
-  private staticModalShow() {
+    private staticModalShow() {
     const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
-    activeModal.componentInstance.modalHeader = 'Modal user';
-    activeModal.componentInstance.modalContent = `This is static modal, backdrop click
- will not close it. Click × or confirmation button to close modal.`;
-
-  }
+    this.translate.get('modal.delete-application-header').subscribe(
+      data => {   
+        activeModal.componentInstance.modalHeader = data;
+    });
+    this.translate.get('modal.delete-application-content').subscribe(
+      data => {   
+       activeModal.componentInstance.modalContent = data;
+    });      
+  } 
   private createSettings(){
     this.dtOptions = {
       // Declare the use of the extension in the dom parameter
-      ordering: false,
       dom: 'Bfrtip',
       // Configure the buttons
       buttons: [

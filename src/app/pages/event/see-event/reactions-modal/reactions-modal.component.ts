@@ -91,10 +91,8 @@ export class ReactionsModalComponent implements OnInit {
     var count=0;
   	for (var i = 0; i < this.existReactionAndUsernames.length; i++) {
   		if(this.existReactionAndUsernames[i].usernames.length){
-  			this.allBy=this.allBy.concat(this.existReactionAndUsernames[i]);
-        console.log(this.allBy);
+  			this.allBy=this.allBy.concat(this.existReactionAndUsernames[i]);;
   			this.allUsers=this.allUsers.concat(this.existReactionAndUsernames[i].usernames);
-        console.log(this.allUsers);
 	  		if(this.existReactionAndUsernames[i].reaction==='like'){
 	  			this.likeBy=this.existReactionAndUsernames[i].usernames;
 	  			this.getUserImages(this.likeBy,'like',count);
