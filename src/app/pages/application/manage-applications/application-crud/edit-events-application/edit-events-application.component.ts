@@ -3,7 +3,7 @@ import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../../../services/auth.service';
 import { EventService } from '../../../../../services/event.service';
 import { ApplicationService } from '../../../../../services/application.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Application } from '../../../../../class/application';
 import { Subject } from 'rxjs/Subject';
 import {DataTableDirective} from 'angular-datatables';
@@ -28,7 +28,6 @@ export class EditEventsApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationService:ApplicationService,
@@ -79,6 +78,7 @@ export class EditEventsApplicationComponent implements OnInit {
                 // Destroy the table first
                 dtInstance.destroy();
                 this.eventsApplication.push(this.events[indexEvent]);
+                console.log(this.eventsApplication);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
               });
@@ -108,7 +108,7 @@ export class EditEventsApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationEventsInit(){
+  private getApplicationEvents(){
     // Get application events
     this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -119,7 +119,7 @@ export class EditEventsApplicationComponent implements OnInit {
     });
   }
   // Function to get events from the database
-  private getEventsInit() {
+  private getEvents() {
     this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events=data.events;
@@ -127,44 +127,7 @@ export class EditEventsApplicationComponent implements OnInit {
       this.addTrigger.next();
     });
   }
-   private getApplicationEvents(){
-    // Get application events
-    this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
-      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-        if(index===0){
-          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            if(data.success){
-              this.application=data.application;
-              this.eventsApplication=data.events;
-            }else{
-              this.application=undefined;
-              this.eventsApplication=[];
-            }        
-            this.deleteTrigger.next();
-          });
-        }        
-      });   
-    });
-  }
-  // Function to get events from the database
-  private getEvents() {
-    this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-          if(index===1){
-            dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-              // Destroy the table first
-              dtInstance.destroy();
-              this.events=data.events;
-              this.addTrigger.next();
-            });
-          }       
-        });      
-      }
-    });
-  }
+
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
     svg.setAttribute('width', '50');
     svg.setAttribute('height', '50');
@@ -187,16 +150,10 @@ export class EditEventsApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationEventsInit();
-    this.getEventsInit();  
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getApplicationEvents();
-      this.getEvents(); 
-    });       
+    this.getApplicationEvents();
+    this.getEvents();    
   }
    ngOnDestroy(){
-    this.subscriptionLanguage.unsubscribe();
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
   }

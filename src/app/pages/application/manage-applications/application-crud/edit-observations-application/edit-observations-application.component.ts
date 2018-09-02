@@ -3,7 +3,7 @@ import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../../../services/auth.service';
 import { ObservationService } from '../../../../../services/observation.service';
 import { ApplicationService } from '../../../../../services/application.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Application } from '../../../../../class/application';
 import { Subject } from 'rxjs/Subject';
 import {DataTableDirective} from 'angular-datatables';
@@ -28,7 +28,6 @@ export class EditObservationsApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationObservation:ApplicationService,
@@ -103,7 +102,7 @@ export class EditObservationsApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationObservationsInit(){
+  private getApplicationObservations(){
     // Get application observations
     this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -114,51 +113,13 @@ export class EditObservationsApplicationComponent implements OnInit {
     });
   }
   // Function to get observations from the database
-  private getObservationsInit() {
+  private getObservations() {
     this.observationObservation.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
       console.log(data);
       if(data.success){
         this.observations=data.observations;
       }
       this.addTrigger.next();
-    });
-  }
-   private getApplicationObservations(){
-    // Get application observations
-    this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
-      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-        if(index===0){
-          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            if(data.success){
-              this.application=data.application;
-              this.observationsApplication=data.observations;
-            }else{
-              this.application=undefined;
-              this.observationsApplication=[];
-            }        
-            this.deleteTrigger.next();
-          });
-        }        
-      });   
-    });
-  }
-  // Function to get observations from the database
-  private getObservations() {
-    this.observationObservation.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-          if(index===1){
-            dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-              // Destroy the table first
-              dtInstance.destroy();
-              this.observations=data.observations;
-              this.addTrigger.next();
-            });
-          }       
-        });      
-      }
     });
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
@@ -183,16 +144,10 @@ export class EditObservationsApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationObservationsInit();
-    this.getObservationsInit();  
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((observation: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=observation.lang;
-      this.getApplicationObservations();
-      this.getObservations(); 
-    });       
+    this.getApplicationObservations();
+    this.getObservations();         
   }
    ngOnDestroy(){
-    this.subscriptionLanguage.unsubscribe();
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
   }

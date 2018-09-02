@@ -2,7 +2,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ServiceService } from '../../../services/service.service';
-import { TranslateService,LangChangeEvent} from '@ngx-translate/core';
+import { TranslateService} from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -26,7 +26,6 @@ export class ManageServicesComponent implements OnInit {
   private subscriptionObservable: Subscription;
   public dtOptions: any = {};
   public dtTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
     private serviceService:ServiceService,
     private authService:AuthService,
@@ -104,26 +103,13 @@ export class ManageServicesComponent implements OnInit {
     }
   }
     // Function to get services from the database
-  private getServicesInit() {
+  private getServices() {
     this.serviceService.getUserServices(this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
       console.log(data.services);
       if(data.success){
         this.services=data.services;
       }
       this.dtTrigger.next();
-    });
-  }
-   // Function to get services from the database
-  private getServices() {
-    this.serviceService.getUserServices(this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          // Destroy the table first
-          dtInstance.destroy();
-          this.services=data.services;
-          this.dtTrigger.next();
-        });
-      }
     });
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
@@ -141,14 +127,9 @@ export class ManageServicesComponent implements OnInit {
       }
     });
     this.createSettings(); 
-    this.getServicesInit();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((service: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=service.lang;
-      this.getServices(); 
-    });
+    this.getServices();
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
       this.dtTrigger.unsubscribe();
   }
 }

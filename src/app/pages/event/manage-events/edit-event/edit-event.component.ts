@@ -23,22 +23,24 @@ export class EditEventComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authGuard:AuthGuard
   ) { }
-  private getEvent(){
+  private getEvent(active){
      // Get event
     this.eventService.getEvent(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.event=data.event;
         this.categories=data.categories;
-        setTimeout(() => {
-          $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
-          $( ".nav-"+this.localizeService.parser.currentLang).click ();
-        }, 0);  
+        if(active){
+          setTimeout(() => {
+            $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
+            $( ".nav-"+this.localizeService.parser.currentLang).click ();
+          }, 0); 
+        } 
       }
     }); 
   }
   private refreshEvent($event){
     this.event=undefined;
-    this.getEvent();
+    this.getEvent(false);
   }
 
   ngOnInit() {
@@ -50,6 +52,6 @@ export class EditEventComponent implements OnInit {
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
     });
-    this.getEvent();
+    this.getEvent(true);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { ObservableService } from '../../services/observable.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService} from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../guards/auth.guard';
 import { Router } from '@angular/router';
@@ -14,7 +14,6 @@ import { Meta,Title } from '@angular/platform-browser';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private subscriptionLanguage: Subscription;
   public events;
   private page :number = 1;
   private range=3;
@@ -63,13 +62,8 @@ export class HomeComponent implements OnInit {
 
     moment.locale(this.localizeService.parser.currentLang);
   	this.getEvents();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getEvents(); 
-    });
   }
   ngOnDestroy(){
-    this.subscriptionLanguage.unsubscribe();
     this.subscription.unsubscribe();
   } 
 

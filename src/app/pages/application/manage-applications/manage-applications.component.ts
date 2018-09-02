@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ApplicationService } from '../../../services/application.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router } from '@angular/router';
@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./manage-applications.component.css']
 })
 export class ManageApplicationsComponent implements OnInit {
-  private subscriptionLanguage: Subscription;
   public applications;
   constructor(
   	private applicationService:ApplicationService,
@@ -41,13 +40,5 @@ export class ManageApplicationsComponent implements OnInit {
       }
     });
   	this.getUserApplications();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getUserApplications();
-    });
   }
-  ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
-  } 
-
 }

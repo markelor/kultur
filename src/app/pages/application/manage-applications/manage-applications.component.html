@@ -27,20 +27,36 @@
                 <a [routerLink]="['/user-route','applications-route','edit-route',application._id] | localize" href="#" class="btn btn-primary btn-block ks-light" translate>{{'application.edit-alication'}}</a>
               </div>
             </div>-->
+
           <div class="ks-plans">
             <div *ngFor="let application of applications" class="ks-plan ks-info">
               <div class="ks-header">
-                <h5 class="ks-name">{{application.title}}</h5>
-                 <img src="{{application.images[0].url}}" height="200px">
+                <!--Title-->
+                <h5 *ngIf="application.language===localizeService.parser.currentLang || application.translation.length===0" class="ks-name">{{application.title}}</h5>
+                <ng-container *ngFor="let translation of application.translation">
+                  <h5 *ngIf="translation.language===localizeService.parser.currentLang" class="ks-name">
+                    {{translation.title}}
+                  </h5>
+                </ng-container>
+                  <img src="{{application.images[0].url}}" height="200px">
                 <div class="ks-price">
                   <div class="ks-currency">€</div>
                   <div class="ks-amount">{{application.price}}</div>
-                  <div class="ks-period">/urtean</div>
+                  <div class="k s-period">/urtean</div>
                 </div>
               </div>
               <div class="ks-body">
                 <ul class="ks-list ks-success">
+                 <!--Condition-->
+                 <ng-container *ngIf="application.language===localizeService.parser.currentLang || application.translation.length===0">
                   <li *ngFor="let condition of application.conditions">{{condition}}</li>
+                 </ng-container>
+                <ng-container *ngFor="let translation of application.translation">
+                  <ng-container *ngIf="translation.language===localizeService.parser.currentLang">
+                    <li *ngFor="let condition of translation.conditions">{{condition}}</li>
+                  </ng-container>
+                </ng-container>
+                  
                 </ul>
                 <a [routerLink]="['/application-route','manage-route',application._id] | localize" href="javascript:void(0);" class="btn btn-info btn-block" translate>{{'application.edit-application'}}</a>
               </div>

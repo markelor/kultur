@@ -17,13 +17,11 @@
               <!--Id-->
               <td>{{serviceType._id}}</td>
               <!--Title-->
-              <td *ngIf="serviceType.language===localizeService.parser.currentLang">{{serviceType.title}}</td>
-              <ng-container *ngFor="let translation of serviceType.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td> 
-              </ng-container> 
+              <td>{{serviceType | translateLanguage:'title':localizeService.parser.currentLang}}</td>         
               <!--Icon-->
               <td [inlineSVG]="serviceType.icons[0].url" [onSVGLoaded]="handleSVG" >
               </td>
+              <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" (click)="serviceTypeEditClick(serviceType)"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
                 <a href="javascript:void(0)" (click)="serviceTypeDeleteClick(i,serviceType)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>

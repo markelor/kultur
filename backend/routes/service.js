@@ -137,7 +137,6 @@ module.exports = (router) => {
                                                             updatedAt: Date.now()
                                                         });
                                                         Place.findOne({
-                                                            $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                             province: {
                                                                 name: req.body.place.province,
                                                                 geonameId: req.body.place.geonameIdProvince
@@ -231,10 +230,6 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             Service.aggregate([{
-                    $match: {
-                        $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }]
-                    }
-                }, {
                     // Join with Place table
                     $lookup: {
                         from: "places", // other table name
@@ -354,7 +349,6 @@ module.exports = (router) => {
                                             } else {
                                                 Service.aggregate([{
                                                         $match: {
-                                                            $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                             _id: ObjectId(req.params.id)
                                                         }
                                                     }, {
@@ -409,7 +403,6 @@ module.exports = (router) => {
             } else {
                 Service.aggregate([{
                     $match: {
-                        $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                         $or: [{ createdBy: req.params.username }, { translation: { $elemMatch: { createdBy: req.params.username } } }]
                     }
                 }, {
@@ -543,7 +536,6 @@ module.exports = (router) => {
                                                 res.json({ success: false, message: eval(saveErrorPermission) }); // Return error
                                             } else {
                                                 Place.findOne({
-                                                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                     province: {
                                                         name: req.body.place.province.name,
                                                         geonameId: req.body.place.province.geonameId
@@ -939,10 +931,10 @@ module.exports = (router) => {
                                                                         }
                                                                     }
                                                                 });
+                                                                res.json({ success: true, applications: applications }); // Return success and place 
                                                             } else {
                                                                 res.json({ success: false, message: eval(language + '.deleteService.deleteError') }); // Return error
                                                             }
-                                                            res.json({ success: true, applications: applications }); // Return success and place 
                                                         }
                                                     }
                                                 });

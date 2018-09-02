@@ -16,22 +16,14 @@
   </thead>
   <tbody>
     <tr *ngFor="let observationApplication of observationsApplication; let i=index">
-      <!--Title and Description-->
-      <td *ngIf="observationApplication.language===localizeService.parser.currentLang">{{observationApplication.title}}</td>
-      <td *ngIf="observationApplication.language===localizeService.parser.currentLang" [innerHTML]="observationApplication.description"></td>
-      <ng-container *ngFor="let translation of observationApplication.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
-      </ng-container> 
+      <!--Title-->
+      <td>{{observationApplication | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+      <!--Description-->
+      <td [innerHTML]="observationApplication | translateLanguage:'description':localizeService.parser.currentLang"></td>
       <!--Expired at-->
-      <td>{{observationApplication.expiredAt | timezone}}</td> 
-      <!--CreatedBy-->
-      <td *ngIf="observationApplication.language===localizeService.parser.currentLang">{{observationApplication.createdBy}}</td>
-      <ng-container *ngFor="let translation of observationApplication.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.createdBy}}
-        </td>        
-      </ng-container>
+      <td>{{observationApplication.expiredAt | timezone}}</td>
+       <!--CreatedBy-->
+      <td>{{observationApplication | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteObservationApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -51,22 +43,14 @@
   </thead>
   <tbody>
     <tr *ngFor="let observation of observations; let i=index">
-      <!--Title and Description-->
-      <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.title}}</td>
-      <td *ngIf="observation.language===localizeService.parser.currentLang" [innerHTML]="observation.description"></td>
-      <ng-container *ngFor="let translation of observation.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
-      </ng-container> 
+      <!--Title-->
+      <td>{{observation | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+      <!--Description-->
+      <td [innerHTML]="observation | translateLanguage:'description':localizeService.parser.currentLang"></td>
       <!--Expired at-->
       <td>{{observation.expiredAt | timezone}}</td>
-      <!--CreatedBy-->
-      <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.createdBy}}</td>
-      <ng-container *ngFor="let translation of observation.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.createdBy}}
-        </td>        
-      </ng-container>
+       <!--CreatedBy-->
+      <td>{{observation | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addObservationApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

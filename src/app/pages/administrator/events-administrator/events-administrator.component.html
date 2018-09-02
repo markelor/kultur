@@ -25,40 +25,24 @@
           </thead>
           <tbody>
             <tr *ngFor="let event of events; let i=index">
-              <!--Title and Description-->
-              <td *ngIf="event.language===localizeService.parser.currentLang">{{event.title}}</td>
-              <td *ngIf="event.language===localizeService.parser.currentLang" [innerHTML]="event.description"></td>
-              <ng-container *ngFor="let translation of event.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>
-              </ng-container>
+              <!--Title-->
+              <td>{{event | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+              <!--Description-->
+              <td [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang"></td>
               <!--Category-->
-              <td *ngIf="event.categories[event.categories.length-1].language===localizeService.parser.currentLang">{{event.categories[event.categories.length-1].title}}</td>
-              <ng-container *ngFor="let translation of event.categories[event.categories.length-1].translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">
-                  {{translation.title}}
-                </td>
-              </ng-container>
+              <td>{{event.categories[event.categories.length-1] | translateLanguage:'title':localizeService.parser.currentLang}}</td> 
               <!--Category icon-->
-              <td *ngIf="event.categories[event.categories.length-1].icons.length>0" [inlineSVG]="event.categories[event.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
+              <td [inlineSVG]="event.categories[event.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
               <!--Price-->
               <td>{{event.price}}€</td>
-              <!--Province and Municipality and location-->
-              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.province.name}}</td>
-              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.municipality.name }}</td>
-              <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.location }}</td>
-              <ng-container *ngFor="let translation of event.place.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location }}</td>
-              </ng-container>
+              <!--Province-->
+               <td>{{event.place | translateLanguage:'province.name':localizeService.parser.currentLang}}</td>    
+              <!--Municipality-->
+               <td>{{event.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}</td>    
+              <!--Location-->
+               <td>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
               <!--CreatedBy-->
-              <td *ngIf="event.language===localizeService.parser.currentLang">{{event.createdBy}}</td>
-              <ng-container *ngFor="let translation of event.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">
-                  {{translation.createdBy}}
-                </td>
-              </ng-container>
+              <td>{{event | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
               <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
@@ -71,3 +55,4 @@
     </div>
   </div>
 </div>
+

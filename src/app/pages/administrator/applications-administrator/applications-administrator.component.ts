@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ApplicationService } from '../../../services/application.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -25,7 +25,6 @@ export class ApplicationsAdministratorComponent implements OnInit {
   private subscriptionObservable: Subscription;
   public dtOptions: any = {};
   public dtTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
   	private applicationService:ApplicationService,
   	private authService:AuthService,
@@ -101,7 +100,7 @@ export class ApplicationsAdministratorComponent implements OnInit {
     }
   }
    // Function to get applications from the database
-  private getApplicationsInit() {
+  private getApplications() {
     //Get applications
     this.applicationService.getApplications(this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -109,19 +108,6 @@ export class ApplicationsAdministratorComponent implements OnInit {
       }
       this.dtTrigger.next();
     });
-  }
-  private getApplications(){
-    //Get applications
-      this.applicationService.getApplications(this.localizeService.parser.currentLang).subscribe(data=>{
-        if(data.success){    
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            this.applications=data.applications;
-            this.dtTrigger.next();
-          });
-        }    
-      });                 
   }
   ngOnInit() {
     // Get authentication on page load
@@ -133,15 +119,10 @@ export class ApplicationsAdministratorComponent implements OnInit {
       }
     });
     this.createSettings(); 
-    this.getApplicationsInit();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getApplications(); 
-    });
+    this.getApplications();
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
-      this.dtTrigger.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 
 }

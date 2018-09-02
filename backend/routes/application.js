@@ -154,7 +154,6 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.getApplication.idProvidedError') }); // Return error
             } else {
                 Application.findOne({
-                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                     _id: ObjectId(req.params.id)
                 }, (err, application) => {
                     // Check if error was found or not
@@ -185,7 +184,6 @@ module.exports = (router) => {
                             //res.json({ success: true, application: application }); // Return success and place 
                             Event.aggregate([{
                                     $match: {
-                                        $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                         _id: { $in: application.events }
                                     }
                                 }, {
@@ -232,7 +230,6 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.getApplication.idProvidedError') }); // Return error
             } else {
                 Application.findOne({
-                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                     _id: ObjectId(req.params.id)
                 }, (err, application) => {
                     // Check if error was found or not
@@ -263,7 +260,6 @@ module.exports = (router) => {
                             //res.json({ success: true, application: application }); // Return success and place 
                             Service.aggregate([{
                                     $match: {
-                                        $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                         _id: { $in: application.services }
                                     }
                                 }, {
@@ -310,7 +306,6 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.getApplication.idProvidedError') }); // Return error
             } else {
                 Application.findOne({
-                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                     _id: ObjectId(req.params.id)
                 }, (err, application) => {
                     // Check if error was found or not
@@ -339,7 +334,6 @@ module.exports = (router) => {
                             res.json({ success: false, message: eval(language + '.getApplication.applicationError') }); // Return error of no application found
                         } else {
                             Observation.find({
-                                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                 _id: { $in: application.observations }
                             }, function(err, observations) {
                                 if (err) {
@@ -384,7 +378,6 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             Application.find({
-                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }]
             }).sort({ '_id': 1 }).exec((err, applications) => {
                 // Check if error was found or not
                 if (err) {
@@ -507,7 +500,6 @@ module.exports = (router) => {
                                             res.json({ success: false, message: eval(saveErrorPermission) }); // Return error
                                         } else {
                                             Application.find({
-                                                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                 users: req.params.username
                                             }).sort({ 'expiredAt': 1 }).exec((err, applications) => {
                                                 // Check if error was found or not

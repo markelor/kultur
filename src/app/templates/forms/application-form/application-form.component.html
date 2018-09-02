@@ -171,7 +171,7 @@
     <!-- ExpiredAt -->
     <div class="col-sm-6">
       <div class="form-group required" [ngClass]="{'has-error': (!expiredAt.valid && expiredAt.dirty), 'has-success': (expiredAt.valid)}">
-        <label for="inputExpiredAt" translate>{{'application-form.expired-date'}}</label>
+        <label for="inputExpiredAt" translate>{{'application-form.expired-at'}}</label>
         <div class="input-group icon">
           <input [formControl]="expiredAt" ngbDatepicker #calendarExpiredAt="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputExpiredAt">
           <div class="input-group-append ">

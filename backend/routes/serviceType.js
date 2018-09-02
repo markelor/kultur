@@ -76,7 +76,6 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             ServiceType.find({
-                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }]
             }).sort({ '_id': 1 }).exec((err, serviceTypes) => {
                 // Check if error was found or not
                 if (err) {

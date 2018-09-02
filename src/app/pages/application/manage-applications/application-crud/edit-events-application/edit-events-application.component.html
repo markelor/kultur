@@ -21,40 +21,28 @@
   </thead>
   <tbody>
     <tr *ngFor="let eventApplication of eventsApplication; let i=index">
-      <!--Title and Description-->
-      <td *ngIf="eventApplication.language===localizeService.parser.currentLang">{{eventApplication.title}}</td>
-      <td *ngIf="eventApplication.language===localizeService.parser.currentLang" [innerHTML]="eventApplication.description"></td>
-      <ng-container *ngFor="let translation of eventApplication.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
-      </ng-container> 
+      <!--Title-->
+      <td>{{eventApplication | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+      <!--Description-->
+      <td [innerHTML]="eventApplication | translateLanguage:'description':localizeService.parser.currentLang"></td>
       <!--Category-->
-      <td *ngIf="eventApplication.category.language===localizeService.parser.currentLang">{{eventApplication.category.title}}</td>
-      <ng-container *ngFor="let translation of eventApplication.category.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.title}}
-        </td>        
-      </ng-container>
+      <td *ngIf="eventApplication.category"> {{eventApplication.category | translateLanguage:'title':localizeService.parser.currentLang}}</td> 
+      <!--Category-->
+      <td *ngIf="eventApplication.categories">{{eventApplication.categories[eventApplication.categories.length-1] | translateLanguage:'title':localizeService.parser.currentLang}}</td> 
       <!--Category icon-->
-      <td *ngIf="eventApplication.category.icons.length>0" [inlineSVG]="eventApplication.category.icons[0].url" [onSVGLoaded]="handleSVG"></td> 
+      <td *ngIf="eventApplication.category" [inlineSVG]="eventApplication.category.icons[0].url" [onSVGLoaded]="handleSVG"></td>
+      <!--Category icon-->
+      <td *ngIf="eventApplication.categories" [inlineSVG]="eventApplication.categories[eventApplication.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
       <!--Price-->
-      <td *ngIf="eventApplication.price">{{eventApplication.price}}€</td> 
-      <!--Province and Municipality-->         
-      <td *ngIf="eventApplication.place.language===localizeService.parser.currentLang">{{eventApplication.place.province.name}}</td>
-      <td *ngIf="eventApplication.place.language===localizeService.parser.currentLang">{{eventApplication.place.municipality.name }}</td>
-      <td *ngIf="eventApplication.place.language===localizeService.parser.currentLang">{{eventApplication.place.location }}</td>
-      <ng-container *ngFor="let translation of eventApplication.place.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td>    
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location }}</td>
-      </ng-container>
+      <td>{{eventApplication.price}}€</td>
+      <!--Province-->
+       <td>{{eventApplication.place | translateLanguage:'province.name':localizeService.parser.currentLang}}</td>    
+      <!--Municipality-->
+       <td>{{eventApplication.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}</td>    
+      <!--Location-->
+       <td>{{eventApplication.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td *ngIf="eventApplication.language===localizeService.parser.currentLang">{{eventApplication.createdBy}}</td>
-      <ng-container *ngFor="let translation of eventApplication.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.createdBy}}
-        </td>        
-      </ng-container>
+      <td>{{eventApplication | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteEventApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -79,40 +67,24 @@
   </thead>
   <tbody>
     <tr *ngFor="let event of events; let i=index">
-      <!--Title and Description-->
-      <td *ngIf="event.language===localizeService.parser.currentLang">{{event.title}}</td>
-      <td *ngIf="event.language===localizeService.parser.currentLang" [innerHTML]="event.description"></td>
-      <ng-container *ngFor="let translation of event.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
-      </ng-container> 
+      <!--Title-->
+      <td>{{event | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+      <!--Description-->
+      <td [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang"></td>
       <!--Category-->
-      <td *ngIf="event.categories[event.categories.length-1].language===localizeService.parser.currentLang">{{event.categories[event.categories.length-1].title}}</td>
-      <ng-container *ngFor="let translation of event.categories[event.categories.length-1].translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.title}}
-        </td>
-      </ng-container>
+      <td>{{event.categories[event.categories.length-1] | translateLanguage:'title':localizeService.parser.currentLang}}</td> 
       <!--Category icon-->
-      <td *ngIf="event.categories[event.categories.length-1].icons.length>0" [inlineSVG]="event.categories[event.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
+      <td [inlineSVG]="event.categories[event.categories.length-1].icons[0].url" [onSVGLoaded]="handleSVG"></td>
       <!--Price-->
       <td>{{event.price}}€</td>
-      <!--Province and Municipality-->         
-      <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.province.name}}</td>
-      <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.municipality.name }}</td>
-      <td *ngIf="event.place.language===localizeService.parser.currentLang">{{event.place.location}}</td>
-      <ng-container *ngFor="let translation of event.place.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td> 
-        <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location}}</td>
-      </ng-container> 
+      <!--Province-->
+       <td>{{event.place | translateLanguage:'province.name':localizeService.parser.currentLang}}</td>    
+      <!--Municipality-->
+       <td>{{event.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}</td>    
+      <!--Location-->
+       <td>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td *ngIf="event.language===localizeService.parser.currentLang">{{event.createdBy}}</td>
-      <ng-container *ngFor="let translation of event.translation">
-        <td *ngIf="translation.language===localizeService.parser.currentLang">
-          {{translation.createdBy}}
-        </td>        
-      </ng-container>
+      <td>{{event | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addEventApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

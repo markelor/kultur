@@ -13,12 +13,8 @@
                   <span>{{event.price}} €</span>
                 </div>
                 <h5 class="card-header">
-                  <ng-container *ngFor="let translation of event.translation">
-                    <span *ngIf="translation.language===localizeService.parser.currentLang" class="ks-text event-title"> {{translation.title}} 
-                    <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
-                    </span>
-                  </ng-container>
-                    <span *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text  event-title"> {{event.title}} 
+                  <!--Title-->
+                    <span class="ks-text  event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} 
                     <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
                     </span>
                     <div class="ks-text-translation"> 
@@ -56,15 +52,10 @@
                       </div>
                     </div>
                   </div>
-                  <ng-container *ngFor="let translation of event.translation">
-                    <img *ngIf="translation.language===localizeService.parser.currentLang&&translation.images.poster.length>0" src="{{translation.images.poster[0].url}}" class="post-image ks-thumbnail img-responsive">
-                    <img *ngIf="translation.language===localizeService.parser.currentLang&&translation.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
-                    <div *ngIf="translation.language===localizeService.parser.currentLang" class="ks-text" [innerHTML]="translation.description">
-                    </div>
-                  </ng-container>
-                  <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
-                  <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length>0" src="{{event.images.poster[0].url}}" class="post-image ks-thumbnail img-responsive">
-                  <div *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text" [innerHTML]="event.description">
+                  <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
+                  <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="post-image ks-thumbnail img-responsive">
+                   <!--Description-->
+                  <div class="ks-text" [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang">
                   </div>
                   <div class="ks-text"></div>
                   <div class="ks-actions">

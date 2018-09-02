@@ -25,40 +25,24 @@
           </thead>
           <tbody>
             <tr *ngFor="let service of services; let i=index">
-              <!--Title and Description-->
-              <td *ngIf="service.language===localizeService.parser.currentLang">{{service.title}}</td>
-              <td *ngIf="service.language===localizeService.parser.currentLang" [innerHTML]="service.description"></td>
-              <ng-container *ngFor="let translation of service.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>
-              </ng-container>
+              <!--Title-->
+              <td>{{service | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+              <!--Description-->
+              <td [innerHTML]="service | translateLanguage:'description':localizeService.parser.currentLang"></td>
               <!--Service type-->
-              <td *ngIf="service.serviceType.language===localizeService.parser.currentLang">{{service.serviceType.title}}</td>
-              <ng-container *ngFor="let translation of service.serviceType.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">
-                  {{translation.title}}
-                </td>
-              </ng-container>
+              <td>{{service.serviceType | translateLanguage:'title':localizeService.parser.currentLang}}</td> 
               <!--Service type icon-->
-              <td *ngIf="service.serviceType.icons.length>0" [inlineSVG]="service.serviceType.icons[0].url" [onSVGLoaded]="handleSVG"></td>
+              <td [inlineSVG]="service.serviceType.icons[0].url" [onSVGLoaded]="handleSVG"></td>
               <!--Expired at-->
               <td>{{service.expiredAt | timezone}}</td>
-              <!--Province and Municipality-->
-              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.province.name}}</td>
-              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.municipality.name }}</td>
-              <td *ngIf="service.place.language===localizeService.parser.currentLang">{{service.place.location}}</td>
-              <ng-container *ngFor="let translation of service.place.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.province.name}}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.municipality.name }}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.location}}</td>
-              </ng-container>
+              <!--Province-->
+              <td>{{service.place | translateLanguage:'province.name':localizeService.parser.currentLang}}</td>    
+              <!--Municipality-->
+              <td>{{service.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}</td>    
+              <!--Location-->
+              <td>{{service.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
               <!--CreatedBy-->
-              <td *ngIf="service.language===localizeService.parser.currentLang">{{service.createdBy}}</td>
-              <ng-container *ngFor="let translation of service.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">
-                  {{translation.createdBy}}
-                </td>
-              </ng-container>
+              <td>{{service | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
               <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/service-route','manage-route','edit-route',service._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>

@@ -225,6 +225,8 @@ export class EventFormComponent implements OnInit {
         this.disableCategories=true;
         this.province.disable();
         this.municipality.disable();
+        this.start.disable();
+        this.end.disable();
         this.price.disable();
         this.lat.disable();
         this.lng.disable();
@@ -537,8 +539,6 @@ export class EventFormComponent implements OnInit {
       this.inputEvent.categoryId=this.categoryId[this.categoryId.length-1];
       if(this.selectedPlace){
         this.inputEvent.place=this.selectedPlace;
-      }else if(this.inputEvent.place.province.name!==this.province || this.inputEvent.place.municipality.name!==this.municipality|| this.inputEvent.place.location!==this.location){
-        this.inputEvent.place.translation=[];
       } 
       this.inputEvent.place.coordinates.lat=Number(this.form.get('lat').value); // Lat field
       this.inputEvent.place.coordinates.lng=Number(this.form.get('lng').value); // Lng field
@@ -548,7 +548,7 @@ export class EventFormComponent implements OnInit {
           this.deleteEditImages(true);
           hasTranslationEvent=true;
           this.inputEvent.translation[i].language=this.inputLanguage;// Language field  
-          this.inputEvent.translation[i].createdBy=this.authService.user.username;// Language field      
+          //this.inputEvent.translation[i].createdBy=this.authService.user.username;// Language field      
           this.inputEvent.translation[i].title=this.form.get('title').value; // Title field
           this.inputEvent.translation[i].description= this.form.get('description').value; // Description field
           this.inputEvent.translation[i].observations=this.form.get('observations').value; // Observations field
@@ -573,7 +573,7 @@ export class EventFormComponent implements OnInit {
         if(this.inputEvent.language===this.inputLanguage){
           this.deleteEditImages(true);
           this.inputEvent.language=this.inputLanguage;// Language field   
-          this.inputEvent.createdBy=this.authService.user.username;// Language field       
+          //this.inputEvent.createdBy=this.authService.user.username;// Language field       
           this.inputEvent.title=this.form.get('title').value; // Title field
           this.inputEvent.description= this.form.get('description').value; // Description field
           this.inputEvent.observations=this.form.get('observations').value; // Observations field     
@@ -585,7 +585,7 @@ export class EventFormComponent implements OnInit {
           //event push new translation
           var eventTranslationObj={
             language:this.inputLanguage,
-            createdBy:this.inputEvent.createdBy=this.authService.user.username,  
+            createdBy:this.authService.user.username,  
             title:this.form.get('title').value,
             description:this.form.get('description').value,
             observations:this.form.get('observations').value,
@@ -647,8 +647,7 @@ export class EventFormComponent implements OnInit {
       } else {
         this.messageClass = 'alert alert-success ks-solid'; // Return success class
         this.message = data.message; // Return success message
-         this.RefreshEvent.emit({event: this.inputEvent,categories:this.inputCategories});
-        this.inputEvent=data.event;
+        this.RefreshEvent.emit({event: this.inputEvent,categories:this.inputCategories});
         // Clear form data after two seconds
         setTimeout(() => {
           //this.newPost = false; // Hide form

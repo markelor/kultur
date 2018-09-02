@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../services/auth.service';
 import { ServiceTypeService } from '../../../services/service-type.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService} from '@ngx-translate/core';
 import { ServiceTypeModalComponent } from './service-type-modal/service-type-modal.component';
 import { ModalComponent } from '../../../templates/modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +25,6 @@ export class CreateServiceTypeComponent implements OnInit {
   public serviceTypes;
   private subscriptionObservableSuccess: Subscription;
   private subscriptionObservableDelete: Subscription;
-  private subscriptionLanguage: Subscription;
   private submitted:boolean = false;
   @ViewChild(DataTableDirective)
   public dtElement: DataTableDirective;
@@ -119,26 +118,13 @@ export class CreateServiceTypeComponent implements OnInit {
       } 
     });   
   }
-   private getServiceTypesInit(){
+  private getServiceTypes(){
     //Get serviceType
       this.serviceTypeService.getServiceTypes(this.localizeService.parser.currentLang).subscribe(data=>{
         if(data.success){ 
           this.serviceTypes=data.serviceTypes;        
           this.dtTrigger.next();
         }    
-      });                 
-  }
- private getServiceTypes(){
-    //Get serviceType
-      this.serviceTypeService.getServiceTypes(this.localizeService.parser.currentLang).subscribe(data=>{
-        if(data.success){ 
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            this.serviceTypes=data.serviceTypes;     
-            this.dtTrigger.next();
-          });          
-        }  
       });                 
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
@@ -161,15 +147,10 @@ export class CreateServiceTypeComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     });
     this.createSettings(); 
-    this.getServiceTypesInit();
+    this.getServiceTypes();
     this.observableServiceTypeSuccess(); 	
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getServiceTypes(); 
-    });  
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
       this.dtTrigger.unsubscribe();
   }
 }

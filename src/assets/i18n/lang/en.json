@@ -130,12 +130,13 @@
   {
     "title": "Title",
     "description": "Description",
-    "padre-id":"Guraso Id",
+    "parent-id":"Parent Id",
     "level":"Level",
     "parent-category": "Parent Category",
     "select-parent-category": "-- SELECT CATEGORY --",
     "send": "Send"
   },
+
   "event-form":
   {
     "created-by": "Created by",
@@ -256,8 +257,8 @@
     "sad": "Sad",
     "angry": "Angry",
     "you": "You",
-    "you-and": "You and",
-    "others": "others"
+    "you-and": "You and ",
+    "others": " others"
   },
   "modal":
   {

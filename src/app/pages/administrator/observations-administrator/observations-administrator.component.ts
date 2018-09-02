@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ObservationService } from '../../../services/observation.service';
-import { TranslateService,LangChangeEvent} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -25,7 +25,6 @@ export class ObservationsAdministratorComponent implements OnInit {
   private subscriptionObservable: Subscription;
   public dtOptions: any = {};
   public dtTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
   	private observationService:ObservationService,
   	private authService:AuthService,
@@ -99,25 +98,12 @@ export class ObservationsAdministratorComponent implements OnInit {
     }
   }
     // Function to get observations from the database
-  private getObservationsInit() {
+  private getObservations() {
     this.observationService.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.observations=data.observations;
       }
       this.dtTrigger.next();
-    });
-  }
-   // Function to get observations from the database
-  private getObservations() {
-    this.observationService.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          // Destroy the table first
-          dtInstance.destroy();
-          this.observations=data.observations;
-          this.dtTrigger.next();
-        });
-      }
     });
   }
   ngOnInit() {
@@ -130,14 +116,9 @@ export class ObservationsAdministratorComponent implements OnInit {
       }
     });
     this.createSettings(); 
-    this.getObservationsInit();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((observation: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=observation.lang;
-      this.getObservations(); 
-    });
+    this.getObservations();
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
-      this.dtTrigger.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 }

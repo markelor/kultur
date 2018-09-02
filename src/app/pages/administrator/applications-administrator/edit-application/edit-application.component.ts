@@ -35,7 +35,6 @@ export class EditApplicationComponent implements OnInit {
     this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
       	this.application=data.application;
-      	console.log(this.application);
         setTimeout(() => {
           $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
           $( ".nav-"+this.localizeService.parser.currentLang).click ();

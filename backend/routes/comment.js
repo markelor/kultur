@@ -488,7 +488,6 @@ module.exports = (router) => {
                                             res.json({ success: false, message: eval(saveErrorPermission) }); // Return error
                                         } else {
                                             Comment.update({
-                                                //$or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                 $and: [{ "mentionedUsers.username": req.body.username }, { "mentionedUsers.readed": false }],
                                             }, { $set: { "mentionedUsers.$.readed": true } }, { multi: true }, function(err, comments) {
                                                 // Check if error

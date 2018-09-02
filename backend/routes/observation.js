@@ -91,7 +91,6 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             Observation.find({
-                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }]
             }, function(err, observations) {
                 if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
@@ -214,7 +213,6 @@ module.exports = (router) => {
                                             } else {
                                                 // Look for observation in database
                                                 Observation.findOne({
-                                                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                                                     _id: ObjectId(req.params.id)
                                                 }, function(err, observation) {
                                                     if (err) {
@@ -267,7 +265,6 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.userObservations.usernameProvidedError') }); // Return error
             } else {
                 Observation.find({
-                    $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }],
                     $or: [{ createdBy: req.params.username }, { translation: { $elemMatch: { createdBy: req.params.username } } }]
                 }, function(err, observations) {
                     if (err) {

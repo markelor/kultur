@@ -92,7 +92,6 @@ module.exports = (router) => {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
             Category.find({
-                $or: [{ language: language }, { translation: { $elemMatch: { language: language } } }]
             }).sort({ '_id': 1 }).exec((err, categories) => {
                 // Check if error was found or not
                 if (err) {
@@ -142,7 +141,6 @@ module.exports = (router) => {
                     req.params.id = null;
                 }
                 Category.find({
-                    language: language,
                     parentId: req.params.id
                 }).sort({ '_id': 1 }).exec((err, categories) => {
                     // Check if error was found or not

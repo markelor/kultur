@@ -20,22 +20,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let observation of observations; let i=index">
-              <!--Title and Description-->
-              <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.title}}</td>
-              <td *ngIf="observation.language===localizeService.parser.currentLang" [innerHTML]="observation.description"></td>
-              <ng-container *ngFor="let translation of observation.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">{{translation.title}}</td>
-                <td *ngIf="translation.language===localizeService.parser.currentLang" [innerHTML]="translation.description"></td>        
-              </ng-container> 
+              <!--Title-->
+              <td>{{observation | translateLanguage:'title':localizeService.parser.currentLang}}</td>    
+              <!--Description-->
+              <td [innerHTML]="observation | translateLanguage:'description':localizeService.parser.currentLang"></td>
               <!--Expired at-->
               <td>{{observation.expiredAt | timezone}}</td>
-              <!--CreatedBy-->
-              <td *ngIf="observation.language===localizeService.parser.currentLang">{{observation.createdBy}}</td>
-              <ng-container *ngFor="let translation of observation.translation">
-                <td *ngIf="translation.language===localizeService.parser.currentLang">
-                  {{translation.createdBy}}
-                </td>        
-              </ng-container>
+               <!--CreatedBy-->
+              <td>{{observation | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
               <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/observation-route','manage-route','edit-route',observation._id]| localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>

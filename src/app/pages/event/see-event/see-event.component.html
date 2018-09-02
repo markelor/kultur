@@ -6,7 +6,8 @@
           <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <article *ngIf="event" class="card panel ks-widget ks-widget-post">
               <h5 class="card-header">
-                <span class="ks-text" *ngIf="event.title">{{event.title}}</span>
+                <!--Title--> 
+                <span class="ks-text">{{event | translateLanguage:'title':localizeService.parser.currentLang}}</span>
               </h5>
               <div class="card-block">
                 <ngx-gallery *ngIf="galleryImages" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
@@ -165,12 +166,8 @@
                         <strong translate>{{'event-form.category'}}</strong>: 
                       </span>
                       <ng-container *ngFor="let category of categories">
-                        <span *ngIf="category.language===localizeService.parser.currentLang&&!category.firstParentId">{{category.title}}</span>
-                        <span *ngIf="category.language===localizeService.parser.currentLang&&category.firstParentId">- {{category.title}} </span>
-                        <ng-container *ngFor="let translation of category.translation">
-                          <span *ngIf="translation.language===localizeService.parser.currentLang&&!translation.firstParentId">{{translation.title}}</span>
-                          <span *ngIf="translation.language===localizeService.parser.currentLang&&translation.firstParentId">- {{translation.title}} </span>
-                        </ng-container>
+                        <span *ngIf="!category.firstParentId">{{category | translateLanguage:'title':localizeService.parser.currentLang}}</span>
+                        <span *ngIf="category.firstParentId">- {{category | translateLanguage:'title':localizeService.parser.currentLang}} </span>
                       </ng-container>
                     </p>
                   </div>
@@ -179,7 +176,7 @@
                     <p>
                       <span>
                         <strong translate>{{'event-form.participants'}}</strong>: 
-                      </span>{{participant }}
+                      </span>{{ participant }}
                     </p>
                   </div>
                   <!--Start-->
@@ -208,47 +205,26 @@
                   </div>
                   <!--Province info-->
                   <div class="col-sm-6">
-                    <ng-container *ngFor="let translation of event.place.translation">
-                      <p *ngIf="translation.language===localizeService.parser.currentLang">
-                        <span>
-                          <strong translate>{{'event-form.province'}}</strong>: 
-                        </span>{{translation.province.name}}
-                      </p>
-                    </ng-container>  
-                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
+                    <p>
                       <span>
                         <strong translate>{{'event-form.province'}}</strong>: 
-                      </span>{{event.place.province.name}}
+                      </span>{{event.place | translateLanguage:'province.name':localizeService.parser.currentLang}}
                     </p>
                   </div>
                   <!--Municipality info-->
-                  <div class="col-sm-6">
-                    <ng-container *ngFor="let translation of event.place.translation">
-                      <p *ngIf="translation.language===localizeService.parser.currentLang">
-                        <span>
-                          <strong translate>{{'event-form.municipality'}}</strong>: 
-                        </span>{{translation.municipality.name}}
-                      </p>
-                    </ng-container>  
-                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
+                  <div class="col-sm-6">   
+                    <p>
                       <span>
                         <strong translate>{{'event-form.municipality'}}</strong>: 
-                      </span>{{event.place.municipality.name}}
+                      </span>{{event.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}
                     </p>
                   </div>
                   <!--Location info-->
-                  <div class="col-sm-12">
-                    <ng-container *ngFor="let translation of event.place.translation">
-                      <p *ngIf="translation.language===localizeService.parser.currentLang">
-                        <span>
-                          <strong translate>{{'event-form.location'}}</strong>: 
-                        </span>{{translation.location}}
-                      </p>
-                    </ng-container>  
-                    <p *ngIf="event.place.language===localizeService.parser.currentLang">
+                  <div class="col-sm-12"> 
+                    <p>
                       <span>
                         <strong translate>{{'event-form.location'}}</strong>: 
-                      </span>{{event.place.location}}
+                      </span>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}
                     </p>
                   </div>
                   <!--Latitude info-->
@@ -269,34 +245,20 @@
                   </div>
                   <!--Description info-->
                   <div class="col-sm-12">
-                    <ng-container *ngFor="let translation of event.translation">
-                      <p *ngIf="translation.language===localizeService.parser.currentLang">
-                        <span>
-                          <strong translate>{{'event-form.description'}}</strong>: 
-                        </span>
-                        <span [innerHTML]="translation.description"></span>
-                      </p>
-                    </ng-container>  
-                    <p *ngIf="event.language===localizeService.parser.currentLang">
+                  <!--Description--> 
+                    <p>
                       <span>
                         <strong translate>{{'event-form.description'}}</strong>: 
                       </span>
-                      <span [innerHTML]="event.description"></span>
+                      <span [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang"></span>
                     </p>
                   </div>
                   <!--Observations info-->
                   <div class="col-sm-12">
-                    <ng-container *ngFor="let translation of event.translation">
-                      <p *ngIf="translation.language===localizeService.parser.currentLang">
-                        <span>
-                          <strong translate>{{'event-form.observations'}}</strong>: 
-                        </span>{{translation.observations}}
-                      </p>
-                    </ng-container>  
-                    <p *ngIf="event.language===localizeService.parser.currentLang">
+                    <p *ngIf="event.observations">
                       <span>
                         <strong translate>{{'event-form.observations'}}</strong>: 
-                      </span>{{event.observations}}
+                      </span>{{event | translateLanguage:'observations':localizeService.parser.currentLang}}
                     </p>
                   </div>
                 </div>

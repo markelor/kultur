@@ -4,7 +4,7 @@ import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../../../services/auth.service';
 import { ServiceService } from '../../../../../services/service.service';
 import { ApplicationService } from '../../../../../services/application.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Application } from '../../../../../class/application';
 import { Subject } from 'rxjs/Subject';
 import {DataTableDirective} from 'angular-datatables';
@@ -29,7 +29,6 @@ export class EditServicesApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
-  private subscriptionLanguage: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationService:ApplicationService,
@@ -82,6 +81,7 @@ export class EditServicesApplicationComponent implements OnInit {
                 this.servicesApplication.push(this.services[indexService]);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
+                console.log(indexService);
               });
             }        
           });
@@ -109,7 +109,7 @@ export class EditServicesApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationServicesInit(){
+  private getApplicationServices(){
     // Get application services
     this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -120,50 +120,12 @@ export class EditServicesApplicationComponent implements OnInit {
     });
   }
   // Function to get services from the database
-  private getServicesInit() {
+  private getServices() {
     this.serviceService.getServices(this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.services=data.services;
       }
       this.addTrigger.next();
-    });
-  }
-   private getApplicationServices(){
-    // Get application services
-    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
-      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-        if(index===0){
-          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            if(data.success){
-              this.application=data.application;
-              this.servicesApplication=data.services;
-            }else{
-              this.application=undefined;
-              this.servicesApplication=[];
-            }        
-            this.deleteTrigger.next();
-          });
-        }        
-      });   
-    });
-  }
-  // Function to get services from the database
-  private getServices() {
-    this.serviceService.getServices(this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-        this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
-          if(index===1){
-            dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-              // Destroy the table first
-              dtInstance.destroy();
-              this.services=data.services;
-              this.addTrigger.next();
-            });
-          }       
-        });      
-      }
     });
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
@@ -188,16 +150,10 @@ export class EditServicesApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationServicesInit();
-    this.getServicesInit();  
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((service: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=service.lang;
-      this.getApplicationServices();
-      this.getServices(); 
-    });       
+    this.getApplicationServices();
+    this.getServices();        
   }
    ngOnDestroy(){
-    this.subscriptionLanguage.unsubscribe();
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
   }

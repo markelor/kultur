@@ -16,12 +16,19 @@
           </thead>
           <tbody>
             <tr *ngFor="let application of applications; let i=index">
-              <td>{{application.title}}</td>
-              <td>{{application.entityName}}</td>
-              <td>{{application.conditions}}</td>
-              <td>{{application.licenseName}}</td>
+              <!--Title-->
+              <td>{{application | translateLanguage:'title':localizeService.parser.currentLang}}</td>   
+              <!--Entity Name-->
+              <td>{{application | translateLanguage:'entityName':localizeService.parser.currentLang}}</td>   
+              <!--Conditions-->
+              <td>{{application | translateLanguage:'conditions':localizeService.parser.currentLang}}</td> 
+              <!--License Name-->
+              <td>{{application | translateLanguage:'licenseName':localizeService.parser.currentLang}}</td> 
+              <!--Price-->
               <td>{{application.price}}</td>
+              <!--Expired At-->
               <td>{{application.expiredAt | timezone}}</td>
+              <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/admin-route','applications-route','edit-route',application._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
                 <a href="javascript:void(0)" (click)="applicationDeleteClick(i,application)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>

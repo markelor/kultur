@@ -21,17 +21,24 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users; let i=index">
+              <!--Id-->
               <td>{{ user._id }}</td>
+              <!--Permission-->
               <td>{{ user.permission}}</td>
+              <!--Username-->
               <td>
                 <div class="ks-user">
                   <img class="ks-avatar" src="{{user.currentAvatar}}" width="24" height="24">
                   <span class="ks-name">{{ user.username }}</span>
                 </div>
               </td>
+              <!--User-->
               <td>{{ user.name }}</td>
-              <td>{{ user.email}}</td>
-              <td>{{ user.aboutYourself}}</td>
+              <!--Email-->
+              <td>{{ user.email }}</td>
+              <!--About Yourself-->
+              <td>{{ user | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td>  
+              <!--Edit/Delete-->      
               <td class="ks-status">
                 <a href="javascript:void(0)" (click)="userEditClick(user)"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>
                 <a href="javascript:void(0)" (click)="userDeleteClick(i,user)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>

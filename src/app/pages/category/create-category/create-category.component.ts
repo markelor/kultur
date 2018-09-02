@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { CategoryModalComponent } from './category-modal/category-modal.component';
 import { ModalComponent } from '../../../templates/modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +25,6 @@ export class CreateCategoryComponent implements OnInit {
   public messageClass;
   private subscriptionObservableSuccess: Subscription;
   private subscriptionObservableDelete: Subscription;
-  private subscriptionLanguage: Subscription;
   private submitted:boolean = false;
   public parentCategories;
   @ViewChild(DataTableDirective)
@@ -119,29 +118,15 @@ export class CreateCategoryComponent implements OnInit {
       } 
     });   
   }
- private getCategoriesInit(){
-    //Get categories
-      this.categoryService.getCategories(this.localizeService.parser.currentLang).subscribe(data=>{
-        if(data.success){        
-          this.parentCategories=data.categories;   
-          this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
-        }  
-        this.dtTrigger.next();  
-      });                 
-  }
   private getCategories(){
     //Get categories
-      this.categoryService.getCategories(this.localizeService.parser.currentLang).subscribe(data=>{
-        if(data.success){    
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            this.parentCategories=data.categories; 
-            this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
-            this.dtTrigger.next();
-          });
-        }    
-      });                 
+    this.categoryService.getCategories(this.localizeService.parser.currentLang).subscribe(data=>{
+      if(data.success){        
+        this.parentCategories=data.categories;   
+        this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
+      }  
+      this.dtTrigger.next();  
+    });                 
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
     svg.setAttribute('width', '50');
@@ -163,17 +148,11 @@ export class CreateCategoryComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     });
     this.createSettings(); 
-    this.getCategoriesInit();
-    this.observableCategorySuccess();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getCategories(); 
-    });
-     	  
+    this.getCategories();
+    this.observableCategorySuccess();     	  
   }
   ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
-      this.dtTrigger.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 }
 

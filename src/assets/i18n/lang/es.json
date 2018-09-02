@@ -130,6 +130,8 @@
   {
     "title": "Título",
     "description": "Descripción",
+    "parent-id":"Padre Id",
+    "level":"Nivel",
     "parent-category": "Categoría Padre",
     "select-parent-category": "-- SELECCIONE UNA CATEGORÍA --",
     "send": "Enviar"
