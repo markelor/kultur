@@ -78,7 +78,7 @@ export class ManageObservationsComponent implements OnInit {
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-observation') {
-          this.observationService.deleteObservation(this.authService.user.username,observation._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.observationService.deleteObservation(this.authService.user.id,observation._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first
@@ -100,7 +100,7 @@ export class ManageObservationsComponent implements OnInit {
   }
     // Function to get observations from the database
   private getObservations() {
-    this.observationService.getUserObservations(this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
+    this.observationService.getUserObservations(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.observations=data.observations;
       }

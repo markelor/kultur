@@ -24,8 +24,8 @@ export class EventService {
     return this.http.post<any>(this.domain + 'event/newEvent', data);
   }
   // Function to get all user events from the database
-  public getUserEvents(username,language) {
-    this.route= encodeURIComponent(username) +'/';
+  public getUserEvents(userId,language) {
+    this.route= userId +'/';
     return this.http.get<any>(this.domain + 'event/userEvents/'+this.route+language);
   }
   // Function to get events from the database
@@ -35,7 +35,7 @@ export class EventService {
   }
   // Function to get event from the database
   public getEvent(id,language) {
-    this.route= encodeURIComponent(id) +'/';
+    this.route= id+'/';
     return this.http.get<any>(this.domain + 'event/getEvent/'+this.route+language);
   }
   // Function to edit/update theme post
@@ -57,8 +57,8 @@ export class EventService {
     return this.http.get<any>(this.domain + 'event/eventsSearch/'+this.route+language);
   }
   // Function to delete a event
-  public deleteEvent(username,id,language) {
-    this.route= username+'/'+id +'/'
+  public deleteEvent(userId,id,language) {
+    this.route= userId+'/'+id +'/'
     return this.http.delete<any>(this.domain + 'event/deleteEvent/'+this.route+language);
   }
   // Function to like a theme post

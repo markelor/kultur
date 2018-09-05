@@ -143,7 +143,7 @@ export class SeeEventComponent implements OnInit {
     this.existReactionAndUsernames=[];
     for (var i = 0; i < this.reactions.length; i++) {
       if(this.authService.user){
-        if (this.bindContent.transform(this.event,'reactions',this.reactions[i]+'By').includes(this.authService.user.username)) {           
+        if (this.bindContent.transform(this.event,'reactionsUsernames',this.reactions[i]+'By').includes(this.authService.user.username)) {           
           myReaction=true;
         var translateReaction=this.translate.get('reaction.'+this.reactions[i]).subscribe(
           data => {   
@@ -152,14 +152,14 @@ export class SeeEventComponent implements OnInit {
           });
         }
       }
-      reactionsCount= reactionsCount+this.bindContent.transform(this.event,'reactions',this.reactions[i]+'By').length;
+      reactionsCount= reactionsCount+this.bindContent.transform(this.event,'reactionsUsernames',this.reactions[i]+'By').length;
       //reactions and count reactions to modal;
       var reactionAndUsernamesObj={
         reaction:this.reactions[i],
-        usernames:this.bindContent.transform(this.event,'reactions',this.reactions[i]+'By')
+        usernames:this.bindContent.transform(this.event,'reactionsUsernames',this.reactions[i]+'By')
       };
       this.existReactionAndUsernames.push(reactionAndUsernamesObj);
-      this.allReactions=this.allReactions.concat(this.bindContent.transform(this.event,'reactions',this.reactions[i]+'By'));
+      this.allReactions=this.allReactions.concat(this.bindContent.transform(this.event,'reactionsUsernames',this.reactions[i]+'By'));
     } 
     if(myReaction===true){ 
       //reactions count
@@ -206,10 +206,10 @@ export class SeeEventComponent implements OnInit {
   }
   private getEvent(){
     this.currentUrl="http://localhost:4200"+this.router.url;
-    console.log(this.currentUrl);
     this.eventService.getEvent(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.event=data.event;
+        this.event.reactionsUsernames=data.reactionsUsernames;
         this.categories=data.categories;
         this.initializeGalleryImages();
         setTimeout(() => {
@@ -231,8 +231,6 @@ export class SeeEventComponent implements OnInit {
 
   }
   private reactionClick(currentReaction){
-    console.log(this.existReactionAndUsernames);
-    console.log(this.allReactions);
     this.reactionStaticModalShow(currentReaction,this.existReactionAndUsernames,this.allReactions);
   }
 

@@ -69,9 +69,10 @@ export class ApplicationFormComponent implements OnInit {
   @Input() inputOperation:string;
   @Input() inputApplication;
   @Input() inputLanguage;
+  @Input() inputModerators;
   public title:AbstractControl;
   public entityName:AbstractControl;
-  public user:AbstractControl;
+  public moderator:AbstractControl;
   public license:AbstractControl;
   public condition:AbstractControl;
   public price:AbstractControl;
@@ -81,8 +82,9 @@ export class ApplicationFormComponent implements OnInit {
   private application:Application=new Application();
   private imagesApplication=[];
   public search:boolean=true;
-  public usersSearch;
-  public selectedUsers=[];
+  public moderatorsSearch;
+  public selectedModerators=[];
+  public selectedModeratorsId=[];
   public conditions=[];
   public searchTerm = new Subject<string>();
   public uploader:FileUploader = new FileUploader({
@@ -122,7 +124,7 @@ export class ApplicationFormComponent implements OnInit {
         Validators.minLength(5),
         TitleValidator.validate
       ])],
-      user: [''],
+      moderator: [''],
       license: ['', Validators.compose([
         Validators.required/*,DateValidator.validate*/
       ])],
@@ -136,7 +138,7 @@ export class ApplicationFormComponent implements OnInit {
     })
     this.title = this.form.controls['title'];
     this.entityName = this.form.controls['entityName'];
-    this.user = this.form.controls['user'];
+    this.moderator = this.form.controls['moderator'];
     this.license= this.form.controls['license'];
     this.condition= this.form.controls['condition'];
     this.price = this.form.controls['price'];
@@ -160,7 +162,10 @@ export class ApplicationFormComponent implements OnInit {
           }
         }               
       }
-      this.selectedUsers=this.inputApplication.users;     
+      for (var i = 0; i < this.inputModerators.length; ++i) {
+        this.selectedModerators.push(this.inputModerators[i].username);
+        this.selectedModeratorsId.push(this.inputModerators[i]._id);
+      }    
       this.price.setValue(this.inputApplication.price);
       this.inputApplication.expiredAt=moment(this.inputApplication.expiredAt).tz("Europe/Madrid").format('YYYY-MM-DD HH:mm');
       var year=Number(this.inputApplication.expiredAt.split("-")[0]);
@@ -198,7 +203,6 @@ export class ApplicationFormComponent implements OnInit {
       for (var i = 0; i < images.length; ++i) {
         var currentUrlSplit = images[i].url.split("/");
         let imageName = currentUrlSplit[currentUrlSplit.length - 1];
-        console.log(imageName);
         var urlSplit = imageName.split("%2F");
         this.fileUploaderService.deleteImages(urlSplit[0],"application",this.localizeService.parser.currentLang).subscribe(data=>{
         });
@@ -209,7 +213,7 @@ export class ApplicationFormComponent implements OnInit {
     if (this.form.valid) {
       this.submitted = true;
       this.application.setLanguage=this.localizeService.parser.currentLang;
-      this.application.setUsers=this.selectedUsers;
+      this.application.setModerators=this.selectedModeratorsId;
       this.application.setTitle=this.form.get('title').value;
       this.application.setEntityName=this.form.get('entityName').value;
       this.application.setConditions=this.conditions;
@@ -228,11 +232,12 @@ export class ApplicationFormComponent implements OnInit {
           this.editApplication();
         }      
       }
-    }   
+    } 
   }
   private createApplication() {
     // Function to save application into database
     this.applicationService.newApplication(this.application).subscribe(data=>{
+      console.log(data);
       if(!data.success){
         this.deleteUploadImages('application',this.imagesApplication);
         this.submitted = false;
@@ -244,8 +249,10 @@ export class ApplicationFormComponent implements OnInit {
         this.uploader.clearQueue()//Reset uploader
         this.conditions=[];
         this.createForm(); // Reset all form fields
-        this.usersSearch=[];
+        this.moderatorsSearch=[];
         this.conditions=[];
+        this.selectedModerators=[];
+        this.selectedModeratorsId=[];
         this.messageClass='alert alert-success ks-solid'
         this.message=data.message
       }
@@ -269,7 +276,7 @@ export class ApplicationFormComponent implements OnInit {
   private editApplication() {
     if(this.inputApplication){
       var hasTranslationApplication=false;
-      this.inputApplication.users=this.selectedUsers; // Users field   
+      this.inputApplication.moderators=this.selectedModeratorsId; // Users field   
       this.inputApplication.price=this.form.get('price').value; // Price field
       this.inputApplication.expiredAt=new Date(this.form.get('expiredAt').value.year,this.form.get('expiredAt').value.month-1,this.form.get('expiredAt').value.day,this.timeExpiredAt.hour,this.timeExpiredAt.minute);
       this.deleteEditImages();   
@@ -306,7 +313,6 @@ export class ApplicationFormComponent implements OnInit {
         }
       }
     }
-    console.log(this.inputApplication);
     // Function to save event into database
     this.applicationService.editApplication(this.inputApplication).subscribe(data => {
       // Check if event was saved to database or not
@@ -328,9 +334,11 @@ export class ApplicationFormComponent implements OnInit {
     });   
   }
   public addUser(){
-    if(this.user.value && !this.selectedUsers.includes(this.user.value) && this.usersSearch.filter(user => user.username === this.user.value).length > 0){
-      this.selectedUsers.push(this.user.value);
-      this.user.setValue("");
+    if( this.moderator.value && !this.selectedModerators.includes(this.moderator.value) && this.moderatorsSearch.filter(moderator => moderator.username === this.moderator.value).length > 0){
+      this.selectedModerators.push(this.moderator.value); 
+      var index=this.moderatorsSearch.findIndex(i => i.username === this.moderator.value);
+      this.selectedModeratorsId.push(this.moderatorsSearch[index]._id);
+      this.moderator.setValue("");
     }
   }
   public addCondition(){
@@ -341,7 +349,7 @@ export class ApplicationFormComponent implements OnInit {
   }
   private selectUser(index) {
     this.search=false;
-    this.user.setValue(this.usersSearch[index].username);
+    this.moderator.setValue(this.moderatorsSearch[index].username);
   }
   private onClickOutside() {
     if(this.search){
@@ -349,7 +357,8 @@ export class ApplicationFormComponent implements OnInit {
     }
   }
   private deleteUser(index){
-    this.selectedUsers.splice(index,1);
+    this.selectedModerators.splice(index,1);
+    this.selectedModeratorsId.splice(index,1);
   }
   private deleteCondition(index){
     this.conditions.splice(index,1);
@@ -437,7 +446,7 @@ export class ApplicationFormComponent implements OnInit {
     });
     this.authService.userSearch(this.searchTerm,this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
-        this.usersSearch=data.users;
+        this.moderatorsSearch=data.users;
         this.search=true; 
       }     
     });

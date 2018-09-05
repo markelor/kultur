@@ -71,14 +71,14 @@ const descriptionValidators = [
 
 // Observation Model Definition
 const observationSchema = new Schema({
-    createdBy: { type: String, required: true },
+    createdBy: { type: Schema.Types.ObjectId, required: true },
     language: { type: String, required: true },
     title: { type: String, required: true, validate: titleValidators },
     description: { type: String, required: true, validate: descriptionValidators },
     images: { type: Array, required: true },
     translation: [{
         language: { type: String, required: true },
-        createdBy: { type: String, required: true },
+        createdBy: { type: Schema.Types.ObjectId, required: true },
         title: { type: String, required: true, validate: titleValidators },
         description: { type: String, required: true, validate: descriptionValidators },
         images: { type: Array, required: true },

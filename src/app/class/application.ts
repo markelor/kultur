@@ -1,5 +1,6 @@
 export class Application{
-    users:Array<string>;
+    moderators:Array<string>;
+    contributors:Array<string>;
     title: string;
     language: string;
 	events: Array<string>;
@@ -14,11 +15,17 @@ export class Application{
     observationsExpiredAt: Date;
     createdAt: Date;
     updatedAt: Date;
-    get getUsers():Array<string> {
-        return this.users;
+    get getModerators():Array<string> {
+        return this.moderators;
     }
-    set setUsers(users:Array<string>) {
-        this.users = users;
+    set setModerators(moderators:Array<string>) {
+        this.moderators = moderators;
+    }
+    get getContributors():Array<string> {
+        return this.moderators;
+    }
+    set setContributors(moderators:Array<string>) {
+        this.moderators = moderators;
     }
     get getTitle():string {
         return this.title;

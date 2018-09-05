@@ -92,7 +92,7 @@ const descriptionValidators = [
 
 // Event Model Definition
 const eventSchema = new Schema({
-    createdBy: { type: String, required: true },
+    createdBy: { type: Schema.Types.ObjectId, required: true },
     categoryId: { type: Schema.Types.ObjectId, required: true },
     placeId: { type: Schema.Types.ObjectId, required: true },
     participants: { type: Array, required: false },
@@ -106,7 +106,7 @@ const eventSchema = new Schema({
     },
     translation: [{
         language: { type: String, required: true },
-        createdBy: { type: String, required: true },
+        createdBy: { type: Schema.Types.ObjectId, required: true },
         title: { type: String, required: true, validate: titleValidators },
         description: { type: String, required: true, validate: descriptionValidators },
         observations: { type: String, validate: observationsValidators },
@@ -120,7 +120,6 @@ const eventSchema = new Schema({
     start: { type: Date, required: true },
     end: { type: Date, required: true },
     price: { type: Number, required: true, default:0 },
-    services: { type: Array, required: false },
     reactions: {
         likeBy: { type: Array, required: false },
         loveBy: { type: Array, required: false },

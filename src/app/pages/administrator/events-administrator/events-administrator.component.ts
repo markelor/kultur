@@ -82,7 +82,7 @@ export class EventsAdministratorComponent implements OnInit {
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-event') {
-          this.eventService.deleteEvent(this.authService.user.username,event._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.eventService.deleteEvent(this.authService.user.id,event._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first

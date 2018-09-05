@@ -71,15 +71,15 @@
                       <span class="ks-amount" >{{event.comments.length}}</span>
                     </span>
                     <span class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
-                      <span *ngIf="event.reactions.likeBy.length>0" ngbTooltip="{{event.reactions.likeBy | reactionsPipe:1}}" class="reaction reaction-like" ></span>
-                      <span *ngIf="event.reactions.loveBy.length>0" ngbTooltip="{{event.reactions.loveBy | reactionsPipe:1}}" class="reaction reaction-love" ></span>
-                      <span *ngIf="event.reactions.hahaBy.length>0" ngbTooltip="{{event.reactions.hahaBy | reactionsPipe:1}}" class="reaction reaction-haha" ></span>
-                      <span *ngIf="event.reactions.wowBy.length>0" ngbTooltip="{{event.reactions.wowBy | reactionsPipe:1}}" class="reaction reaction-wow" ></span>
-                      <span *ngIf="event.reactions.sadBy.length>0" ngbTooltip="{{event.reactions.sadBy | reactionsPipe:1}}" class="reaction reaction-sad" ></span>
-                      <span *ngIf="event.reactions.angryBy.length>0" ngbTooltip="{{event.reactions.angryBy | reactionsPipe:1}}" class="reaction reaction-angry" ></span>
+                      <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
+                      <span *ngIf="event.reactions.loveBy.length>0" class="reaction reaction-love" ></span>
+                      <span *ngIf="event.reactions.hahaBy.length>0" class="reaction reaction-haha" ></span>
+                      <span *ngIf="event.reactions.wowBy.length>0" class="reaction reaction-wow" ></span>
+                      <span *ngIf="event.reactions.sadBy.length>0" class="reaction reaction-sad" ></span>
+                      <span *ngIf="event.reactions.angryBy.length>0" class="reaction reaction-angry" ></span>
                       <span *ngIf="(event.reactions.angryBy.length+event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length==0)" class="reaction reaction-like" ></span>
                       
-                      <span ngbTooltip="{{event.reactions | reactionsPipe:6}}" class="ks-amount ks-amount-reactions">{{event.reactions.angryBy.length +event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length}}</span>
+                      <span  class="ks-amount ks-amount-reactions">{{event.reactions.angryBy.length +event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length}}</span>
                     </span>
                   </div>
                   <!--

@@ -99,7 +99,7 @@ export class CreateCategoryComponent implements OnInit {
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-category') {
           this.categoryService.deleteCategory(category._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  
-              this.getCategories();
+              this.getCategories(true);
               this.messageClass = 'alert alert-success ks-solid'; // Set bootstrap success class
               this.message = data.message; // Set success messag
             }else{
@@ -114,18 +114,29 @@ export class CreateCategoryComponent implements OnInit {
   private observableCategorySuccess(){
     this.subscriptionObservableSuccess=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === 'modal-edit-category-success') {
-       this.getCategories();
+       this.getCategories(true);
       } 
     });   
   }
-  private getCategories(){
+  private getCategories(operation){
     //Get categories
     this.categoryService.getCategories(this.localizeService.parser.currentLang).subscribe(data=>{
-      if(data.success){        
-        this.parentCategories=data.categories;   
-        this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
+      if(data.success){ 
+        if(operation){
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            this.parentCategories=data.categories;   
+            this.categories=this.groupByPipe.transform(data.categories,'firstParentId');
+            // Call the addTrigger to rerender again
+            this.dtTrigger.next();
+          }); 
+        }else{
+          this.parentCategories=data.categories;   
+          this.categories=this.groupByPipe.transform(data.categories,'firstParentId');        
+          this.dtTrigger.next();
+        }            
       }  
-      this.dtTrigger.next();  
     });                 
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
@@ -148,7 +159,7 @@ export class CreateCategoryComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     });
     this.createSettings(); 
-    this.getCategories();
+    this.getCategories(undefined);
     this.observableCategorySuccess();     	  
   }
   ngOnDestroy(){

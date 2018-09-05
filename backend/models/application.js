@@ -109,7 +109,8 @@ const descriptionValidators = [
 ];
 // Application Model Definition
 const applicationSchema = new Schema({
-    users: { type: Array, required: true },
+    moderators: { type: Array, required: true },
+    contributors: { type: Array, required: false },
     events: [{ type: Schema.Types.ObjectId, required: true }],
     services: [{ type: Schema.Types.ObjectId, required: true } ],
     observations:[{ type: Schema.Types.ObjectId, required: true }],

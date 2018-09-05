@@ -10,6 +10,7 @@ import {DataTableDirective} from 'angular-datatables';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ObservableService } from '../../../../../services/observable.service';
 
 @Component({
   selector: 'app-edit-observations-application',
@@ -28,10 +29,12 @@ export class EditObservationsApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
+  private subscriptionTabClick: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationObservation:ApplicationService,
     private authService:AuthService,
+    private observableService: ObservableService,
     private observationObservation:ObservationService,
     private translate: TranslateService,
     private router:Router,
@@ -102,7 +105,7 @@ export class EditObservationsApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationObservations(){
+  private getApplicationObservationsInit(){
     // Get application observations
     this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -112,10 +115,30 @@ export class EditObservationsApplicationComponent implements OnInit {
       this.deleteTrigger.next();
     });
   }
+  private getApplicationObservations(){
+    // Get application observations
+    this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
+        if(index===0){
+          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            if(data.success){
+              this.application=data.application;
+              this.observationsApplication=data.observations;
+            }else{
+              this.application=undefined;
+              this.observationsApplication=[];
+            }        
+            this.deleteTrigger.next();
+          });
+        }        
+      });   
+    });
+  }
   // Function to get observations from the database
   private getObservations() {
     this.observationObservation.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
-      console.log(data);
       if(data.success){
         this.observations=data.observations;
       }
@@ -126,6 +149,13 @@ export class EditObservationsApplicationComponent implements OnInit {
     svg.setAttribute('width', '50');
     svg.setAttribute('height', '50');
     return svg;
+  }
+  private tabClick(){
+    this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.applicationObservations) {
+        this.getApplicationObservations();   
+      }
+    }); 
   }
   ngOnInit() {
     // Get authentication on page load
@@ -144,11 +174,13 @@ export class EditObservationsApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationObservations();
-    this.getObservations();         
+    this.getApplicationObservationsInit();
+    this.getObservations(); 
+    this.tabClick();        
   }
    ngOnDestroy(){
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
+    this.subscriptionTabClick.unsubscribe();
   }
 }

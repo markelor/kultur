@@ -6,11 +6,11 @@ import { ApplicationService } from '../../../../../services/application.service'
 import { TranslateService } from '@ngx-translate/core';
 import { Application } from '../../../../../class/application';
 import { Subject } from 'rxjs/Subject';
-import {DataTableDirective} from 'angular-datatables';
+import { DataTableDirective} from 'angular-datatables';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
-
+import { ObservableService } from '../../../../../services/observable.service';
 @Component({
   selector: 'app-edit-events-application',
   templateUrl: './edit-events-application.component.html',
@@ -28,11 +28,13 @@ export class EditEventsApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
+  private subscriptionTabClick: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationService:ApplicationService,
     private authService:AuthService,
     private eventService:EventService,
+    private observableService: ObservableService,
     private translate: TranslateService,
     private router:Router,
     private activatedRoute: ActivatedRoute,
@@ -78,7 +80,6 @@ export class EditEventsApplicationComponent implements OnInit {
                 // Destroy the table first
                 dtInstance.destroy();
                 this.eventsApplication.push(this.events[indexEvent]);
-                console.log(this.eventsApplication);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
               });
@@ -108,7 +109,7 @@ export class EditEventsApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationEvents(){
+  private getApplicationEventsInit(){
     // Get application events
     this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -116,6 +117,27 @@ export class EditEventsApplicationComponent implements OnInit {
         this.eventsApplication=data.events;
       }
       this.deleteTrigger.next();
+    });
+  }
+     private getApplicationEvents(){
+    // Get application events
+    this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
+        if(index===0){
+          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            if(data.success){
+              this.application=data.application;
+              this.eventsApplication=data.events;
+            }else{
+              this.application=undefined;
+              this.eventsApplication=[];
+            }        
+            this.deleteTrigger.next();
+          });
+        }        
+      });   
     });
   }
   // Function to get events from the database
@@ -132,6 +154,13 @@ export class EditEventsApplicationComponent implements OnInit {
     svg.setAttribute('width', '50');
     svg.setAttribute('height', '50');
     return svg;
+  }
+   private tabClick(){
+    this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.applicationEvents) {
+        this.getApplicationEvents();   
+      }
+    }); 
   }
   ngOnInit() {
     // Get authentication on page load
@@ -150,11 +179,13 @@ export class EditEventsApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationEvents();
+    this.getApplicationEventsInit();
     this.getEvents();    
+    this.tabClick();
   }
    ngOnDestroy(){
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
+    this.subscriptionTabClick.unsubscribe();
   }
 }

@@ -82,7 +82,7 @@ export class ManageServicesComponent implements OnInit {
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-service') {
-          this.serviceService.deleteService(this.authService.user.username,service._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.serviceService.deleteService(this.authService.user.id,service._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first
@@ -104,8 +104,7 @@ export class ManageServicesComponent implements OnInit {
   }
     // Function to get services from the database
   private getServices() {
-    this.serviceService.getUserServices(this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
-      console.log(data.services);
+    this.serviceService.getUserServices(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.services=data.services;
       }

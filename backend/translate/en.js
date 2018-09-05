@@ -193,7 +193,7 @@ module.exports = {
     },
     //newApplication
     newApplication: {
-        usersProvidedError: "Application users are required.",
+        moderatorsProvidedError: "Application moderators are required.",
         titleProvidedError: "Application title is required.",
         licenseNameProvidedError: "Application license name is required.",
         conditionsProvidedError: "Application conditions are required.",
@@ -255,18 +255,18 @@ module.exports = {
     },
     //userEvents
     userEvents: {
-        usernameProvidedError: "Events username is not provided.",
+        userIdProvidedError: "The user identifier of events was not provided.",
         eventsError: "No events found."
     },
     //userApplications
     userApplications: {
-        usernameProvidedError: "Application username is not provided.",
+        userIdProvidedError: "The user identifier of appications was not provided.",
         userError: "No user found.",
         applicationsError: "No applications found."
     },
     //userServices
     userServices: {
-        usernameProvidedError: "Services username is not provided.",
+        userIdProvidedError: "The user identifier of services was not provided.",
         eventsError: "No services found."
     },
     //usersSearch
@@ -295,7 +295,7 @@ module.exports = {
     //getService
     getService: {
         idProvidedError: "Service ID is not provided.",
-        usernameProvidedError: "Service username is not provided.",
+        userIdProvidedError: "The user identifier of service was not provided",
         userError: "No user found.",
         serviceError: "No service found.",
         placeError: "No place found."
@@ -303,14 +303,14 @@ module.exports = {
     //getObservation
     getObservation: {
         idProvidedError: "Observation ID is not provided.",
-        usernameProvidedError: "Observation username is not provided.",
+        userIdProvidedError: "The user identifier of observation was not provided",
         userError: "No user found.",
         observationError: "No observation found."
     },
     //getComment
     getComment: {
         idProvidedError: "Comment ID is not provided.",
-        usernameProvidedError: "Comment username is not provided.",
+        userIdProvidedError: "The user identifier of comment was not provided",
         commentError: "No comment found.",
     },
     //getPlacesCoordinates
@@ -378,7 +378,6 @@ module.exports = {
     },
     editComment: {
         idProvidedError: 'Comment ID was not provided.',
-        usernameProvidedError: 'Username was not provided.',
         createdByProvidedError: 'Username was not provided.',
         commentProvidedError: 'Comment was not provided.',
         saveError: "Could not edit comment. Error: ",
@@ -391,19 +390,19 @@ module.exports = {
         success: "Category deleted!"
     },
     deleteEvent: {
-        usernameProvidedError: 'Username was not provided.',
+        userIdProvidedError: 'The user identifier of event was not provided.',
         idProvidedError: 'Event ID was not provided.',
         saveError: "Could not delete event. Error: ",
         success: "Event deleted!"
     },
     deleteApplication: {
-        usernameProvidedError: 'Username was not provided.',
+        userIdProvidedError: 'The user identifier of application was not provided.',
         idProvidedError: 'Event ID was not provided.',
         saveError: "Could not delete application. Error: ",
         success: "Application deleted!"
     },
     deleteService: {
-        usernameProvidedError: 'Username was not provided.',
+        userIdProvidedError: 'The user identifier of service was not provided.',
         idProvidedError: 'Service ID was not provided.',
         deleteError: "The service could not be deleted, it is being used by another application.",
         saveError: "Could not delete service. Error: ",
@@ -415,14 +414,14 @@ module.exports = {
         success: "Service type deleted!"
     },
     deleteObservation: {
-        usernameProvidedError: 'Username was not provided.',
+        userIdProvidedError: 'The user identifier of observation was not provided.',
         idProvidedError: 'Observation ID was not provided.',
         deleteError: "The service could not be deleted, it is being used by another application.",
         saveError: "Could not delete observation. Error: ",
         success: "Observation deleted!"
     },
     deleteComment: {
-        usernameProvidedError: 'Username was not provided.',
+        userIdProvidedError: 'The user identifier of comment was not provided.',
         idProvidedError: 'Comment ID was not provided.',
         success: "Comment deleted!"
     },

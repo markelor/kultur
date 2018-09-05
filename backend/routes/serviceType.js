@@ -8,7 +8,7 @@ const en = require('../translate/en'); // Import translate en
 const nodemailer = require('nodemailer');
 const emailConfig = require('../config/email'); // Mongoose Email
 var aws = require('aws-sdk');
-
+var ObjectId = require('mongodb').ObjectId;
 module.exports = (router) => {
     // create reusable transporter object using the default SMTP transport
     var transporter = nodemailer.createTransport({
@@ -216,7 +216,7 @@ module.exports = (router) => {
     /* ===============================================================
             Route to delete a serviceType
         =============================================================== */
-    router.delete('/deleteServiceType/:id/:language', function(req, res) {
+    router.delete('/deleteServiceType/:userId/:id/:language', function(req, res) {
         var language = req.params.language;
         // Check if language was provided
         if (!language) {
@@ -226,7 +226,7 @@ module.exports = (router) => {
             if (!req.params.id) {
                 res.json({ success: false, message: eval(language + '.deleteServiceType.idProvidedError') }); // Return error
             } else {
-                var deleteUser = req.params.username; // Assign the username from request parameters to a variable
+                var deleteUser = ObjectId(req.params.userId); // Assign the userId from request parameters to a variable
                 // Look for logged in user in database to check if have appropriate access
                 User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
                     if (err) {
@@ -255,24 +255,8 @@ module.exports = (router) => {
                         } else {
                             var saveErrorPermission = false;
                             // Check if is owner
-                            if (mainUser._id.toString() === user._id.toString()) {} else {
-                                // Check if the current permission is 'admin'
-                                if (mainUser.permission === 'admin') {
-                                    // Check if user making changes has access
-                                    if (user.permission === 'admin') {
-                                        saveErrorPermission = language + '.general.adminOneError';
-                                    } else {}
-                                } else {
-                                    // Check if the current permission is moderator
-                                    if (mainUser.permission === 'moderator') {
-                                        // Check if contributor making changes has access
-                                        if (user.permission === 'contributor') {} else {
-                                            saveErrorPermission = language + '.general.adminOneError';
-                                        }
-                                    } else {
-                                        saveErrorPermission = language + '.general.permissionError';
-                                    }
-                                }
+                            if (mainUser.permission !== 'admin') {
+                                saveErrorPermission = language + '.general.permissionError';
                             }
                             //check saveError permision to save changes or not
                             if (saveErrorPermission) {

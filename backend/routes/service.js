@@ -78,7 +78,7 @@ module.exports = (router) => {
                                                     } else {
                                                         function serviceSave(place) {
                                                             const service = new Service({
-                                                                createdBy: req.body.service.createdBy,
+                                                                createdBy: ObjectId(req.body.service.createdBy),
                                                                 serviceTypeId: req.body.service.serviceTypeId,
                                                                 placeId: place._id,
                                                                 language: language,
@@ -260,7 +260,8 @@ module.exports = (router) => {
     /* ===============================================================
            GET Service
         =============================================================== */
-    router.get('/getService/:id/:username/:language', (req, res) => {
+    router.get('/getService/:id/:userId/:language', (req, res) => {
+                console.log(req.params);
         var language = req.params.language;
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
@@ -268,8 +269,8 @@ module.exports = (router) => {
             if (!req.params.id) {
                 res.json({ success: false, message: eval(language + '.getService.idProvidedError') }); // Return error
             } else {
-                if (!req.params.username) {
-                    res.json({ success: false, message: eval(language + '.getService.usernameProvidedError') }); // Return error
+                if (!req.params.userId) {
+                    res.json({ success: false, message: eval(language + '.getService.userIdProvidedError') }); // Return error
                 } else {
                     // Look for logged in user in database to check if have appropriate access
                     User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
@@ -298,7 +299,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.getService.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: req.params.username }, function(err, user) {
+                                User.findOne({ _id: ObjectId(req.params.userId) }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {
@@ -393,17 +394,17 @@ module.exports = (router) => {
     /* ===============================================================
            GET ALL user services
         =============================================================== */
-    router.get('/userServices/:username/:language', (req, res) => {
+    router.get('/userServices/:userId/:language', (req, res) => {
         var language = req.params.language;
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
-            if (!req.params.username) {
-                res.json({ success: false, message: eval(language + '.userServices.usernameProvidedError') }); // Return error
+            if (!req.params.userId) {
+                res.json({ success: false, message: eval(language + '.userServices.userIdProvidedError') }); // Return error
             } else {
                 Service.aggregate([{
                     $match: {
-                        $or: [{ createdBy: req.params.username }, { translation: { $elemMatch: { createdBy: req.params.username } } }]
+                        $or: [{ createdBy: ObjectId(req.params.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.params.userId) } } }]
                     }
                 }, {
                     // Join with Place table
@@ -450,7 +451,7 @@ module.exports = (router) => {
                 if (!req.body.createdBy) {
                     res.json({ success: false, message: eval(language + '.editService.createdByProvidedError') }); // Return error
                 } else {
-                    var editUser = req.body.createdBy; // Assign _id from service to be editted to a variable
+                    var editUser = ObjectId(req.body.createdBy); // Assign _id from service to be editted to a variable
                     if (req.body.createdBy) var newServiceCreatedBy = req.body.createdBy; // Check if a change to createdBy was requested
                     if (req.body.serviceTypeId) var newServiceTypeId = req.body.serviceTypeId; // Check if a change to serviceTypeId was requested
                     if (req.body.language) var newServiceLanguage = req.body.language; // Check if a change to language was requested
@@ -486,7 +487,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: editUser }, function(err, user) {
+                                User.findOne({ _id: editUser }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {
@@ -740,21 +741,21 @@ module.exports = (router) => {
     /* ===============================================================
             Route to delete a service
         =============================================================== */
-    router.delete('/deleteService/:username/:id/:language', function(req, res) {
+    router.delete('/deleteService/:userId/:id/:language', function(req, res) {
         var language = req.params.language;
         // Check if language was provided
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
-            // Check if username was provided
-            if (!req.params.username) {
-                res.json({ success: false, message: eval(language + '.deleteService.usernameProvidedError') }); // Return error
+            // Check if userId was provided
+            if (!req.params.userId) {
+                res.json({ success: false, message: eval(language + '.deleteService.userIdProvidedError') }); // Return error
             } else {
                 // Check if service id was provided
                 if (!req.params.id) {
                     res.json({ success: false, message: eval(language + '.deleteService.idProvidedError') }); // Return error
                 } else {
-                    var deleteUser = req.params.username; // Assign the username from request parameters to a variable
+                    var deleteUser = ObjectId(req.params.userId); // Assign the userId from request parameters to a variable
                     // Look for logged in user in database to check if have appropriate access
                     User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
                         if (err) {
@@ -782,7 +783,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: deleteUser }, function(err, user) {
+                                User.findOne({ _id: deleteUser }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {
@@ -924,9 +925,11 @@ module.exports = (router) => {
                                                                         if (service.images.length > 0) {
                                                                             deleteImages(service.images, "service-description");
                                                                         }
-                                                                        for (var i = 0; i < service.translation.length; i++) {
-                                                                            if (service.translation[i].images.description.length > 0) {
-                                                                                deleteImages(service.translation[i].images, "service-description");
+                                                                        if(service.translation){
+                                                                            for (var i = 0; i < service.translation.length; i++) {
+                                                                                if (service.translation[i].images.description.length > 0) {
+                                                                                    deleteImages(service.translation[i].images, "service-description");
+                                                                                }
                                                                             }
                                                                         }
                                                                     }

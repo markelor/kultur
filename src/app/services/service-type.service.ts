@@ -28,8 +28,8 @@ export class ServiceTypeService {
     return this.http.put<any>(this.domain + 'serviceType/editServiceType',serviceType);
   }
   // Function to delete a serviceType
-  public deleteServiceType(username,id,language) {
-    this.route= username+'/'+id +'/';
+  public deleteServiceType(userId,id,language) {
+    this.route= userId+'/'+id +'/';
     return this.http.delete<any>(this.domain + 'serviceType/deleteServiceType/' + this.route+language);
   }
 }

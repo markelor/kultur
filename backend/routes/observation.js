@@ -124,7 +124,7 @@ module.exports = (router) => {
     /* ===============================================================
            GET Observation
         =============================================================== */
-    router.get('/getObservation/:id/:username/:language', (req, res) => {
+    router.get('/getObservation/:id/:userId/:language', (req, res) => {
         var language = req.params.language;
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
@@ -132,8 +132,8 @@ module.exports = (router) => {
             if (!req.params.id) {
                 res.json({ success: false, message: eval(language + '.getObservation.idProvidedError') }); // Return error
             } else {
-                if (!req.params.username) {
-                    res.json({ success: false, message: eval(language + '.getObservation.usernameProvidedError') }); // Return error
+                if (!req.params.userId) {
+                    res.json({ success: false, message: eval(language + '.getObservation.userIdProvidedError') }); // Return error
                 } else {
                     // Look for logged in user in database to check if have appropriate access
                     User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
@@ -162,7 +162,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.getObservation.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: req.params.username }, function(err, user) {
+                                User.findOne({ _id: ObjectId(req.params.userId) }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {
@@ -256,16 +256,16 @@ module.exports = (router) => {
     /* ===============================================================
            GET ALL user observations
         =============================================================== */
-    router.get('/userObservations/:username/:language', (req, res) => {
+    router.get('/userObservations/:userId/:language', (req, res) => {
         var language = req.params.language;
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
-            if (!req.params.username) {
-                res.json({ success: false, message: eval(language + '.userObservations.usernameProvidedError') }); // Return error
+            if (!req.params.userId) {
+                res.json({ success: false, message: eval(language + '.getObservation.userIdProvidedError') }); // Return error
             } else {
                 Observation.find({
-                    $or: [{ createdBy: req.params.username }, { translation: { $elemMatch: { createdBy: req.params.username } } }]
+                    $or: [{ createdBy: ObjectId(req.params.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.params.userId) } } }]
                 }, function(err, observations) {
                     if (err) {
                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
@@ -315,7 +315,7 @@ module.exports = (router) => {
                 if (!req.body.createdBy) {
                     res.json({ success: false, message: eval(language + '.editObservation.createdByProvidedError') }); // Return error
                 } else {
-                    var editUser = req.body.createdBy; // Assign _id from observation to be editted to a variable
+                    var editUser = ObjectId(req.body.createdBy); // Assign _id from observation to be editted to a variable
                     if (req.body.createdBy) var newObservationCreatedBy = req.body.createdBy; // Check if a change to createdBy was requested
                     if (req.body.observationTypeId) var newObservationTypeId = req.body.observationTypeId; // Check if a change to observationTypeId was requested
                     if (req.body.language) var newObservationLanguage = req.body.language; // Check if a change to language was requested
@@ -351,7 +351,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: editUser }, function(err, user) {
+                                User.findOne({ _id: editUser }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {
@@ -480,21 +480,21 @@ module.exports = (router) => {
     /* ===============================================================
                 Route to delete a observation
             =============================================================== */
-    router.delete('/deleteObservation/:username/:id/:language', function(req, res) {
+    router.delete('/deleteObservation/:userId/:id/:language', function(req, res) {
         var language = req.params.language;
         // Check if language was provided
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
         } else {
-            // Check if username was provided
-            if (!req.params.username) {
-                res.json({ success: false, message: eval(language + '.deleteObservation.usernameProvidedError') }); // Return error
+            // Check if userId was provided
+            if (!req.params.userId) {
+                res.json({ success: false, message: eval(language + '.deleteObservation.userIdProvidedError') }); // Return error
             } else {
                 // Check if observation id was provided
                 if (!req.params.id) {
                     res.json({ success: false, message: eval(language + '.deleteObservation.idProvidedError') }); // Return error
                 } else {
-                    var deleteUser = req.params.username; // Assign the username from request parameters to a variable
+                    var deleteUser = ObjectId(req.params.userId); // Assign the userId from request parameters to a variable
                     // Look for logged in user in database to check if have appropriate access
                     User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
                         if (err) {
@@ -522,7 +522,7 @@ module.exports = (router) => {
                                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
                             } else {
                                 // Look for user in database
-                                User.findOne({ username: deleteUser }, function(err, user) {
+                                User.findOne({ _id: deleteUser }, function(err, user) {
                                     if (err) {
                                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                         var mailOptions = {

@@ -249,20 +249,20 @@ module.exports = (router) => {
   /* ===============================================================
      GET ALL user events
   =============================================================== */
-  router.get('/userEvents/:username/:language', (req, res) => {
+  router.get('/userEvents/:userId/:language', (req, res) => {
     var language = req.params.language;
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
-      if (!req.params.username) {
-        res.json({ success: false, message: eval(language + '.userEvents.usernameProvidedError') }); // Return error
+      if (!req.params.userId) {
+        res.json({ success: false, message: eval(language + '.userEvents.userIdProvidedError') }); // Return error
       } else {
 
         Event.aggregate([
           // Join with Place table
           {
             $match: {
-              $or: [{ createdBy: req.params.username }, { translation: { $elemMatch: { createdBy: req.params.username } } }]
+              $or: [{ createdBy: ObjectId(req.params.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.params.userId) } } }]
             }
           },
           {
@@ -526,13 +526,50 @@ module.exports = (router) => {
                     child = findCategory('child.parentId');
                     categoryArray.unshift(child);
                   }
-                  res.json({ success: true, event: event[0], categories: categoryArray }); // Return success and place 
+                  var reactions = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+                  var allReactions = [];
+                  var allReactionsIndex = [];
+                  for (var i = 0; i < reactions.length; i++) {
+                    var reaction = (eval('event[0].reactions.' + reactions[i] + 'By'));
+                    allReactionsIndex.push({ index: reaction.length, name: reactions[i] + 'By' })
+                    allReactions = allReactions.concat(reaction);
+                  }
+                  User.aggregate([ // Join with Place table
+                    {
+                      $match: { _id: { $in: allReactions } }
+                    },
+                    {
+                      $addFields: { "__order": { $indexOfArray: [allReactions, "$_id"] } }
+                    },
+                    {
+                      $sort: { "__order": 1 }
+                    }
+                  ]).exec(function(err, users) {
+                    if (err) {
+                      res.json({ success: false, message: err }); // Error if cannot connect
+                    } else {
+                      // Check if user is in database
+                      if (!users) {
+                        res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
+                      } else {
+                        var usersArray = [];
+                        for (var j = 0; j < users.length; j++) {
+                          usersArray.push(users[j].username);
+                        }
+                        var reactionsUsernames = {};
+                        for (var i = 0; i < allReactionsIndex.length; i++) {
+                          reactionsUsernames[allReactionsIndex[i].name] = usersArray.slice(0, allReactionsIndex[i].index);
+                          usersArray.splice(0, allReactionsIndex[i].index);
+                        }
+                        res.json({ success: true, event: event[0], categories: categoryArray, reactionsUsernames: reactionsUsernames }); // Return success and place 
+                      }
+                    }
+                  });
                 }
               }
             });
           }
         });
-
       }
     }
   });
@@ -596,7 +633,7 @@ module.exports = (router) => {
               } else {
                 var saveErrorPermission = false;
                 // Check if is owner
-                if (mainUser.permission==="banned") {
+                if (mainUser.permission === "banned") {
                   saveErrorPermission = language + '.general.permissionError';
                 }
                 //check saveError permision to save changes or not
@@ -871,21 +908,21 @@ module.exports = (router) => {
   /* ===============================================================
       Route to delete a event
   =============================================================== */
-  router.delete('/deleteEvent/:username/:id/:language', function(req, res) {
+  router.delete('/deleteEvent/:userId/:id/:language', function(req, res) {
     var language = req.params.language;
     // Check if language was provided
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
-      // Check if username was provided
-      if (!req.params.username) {
-        res.json({ success: false, message: eval(language + '.deleteEvent.usernameProvidedError') }); // Return error
+      // Check if userId was provided
+      if (!req.params.userId) {
+        res.json({ success: false, message: eval(language + '.deleteEvent.userIdProvidedError') }); // Return error
       } else {
         // Check if event id was provided
         if (!req.params.id) {
           res.json({ success: false, message: eval(language + '.deleteEvent.idProvidedError') }); // Return error
         } else {
-          var deleteUser = req.params.username; // Assign the username from request parameters to a variable
+          var deleteUser = ObjectId(req.params.userId); // Assign the userId from request parameters to a variable
           // Look for logged in user in database to check if have appropriate access
           User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
             if (err) {
@@ -913,7 +950,7 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
               } else {
                 // Look for user in database
-                User.findOne({ username: deleteUser }, function(err, user) {
+                User.findOne({ _id: deleteUser }, function(err, user) {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
@@ -1064,12 +1101,14 @@ module.exports = (router) => {
                             if (event.images.description.length > 0) {
                               deleteImages(event.images.description, "event-description");
                             }
-                            for (var i = 0; i < event.translation.length; i++) {
-                              if (event.translation[i].images.poster.length > 0) {
-                                deleteImages(event.translation[i].images.poster, "event-poster");
-                              }
-                              if (event.translation[i].images.description.length > 0) {
-                                deleteImages(event.translation[i].images.description, "event-description");
+                            if (event.translation) {
+                              for (var i = 0; i < event.translation.length; i++) {
+                                if (event.translation[i].images.poster.length > 0) {
+                                  deleteImages(event.translation[i].images.poster, "event-poster");
+                                }
+                                if (event.translation[i].images.description.length > 0) {
+                                  deleteImages(event.translation[i].images.description, "event-description");
+                                }
                               }
                             }
                           }
@@ -1165,20 +1204,23 @@ module.exports = (router) => {
                       var limit = false;
                       // Check if the user who liked the post has already liked the event post before
                       for (var i = 0; i < reactions.length && !limit; i++) {
-                        if (eval('event.reactions.' + reactions[i] + 'By').includes(user.username)) {
-                          limit = true;
-                          if (req.body.reaction === reactions[i]) {
-                            res.json({ success: false, message: eval(language + '.newEventReaction.likedBeforeError') }); // Return error message
-                          } else {
-                            //Delete reaction
-                            insert = true;
-                            eval('event.reactions.' + reactions[i] + 'By').splice(eval('event.reactions.' + reactions[i] + 'By').indexOf(user.username), 1);
+                        var reaction = (eval('event.reactions.' + reactions[i] + 'By'));
+                        for (var j = 0; j < reaction.length; j++) {
+                          if (reaction[j]._id.toString() === user._id.toString()) {
+                            limit = true;
+                            if (req.body.reaction === reactions[i]) {
+                              res.json({ success: false, message: eval(language + '.newEventReaction.likedBeforeError') }); // Return error message
+                            } else {
+                              //Delete reaction
+                              insert = true;
+                              reaction.splice(reaction.indexOf(user._id), 1);
+                            }
                           }
                         }
                       }
                       if (insert || !limit) {
                         // Save event post data
-                        eval('event.reactions.' + req.body.reaction + 'By').push(user.username);
+                        eval('event.reactions.' + req.body.reaction + 'By').push(user._id);
                         event.save((err) => {
                           // Check if error was found
                           if (err) {
@@ -1271,20 +1313,22 @@ module.exports = (router) => {
                     // Check if the user who disliked the post has already liked the event post before
                     var reactions = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
                     for (var i = 0; i < reactions.length; i++) {
-                      if (eval('event.reactions.' + reactions[i] + 'By').includes(user.username)) {
-                        //delete reactions
-                        eval('event.reactions.' + reactions[i] + 'By').splice(eval('event.reactions.' + reactions[i] + 'By').indexOf(user.username), 1);
-                        // Save event post data
-                        event.save((err) => {
-                          // Check if error was found
-                          if (err) {
-                            res.json({ success: false, message: eval(language + '.deleteEventReaction.saveError'), err }); // Return general error message
-                          } else {
-                            res.json({ success: true, message: eval(language + '.deleteEventReaction.success') }); // Return error message
-                          }
-                        });
+                      var reaction = (eval('event.reactions.' + reactions[i] + 'By'));
+                      for (var j = 0; j < reaction.length; j++) {
+                        if (reaction[j]._id.toString() === user._id.toString()) {
+                          //delete reactions
+                          reaction.splice(reaction.indexOf(user._id), 1);
+                          // Save event post data
+                          event.save((err) => {
+                            // Check if error was found
+                            if (err) {
+                              res.json({ success: false, message: eval(language + '.deleteEventReaction.saveError'), err }); // Return general error message
+                            } else {
+                              res.json({ success: true, message: eval(language + '.deleteEventReaction.success') }); // Return error message
+                            }
+                          });
+                        }
                       }
-
                     }
                   }
                 }

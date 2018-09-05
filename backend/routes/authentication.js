@@ -234,6 +234,7 @@ module.exports = (router) => {
                                         message: eval(language + '.login.success'),
                                         token: token,
                                         user: {
+                                            id:user._id,
                                             username: user.username,
                                             permission:user.permission,
                                             currentAvatar: user.currentAvatar

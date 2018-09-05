@@ -34,12 +34,12 @@ const commentSchema = new Schema({
     level: { type: Number, required: true, default: 0 },
     eventId: { type: Schema.Types.ObjectId, required: true },
     mentionedUsers: [{
-        username: { type: String, required: true },
+        userId: { type: Schema.Types.ObjectId, required: true },
         readed: { type: Boolean, required: true,default:false },
         _id:false
     }],
     comment: { type: String, required: true, validate: commentValidators },
-    createdBy: { type: String, required: true },
+    createdBy: { type: Schema.Types.ObjectId, required: true },
     deleted: { type: Boolean, required: true, default: false },
     createdAt: { type: Date, required: true, default: Date.now() },
     updatedAt: { type: Date, required: true, default: Date.now() },

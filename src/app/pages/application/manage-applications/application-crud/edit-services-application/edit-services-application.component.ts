@@ -11,6 +11,7 @@ import {DataTableDirective} from 'angular-datatables';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
+import { ObservableService } from '../../../../../services/observable.service';
 
 @Component({
   selector: 'app-edit-services-application',
@@ -29,10 +30,12 @@ export class EditServicesApplicationComponent implements OnInit {
   public dtOptions: any = {};
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
+  private subscriptionTabClick: Subscription;
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationService:ApplicationService,
     private authService:AuthService,
+    private observableService: ObservableService,
     private serviceService:ServiceService,
     private translate: TranslateService,
     private router:Router,
@@ -81,7 +84,6 @@ export class EditServicesApplicationComponent implements OnInit {
                 this.servicesApplication.push(this.services[indexService]);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
-                console.log(indexService);
               });
             }        
           });
@@ -109,7 +111,7 @@ export class EditServicesApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationServices(){
+  private getApplicationServicesInit(){
     // Get application services
     this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
@@ -117,6 +119,27 @@ export class EditServicesApplicationComponent implements OnInit {
         this.servicesApplication=data.services;
       }
       this.deleteTrigger.next();
+    });
+  }
+   private getApplicationServices(){
+    // Get application services
+    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+      this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
+        if(index===0){
+          dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            if(data.success){
+              this.application=data.application;
+              this.servicesApplication=data.services;
+            }else{
+              this.application=undefined;
+              this.servicesApplication=[];
+            }        
+            this.deleteTrigger.next();
+          });
+        }        
+      });   
     });
   }
   // Function to get services from the database
@@ -132,6 +155,13 @@ export class EditServicesApplicationComponent implements OnInit {
     svg.setAttribute('width', '50');
     svg.setAttribute('height', '50');
     return svg;
+  }
+  private tabClick(){
+    this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === this.observableService.applicationServices) {
+        this.getApplicationServices();
+      }
+    }); 
   }
   ngOnInit() {
     // Get authentication on page load
@@ -150,11 +180,13 @@ export class EditServicesApplicationComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     }); 
     this.createSettings(); 
-    this.getApplicationServices();
-    this.getServices();        
+    this.getApplicationServicesInit();
+    this.getServices(); 
+    this.tabClick();       
   }
    ngOnDestroy(){
     this.addTrigger.unsubscribe();
     this.deleteTrigger.unsubscribe();
+    this.subscriptionTabClick.unsubscribe();
   }
 }

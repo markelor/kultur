@@ -21,18 +21,18 @@ export class ObservationService {
     return this.http.get<any>(this.domain + 'observation/getObservations/'+language);
   }
   // Function to get observation from the database
-  public getObservation(id,username,language) {
-    this.route= encodeURIComponent(id) +'/'+encodeURIComponent(username)+'/';
+  public getObservation(id,userId,language) {
+    this.route= id +'/'+userId+'/';
     return this.http.get<any>(this.domain + 'observation/getObservation/'+this.route+language);
   }
   // Function to get all user observations from the database
-  public getUserObservations(username,language) {
-    this.route= encodeURIComponent(username) +'/';
+  public getUserObservations(userId,language) {
+    this.route= userId +'/';
     return this.http.get<any>(this.domain + 'observation/userObservations/'+this.route+language);
   }
   // Function to delete a observation
-  public deleteObservation(username,id,language) {
-    this.route= username+'/'+id +'/'
+  public deleteObservation(userId,id,language) {
+    this.route= userId+'/'+id +'/'
     return this.http.delete<any>(this.domain + 'observation/deleteObservation/'+this.route+language);
   }
   // Function to edit a observation

@@ -379,7 +379,7 @@ export class ServiceFormComponent implements OnInit {
       if(this.inputService.translation[i].language===this.inputLanguage){
         hasTranslationService=true;
         this.inputService.translation[i].language=this.inputLanguage;
-        this.inputService.translation[i].createdBy=this.authService.user.username;// Language field  
+        this.inputService.translation[i].createdBy=this.authService.user.id;// Language field  
         this.inputService.translation[i].title=this.form.get('title').value;
         this.inputService.translation[i].description=this.form.get('description').value;
         this.inputService.translation[i].images.description=this.imagesDescription;
@@ -401,14 +401,14 @@ export class ServiceFormComponent implements OnInit {
     if(!hasTranslationService){
       if(this.inputService.language===this.inputLanguage){
         this.inputService.language=this.inputLanguage, 
-        this.inputService.createdBy=this.authService.user.username;       
+        this.inputService.createdBy=this.authService.user.id;       
         this.inputService.title=this.form.get('title').value;
         this.inputService.description=this.form.get('description').value;
         this.inputService.images.description=this.imagesDescription;
       }else{
         var translationObj={
           language:this.inputLanguage,
-          createdBy:this.authService.user.username,
+          createdBy:this.authService.user.id,
           title:this.form.get('title').value,
           description:this.form.get('description').value,
           images:this.imagesDescription
@@ -571,7 +571,7 @@ export class ServiceFormComponent implements OnInit {
         this.submitted = true;
         //this.disableForm();
         this.service.setLanguage=this.localizeService.parser.currentLang,
-        this.service.createdBy=this.authService.user.username; // CreatedBy field 
+        this.service.createdBy=this.authService.user.id; // CreatedBy field 
         this.service.setServiceTypeId=this.form.get('serviceType').value;
         this.service.setTitle=this.form.get('title').value;
         this.service.setDescription=this.form.get('description').value;

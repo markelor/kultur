@@ -82,7 +82,7 @@ export class ServicesAdministratorComponent implements OnInit {
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-service') {
-          this.serviceService.deleteService(this.authService.user.username,service._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.serviceService.deleteService(this.authService.user.id,service._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first

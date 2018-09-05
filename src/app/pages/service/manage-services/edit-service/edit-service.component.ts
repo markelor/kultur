@@ -33,7 +33,7 @@ export class EditServiceComponent implements OnInit {
       }
     });
     // Get service
-    this.serviceService.getService(this.activatedRoute.snapshot.params['id'],this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
+    this.serviceService.getService(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
       	this.service=data.service;
         setTimeout(() => {

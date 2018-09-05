@@ -91,7 +91,7 @@ export class CreateServiceTypeComponent implements OnInit {
       this.subscriptionObservableDelete=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservableDelete.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-service-type') {
-          this.serviceTypeService.deleteServiceType(this.authService.user.username,serviceType._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.serviceTypeService.deleteServiceType(this.authService.user.id,serviceType._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  
               this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
                 // Destroy the table first
@@ -114,18 +114,28 @@ export class CreateServiceTypeComponent implements OnInit {
   private observableServiceTypeSuccess(){
     this.subscriptionObservableSuccess=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === 'modal-edit-service-type-success') {
-       this.getServiceTypes();
+         this.getServiceTypes(true);
       } 
     });   
   }
-  private getServiceTypes(){
+  private getServiceTypes(operation){
     //Get serviceType
-      this.serviceTypeService.getServiceTypes(this.localizeService.parser.currentLang).subscribe(data=>{
-        if(data.success){ 
+    this.serviceTypeService.getServiceTypes(this.localizeService.parser.currentLang).subscribe(data=>{
+      if(data.success){ 
+        if(operation){
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            this.serviceTypes=data.serviceTypes; 
+            // Call the addTrigger to rerender again
+            this.dtTrigger.next();
+          }); 
+        }else{
           this.serviceTypes=data.serviceTypes;        
           this.dtTrigger.next();
-        }    
-      });                 
+        }
+      }    
+    });                 
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
     svg.setAttribute('width', '50');
@@ -147,7 +157,7 @@ export class CreateServiceTypeComponent implements OnInit {
       this.style.height = (this.scrollHeight) + 'px';
     });
     this.createSettings(); 
-    this.getServiceTypes();
+    this.getServiceTypes(undefined);
     this.observableServiceTypeSuccess(); 	
   }
   ngOnDestroy(){

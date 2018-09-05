@@ -79,7 +79,7 @@ export class ApplicationsAdministratorComponent implements OnInit {
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'modal-delete-application') {
-          this.applicationService.deleteApplication(this.authService.user.username,application._id,this.localizeService.parser.currentLang).subscribe(data=>{
+          this.applicationService.deleteApplication(this.authService.user.id,application._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first

@@ -13,6 +13,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class EditApplicationComponent implements OnInit {
   public application;
+  public moderator;
   constructor(
   	private applicationService:ApplicationService,
   	private authService:AuthService,
@@ -35,6 +36,7 @@ export class EditApplicationComponent implements OnInit {
     this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
       	this.application=data.application;
+        this.moderator=data.moderatorsArray;
         setTimeout(() => {
           $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
           $( ".nav-"+this.localizeService.parser.currentLang).click ();

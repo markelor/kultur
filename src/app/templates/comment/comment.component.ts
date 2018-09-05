@@ -91,7 +91,7 @@ export class CommentComponent implements OnInit {
  
     }else{
       //delete comment   
-      this.commentService.deleteComment(this.authService.user.username,comment._id,this.localizeService.parser.currentLang).subscribe(data=>{
+      this.commentService.deleteComment(this.authService.user.id,comment._id,this.localizeService.parser.currentLang).subscribe(data=>{
         if(data.success){ 
           this.messageClass = 'alert alert-success ks-solid'; // Set bootstrap success class
           this.message = data.message; // Set success messag
@@ -119,24 +119,22 @@ export class CommentComponent implements OnInit {
     if (!this.form.get('comment').value) {
       this.form.controls['comment'].setValue('');
     }
-    if(this.form.get('comment').value.search('@' + comment.createdBy)===-1){
+    if(this.form.get('comment').value.search('@' + comment.user.username)===-1){
       if (this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
       )[0] === '@') {
-        console.log("a");
         this.form.controls['comment'].setValue(', '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));
       }else {
-        console.log("b");
         this.form.controls['comment'].setValue(' '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));      
       }
-       this.form.controls['comment'].setValue('@' + comment.createdBy + this.form.get('comment').value);
+       this.form.controls['comment'].setValue('@' + comment.user.username + this.form.get('comment').value);
        if (isPlatformBrowser(this.platformId)) {
         $("#textareaComment").focus();
       }  
@@ -157,14 +155,10 @@ export class CommentComponent implements OnInit {
           if(this.formEdit.get('commentEdit').value.match(/(^|[^@\w])@(\w{1,15})\b/)){
             var mentionedUsers = this.formEdit.get('commentEdit').value.replace(/(^|[^@\w])@(\w{1,15})\b/g,'@271$2@272').match(/@271(.*?)@272/g).join().replace(/@271/g,'').replace(/@272/g,'').split(',');
           }                                                                                      
-          console.log(this.formEdit.get('commentEdit').value);
           var span= this.markdown(this.formEdit.get('commentEdit').value.substring(
           this.formEdit.get('commentEdit').value.lastIndexOf("<p>") + 3, 
           this.formEdit.get('commentEdit').value.lastIndexOf("</p>")
-          ));
-            console.log(span)
-            console.log(mentionedUsers);
-            
+          ));            
             comment.comment=span;
             comment.mentionedUsers=mentionedUsers; 
         }
@@ -172,7 +166,6 @@ export class CommentComponent implements OnInit {
         this.submittedEdit = true;
         // Function to save comment into database
         this.commentService.editComment(comment).subscribe(data => {
-          console.log(data);
           // Check if event was saved to database or not
           if (!data.success) {
 
@@ -199,16 +192,13 @@ export class CommentComponent implements OnInit {
         if(this.form.get('comment').value.match(/(^|[^@\w])@(\w{1,15})\b/)){
             var mentionedUsers = this.form.get('comment').value.replace(/(^|[^@\w])@(\w{1,15})\b/g,'@271$2@272').match(/@271(.*?)@272/g).join().replace(/@271/g,'').replace(/@272/g,'').split(',');
         }                                                                                      
-        console.log(this.form.get('comment').value);
         var span= this.markdown(this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));                            
-        console.log(span)
-        console.log(mentionedUsers);
         this.commentClass.setEventId=this.inputEventId;
         this.commentClass.language=this.localizeService.parser.currentLang;
-        this.commentClass.setCreatedBy=this.authService.user.username;
+        this.commentClass.setCreatedBy=this.authService.user.id;
         this.commentClass.setComment=span;
         this.commentClass.setMentionedUsers=mentionedUsers;
         if(mentionedUsers){
@@ -219,7 +209,6 @@ export class CommentComponent implements OnInit {
         this.submitted = true;
         // Function to save comment into database
         this.commentService.newComment(this.commentClass).subscribe(data => {
-          console.log(data);
           // Check if event was saved to database or not
           if (!data.success) {
             this.submitted = false; // Enable submit button

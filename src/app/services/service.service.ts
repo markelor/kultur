@@ -22,18 +22,18 @@ export class ServiceService {
     return this.http.get<any>(this.domain + 'service/getServices/'+language);
   }
   // Function to get service from the database
-  public getService(id,username,language) {
-    this.route= encodeURIComponent(id) +'/'+encodeURIComponent(username)+'/';
+  public getService(id,userId,language) {
+    this.route= id +'/'+userId+'/';
     return this.http.get<any>(this.domain + 'service/getService/'+this.route+language);
   }
   // Function to get all user services from the database
-  public getUserServices(username,language) {
-    this.route= encodeURIComponent(username) +'/';
+  public getUserServices(userId,language) {
+    this.route= userId +'/';
     return this.http.get<any>(this.domain + 'service/userServices/'+this.route+language);
   }
   // Function to delete a service
-  public deleteService(username,id,language) {
-    this.route= username+'/'+id +'/'
+  public deleteService(userId,id,language) {
+    this.route= userId+'/'+id +'/'
     return this.http.delete<any>(this.domain + 'service/deleteService/'+this.route+language);
   }
   // Function to edit a service

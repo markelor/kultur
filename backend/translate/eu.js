@@ -192,7 +192,7 @@ module.exports = {
     },
     //newApplication
     newApplication: {
-        usersProvidedError: "Aplikazioaren erabiltzaileak beharrezkoak dira.",
+        moderatorsProvidedError: "Aplikazioaren moderatzaileak beharrezkoak dira.",
         titleProvidedError: "Aplikazioaren izenburua beharrezkoa da.",
         licenseNameProvidedError: "Aplikazioaren lizentzia beharrezkoa da.",
         conditionsProvidedError: "Aplikazioaren baldintzak beharrezkoak dira.",
@@ -254,18 +254,18 @@ module.exports = {
     },
     //userEvents
     userEvents: {
-        usernameProvidedError: "Ekintzen erabiltzailea ez da eman.",
+        userIdProvidedError: "Ekintzen erabiltzaile indentifikazioak ez dira eman.",
         eventsError: "Ez dira ekintzak aurkitu.",
     },
     //userApplications
     userApplications: {
-        usernameProvidedError: "Aplikazioen erabiltzailea ez da eman.",
+        userIdProvidedError: "Aplikazioen erabiltzaile indentifikazioak ez dira eman.",
         userError: "Erabiltzailea ez da aurkitu.",
         applicationsError: "Ez dira aplikazioak aurkitu."
     },
     //userServices
     userServices: {
-        usernameProvidedError: "Zerbitzuen erabiltzailea ez da eman.",
+        userIdProvidedError: "Zerbitzuen erabiltzaile indentifikazioak ez dira eman.",
         eventsError: "Ez dira zerbitzuak aurkitu.",
     },
     //usersSearch
@@ -294,7 +294,7 @@ module.exports = {
     //getService
     getService: {
         idProvidedError: "Zerbitzuaren IDa ez da eman.",
-        usernameProvidedError: "Zerbitzuaren erabiltzailea ez da eman.",
+        userIdProvidedError: "Zerbitzuaren erabiltzaile indentifikazioa ez da eman.",
         userError: "Erabiltzailea ez da aurkitu.",
         serviceError: "Ez da zerbitzua aurkitu.",
         placeError: "Ez da lekua aurkitu."
@@ -302,14 +302,14 @@ module.exports = {
     //getObservation
     getObservation: {
         idProvidedError: "Oharraren IDa ez da eman.",
-        usernameProvidedError: "Oharraren erabiltzailea ez da eman.",
+        userIdProvidedError: "Oharraren erabiltzaile indentifikazioa ez da eman.",
         userError: "Erabiltzailea ez da aurkitu.",
         observationError: "Ez da oharra aurkitu."
     },
     //getComment
     getComment: {
         idProvidedError: "Iruzkinaren IDa ez da eman.",
-        usernameProvidedError: "Iruzkinaren erabiltzailea ez da eman.",
+        userIdProvidedError: "Iruzkinaren erabiltzaile indentifikazioa ez da eman.",
         commentError: "Ez da iruzkina aurkitu."
     },
     //getPlacesCoordinates
@@ -351,7 +351,7 @@ module.exports = {
     },
     editApplication: {
         idProvidedError: 'Ez da aplikazioaren IDa eman.',
-        usersProvidedError: "Aplikazioaren erabiltzaileak ez dira eman.",
+        usersProvidedError: "Aplikazioen erabiltzaileak ez dira eman.",
         saveError: "Ezin izan da aplikazioa aldatu. Akatsa: ",
         success: "Aplikazioa aldatu da!"
     },
@@ -377,7 +377,6 @@ module.exports = {
     },
     editComment: {
         idProvidedError: 'Ez da iruzkinaren IDa eman.',
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
         createdByProvidedError: 'Iruzkinaren erabiltzailea ez da eman.',
         commentProvidedError: 'Iruzkina ez da eman.',
         saveError: "Ezin izan da iruzkina aldatu. Akatsa: ",
@@ -390,19 +389,19 @@ module.exports = {
         success: "Kategoria ezabatu da!"
     },
     deleteEvent: {
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
+        userIdProvidedError: "Ekintzaren erabiltzaile indentifikazioa ez da eman.",
         idProvidedError: 'Ez da ekintzaren IDa eman.',
         saveError: "Ezin izan da ekintza ezabatu. Akatsa: ",
         success: "Ekintza ezabatu da!"
     },
     deleteApplication: {
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
+        userIdProvidedError: "Aplikazioaren erabiltzaile indentifikazioa ez da eman.",
         idProvidedError: 'Ez da ekintzaren IDa eman.',
         saveError: "Ezin izan da ekintza ezabatu. Akatsa: ",
         success: "Ekintza ezabatu da!"
     },
     deleteService: {
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
+        userIdProvidedError: "Zerbitzuaren erabiltzaile indentifikazioa ez da eman.",
         idProvidedError: 'Ez da zerbitzuaren IDa eman.',
         deleteError: "Ezin izan da zerbitzua ezabatu, beste aplikazio batek erabiltzen du.",
         saveError: "Ezin izan da zerbitzua ezabatu. Akatsa: ",
@@ -414,14 +413,14 @@ module.exports = {
         success: "Zerbitzu mota ezabatu da!"
     },
     deleteObservation: {
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
+        userIdProvidedError: "Oharraren erabiltzaile indentifikazioa ez da eman.",
         idProvidedError: 'Ez da oharraren IDa eman.',
         deleteError: "Ezin izan da oharra ezabatu, beste aplikazio batek erabiltzen du.",
         saveError: "Ezin izan da oharra ezabatu. Akatsa: ",
         success: "Oharra ezabatu da!"
     },
     deleteComment: {
-        usernameProvidedError: 'Erabiltzaile izena ez da eman.',
+        userIdProvidedError: "Iruzkinaren erabiltzaile indentifikazioa ez da eman.",
         idProvidedError: 'Ez da iruzkinaren IDa eman.',
         success: "Iruzkina ezabatu da!"
     },

@@ -192,7 +192,7 @@ module.exports = {
     },
     //newApplication
     newApplication: {
-        usersProvidedError: "Los usuarios de la aplicación son requeridas.",
+        moderatorsProvidedError: "Los moderadores de la aplicación son requeridas.",
         titleProvidedError: "El título de la aplicación es requerida.",
         licenseNameProvidedError: "El nombre de la licencia de la aplicación es requerida.",
         conditionsProvidedError: "Las condiciones de la aplicación son requeridas.",
@@ -254,18 +254,18 @@ module.exports = {
     },
     //userEvents
     userEvents: {
-        usernameProvidedError: "El usurio de los eventos no fue proporcionado.",
+        userIdProvidedError: "El identificador del usuario de los eventos no fue proporcionado.",
         eventsError: "No se encontraron eventos.",
     },
     //userApplications
     userApplications: {
-        usernameProvidedError: "El usurio de las aplicaciones no fue proporcionado.",
+        userIdProvidedError: "El identificador del usuario de las aplicaciones no fue proporcionado.",
         userError: "No se encontró el usuario.",
         applicationsError: "No se encontraron aplicaciones."
     },
     //userServices
     userServices: {
-        usernameProvidedError: "El usurio de los servicios no fue proporcionado.",
+        userIdProvidedError: "El identificador del usuario de los servicios no fue proporcionado.",
         eventsError: "No se encontraron servicios.",
     },
     //usersSearch
@@ -309,7 +309,7 @@ module.exports = {
     //getComment
     getComment: {
         idProvidedError: "El ID del comentario no fue proporcionado.",
-        usernameProvidedError: "El usurio del comentario no fue proporcionado.",
+        userIdProvidedError: "El identificador del usuario de los comentarios no fue proporcionado.",
         commentError: "No se encontro el comentario."
     },
     //getPlacesCoordinates
@@ -351,13 +351,13 @@ module.exports = {
     },
     editApplication: {
         idProvidedError: 'El ID de la aplicación, no fue proporcionado.',
-        usersProvidedError: "Los usuarios de la aplicación no fueron proporcionados.",
+        usersProvidedError: "El usuario de la aplicación no fueron proporcionados.",
         saveError: "No se pudo editar la aplicación. Error: ",
         success: "¡Aplicación editada!"
     },
     editService: {
         idProvidedError: 'El ID del servicio, no fue proporcionado.',
-        createdByProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario del servicio no fue proporcionado.',
         saveError: "No se pudo editar el servicio. Error: ",
         success: "¡Servicio editado!"
     },
@@ -377,7 +377,6 @@ module.exports = {
     },
     editComment: {
         idProvidedError: 'El ID del comentario, no fue proporcionado.',
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
         createdByProvidedError: 'El nombre de usuario no fue proporcionado.',
         commentProvidedError: 'El comentario no fue proporcionado.',
         saveError: "No se pudo editar el comentario. Error: ",
@@ -390,19 +389,19 @@ module.exports = {
         success: "¡Categoría eliminada!"
     },
     deleteEvent: {
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario del evento no fue proporcionado.',
         idProvidedError: 'El ID del evento, no fue proporcionado.',
         saveError: "No se pudo eliminar el evento. Error: ",
         success: "¡Evento eliminado!"
     },
     deleteApplication: {
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario de la aplicación no fue proporcionado.',
         idProvidedError: 'El ID del evento, no fue proporcionado.',
         saveError: "No se pudo eliminar la aplicación. Error: ",
         success: "¡Aplikación eliminada!"
     },
     deleteService: {
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario del servicio no fue proporcionado.',
         idProvidedError: 'El ID del servicio, no fue proporcionado.',
         deleteError: "No se pudo eliminar el servicio, está siendo utilizado por otra aplicación.",
         saveError: "No se pudo eliminar el servicio. Error: ",
@@ -414,14 +413,14 @@ module.exports = {
         success: "¡Tipo de servicio eliminado!"
     },
     deleteObservation: {
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario de la observación no fue proporcionado.',
         idProvidedError: 'El ID de la observación, no fue proporcionado.',
         deleteError: "No se pudo eliminar la observación, está siendo utilizado por otra aplicación.",
         saveError: "No se pudo eliminar la observación. Error: ",
         success: "¡Observación eliminada!"
     },
     deleteComment: {
-        usernameProvidedError: 'El nombre de usuario no fue proporcionado.',
+        userIdProvidedError: 'El identificador del usuario del comentario no fue proporcionado.',
         idProvidedError: 'El ID del comentario, no fue proporcionado.',
         success: "¡Comentario eliminado!"
     },

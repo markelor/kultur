@@ -33,7 +33,7 @@ export class EditObservationComponent implements OnInit {
       }
     });
     // Get service
-    this.observationService.getObservation(this.activatedRoute.snapshot.params['id'],this.authService.user.username,this.localizeService.parser.currentLang).subscribe(data => {
+    this.observationService.getObservation(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
       	this.observation=data.observation;
         setTimeout(() => {

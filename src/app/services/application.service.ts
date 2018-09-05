@@ -39,8 +39,8 @@ export class ApplicationService {
     return this.http.get<any>(this.domain + 'application/getApplicationObservations/'+this.route+language);
   }
   // Function to get all user applications from the database
-  public getUserApplications(username,language) {
-    this.route= encodeURIComponent(username) +'/';
+  public getUserApplications(userId,language) {
+    this.route= userId +'/';
     return this.http.get<any>(this.domain + 'application/userApplications/'+this.route+language);
   }
   // Function to edit/update theme post
@@ -48,8 +48,8 @@ export class ApplicationService {
     return this.http.put<any>(this.domain + 'application/editApplication',application);
   }
   // Function to delete a event
-  public deleteApplication(username,id,language) {
-    this.route= username+'/'+id +'/'
+  public deleteApplication(userId,id,language) {
+    this.route= userId+'/'+id +'/'
     return this.http.delete<any>(this.domain + 'application/deleteApplication/'+this.route+language);
   }
 }

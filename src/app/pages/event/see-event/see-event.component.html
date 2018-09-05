@@ -83,37 +83,37 @@
                     <!--like reaction-->
                     <ng-template #likeReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'likeBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'likeBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <!--love reaction-->
                     <ng-template #loveReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'loveBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'loveBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <!--haha reaction-->
                     <ng-template #hahaReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'hahaBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'hahaBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <!--wow reaction-->
                     <ng-template #wowReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'wowBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'wowBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <!--sad reaction-->
                     <ng-template #sadReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'sadBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'sadBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <!--angry reaction-->
                     <ng-template #angryReaction>
                       <ul class="reaction-names">
-                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactions' : 'angryBy'">{{reactionUsername}}</li>
+                        <li *ngFor="let reactionUsername of event | safeHtml : 'reactionsUsernames' : 'angryBy'">{{reactionUsername}}</li>
                       </ul>
                     </ng-template>
                     <ng-template #allReaction>
@@ -124,32 +124,32 @@
                     <!--like reaction-->
                     <a (click)="reactionClick('like')" href="javascript:void(0);" placement="top" [ngbTooltip]="likeReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'likeBy').length" [ngClass]="'like-btn-like'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'likeBy').length" [ngClass]="'like-btn-like'"></span>
                     </a>
                     <!--love reaction-->
                     <a (click)="reactionClick('love')" href="javascript:void(0);" placement="top" [ngbTooltip]="loveReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'loveBy').length" [ngClass]="'like-btn-love'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'loveBy').length" [ngClass]="'like-btn-love'"></span>
                     </a>
                     <!--haha reaction-->
                     <a (click)="reactionClick('haha')" href="javascript:void(0);" placement="top" [ngbTooltip]="hahaReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'hahaBy').length" [ngClass]="'like-btn-haha'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'hahaBy').length" [ngClass]="'like-btn-haha'"></span>
                     </a>
                     <!--wow reaction-->
                     <a (click)="reactionClick('wow')" href="javascript:void(0);" placement="top" [ngbTooltip]="wowReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'wowBy').length" [ngClass]="'like-btn-wow'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'wowBy').length" [ngClass]="'like-btn-wow'"></span>
                     </a>
                     <!--sad reaction-->
                     <a (click)="reactionClick('sad')" href="javascript:void(0);" placement="top" [ngbTooltip]="sadReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'sadBy').length" [ngClass]="'like-btn-sad'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'sadBy').length" [ngClass]="'like-btn-sad'"></span>
                     </a>
                     <!--angry reaction-->
                     <a (click)="reactionClick('angry')" href="javascript:void(0);" placement="top" [ngbTooltip]="angryReaction" class="like-emo">
                       <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactions' : 'angryBy').length" [ngClass]="'like-btn-angry'"></span>
+                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'angryBy').length" [ngClass]="'like-btn-angry'"></span>
                     </a>
                     <a (click)="reactionClick('all')" href="javascript:void(0);" placement="top" [ngbTooltip]="allReaction" class="like-details">
                     </a>

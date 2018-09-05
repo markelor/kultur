@@ -219,7 +219,7 @@ export class ObservationFormComponent implements OnInit {
       if(this.inputObservation.translation[i].language===this.inputLanguage){
         hasTranslationObservation=true;
         this.inputObservation.translation[i].language=this.inputLanguage;
-        this.inputObservation.translation[i].createdBy=this.authObservation.user.username;// Language field  
+        this.inputObservation.translation[i].createdBy=this.authObservation.user.id;// Language field  
         this.inputObservation.translation[i].title=this.form.get('title').value;
         this.inputObservation.translation[i].description=this.form.get('description').value;
         this.inputObservation.translation[i].images.description=this.imagesDescription;
@@ -228,14 +228,14 @@ export class ObservationFormComponent implements OnInit {
     if(!hasTranslationObservation){
       if(this.inputObservation.language===this.inputLanguage){
         this.inputObservation.language=this.inputLanguage, 
-        this.inputObservation.createdBy=this.authObservation.user.username;       
+        this.inputObservation.createdBy=this.authObservation.user.id;       
         this.inputObservation.title=this.form.get('title').value;
         this.inputObservation.description=this.form.get('description').value;
         this.inputObservation.images.description=this.imagesDescription;
       }else{
         var translationObj={
           language:this.inputLanguage,
-          createdBy:this.authObservation.user.username,
+          createdBy:this.authObservation.user.id,
           title:this.form.get('title').value,
           description:this.form.get('description').value,
           images:this.imagesDescription
@@ -262,7 +262,7 @@ export class ObservationFormComponent implements OnInit {
         this.submitted = true;
         //this.disableForm();
         this.observation.setLanguage=this.localizeObservation.parser.currentLang,
-        this.observation.createdBy=this.authObservation.user.username; // CreatedBy field 
+        this.observation.createdBy=this.authObservation.user.id; // CreatedBy field 
         this.observation.setTitle=this.form.get('title').value;
         this.observation.setDescription=this.form.get('description').value;
         this.observation.setExpiredAt=new Date(this.form.get('expiredAt').value.year,this.form.get('expiredAt').value.month-1,this.form.get('expiredAt').value.day,this.timeExpiredAt.hour,this.timeExpiredAt.minute);

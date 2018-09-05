@@ -214,7 +214,7 @@ export class EventFormComponent implements OnInit {
       this.inputEventCopy=JSON.parse(JSON.stringify(this.inputEvent));
       //general event translation
       if(this.inputEvent.language===this.inputLanguage){
-        if(this.inputEvent.createdBy!==this.authService.user.username && this.authService.user.permission!=="admin"){     
+        if(this.inputEvent.createdBy!==this.authService.user.id && this.authService.user.permission!=="admin"){     
           this.disableForm();
         }
         this.title.setValue(this.inputEvent.title);
@@ -232,7 +232,7 @@ export class EventFormComponent implements OnInit {
         this.lng.disable();
         for (var i = 0; i < this.inputEvent.translation.length; ++i) {
           if(this.inputEvent.translation[i].language===this.inputLanguage){
-            if(this.inputEvent.translation[i].createdBy!==this.authService.user.username && this.authService.user.permission!=="admin"){     
+            if(this.inputEvent.translation[i].createdBy!==this.authService.user.id && this.authService.user.permission!=="admin"){     
               this.disableForm();
             }
             this.title.setValue(this.inputEvent.translation[i].title);
@@ -271,7 +271,7 @@ export class EventFormComponent implements OnInit {
       this.placeService.getGeonamesJson('province',this.inputLanguage,'euskal-herria').subscribe(provincesEvent => {
         this.provincesEvent=provincesEvent.geonames;
         if(this.inputEvent.place.language===this.inputLanguage){
-          if(this.inputEvent.createdBy===this.authService.user.username || this.authService.user.permission==="admin"){     
+          if(this.inputEvent.createdBy===this.authService.user.id || this.authService.user.permission==="admin"){     
             this.form.get('municipality').enable(); // Enable municipality field
           }
           this.province.setValue(this.inputEvent.place.province.name);    
@@ -455,7 +455,7 @@ export class EventFormComponent implements OnInit {
     this.submitted = true;
     // Create event object from form fields
     this.event.setLanguage=this.localizeService.parser.currentLang;// Language field
-    this.event.setCreatedBy=this.authService.user.username; // CreatedBy field
+    this.event.setCreatedBy=this.authService.user.id; // CreatedBy field
     this.event.setTitle=this.form.get('title').value; // Title field
     this.event.setParticipants=this.participants;
     this.event.setStart=new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute);
@@ -548,7 +548,7 @@ export class EventFormComponent implements OnInit {
           this.deleteEditImages(true);
           hasTranslationEvent=true;
           this.inputEvent.translation[i].language=this.inputLanguage;// Language field  
-          //this.inputEvent.translation[i].createdBy=this.authService.user.username;// Language field      
+          //this.inputEvent.translation[i].createdBy=this.authService.user.id;// Language field      
           this.inputEvent.translation[i].title=this.form.get('title').value; // Title field
           this.inputEvent.translation[i].description= this.form.get('description').value; // Description field
           this.inputEvent.translation[i].observations=this.form.get('observations').value; // Observations field
@@ -573,7 +573,7 @@ export class EventFormComponent implements OnInit {
         if(this.inputEvent.language===this.inputLanguage){
           this.deleteEditImages(true);
           this.inputEvent.language=this.inputLanguage;// Language field   
-          //this.inputEvent.createdBy=this.authService.user.username;// Language field       
+          //this.inputEvent.createdBy=this.authService.user.id;// Language field       
           this.inputEvent.title=this.form.get('title').value; // Title field
           this.inputEvent.description= this.form.get('description').value; // Description field
           this.inputEvent.observations=this.form.get('observations').value; // Observations field     
@@ -585,7 +585,7 @@ export class EventFormComponent implements OnInit {
           //event push new translation
           var eventTranslationObj={
             language:this.inputLanguage,
-            createdBy:this.authService.user.username,  
+            createdBy:this.authService.user.id,  
             title:this.form.get('title').value,
             description:this.form.get('description').value,
             observations:this.form.get('observations').value,
@@ -968,5 +968,6 @@ export class EventFormComponent implements OnInit {
   }
   ngOnDestroy(){
     this.subscriptionLanguage.unsubscribe();
+    this.subscriptionObservableMapClick.unsubscribe();
   } 
 }

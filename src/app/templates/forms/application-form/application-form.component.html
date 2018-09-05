@@ -92,10 +92,10 @@
     <!-- File upload end-->
     <!-- User -->
     <div class="col-sm-12">
-      <div class="form-group required" [ngClass]="{'has-error': (!user.valid && user.dirty), 'has-success': (user.valid && user.value)}">
+      <div class="form-group required" [ngClass]="{'has-error': (!moderator.valid && moderator.dirty), 'has-success': (moderator.valid && moderator.value)}">
         <label for="textareaUser" translate>{{'application-form.users'}}</label>
         <div class="input-group icon">
-          <input (keyup)="searchTerm.next($event.target.value)" [formControl]="user" capitalize type="text" class="form-control" id="inputUser">
+          <input (keyup)="searchTerm.next($event.target.value)" [formControl]="moderator" capitalize type="text" class="form-control" id="inputUser">
           <div class="input-group-append ">
             <button (click)="addUser()" type="button" class="btn btn-success ks-light ks-no-text">
               <span class="la la-plus ks-icon"></span>
@@ -103,14 +103,14 @@
           </div>
         </div>
         <!--ngIf="searchTerm.observers[0].destination.key-->
-        <table click-outside (clickOutside)="onClickOutside()" *ngIf="usersSearch && search" class="table table-hover ks-table-cells-vertical-align-middle ks-crm-contacts-users-list-column-table">
+        <table click-outside (clickOutside)="onClickOutside()" *ngIf="moderatorsSearch && search" class="table table-hover ks-table-cells-vertical-align-middle ks-crm-contacts-moderators-list-column-table">
           <tbody>
-            <tr (click)="selectUser(i)" *ngFor="let user of usersSearch; let i=index">
+            <tr (click)="selectUser(i)" *ngFor="let moderator of moderatorsSearch; let i=index">
               <td width="1">
-                <img src="{{user.currentAvatar}}" class="ks-avatar rounded-circle" width="36" height="36">
+                <img src="{{moderator.currentAvatar}}" class="ks-avatar rounded-circle" width="36" height="36">
               </td>
               <td width="200">
-                <div class="ks-name">{{user.username}}</div>
+                <div class="ks-name">{{moderator.username}}</div>
               </td>
             </tr>
           </tbody>
@@ -120,10 +120,10 @@
     <!-- Users list -->
     <div class="col-sm-12">
       <div class="form-group">
-        <label *ngFor="let user of selectedUsers; let i=index;" class="custom-control custom-checkbox">
-          <input type="checkbox" [checked]="user" (change)="deleteUser(i)" class="custom-control-input">
+        <label *ngFor="let moderator of selectedModerators; let i=index;" class="custom-control custom-checkbox">
+          <input type="checkbox" [checked]="moderator" (change)="deleteUser(i)" class="custom-control-input">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{user}}</span>
+          <span class="custom-control-description">{{moderator}}</span>
         </label>
       </div>
     </div>
@@ -195,7 +195,7 @@
     <!-- Submit Button -->
     <div class="col-sm-12">
       <div class="form-group text-center">
-        <button [disabled]="!form.valid || selectedUsers.length<=0 || conditions.length<=0 || submitted" type="submit" class="btn btn-default btn-auth" translate>{{'application-form.send'}}</button>
+        <button [disabled]="!form.valid || selectedModerators.length<=0 || conditions.length<=0 || submitted" type="submit" class="btn btn-default btn-auth" translate>{{'application-form.send'}}</button>
       </div>
     </div>
   </div>

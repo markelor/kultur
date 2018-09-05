@@ -11,19 +11,19 @@
               <div class="card-block">
                 <div class="ks-tabs-container ks-tabs-default ks-tabs-no-separator ks-widget-attachments">
                   <ul class="nav ks-nav-tabs">
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="refreshEvents()">
                       <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab1" translate>
                         <span class="ks-icon la la-user text-info"></span>
                         {{'navbar.events'}}
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="refreshServices()">
                       <a class="nav-link" href="" data-toggle="tab" data-target="#tab2" translate>
                         <span class="ks-icon la la-calendar-o text-success"></span>
                         {{'navbar.services'}}
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="refreshObservations()">
                       <a class="nav-link" href="#" data-toggle="tab" data-target="#tab4" translate>
                         <span class="ks-icon la la-mobile-phone text-danger"></span>
                         {{'navbar.observations'}}
