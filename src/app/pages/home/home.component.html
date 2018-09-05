@@ -67,7 +67,7 @@
                     <button [routerLink]="['/event-route','see-route',event._id] | localize" class="btn btn-success right" translate>{{'event.see-event'}}</button>
                   -->
                     <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
-                      <span class="la la-comment-o ks-icon" ngbTooltip="{{event.comments | commentsPipe}}" ></span>
+                      <span class="la la-comment-o ks-icon"></span>
                       <span class="ks-amount" >{{event.comments.length}}</span>
                     </span>
                     <span class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
