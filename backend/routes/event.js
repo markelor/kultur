@@ -137,7 +137,7 @@ module.exports = (router) => {
                                         res.json({ success: false, message: eval(language + '.newEvent.saveError'), err }); // Return general error message
                                       }
                                     } else {
-                                      res.json({ success: true, message: eval(language + '.newEvent.success') }); // Return success message
+                                      res.json({ success: true, message: eval(language + '.newEvent.success'),event:event }); // Return success message
                                     }
                                   });
                                 }

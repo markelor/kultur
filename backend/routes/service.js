@@ -114,7 +114,7 @@ module.exports = (router) => {
                                                                         res.json({ success: false, message: eval(language + '.newService.saveError'), err }); // Return general error message
                                                                     }
                                                                 } else {
-                                                                    res.json({ success: true, message: eval(language + '.newService.success') }); // Return success message
+                                                                    res.json({ success: true, message: eval(language + '.newService.success'),service:service }); // Return success message
                                                                 }
                                                             });
                                                         }
@@ -261,7 +261,6 @@ module.exports = (router) => {
            GET Service
         =============================================================== */
     router.get('/getService/:id/:userId/:language', (req, res) => {
-                console.log(req.params);
         var language = req.params.language;
         if (!language) {
             res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error

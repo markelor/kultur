@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { ObservableService } from '../../services/observable.service';
-import { AuthService } from '../../services/auth.service';
+import { ObservableService } from '../../../services/observable.service';
+import { AuthService } from '../../../services/auth.service';
 import { LocalizeRouterService } from 'localize-router';
 @Component({
-  selector: 'modal',
-  styleUrls: ['./modal.component.css'],
-  templateUrl: './modal.component.html'
+  selector: 'confirmation-modal',
+  styleUrls: ['./confirmation-modal.component.css'],
+  templateUrl: './confirmation-modal.component.html'
 })
 
-export class ModalComponent implements OnInit {
+export class ConfirmationModalComponent implements OnInit {
   public modalHeader;
   public modalContent;
 
@@ -29,15 +29,14 @@ export class ModalComponent implements OnInit {
   }
   
   public cancelModal(){
-    if(this.observableService.modalType==="modal-renew-session"){
+    if(this.observableService.confirmationModalType==="confirmation-modal-renew-session"){
       this.authService.logout();
       this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
     }
     this.closeModal();
-
   }
   public confirmModal() {
-    this.observableService.notifyOther({option: this.observableService.modalType});
+    this.observableService.notifyOther({option: this.observableService.confirmationModalType});
     this.closeModal();
   }
 }

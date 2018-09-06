@@ -5,7 +5,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserModalComponent } from './user-modal/user-modal.component';
-import { ModalComponent } from '../../../templates/modal/modal.component';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../services/observable.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -38,7 +38,7 @@ export class UsersAdministratorComponent implements OnInit {
 
   }
   private staticModalShow() {
-    const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
     this.translate.get('modal.delete-user-header').subscribe(
       data => {   
         activeModal.componentInstance.modalHeader = data;
@@ -73,12 +73,12 @@ export class UsersAdministratorComponent implements OnInit {
     };
   }
   private userEditClick(user): void {
-    this.observableService.modalType="modal-edit-user";
+    this.observableService.confirmationModalType="confirmation-modal-edit-user";
     if(this.observableService.modalCount<1){
       this.userStaticModalShow(user);
       this.subscription=this.observableService.notifyObservable.subscribe(res => {
         this.subscription.unsubscribe();
-        if (res.hasOwnProperty('option') && res.option === 'modal-edit-user') {
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-edit-user') {
           if(res.data.success){
               this.messageClass = 'alert alert-success ks-solid '; // Set bootstrap success class
               this.message = res.data.message; // Set success message
@@ -93,12 +93,12 @@ export class UsersAdministratorComponent implements OnInit {
     }
   }
   private userDeleteClick(index,user): void {
-    this.observableService.modalType="modal-delete-user";
+    this.observableService.confirmationModalType="confirmation-modal-delete-user";
     if(this.observableService.modalCount<1){
       this.staticModalShow();
       this.subscription=this.observableService.notifyObservable.subscribe(res => {
         this.subscription.unsubscribe();
-        if (res.hasOwnProperty('option') && res.option === 'modal-delete-user') {
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-user') {
           this.authService.deleteUser(user.username,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  
               this.users.splice(index,1);

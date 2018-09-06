@@ -73,7 +73,7 @@ module.exports = (router) => {
                                     res.json({ success: false, message: eval(language + '.newObservation.saveError'), err }); // Return general error message
                                 }
                             } else {
-                                res.json({ success: true, message: eval(language + '.newObservation.success') }); // Return success message
+                                res.json({ success: true, message: eval(language + '.newObservation.success'),observation:observation }); // Return success message
                             }
                         });
                     }

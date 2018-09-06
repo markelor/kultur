@@ -110,7 +110,7 @@ module.exports = (router) => {
                               updatedAt: Date.now()
                             });
                             // Save application into database
-                            application.save((err) => {
+                            application.save((err,application) => {
                               // Check if error
                               if (err) {
                                 console.log(err);
@@ -130,7 +130,7 @@ module.exports = (router) => {
                                   res.json({ success: false, message: eval(language + '.newApplication.saveError'), err }); // Return general error message
                                 }
                               } else {
-                                res.json({ success: true, message: eval(language + '.newApplication.success') }); // Return success message
+                                res.json({ success: true, message: eval(language + '.newApplication.success'),application:application }); // Return success message
                               }
                             });
                           }

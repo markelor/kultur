@@ -7,7 +7,7 @@ import { AuthGuard} from '../../guards/auth.guard';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
-import { ModalComponent } from '../../../templates/modal/modal.component';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../services/observable.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -37,7 +37,7 @@ export class ServicesAdministratorComponent implements OnInit {
     private modalService: NgbModal
   ) { }
   private staticModalShow() {
-    const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
     this.translate.get('modal.delete-service-header').subscribe(
       data => {   
         activeModal.componentInstance.modalHeader = data;
@@ -76,12 +76,12 @@ export class ServicesAdministratorComponent implements OnInit {
     };
   }
   private serviceDeleteClick(index,service): void {
-    this.observableService.modalType="modal-delete-service";
+    this.observableService.confirmationModalType="confirmation-modal-delete-service";
     if(this.observableService.modalCount<1){
       this.staticModalShow();
       this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservable.unsubscribe();
-        if (res.hasOwnProperty('option') && res.option === 'modal-delete-service') {
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-service') {
           this.serviceService.deleteService(this.authService.user.id,service._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){ 
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

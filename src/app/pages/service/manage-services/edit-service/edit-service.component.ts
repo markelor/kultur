@@ -22,6 +22,24 @@ export class EditServiceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authGuard:AuthGuard
   ) { }
+  private getService(active){
+    // Get service
+    this.serviceService.getService(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
+      if(data.success){
+        this.service=data.service;
+        if(active){
+          setTimeout(() => {
+            $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
+            $( ".nav-"+this.localizeService.parser.currentLang).click ();
+          }, 0); 
+        } 
+      }
+    }); 
+  }
+  private refreshService($event){
+    this.service=undefined;
+    this.getService(false);
+  }
 
   ngOnInit() {
     // Get authentication on page load
@@ -32,15 +50,6 @@ export class EditServiceComponent implements OnInit {
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
     });
-    // Get service
-    this.serviceService.getService(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-      	this.service=data.service;
-        setTimeout(() => {
-          $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
-          $( ".nav-"+this.localizeService.parser.currentLang).click ();
-        }, 0);  
-      }
-    }); 
+    this.getService(true);
   }
 }

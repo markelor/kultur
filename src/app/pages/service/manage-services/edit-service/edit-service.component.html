@@ -32,13 +32,13 @@
                   </ul>
                   <div class="tab-content">
                     <div class="tab-pane nav-eu" id="tab1" role="tabpanel">
-                      <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'eu'" [inputService]="service"></app-service-form>
+                      <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'eu'" [inputService]="service" (RefreshService)="refreshService($event)"></app-service-form>
                     </div>
                     <div class="tab-pane nav-es" id="tab2" role="tabpanel">
-                      <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'es'" [inputService]="service"></app-service-form>
+                      <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'es'" [inputService]="service" (RefreshService)="refreshService($event)"></app-service-form>
                     </div>
                     <div class="tab-pane nav-en" id="tab3" role="tabpanel">
-                     <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'en'" [inputService]="service"></app-service-form>
+                     <app-service-form *ngIf="service" [inputOperation]="'edit'" [inputLanguage]="'en'" [inputService]="service" (RefreshService)="refreshService($event)"></app-service-form>
                     </div>
                   </div>
                 </div>

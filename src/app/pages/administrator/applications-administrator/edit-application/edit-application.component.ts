@@ -23,6 +23,26 @@ export class EditApplicationComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authGuard:AuthGuard) { }
 
+  private getApplication(active){
+    // Get application events
+    this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
+      if(data.success){
+        this.application=data.application;
+        this.moderator=data.moderatorsArray;
+        if(active){
+          setTimeout(() => {
+            $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
+            $( ".nav-"+this.localizeService.parser.currentLang).click ();
+          }, 0); 
+        }
+      }
+    });
+  }  
+  private refreshApplication($event){
+    this.application=undefined;
+    this.moderator=undefined;
+    this.getApplication(false);
+  }
   ngOnInit() {
   	// Get authentication on page load
     this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
@@ -31,17 +51,7 @@ export class EditApplicationComponent implements OnInit {
         this.authGuard.redirectUrl=this.router.url;
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
-    });
-    // Get application events
-    this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-      	this.application=data.application;
-        this.moderator=data.moderatorsArray;
-        setTimeout(() => {
-          $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
-          $( ".nav-"+this.localizeService.parser.currentLang).click ();
-        }, 0);  
-      }
     }); 
+    this.getApplication(true);
   }
 }

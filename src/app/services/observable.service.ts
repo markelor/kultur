@@ -10,7 +10,8 @@ export class ObservableService {
   public applicationEvents;
   public applicationServices;
   public applicationObservations;
-  public modalType;
+  public confirmationModalType;
+  public createModalType;
   public avatarType;
   public modalCount=0;
   private notify = new Subject<any>();

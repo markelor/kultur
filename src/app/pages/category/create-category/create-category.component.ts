@@ -4,7 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryModalComponent } from './category-modal/category-modal.component';
-import { ModalComponent } from '../../../templates/modal/modal.component';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../services/observable.service';
 import { AlphanumericValidator } from '../../../validators';
@@ -50,7 +50,7 @@ export class CreateCategoryComponent implements OnInit {
 
   }
   private staticModalShow() {
-    const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
     this.translate.get('modal.delete-category-header').subscribe(
       data => {   
         activeModal.componentInstance.modalHeader = data;
@@ -91,12 +91,12 @@ export class CreateCategoryComponent implements OnInit {
     }
   }
   private categoryDeleteClick(index,category): void {
-    this.observableService.modalType="modal-delete-category";
+    this.observableService.confirmationModalType="confirmation-modal-delete-category";
     if(this.observableService.modalCount<1){
       this.staticModalShow();
       this.subscriptionObservableDelete=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservableDelete.unsubscribe();
-        if (res.hasOwnProperty('option') && res.option === 'modal-delete-category') {
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-category') {
           this.categoryService.deleteCategory(category._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  
               this.getCategories(true);
@@ -113,7 +113,7 @@ export class CreateCategoryComponent implements OnInit {
   }
   private observableCategorySuccess(){
     this.subscriptionObservableSuccess=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === 'modal-edit-category-success') {
+      if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-edit-category-success') {
        this.getCategories(true);
       } 
     });   

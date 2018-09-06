@@ -1,4 +1,4 @@
-import { Component, OnInit,Injectable,Input } from '@angular/core';
+import { Component, OnInit,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { LocalizeRouterService } from 'localize-router';
@@ -7,7 +7,6 @@ import { ApplicationService } from '../../../services/application.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 //import { ApplicationModalComponent } from './application-modal/application-modal.component';
-import { ModalComponent } from '../../../templates/modal/modal.component';
 import { ObservableService } from '../../../services/observable.service';
 import { TitleValidator } from '../../../validators';
 import { Application } from '../../../class/application';
@@ -15,6 +14,8 @@ import { Subject } from 'rxjs/Subject';
 import { FileUploaderService} from '../../../services/file-uploader.service';
 import { FileUploader,FileUploaderOptions,FileItem } from 'ng2-file-upload';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 const URL = 'http://localhost:8080/fileUploader/uploadImages/application';
 const I18N_VALUES = {
@@ -97,6 +98,7 @@ export class ApplicationFormComponent implements OnInit {
   private uploadOptions;
   private hasBaseDropZoneOver:boolean = false;
   private hasAnotherDropZoneOver:boolean = false;
+  @Output() RefreshApplication = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
@@ -106,7 +108,8 @@ export class ApplicationFormComponent implements OnInit {
     private observableService:ObservableService,
     private router:Router,
     private authGuard: AuthGuard,
-    private translate: TranslateService){
+    private translate: TranslateService,
+    private modalService: NgbModal){
     this.createForm(); // Create new theme form on start up
     }
     // Function to create new theme form
@@ -190,6 +193,25 @@ export class ApplicationFormComponent implements OnInit {
       } 
     }   
   }
+  private staticModalShow(success,operation,id) {
+    const activeModal = this.modalService.open(CreateModalComponent, {backdrop: 'static',keyboard: false, centered: true});
+    this.translate.get('modal.'+operation+'-application-header').subscribe(
+      data => {   
+      activeModal.componentInstance.modalHeader = data;
+    });
+    activeModal.componentInstance.operation = operation;
+    activeModal.componentInstance.modalContent = this.message; 
+    if(operation==="create"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/application-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
+    }else if(operation==="edit"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/application-route')+"/"+this.localizeService.translateRoute('manage-route');
+    }
+    if(success){
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+    }else{
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
+    }       
+  } 
   // Function to disable the registration form
   private disableForm(){
     this.form.disable(); // Disable form
@@ -237,15 +259,15 @@ export class ApplicationFormComponent implements OnInit {
   private createApplication() {
     // Function to save application into database
     this.applicationService.newApplication(this.application).subscribe(data=>{
-      console.log(data);
       if(!data.success){
         this.deleteUploadImages('application',this.imagesApplication);
-        this.submitted = false;
         this.messageClass='alert alert-danger ks-solid';
         this.message=data.message
         this.enableForm();
+        this.staticModalShow(false,'create',data.application._id);
       }else{
         this.submitted = false;
+        this.application=new Application();
         this.uploader.clearQueue()//Reset uploader
         this.conditions=[];
         this.createForm(); // Reset all form fields
@@ -255,6 +277,7 @@ export class ApplicationFormComponent implements OnInit {
         this.selectedModeratorsId=[];
         this.messageClass='alert alert-success ks-solid'
         this.message=data.message
+        this.staticModalShow(true,'create',data.application._id);
       }
     });
   }
@@ -318,18 +341,16 @@ export class ApplicationFormComponent implements OnInit {
       // Check if event was saved to database or not
       if (!data.success) {
         this.deleteUploadImages('application',this.imagesApplication);
+        this.enableForm();
         this.messageClass = 'alert alert-danger ks-solid'; // Return error class
         this.message = data.message; // Return error message
-        this.submitted = true; // Enable submit button
+        this.staticModalShow(false,'edit',this.inputApplication._id);
       } else {
         this.messageClass = 'alert alert-success ks-solid'; // Return success class
         this.message = data.message; // Return success message
-        // Clear form data after two seconds
-        setTimeout(() => {
-          //this.newPost = false; // Hide form
-          this.submitted = false; // Enable submit button
-          this.message = false; // Erase error/success message
-        }, 2000);
+        this.staticModalShow(true,'edit',this.inputApplication._id); 
+        this.RefreshApplication.emit({service: this.inputApplication });
+        this.submitted = false; // Enable submit button
       }
     });   
   }

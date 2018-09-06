@@ -123,15 +123,15 @@
     "new-password-success": "Por favor, introduzca una nueva contraseña.",
     "send": "Enviar",
     "guard-error": "Debes iniciar sesión para ver esa página.",
-    "permission":"Permiso",
-    "id":"Id"
+    "permission": "Permiso",
+    "id": "Id"
   },
   "category-form":
   {
     "title": "Título",
     "description": "Descripción",
-    "parent-id":"Padre Id",
-    "level":"Nivel",
+    "parent-id": "Padre Id",
+    "level": "Nivel",
     "parent-category": "Categoría Padre",
     "select-parent-category": "-- SELECCIONE UNA CATEGORÍA --",
     "send": "Enviar"
@@ -140,8 +140,8 @@
   {
     "created-by": "Creado por",
     "title": "Título",
-    "parent-id":"Padre Id",
-    "level":"Nivel",
+    "parent-id": "Padre Id",
+    "level": "Nivel",
     "category": "Categoría",
     "participants": "Participantes",
     "start": "Inicio",
@@ -269,18 +269,30 @@
     "delete-user-content": "¿Estas seguro de eliminar el usuario?",
     "delete-category-header": "Eliminar categoría",
     "delete-category-content": "¿Estas seguro de eliminar la categoría?",
+    "create-event-header": "Crear evento",
+    "edit-event-header": "Editar evento",
     "delete-event-header": "Eliminar evento",
     "delete-event-content": "¿Estas seguro de eliminar el evento?",
+    "create-service-header": "Crear servicio",
+    "edit-service-header": "Editar servicio",
     "delete-service-header": "Eliminar servicio",
     "delete-service-content": "¿Estas seguro de eliminar el servicio?",
     "delete-service-type-header": "Eliminar typo de servicio",
+    "create-observation-header": "Crear observación",
+    "edit-observation-header": "Editar observación",
     "delete-service-type-content": "¿Estas seguro de eliminar el tipo de servicio?",
     "delete-observation-header": "Eliminar observación",
     "delete-observation-content": "¿Estas seguro de eliminar la observación?",
+    "create-application-header": "Crear aplicación",
+    "edit-application-header": "Editar aplicación",
     "delete-application-header": "Eliminar aplicación",
     "delete-application-content": "¿Estas seguro de eliminar la aplicación?",
-    "acept":"Aceptar",
-    "cancel":"Cancelar"
+    "acept": "Aceptar",
+    "continue": "Continue",
+    "home": "Inicio",
+    "edit": "Editar",
+    "cancel": "Cancelar",
+    "manage":"Gestionar"
   },
   "dates":
   {

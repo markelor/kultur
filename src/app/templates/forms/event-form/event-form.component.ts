@@ -17,6 +17,8 @@ import { ObservableService } from '../../../services/observable.service';
 import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
 const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
@@ -133,7 +135,8 @@ export class EventFormComponent implements OnInit {
     private elementRef: ElementRef,
     private localizeService: LocalizeRouterService,
     private authGuard: AuthGuard,
-    private groupByPipe:GroupByPipe
+    private groupByPipe:GroupByPipe,
+    private modalService: NgbModal
   ) {
     this.createNewEventForm(); // Create new event form on start up
   }
@@ -407,6 +410,25 @@ export class EventFormComponent implements OnInit {
       } 
     }   
   }
+   private staticModalShow(success,operation,id) {
+    const activeModal = this.modalService.open(CreateModalComponent, {backdrop: 'static',keyboard: false, centered: true});
+    this.translate.get('modal.'+operation+'-event-header').subscribe(
+      data => {   
+      activeModal.componentInstance.modalHeader = data;
+    });
+    activeModal.componentInstance.operation = operation;
+    activeModal.componentInstance.modalContent = this.message; 
+    if(operation==="create"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/event-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
+    }else if(operation==="edit"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/event-route')+"/"+this.localizeService.translateRoute('manage-route');
+    }
+    if(success){
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+    }else{
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
+    }       
+  }  
   private mapClickPlace(){
     this.subscriptionObservableMapClick=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === this.observableService.mapClickType) {
@@ -496,19 +518,21 @@ export class EventFormComponent implements OnInit {
         this.deleteUploadImages('descriptionAll',this.imagesDescription);
         this.messageClass = 'alert alert-danger ks-solid'; // Return error class
         this.message = data.message; // Return error message
-        this.submitted = false; // Enable submit button
+        this.staticModalShow(false,'create',data.event._id);
+
       } else {
-        // Clear form data after two seconds
-        setTimeout(() => {
-          this.createNewEventForm(); // Reset all form fields
-          this.uploader.clearQueue();
-          this.imagesPoster=[];
-          this.imagesDescription=[];
-          this.participants=[];
-          this.locationsExistsEvent=[];
-          this.messageClass = 'alert alert-success ks-solid'; // Return success class
-          this.message = data.message; // Return success message
-        }, 2000);
+        this.createNewEventForm(); // Reset all form fields
+        this.uploader.clearQueue();
+        this.event=new Event();
+        this.imagesPoster=[];
+        this.imagesDescription=[];
+        this.participants=[];
+        this.locationsExistsEvent=[];
+        this.messageClass = 'alert alert-success ks-solid'; // Return success class
+        this.message = data.message; // Return success message
+        this.enableForm();
+        this.submitted = false; // Enable submit button
+        this.staticModalShow(true,'create',data.event._id);
       }
     });  
   }
@@ -643,17 +667,14 @@ export class EventFormComponent implements OnInit {
         this.deleteUploadImages('descriptionAll',this.imagesDescription);
         this.messageClass = 'alert alert-danger ks-solid'; // Return error class
         this.message = data.message; // Return error message
+        this.staticModalShow(false,'edit',this.inputEvent._id);    
         this.enableForm(); // Enable form
       } else {
         this.messageClass = 'alert alert-success ks-solid'; // Return success class
         this.message = data.message; // Return success message
+        this.staticModalShow(true,'edit',this.inputEvent._id);    
         this.RefreshEvent.emit({event: this.inputEvent,categories:this.inputCategories});
-        // Clear form data after two seconds
-        setTimeout(() => {
-          //this.newPost = false; // Hide form
-          this.submitted = false; // Enable submit button
-          this.message = false; // Erase error/success message
-        }, 2000);
+        this.submitted=false;
       }
     }); 
   }
@@ -865,7 +886,6 @@ export class EventFormComponent implements OnInit {
           this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]);
         }
         this.uploadAllSuccess=false;
-        this.enableForm(); // Enable form
       }else{
         var file={
           size:responseJson.file[0].size,
@@ -942,6 +962,11 @@ export class EventFormComponent implements OnInit {
     }
   }
   ngOnInit() {
+    $('textarea').each(function () {
+      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    }).on('input', function () {
+      this.style.height = (this.scrollHeight) + 'px';
+    });
     this.initializeForm();
     this.mapClickPlace();
     this.location.valueChanges.subscribe(data=>{

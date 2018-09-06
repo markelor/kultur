@@ -140,8 +140,8 @@ export class ServiceTypeFormComponent implements OnInit {
     }
     this.serviceTypeService.editServiceType(this.inputServiceType).subscribe(data=>{
       if(data.success){
-        this.observableService.modalType="modal-edit-service-type-success";
-        this.observableService.notifyOther({option: this.observableService.modalType,serviceType:this.inputServiceType});
+        this.observableService.confirmationModalType="confirmation-modal-edit-service-type-success";
+        this.observableService.notifyOther({option: this.observableService.confirmationModalType,serviceType:this.inputServiceType});
         this.messageClass = 'alert alert-success ks-solid '; // Set bootstrap success class
         this.message =data.message; // Set success message            
       }else{
@@ -153,7 +153,7 @@ export class ServiceTypeFormComponent implements OnInit {
   private observableEdit(){
     this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
       this.subscriptionObservable.unsubscribe();
-      if (res.hasOwnProperty('option') && res.option === 'modal-edit-service-type') {
+      if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-edit-service-type') {
         if(this.inputServiceType && res.language===this.inputLanguage){
           if(this.uploader.queue.length>0){
             this.uploader.uploadAll();
@@ -182,8 +182,8 @@ export class ServiceTypeFormComponent implements OnInit {
       }else{
         this.uploader.clearQueue();
         this.iconsServiceType=[];
-        this.observableService.modalType="modal-edit-service-type-success";
-        this.observableService.notifyOther({option: this.observableService.modalType});
+        this.observableService.confirmationModalType="confirmation-modal-edit-service-type-success";
+        this.observableService.notifyOther({option: this.observableService.confirmationModalType});
         this.submitted = false;
         this.serviceType=new ServiceType();
         this.createForm(); // Reset all form fields
@@ -295,11 +295,6 @@ export class ServiceTypeFormComponent implements OnInit {
     return svg;
   }
   ngOnInit() {
-    /*$('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    });*/
     this.initializeForm();
     this.observableEdit();  
      //File uploader options

@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,Injectable,Input } from '@angular/core';
+import { Component, OnInit,ElementRef,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { LocalizeRouterService } from 'localize-router';
@@ -15,6 +15,8 @@ import { Place } from '../../../class/place';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
 const I18N_VALUES = {
@@ -92,6 +94,7 @@ export class ServiceFormComponent implements OnInit {
   private froalaEvent;
   private subscriptionLanguage: Subscription;
   private subscriptionObservableMapClick: Subscription;
+  @Output() RefreshService = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
@@ -103,7 +106,8 @@ export class ServiceFormComponent implements OnInit {
     private authService:AuthService,
     private translate: TranslateService,
     private router:Router,
-    private authGuard: AuthGuard,){
+    private authGuard: AuthGuard,
+    private modalService: NgbModal){
     this.createForm(); // Create new theme form on start up
     }
     // Function to create new theme form
@@ -284,6 +288,25 @@ export class ServiceFormComponent implements OnInit {
       } 
     }      
   }
+  private staticModalShow(success,operation,id) {
+    const activeModal = this.modalService.open(CreateModalComponent, {backdrop: 'static',keyboard: false, centered: true});
+    this.translate.get('modal.'+operation+'-service-header').subscribe(
+      data => {   
+      activeModal.componentInstance.modalHeader = data;
+    });
+    activeModal.componentInstance.operation = operation;
+    activeModal.componentInstance.modalContent = this.message; 
+    if(operation==="create"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/service-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
+    }else if(operation==="edit"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/service-route')+"/"+this.localizeService.translateRoute('manage-route');
+    }
+    if(success){
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+    }else{
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
+    }       
+  }   
   private mapClickPlace(){
     this.subscriptionObservableMapClick=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === this.observableService.mapClickType) {
@@ -456,12 +479,16 @@ export class ServiceFormComponent implements OnInit {
     this.serviceService.editService(this.inputService).subscribe(data=>{
       if(data.success){
         this.messageClass = 'alert alert-success ks-solid '; // Set bootstrap success class
-        this.message =data.message; // Set success message            
+        this.message =data.message; // Set success message 
+        this.staticModalShow(true,'edit',this.inputService._id); 
+        this.RefreshService.emit({service: this.inputService });
+        this.submitted = false;          
       }else{
         this.deleteUploadImages('descriptionAll',this.imagesDescription);
         this.enableFormNewServiceForm();
         this.messageClass = 'alert alert-danger ks-solid'; // Set bootstrap error class
         this.message =data.message; // Set error message
+        this.staticModalShow(false,'edit',this.inputService._id);
       } 
     }); 
   }
@@ -590,12 +617,15 @@ export class ServiceFormComponent implements OnInit {
             this.messageClass='alert alert-danger ks-solid';
             this.message=data.message
             this.enableFormNewServiceForm();
+            this.staticModalShow(false,'create',data.service._id);
+
           }else{
             this.submitted = false;
             this.service=new Service();
             this.createForm(); // Reset all form fields
             this.messageClass='alert alert-success ks-solid'
-            this.message=data.message
+            this.message=data.message;
+            this.staticModalShow(true,'create',data.service._id);
           }
         });
       }else{
@@ -605,11 +635,11 @@ export class ServiceFormComponent implements OnInit {
     }                
   }
   ngOnInit() {
-    /*$('textarea').each(function () {
+    $('textarea').each(function () {
       this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
       this.style.height = (this.scrollHeight) + 'px';
-    });*/
+    });
     this.initializeForm();
     this.mapClickPlace();
     this.location.valueChanges.subscribe(data=>{

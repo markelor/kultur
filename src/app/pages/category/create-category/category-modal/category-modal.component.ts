@@ -31,8 +31,8 @@ export class CategoryModalComponent implements OnInit {
 
   }
   public confirmModal() {
-  	this.observableService.modalType="modal-edit-category";
-    this.observableService.notifyOther({option: this.observableService.modalType,language:this.tabLanguage});
+  	this.observableService.confirmationModalType="confirmation-modal-edit-category";
+    this.observableService.notifyOther({option: this.observableService.confirmationModalType,language:this.tabLanguage});
     this.closeModal();
   }
   public clickLanguage(language){

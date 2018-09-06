@@ -22,7 +22,24 @@ export class EditObservationComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authGuard:AuthGuard
   ) { }
-
+  private getObservation(active){
+    // Get observation
+    this.observationService.getObservation(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
+      if(data.success){
+        this.observation=data.observation;
+         if(active){
+          setTimeout(() => {
+            $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
+            $( ".nav-"+this.localizeService.parser.currentLang).click ();
+          }, 0);  
+         }
+      }
+    }); 
+  }
+  private refreshObservation($event){
+    this.observation=undefined;
+    this.getObservation(false);
+  }
   ngOnInit() {
     // Get authentication on page load
     this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
@@ -32,15 +49,6 @@ export class EditObservationComponent implements OnInit {
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
     });
-    // Get service
-    this.observationService.getObservation(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
-      if(data.success){
-      	this.observation=data.observation;
-        setTimeout(() => {
-          $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
-          $( ".nav-"+this.localizeService.parser.currentLang).click ();
-        }, 0);  
-      }
-    }); 
+    this.getObservation(true);
   }
 }

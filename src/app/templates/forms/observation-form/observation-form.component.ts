@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,Injectable,Input } from '@angular/core';
+import { Component, OnInit,ElementRef,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { LocalizeRouterService } from 'localize-router';
@@ -12,6 +12,8 @@ import { Observation } from '../../../class/observation';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
 const I18N_VALUES = {
@@ -74,16 +76,18 @@ export class ObservationFormComponent implements OnInit {
   private froalaSignature;
   private froalaEvent;
   private subscriptionLanguage: Subscription;
+  @Output() RefreshObservation = new EventEmitter();
   constructor(
     private fb: FormBuilder,
-    private localizeObservation:LocalizeRouterService,
-    private observationObservation:ObservationService,
-    private observableObservation:ObservableService,
-    private fileUploaderObservation:FileUploaderService,
-    private authObservation:AuthService,
+    private localizeService:LocalizeRouterService,
+    private observationService:ObservationService,
+    private observableService:ObservableService,
+    private fileUploaderService:FileUploaderService,
+    private authService:AuthService,
     private translate: TranslateService,
     private router:Router,
-    private authGuard: AuthGuard,){
+    private authGuard: AuthGuard,
+    private modalService: NgbModal){
     this.createForm(); // Create new theme form on start up
     }
     // Function to create new theme form
@@ -130,14 +134,14 @@ export class ObservationFormComponent implements OnInit {
           this.observation.setImagesDescription=this.imagesDescription;
         }
       }
-      this.fileUploaderObservation.deleteImages(urlSplit[1],urlSplit[0],this.localizeObservation.parser.currentLang).subscribe(data=>{
+      this.fileUploaderService.deleteImages(urlSplit[1],urlSplit[0],this.localizeService.parser.currentLang).subscribe(data=>{
       });
     }else if (type==='descriptionAll'){
       for (var i = 0; i < this.imagesDescription.length; i++) {
         var currentUrlSplit = this.imagesDescription[i].split("/");
         let imageName = currentUrlSplit[currentUrlSplit.length - 1];
         var urlSplit = imageName.split("%2F");
-        this.fileUploaderObservation.deleteImages(urlSplit[1],urlSplit[0],this.localizeObservation.parser.currentLang).subscribe(data=>{
+        this.fileUploaderService.deleteImages(urlSplit[1],urlSplit[0],this.localizeService.parser.currentLang).subscribe(data=>{
         });
       }
     }
@@ -178,7 +182,26 @@ export class ObservationFormComponent implements OnInit {
       }  
     }      
   }
-   public froalaOptions= {
+  private staticModalShow(success,operation,id) {
+    const activeModal = this.modalService.open(CreateModalComponent, {backdrop: 'static',keyboard: false, centered: true});
+    this.translate.get('modal.'+operation+'-observation-header').subscribe(
+      data => {   
+      activeModal.componentInstance.modalHeader = data;
+    });
+    activeModal.componentInstance.operation = operation;
+    activeModal.componentInstance.modalContent = this.message; 
+    if(operation==="create"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/observation-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
+    }else if(operation==="edit"){
+      activeModal.componentInstance.route=this.localizeService.translateRoute('/observation-route')+"/"+this.localizeService.translateRoute('manage-route');
+    }
+    if(success){
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+    }else{
+      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
+    }       
+  } 
+  public froalaOptions= {
      // Set max image size to 5MB.
     imageMaxSize: 5 * 1024 * 1024,
     // Allow to upload PNG and JPG.
@@ -189,7 +212,7 @@ export class ObservationFormComponent implements OnInit {
   public initializeFroala(initControls) {
     this.froalaEvent=initControls;
     var context=this;
-    this.fileUploaderObservation.getSignatureFroala("observation-description",this.localizeObservation.parser.currentLang).subscribe(data=>{
+    this.fileUploaderService.getSignatureFroala("observation-description",this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.froalaOptions.imageUploadToS3=data.options
         initControls.initialize();
@@ -219,7 +242,7 @@ export class ObservationFormComponent implements OnInit {
       if(this.inputObservation.translation[i].language===this.inputLanguage){
         hasTranslationObservation=true;
         this.inputObservation.translation[i].language=this.inputLanguage;
-        this.inputObservation.translation[i].createdBy=this.authObservation.user.id;// Language field  
+        this.inputObservation.translation[i].createdBy=this.authService.user.id;// Language field  
         this.inputObservation.translation[i].title=this.form.get('title').value;
         this.inputObservation.translation[i].description=this.form.get('description').value;
         this.inputObservation.translation[i].images.description=this.imagesDescription;
@@ -228,14 +251,14 @@ export class ObservationFormComponent implements OnInit {
     if(!hasTranslationObservation){
       if(this.inputObservation.language===this.inputLanguage){
         this.inputObservation.language=this.inputLanguage, 
-        this.inputObservation.createdBy=this.authObservation.user.id;       
+        this.inputObservation.createdBy=this.authService.user.id;       
         this.inputObservation.title=this.form.get('title').value;
         this.inputObservation.description=this.form.get('description').value;
         this.inputObservation.images.description=this.imagesDescription;
       }else{
         var translationObj={
           language:this.inputLanguage,
-          createdBy:this.authObservation.user.id,
+          createdBy:this.authService.user.id,
           title:this.form.get('title').value,
           description:this.form.get('description').value,
           images:this.imagesDescription
@@ -243,15 +266,19 @@ export class ObservationFormComponent implements OnInit {
         this.inputObservation.translation.push(translationObj);             
       }
     }
-    this.observationObservation.editObservation(this.inputObservation).subscribe(data=>{
+    this.observationService.editObservation(this.inputObservation).subscribe(data=>{
       if(data.success){
         this.messageClass = 'alert alert-success ks-solid '; // Set bootstrap success class
-        this.message =data.message; // Set success message            
+        this.message =data.message; // Set success message    
+        this.staticModalShow(true,'edit',this.inputObservation._id);
+        this.RefreshObservation.emit({service: this.inputObservation }); 
+        this.submitted = false;         
       }else{
         this.deleteUploadImages('descriptionAll',this.imagesDescription);
         this.enableFormNewObservationForm();
         this.messageClass = 'alert alert-danger ks-solid'; // Set bootstrap error class
         this.message =data.message; // Set error message
+        this.staticModalShow(false,'edit',this.inputObservation._id);
       } 
     }); 
   }
@@ -261,22 +288,24 @@ export class ObservationFormComponent implements OnInit {
       if(this.inputOperation==="create"){
         this.submitted = true;
         //this.disableForm();
-        this.observation.setLanguage=this.localizeObservation.parser.currentLang,
-        this.observation.createdBy=this.authObservation.user.id; // CreatedBy field 
+        this.observation.setLanguage=this.localizeService.parser.currentLang,
+        this.observation.createdBy=this.authService.user.id; // CreatedBy field 
         this.observation.setTitle=this.form.get('title').value;
         this.observation.setDescription=this.form.get('description').value;
         this.observation.setExpiredAt=new Date(this.form.get('expiredAt').value.year,this.form.get('expiredAt').value.month-1,this.form.get('expiredAt').value.day,this.timeExpiredAt.hour,this.timeExpiredAt.minute);
-        this.observationObservation.newObservation(this.observation).subscribe(data=>{
+        this.observationService.newObservation(this.observation).subscribe(data=>{
           if(!data.success){
             this.messageClass='alert alert-danger ks-solid';
             this.message=data.message
             this.enableFormNewObservationForm();
+            this.staticModalShow(false,'create',data.observation._id);
           }else{
             this.submitted = false;
             this.observation=new Observation();
             this.createForm(); // Reset all form fields
             this.messageClass='alert alert-success ks-solid'
             this.message=data.message
+            this.staticModalShow(true,'create',data.observation._id);
           }
         });
       }else{
@@ -293,7 +322,7 @@ export class ObservationFormComponent implements OnInit {
     });*/
     this.initializeForm();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeObservation.parser.currentLang=event.lang;
+      this.localizeService.parser.currentLang=event.lang;
     }); 	  
   }
 }

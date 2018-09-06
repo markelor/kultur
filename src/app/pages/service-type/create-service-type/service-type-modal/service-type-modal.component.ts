@@ -31,8 +31,8 @@ export class ServiceTypeModalComponent implements OnInit {
 
   }
   public confirmModal() {
-  	this.observableService.modalType="modal-edit-service-type";
-    this.observableService.notifyOther({option: this.observableService.modalType,language:this.tabLanguage});
+  	this.observableService.confirmationModalType="confirmation-modal-edit-service-type";
+    this.observableService.notifyOther({option: this.observableService.confirmationModalType,language:this.tabLanguage});
     this.closeModal();
   }
   public clickLanguage(language){

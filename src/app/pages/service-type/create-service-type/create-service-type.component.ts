@@ -4,7 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { ServiceTypeService } from '../../../services/service-type.service';
 import { TranslateService} from '@ngx-translate/core';
 import { ServiceTypeModalComponent } from './service-type-modal/service-type-modal.component';
-import { ModalComponent } from '../../../templates/modal/modal.component';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../services/observable.service';
 import { AlphanumericValidator } from '../../../validators';
@@ -47,7 +47,7 @@ export class CreateServiceTypeComponent implements OnInit {
 
   }
   private staticModalShow() {
-    const activeModal = this.modalService.open(ModalComponent, {size: 'sm',backdrop: 'static'});
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
     this.translate.get('modal.delete-service-type-header').subscribe(
       data => {   
         activeModal.componentInstance.modalHeader = data;
@@ -85,12 +85,12 @@ export class CreateServiceTypeComponent implements OnInit {
     }
   }
   private serviceTypeDeleteClick(index,serviceType): void {
-    this.observableService.modalType="modal-delete-service-type";
+    this.observableService.confirmationModalType="confirmation-modal-delete-service-type";
     if(this.observableService.modalCount<1){
       this.staticModalShow();
       this.subscriptionObservableDelete=this.observableService.notifyObservable.subscribe(res => {
         this.subscriptionObservableDelete.unsubscribe();
-        if (res.hasOwnProperty('option') && res.option === 'modal-delete-service-type') {
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-service-type') {
           this.serviceTypeService.deleteServiceType(this.authService.user.id,serviceType._id,this.localizeService.parser.currentLang).subscribe(data=>{
             if(data.success){  
               this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -113,7 +113,7 @@ export class CreateServiceTypeComponent implements OnInit {
   }
   private observableServiceTypeSuccess(){
     this.subscriptionObservableSuccess=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === 'modal-edit-service-type-success') {
+      if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-edit-service-type-success') {
          this.getServiceTypes(true);
       } 
     });   

@@ -5,7 +5,6 @@ import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalComponent } from '../../../templates/modal/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../services/observable.service';
 import { AlphanumericValidator } from '../../../validators';

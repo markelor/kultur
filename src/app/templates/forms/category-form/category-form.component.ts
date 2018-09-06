@@ -161,8 +161,8 @@ export class CategoryFormComponent implements OnInit {
     }
     this.categoryService.editCategory(this.inputCategory).subscribe(data=>{
       if(data.success){
-        this.observableService.modalType="modal-edit-category-success";
-        this.observableService.notifyOther({option: this.observableService.modalType,category:this.inputCategory});
+        this.observableService.confirmationModalType="confirmation-modal-edit-category-success";
+        this.observableService.notifyOther({option: this.observableService.confirmationModalType,category:this.inputCategory});
         this.messageClass = 'alert alert-success ks-solid '; // Set bootstrap success class
         this.message =data.message; // Set success message            
       }else{
@@ -174,7 +174,7 @@ export class CategoryFormComponent implements OnInit {
   private observableEdit(){
     this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
       this.subscriptionObservable.unsubscribe();
-      if (res.hasOwnProperty('option') && res.option === 'modal-edit-category') {
+      if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-edit-category') {
         if(this.inputCategory && res.language===this.inputLanguage){
           if(this.uploader.queue.length>0){
             this.uploader.uploadAll();
@@ -229,8 +229,8 @@ export class CategoryFormComponent implements OnInit {
       }else{
         this.uploader.clearQueue();
         this.iconsCategory=[];
-        this.observableService.modalType="modal-edit-category-success";
-        this.observableService.notifyOther({option: this.observableService.modalType});
+        this.observableService.confirmationModalType="confirmation-modal-edit-category-success";
+        this.observableService.notifyOther({option: this.observableService.confirmationModalType});
         this.submitted = false;
         this.category=new Category();
         this.createForm(); // Reset all form fields
@@ -344,11 +344,11 @@ export class CategoryFormComponent implements OnInit {
     return svg;
   }
   ngOnInit() {
-    /*$('textarea').each(function () {
+    $('textarea').each(function () {
       this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
       this.style.height = (this.scrollHeight) + 'px';
-    });*/
+    });
     this.initializeForm();
     this.observableEdit();  
      //File uploader options

@@ -1,9 +1,3 @@
-<!-- Custom Success/Error Message -->
-<div *ngIf="message" class="row show-hide-message">
-  <div [ngClass]="messageClass">
-    {{ message }}
-  </div>
-</div>
 <!-- Service Form -->
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-horizontal">
   <div class="row">
