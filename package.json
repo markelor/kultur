@@ -78,6 +78,7 @@
     "ngx-img-cropper": "^0.10.4",
     "ngx-moment": "^2.0.0",
     "ngx-pagination": "^3.0.3",
+    "nodemailer": "^4.6.8",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
     "snazzy-info-window": "^1.1.0",

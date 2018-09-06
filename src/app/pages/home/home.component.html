@@ -14,17 +14,25 @@
                 </div>
                 <h5 class="card-header">
                   <!--Title-->
-                    <span class="ks-text  event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} 
-                    <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
-                    </span>
-                    <div class="ks-text-translation"> 
-                    <span *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><i class="la la-language"></i>eu</span>
-                    <span *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><i class="la la-language"></i>es</span>
-                    <span *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><i class="la la-language"></i>en</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><i class="la la-language"></i>eu</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><i class="la la-language"></i>es</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><i class="la la-language"></i>en</span>
-                  </div>
+                    <span class="ks-text">
+                    <span class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                    <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event"></i></span>
+                  </span>
+                    <div class="dropdown">
+                      <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="la la-language"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
+                        <div class="ks-wrapper">
+                          <div *ngIf="event | hasBeenTranslatedPipe:'eu'"><span  class="language-done"><i class="la la-language"></i>Euskara</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'es'" ><span class="language-done"><i class="la la-language"></i>Español</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'en'"><span class="language-done"><i class="la la-language"></i>English</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" class="language-pendant"><i class="la la-language"></i>Euskara</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'es')" class="language-pendant"><i class="la la-language"></i>Español</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'en')" class="language-pendant"><i class="la la-language"></i>English</span></div>
+                        </div>
+                      </div>
+                    </div>
                   <div class="ks-controls">
                     <!-- showCollapse-->
                     <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
@@ -55,7 +63,7 @@
                   <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
                   <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="post-image ks-thumbnail img-responsive">
                    <!--Description-->
-                  <div class="ks-text" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText">
+                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText">
                   </div>
                   <div class="ks-text"></div>
                   <div class="ks-actions">

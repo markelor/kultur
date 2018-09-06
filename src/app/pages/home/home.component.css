@@ -77,16 +77,24 @@ position: sticky;
 
 .view-event{
   font-size: 20pt;
+  padding:4px 4px 4px 4px;
+  border-radius: 50%;
+  /*
   margin-left: 30px;
-  padding:8px 8px 8px 12px;
   border-left: solid 1px #79bcf4;
-  border-radius: 0px 3px 3px 0px;
+  */
 }
 
 .view-event:hover{
-   background-color:#0e58a2;
+  font-weight: bolder;
   font-size: 20pt;
   cursor: pointer;
+}
+
+.translate-event{
+  font-size: 20pt;
+  padding:8px 8px 8px 12px;
+  color:#ffffff;
 }
 
 .ks-text-translation{
@@ -95,16 +103,16 @@ position: sticky;
 }
 
 .language-done{
-  color:#ffffff;
+  color:#0e58a2;
   font-weight: lighter;
   font-size: 14pt;
   cursor: pointer;
-  border-radius: 3px;
-  padding:2px;
+  padding:4px;
+
 }
 
 .language-done:hover{
-  background-color:#0e58a2;
+  /*background-color:#0e58a2;*/
 }
 
 .language-pendant{
@@ -112,12 +120,11 @@ position: sticky;
   font-weight: lighter;
   font-size: 14pt;
   cursor:pointer;
-  border-radius: 3px;
-  padding:2px;
+  padding:4px;
 }
 
 .language-pendant:hover{
-  background-color:#0e58a2;
+  /*background-color:#0e58a2;*/
 }
 
 /* common */
@@ -282,7 +289,6 @@ position: sticky;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 13rem;
   }
   .right {
     float: right;
