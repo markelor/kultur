@@ -124,22 +124,25 @@ export class CommentComponent implements OnInit {
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
       )[0] === '@') {
+                console.log(this.form.get('comment').value);
         this.form.controls['comment'].setValue(', '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));
       }else {
+        console.log("ddddddd");
         this.form.controls['comment'].setValue(' '+this.form.get('comment').value.substring(
         this.form.get('comment').value.lastIndexOf("<p>") + 3, 
         this.form.get('comment').value.lastIndexOf("</p>")
         ));      
       }
-       this.form.controls['comment'].setValue('@' + comment.user.username + this.form.get('comment').value);
-       if (isPlatformBrowser(this.platformId)) {
+      this.form.controls['comment'].setValue("<p>"+'@' + comment.user.username + this.form.get('comment').value+"</p>");
+      if (isPlatformBrowser(this.platformId)) {
         $("#textareaComment").focus();
-      }  
-    } 
+      } 
 
+    } 
+    console.log(this.form.get('comment'));
   }
   public onSubmitEdit(comment){
     // Get authentication to send comment
@@ -189,6 +192,7 @@ export class CommentComponent implements OnInit {
           this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
         }
       }else{
+        console.log(this.form.get('comment'));
         if(this.form.get('comment').value.match(/(^|[^@\w])@(\w{1,15})\b/)){
             var mentionedUsers = this.form.get('comment').value.replace(/(^|[^@\w])@(\w{1,15})\b/g,'@271$2@272').match(/@271(.*?)@272/g).join().replace(/@271/g,'').replace(/@272/g,'').split(',');
         }                                                                                      

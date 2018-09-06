@@ -102,16 +102,18 @@
               <div class="tab-pane ks-messages-tab active" id="ks-navbar-messages-inbox" role="tabpanel">
                 <div class="ks-wrapper ks-scrollable">
                 <ng-container *ngFor="let notificationComent of notificationComments">
-                  <a *ngFor="let groupComment of notificationComent.groupComments" href="javascript:void(0)" [routerLink]="['/event-route','see-route',groupComment.eventId] | localize"  class="ks-message">
-                    <div class="ks-avatar ks-online">
-                      <img src="{{groupComment.user.currentAvatar}}" width="36" height="36">
-                    </div>
-                    <div class="ks-info">
-                      <div class="ks-user-name">{{groupComment.createdBy}}</div>
-                      <div class="ks-text" [innerHTML]="groupComment.comment"></div>
-                      <div class="ks-datetime">{{groupComment.createdAt | timezone}}</div>
-                    </div>
-                  </a>
+                  <ng-container *ngFor="let groupComment of notificationComent.groupComments; let i=index">
+                    <a *ngIf="i<5" href="javascript:void(0)" [routerLink]="['/event-route','see-route',groupComment.eventId] | localize"  class="ks-message">
+                      <div class="ks-avatar ks-online">
+                        <img src="{{groupComment.user.currentAvatar}}" width="36" height="36">
+                      </div>
+                      <div class="ks-info">
+                        <div class="ks-user-name">{{groupComment.createdBy}}</div>
+                        <div class="ks-text" [innerHTML]="groupComment.comment"></div>
+                        <div class="ks-datetime">{{groupComment.createdAt | timezone}}</div>
+                      </div>
+                    </a>
+                  </ng-container>
                 </ng-container>
                 </div>
                 <div class="ks-view-all">

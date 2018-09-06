@@ -100,7 +100,9 @@ export class NavbarComponent implements OnInit {
   private getCommentsNotification(){
     if(this.authService.user){
       this.commentService.getCommentsNotification(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data=>{
+                 console.log(data);
         if(data.success){
+ 
           this.notificationComments=data.comments;
         }     
       });
@@ -110,7 +112,6 @@ export class NavbarComponent implements OnInit {
   public editCommentsNotification(){
     if(this.authService.user){
       this.commentService.editCommentsNotification(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data=>{
-        console.log(data);
         if(data.success){
           this.getCommentsNotification();       
         }     
