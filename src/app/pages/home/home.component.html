@@ -14,7 +14,7 @@
                 </div>
                 <h5 class="card-header">
                   <!--Title-->
-                    <span class="ks-text">
+                  <span class="ks-text">
                     <span class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
                     <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event"></i></span>
                   </span>
@@ -24,12 +24,12 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
                         <div class="ks-wrapper">
-                          <div *ngIf="event | hasBeenTranslatedPipe:'eu'"><span  class="language-done"><i class="la la-language"></i>Euskara</span></div>
-                          <div *ngIf="event | hasBeenTranslatedPipe:'es'" ><span class="language-done"><i class="la la-language"></i>Español</span></div>
-                          <div *ngIf="event | hasBeenTranslatedPipe:'en'"><span class="language-done"><i class="la la-language"></i>English</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" class="language-pendant"><i class="la la-language"></i>Euskara</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'es')" class="language-pendant"><i class="la la-language"></i>Español</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" ><span *ngIf="!(event | hasBeenTranslatedPipe:'en')" class="language-pendant"><i class="la la-language"></i>English</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')"><i class="la la-language"></i>Euskara</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'es')"><i class="la la-language"></i>Español</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'en')"><i class="la la-language"></i>English</span></div>
                         </div>
                       </div>
                     </div>

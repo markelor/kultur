@@ -7,10 +7,29 @@
             <ng-container *ngFor="let event of events let i=index;">
               <article *ngIf="minSize<=i && maxSize>=i" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
                 <h5 class="card-header">
-                  <ng-container *ngFor="let translation of event.translation">
+                    <span class="ks-text">
+                      <span class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                      <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event"></i></span>
+                      <span class="ks-text"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event"></i></span>
+                    </span>
+                    <div class="dropdown">
+                      <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="la la-language" [ngClass]="event | translateCount"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
+                        <div class="ks-wrapper">
+                          <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
+                          <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')"><i class="la la-language"></i>Euskara</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'es')"><i class="la la-language"></i>Español</span></div>
+                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'en')"><i class="la la-language"></i>English</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  <!--<ng-container *ngFor="let translation of event.translation">
                     <span *ngIf="translation.language===localizeService.parser.currentLang" class="ks-text event-title"> {{translation.title}} 
                     <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
-                    <i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event"></i>
                     </span>
                   </ng-container>
                     <span *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text  event-title"> {{event.title}} 
@@ -24,7 +43,7 @@
                     <span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" class="language-pendant"><i class="la la-language"></i>eu</span>
                     <span *ngIf="!(event | hasBeenTranslatedPipe:'es')" class="language-pendant"><i class="la la-language"></i>es</span>
                     <span *ngIf="!(event | hasBeenTranslatedPipe:'en')" class="language-pendant"><i class="la la-language"></i>en</span>
-                  </div>
+                  </div>-->
                   <div class="ks-controls">
                     <!-- showCollapse-->
                     <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
@@ -72,8 +91,8 @@
                   </ng-container>
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length>0" src="{{event.images.poster[0].url}}" class="post-image ks-thumbnail img-responsive">
-                  <div *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text" [innerHTML]="event.description">
-                  </div>                
+                  <div *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text description" [innerHTML]="event.description">
+                  </div>
                   <div class="col-sm-12 details-container">
                     <!-- Category info-->
                     <div class="col-sm-6">
