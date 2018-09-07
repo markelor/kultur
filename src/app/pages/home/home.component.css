@@ -281,6 +281,12 @@ position: sticky;
 .autor {
   color: #77b300;
 }
+.well-translation{
+  color:green;
+} 
+.needed-translation{
+  color:red;
+}
 
 @media (min-width: 450px) {
   .description {

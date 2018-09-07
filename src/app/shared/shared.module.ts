@@ -34,6 +34,7 @@ import { DisableCategoriesPipe} from './pipes/disable-categories.pipe';
 import { FormArrayPipe} from './pipes/form-array.pipe';
 import { TranslateLanguagePipe} from './pipes/translate-language.pipe';
 import { HtmlTextPipe} from './pipes/html-text.pipe';
+import { TranslateCountPipe} from './pipes/translate-count.pipe';
 @NgModule({
   imports: [
     CommonModule
@@ -72,7 +73,8 @@ import { HtmlTextPipe} from './pipes/html-text.pipe';
     DisableCategoriesPipe,
     FormArrayPipe,
     TranslateLanguagePipe,
-    HtmlTextPipe
+    HtmlTextPipe,
+    TranslateCountPipe
   ],
   exports: [
     TouchspinDirective,
@@ -107,7 +109,8 @@ import { HtmlTextPipe} from './pipes/html-text.pipe';
     DisableCategoriesPipe,
     FormArrayPipe,
     TranslateLanguagePipe,
-    HtmlTextPipe
+    HtmlTextPipe,
+    TranslateCountPipe
   ]
 })
 export class SharedModule { }
