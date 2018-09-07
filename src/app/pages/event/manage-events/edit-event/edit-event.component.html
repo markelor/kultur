@@ -8,24 +8,29 @@
               <h5 class="card-header">
               <span class="ks-text" translate>{{'navbar.user'}}</span>
             </h5>
+            <!--
               <div class="card-block">
+              -->
                 <div class="ks-tabs-container ks-tabs-default ks-tabs-no-separator ks-widget-attachments">
                   <ul class="nav ks-nav-tabs">
                     <li class="nav-item">
                       <a class="nav-link nav-eu" href="#" data-toggle="tab" data-target="#tab1" translate>
-                        <span class="ks-icon la la-user text-info"></span>
+                        <span *ngIf="event | hasBeenTranslatedPipe:'eu'" class="ks-icon la la-language well-translation"></span>
+                        <span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" class="ks-icon la la-language needed-translation"></span>
                         {{'navbar.eu'}}
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link nav-es" href="#" data-toggle="tab" data-target="#tab2" translate>
-                        <span class="ks-icon la la-camera text-success"></span>
+                        <span *ngIf="event | hasBeenTranslatedPipe:'es'" class="ks-icon la la-language well-translation"></span>
+                        <span *ngIf="!(event | hasBeenTranslatedPipe:'es')" class="ks-icon la la-language needed-translation"></span>
                         {{'navbar.es'}}
                       </a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link nav-en" href="#" data-toggle="tab" data-target="#tab3" translate>
-                        <span class="ks-icon la la-file-text-o text-danger"></span>
+                        <span *ngIf="event | hasBeenTranslatedPipe:'en'" class="ks-icon la la-language well-translation"></span>
+                        <span *ngIf="!(event | hasBeenTranslatedPipe:'en')" class="ks-icon la la-language needed-translation"></span>
                         {{'navbar.en'}}
                       </a>
                     </li>
@@ -42,7 +47,9 @@
                     </div>
                   </div>
                 </div>
+              <!--
               </div>
+          -->
             </div>
           </section>
         </div>

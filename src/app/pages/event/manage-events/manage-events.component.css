@@ -130,6 +130,18 @@ position: sticky;
   margin-left: 15%;
   width: 100%
 }
+.language-done{
+  padding:5px 0 5px 5px;
+}
+
+.language-done span{
+  color: #0e58a2;
+  font-weight: lighter;
+  font-size: 12pt;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 15%;
+}
 
 .language-done span i{
   color:#0ca23e;
@@ -139,10 +151,14 @@ position: sticky;
   background-color:#dffde9;
 }
 
+.language-pendant{
+  padding:5px 0 5px 5px;
+}
+
 .language-pendant span{
   color: #87bef5;
   font-weight: lighter;
-  font-size: 14pt;
+  font-size: 12pt;
   cursor: pointer;
   padding: 4px;
   margin-left: 15%;

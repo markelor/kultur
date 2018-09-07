@@ -27,9 +27,9 @@
                           <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
                           <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
                           <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')"><i class="la la-language"></i>Euskara</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'es')"><i class="la la-language"></i>Español</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'en')"><i class="la la-language"></i>English</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
                         </div>
                       </div>
                     </div>
