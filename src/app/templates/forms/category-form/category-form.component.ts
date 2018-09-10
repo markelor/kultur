@@ -344,11 +344,6 @@ export class CategoryFormComponent implements OnInit {
     return svg;
   }
   ngOnInit() {
-    $('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    });
     this.initializeForm();
     this.observableEdit();  
      //File uploader options

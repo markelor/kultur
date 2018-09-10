@@ -962,11 +962,6 @@ export class EventFormComponent implements OnInit {
     }
   }
   ngOnInit() {
-    $('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    });
     this.initializeForm();
     this.mapClickPlace();
     this.location.valueChanges.subscribe(data=>{

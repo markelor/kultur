@@ -14,8 +14,9 @@ import { ElementHeightDirective } from './directives/element-height.directive';
 import { DatepickerDirective } from './directives/datepicker.directive';
 import { PopoverDirective } from './directives/popover.directive';
 import { ImagePreviewDirective } from './directives/image-preview.directive';
-import { BindContentPipe } from './pipes/bind-content.pipe';
 import { CapitalizeDirective } from './directives/capitalize.directive';
+import { AutoResizeDirective } from './directives/auto-resize.directive';
+import { BindContentPipe } from './pipes/bind-content.pipe';
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SpacePipe } from './pipes/space.pipe';
@@ -54,13 +55,14 @@ import { TranslateCountPipe} from './pipes/translate-count.pipe';
     DatepickerDirective,
     PopoverDirective,
     ImagePreviewDirective,
-    BindContentPipe,
+    ClickOutsideDirective,
     CapitalizeDirective,
+    AutoResizeDirective,
+    BindContentPipe,
     GroupByPipe,
     OrderByPipe,
     SpacePipe,
     CapitalizePipe,
-    ClickOutsideDirective,
     PipesPipe,
     EventCategoryPipe,
     TimezonePipe,
@@ -91,13 +93,14 @@ import { TranslateCountPipe} from './pipes/translate-count.pipe';
     DatepickerDirective,
     PopoverDirective,
     ImagePreviewDirective,
-    BindContentPipe,
+    ClickOutsideDirective,
     CapitalizeDirective,
+    AutoResizeDirective,
+    BindContentPipe,
     GroupByPipe,
     OrderByPipe,
     SpacePipe,
     CapitalizePipe,
-    ClickOutsideDirective,
     EventCategoryPipe,
     TimezonePipe,
     CompareDatePipe,

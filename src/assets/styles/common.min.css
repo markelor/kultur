@@ -9066,7 +9066,7 @@ h6 .badge {
 
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu {
   width: 360px;
-  /*height: 342px;*/
+  height: 426px;
   background: #fff
 }
 
@@ -9207,7 +9207,8 @@ h6 .badge {
 }
 
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu>.tab-content>.tab-pane>.ks-wrapper {
-  /*height: 251px*/
+  height: 426px;
+  overflow-y: scroll;
 }
 
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu>.tab-content>.tab-pane>.ks-wrapper .ks-message {

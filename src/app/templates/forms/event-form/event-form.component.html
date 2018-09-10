@@ -243,7 +243,7 @@
     <div [hidden]="locationsExists.value" class="col-sm-12">
       <div class="form-group" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
         <label for="textareaLocation" translate>{{'event-form.location'}}</label>
-        <textarea [formControl]="location" capitalize class="form-control" id="textareaLocation"></textarea>
+        <textarea [formControl]="location" autoresize capitalize class="form-control" id="textareaLocation"></textarea>
         <!-- Validation -->
         <span *ngIf="!location.value && location.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="location.errors?.maxlength && location.dirty " class="help-block form-error" translate>{{'validation.location-length'}}</span>
@@ -294,7 +294,7 @@
     <div class="col-sm-12">
       <div class="form-group" [ngClass]="{'has-error': (!observations.valid && observations.dirty), 'has-success': (observations.value)}">
         <label for="textareaObservations" translate>{{'event-form.observations'}}</label>
-        <textarea [formControl]="observations" capitalize class="form-control" id="textareaObservations"></textarea>
+        <textarea [formControl]="observations" autoresize capitalize class="form-control" id="textareaObservations"></textarea>
         <span *ngIf="observations.errors?.maxlength && observations.dirty " class="help-block form-error" translate>{{'validation.observations-length'}}</span>
       </div>
     </div>

@@ -460,11 +460,6 @@ export class ApplicationFormComponent implements OnInit {
   }
   ngOnInit() {
     this.initializeForm();
-    $('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    });
     this.authService.userSearch(this.searchTerm,this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.moderatorsSearch=data.users;

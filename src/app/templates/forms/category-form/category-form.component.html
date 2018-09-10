@@ -77,7 +77,7 @@
     <div class="col-sm-12">
       <div class="form-group required" [ngClass]="{'has-error': (!description.valid && description.dirty), 'has-success': (description.valid)}">
         <label for="textareaDescription" translate>{{'category-form.description'}}</label>
-        <textarea [formControl]="description" capitalize class="form-control"></textarea>
+        <textarea [formControl]="description" autoresize capitalize class="form-control"></textarea>
         <!-- Validation -->
         <span *ngIf="description.errors?.required && description.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="description.errors?.minlength && description.dirty || description.errors?.maxlength && description.dirty " class="help-block form-error" translate>{{'validation.category-description-length'}}</span>
