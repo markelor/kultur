@@ -71,9 +71,11 @@ export class ApplicationFormComponent implements OnInit {
   @Input() inputApplication;
   @Input() inputLanguage;
   @Input() inputModerators;
+  @Input() inputContributors;
   public title:AbstractControl;
   public entityName:AbstractControl;
   public moderator:AbstractControl;
+  public contributor:AbstractControl;
   public license:AbstractControl;
   public condition:AbstractControl;
   public price:AbstractControl;
@@ -82,12 +84,17 @@ export class ApplicationFormComponent implements OnInit {
   private categories;
   private application:Application=new Application();
   private imagesApplication=[];
-  public search:boolean=true;
+  public searchModerator:boolean=true;
+  public searchContributor:boolean=true;
   public moderatorsSearch;
   public selectedModerators=[];
   public selectedModeratorsId=[];
+  public contributorsSearch;
+  public selectedContributors=[];
+  public selectedContributorsId=[];
   public conditions=[];
-  public searchTerm = new Subject<string>();
+  public searchTermModerator = new Subject<string>();
+  public searchTermContributor = new Subject<string>();
   public uploader:FileUploader = new FileUploader({
     url: URL,itemAlias: 'application',
     isHTML5: true,
@@ -128,6 +135,7 @@ export class ApplicationFormComponent implements OnInit {
         TitleValidator.validate
       ])],
       moderator: [''],
+      contributor: [''],
       license: ['', Validators.compose([
         Validators.required/*,DateValidator.validate*/
       ])],
@@ -142,6 +150,7 @@ export class ApplicationFormComponent implements OnInit {
     this.title = this.form.controls['title'];
     this.entityName = this.form.controls['entityName'];
     this.moderator = this.form.controls['moderator'];
+    this.contributor = this.form.controls['contributor'];
     this.license= this.form.controls['license'];
     this.condition= this.form.controls['condition'];
     this.price = this.form.controls['price'];
@@ -168,7 +177,11 @@ export class ApplicationFormComponent implements OnInit {
       for (var i = 0; i < this.inputModerators.length; ++i) {
         this.selectedModerators.push(this.inputModerators[i].username);
         this.selectedModeratorsId.push(this.inputModerators[i]._id);
-      }    
+      }
+      for (var i = 0; i < this.inputContributors.length; ++i) {
+        this.selectedContributors.push(this.inputContributors[i].username);
+        this.selectedContributorsId.push(this.inputContributors[i]._id);
+      }     
       this.price.setValue(this.inputApplication.price);
       this.inputApplication.expiredAt=moment(this.inputApplication.expiredAt).tz("Europe/Madrid").format('YYYY-MM-DD HH:mm');
       var year=Number(this.inputApplication.expiredAt.split("-")[0]);
@@ -236,6 +249,7 @@ export class ApplicationFormComponent implements OnInit {
       this.submitted = true;
       this.application.setLanguage=this.localizeService.parser.currentLang;
       this.application.setModerators=this.selectedModeratorsId;
+      this.application.setContributors=this.selectedContributorsId;
       this.application.setTitle=this.form.get('title').value;
       this.application.setEntityName=this.form.get('entityName').value;
       this.application.setConditions=this.conditions;
@@ -272,9 +286,12 @@ export class ApplicationFormComponent implements OnInit {
         this.conditions=[];
         this.createForm(); // Reset all form fields
         this.moderatorsSearch=[];
+        this.contributorsSearch=[];
         this.conditions=[];
         this.selectedModerators=[];
         this.selectedModeratorsId=[];
+        this.selectedContributors=[];
+        this.selectedContributorsId=[];
         this.messageClass='alert alert-success ks-solid'
         this.message=data.message
         this.staticModalShow(true,'create',data.application._id);
@@ -299,7 +316,8 @@ export class ApplicationFormComponent implements OnInit {
   private editApplication() {
     if(this.inputApplication){
       var hasTranslationApplication=false;
-      this.inputApplication.moderators=this.selectedModeratorsId; // Users field   
+      this.inputApplication.moderators=this.selectedModeratorsId; // Users field 
+      this.inputApplication.contributors=this.selectedContributorsId; // Users field   
       this.inputApplication.price=this.form.get('price').value; // Price field
       this.inputApplication.expiredAt=new Date(this.form.get('expiredAt').value.year,this.form.get('expiredAt').value.month-1,this.form.get('expiredAt').value.day,this.timeExpiredAt.hour,this.timeExpiredAt.minute);
       this.deleteEditImages();   
@@ -354,12 +372,20 @@ export class ApplicationFormComponent implements OnInit {
       }
     });   
   }
-  public addUser(){
-    if( this.moderator.value && !this.selectedModerators.includes(this.moderator.value) && this.moderatorsSearch.filter(moderator => moderator.username === this.moderator.value).length > 0){
+  public addModerator(){
+    if( this.moderator.value && !this.selectedModerators.includes(this.moderator.value) && this.moderatorsSearch.filter(moderator => moderator.username === this.moderator.value).length > 0 && !this.selectedContributors.includes(this.moderator.value)){
       this.selectedModerators.push(this.moderator.value); 
       var index=this.moderatorsSearch.findIndex(i => i.username === this.moderator.value);
       this.selectedModeratorsId.push(this.moderatorsSearch[index]._id);
       this.moderator.setValue("");
+    }
+  }
+  public addContributor(){
+    if( this.contributor.value && !this.selectedContributors.includes(this.contributor.value) && this.contributorsSearch.filter(contributor => contributor.username === this.contributor.value).length > 0 && !this.selectedModerators.includes(this.contributor.value)){
+      this.selectedContributors.push(this.contributor.value); 
+      var index=this.contributorsSearch.findIndex(i => i.username === this.contributor.value);
+      this.selectedContributorsId.push(this.contributorsSearch[index]._id);
+      this.contributor.setValue("");
     }
   }
   public addCondition(){
@@ -368,18 +394,29 @@ export class ApplicationFormComponent implements OnInit {
       this.condition.setValue("");
     }
   }
-  private selectUser(index) {
-    this.search=false;
+  private selectModerator(index) {
+    this.searchModerator=false;
     this.moderator.setValue(this.moderatorsSearch[index].username);
   }
+  private selectContributor(index) {
+    this.searchContributor=false;
+    this.contributor.setValue(this.contributorsSearch[index].username);
+  }
   private onClickOutside() {
-    if(this.search){
-      this.search=false;
+    if(this.searchModerator){
+      this.searchModerator=false;
+    }
+    if(this.searchContributor){
+      this.searchContributor=false;
     }
   }
-  private deleteUser(index){
+  private deleteModerator(index){
     this.selectedModerators.splice(index,1);
     this.selectedModeratorsId.splice(index,1);
+  }
+  private deleteContributor(index){
+    this.selectedContributors.splice(index,1);
+    this.selectedContributorsId.splice(index,1);
   }
   private deleteCondition(index){
     this.conditions.splice(index,1);
@@ -460,10 +497,16 @@ export class ApplicationFormComponent implements OnInit {
   }
   ngOnInit() {
     this.initializeForm();
-    this.authService.userSearch(this.searchTerm,this.localizeService.parser.currentLang).subscribe(data=>{
+    this.authService.userSearch(this.searchTermModerator,this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.moderatorsSearch=data.users;
-        this.search=true; 
+        this.searchModerator=true;  
+      }     
+    });
+    this.authService.userSearch(this.searchTermContributor,this.localizeService.parser.currentLang).subscribe(data=>{
+      if(data.success){
+        this.contributorsSearch=data.users;
+        this.searchContributor=true; 
       }     
     });
     //File uploader options

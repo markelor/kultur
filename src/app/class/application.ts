@@ -22,10 +22,10 @@ export class Application{
         this.moderators = moderators;
     }
     get getContributors():Array<string> {
-        return this.moderators;
+        return this.contributors;
     }
-    set setContributors(moderators:Array<string>) {
-        this.moderators = moderators;
+    set setContributors(contributors:Array<string>) {
+        this.contributors = contributors;
     }
     get getTitle():string {
         return this.title;

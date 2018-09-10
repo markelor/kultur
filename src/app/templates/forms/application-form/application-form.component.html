@@ -84,22 +84,22 @@
       </div>
     </div>
     <!-- File upload end-->
-    <!-- User -->
+    <!-- Moderator -->
     <div class="col-sm-12">
       <div class="form-group required" [ngClass]="{'has-error': (!moderator.valid && moderator.dirty), 'has-success': (moderator.valid && moderator.value)}">
-        <label for="textareaUser" translate>{{'application-form.users'}}</label>
+        <label for="textareaModerator" translate>{{'application-form.moderators'}}</label>
         <div class="input-group icon">
-          <input (keyup)="searchTerm.next($event.target.value)" [formControl]="moderator" capitalize type="text" class="form-control" id="inputUser">
+          <input (keyup)="searchTermModerator.next($event.target.value)" [formControl]="moderator" capitalize type="text" class="form-control" id="inputModerator">
           <div class="input-group-append ">
-            <button (click)="addUser()" type="button" class="btn btn-success ks-light ks-no-text">
+            <button (click)="addModerator()" type="button" class="btn btn-success ks-light ks-no-text">
               <span class="la la-plus ks-icon"></span>
             </button>
           </div>
         </div>
         <!--ngIf="searchTerm.observers[0].destination.key-->
-        <table click-outside (clickOutside)="onClickOutside()" *ngIf="moderatorsSearch && search" class="table table-hover ks-table-cells-vertical-align-middle ks-crm-contacts-moderators-list-column-table">
+        <table click-outside (clickOutside)="onClickOutside()" *ngIf="moderatorsSearch && searchModerator" class="table table-hover ks-table-cells-vertical-align-middle ks-crm-contacts-useSearc-list-column-table">
           <tbody>
-            <tr (click)="selectUser(i)" *ngFor="let moderator of moderatorsSearch; let i=index">
+            <tr (click)="selectModerator(i)" *ngFor="let moderator of moderatorsSearch; let i=index">
               <td width="1">
                 <img src="{{moderator.currentAvatar}}" class="ks-avatar rounded-circle" width="36" height="36">
               </td>
@@ -111,13 +111,50 @@
         </table>
       </div>
     </div>
-    <!-- Users list -->
+    <!-- Moderators list -->
     <div class="col-sm-12">
       <div class="form-group">
         <label *ngFor="let moderator of selectedModerators; let i=index;" class="custom-control custom-checkbox">
-          <input type="checkbox" [checked]="moderator" (change)="deleteUser(i)" class="custom-control-input">
+          <input type="checkbox" [checked]="moderator" (change)="deleteModerator(i)" class="custom-control-input">
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">{{moderator}}</span>
+        </label>
+      </div>
+    </div>
+    <!-- Contributor -->
+    <div class="col-sm-12">
+      <div class="form-group required" [ngClass]="{'has-error': (!contributor.valid && contributor.dirty), 'has-success': (contributor.valid && contributor.value)}">
+        <label for="textareaContributor" translate>{{'application-form.contributors'}}</label>
+        <div class="input-group icon">
+          <input (keyup)="searchTermContributor.next($event.target.value)" [formControl]="contributor" capitalize type="text" class="form-control" id="inputContributor">
+          <div class="input-group-append ">
+            <button (click)="addContributor()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-plus ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!--ngIf="searchTerm.observers[0].destination.key-->
+        <table click-outside (clickOutside)="onClickOutside()" *ngIf="contributorsSearch && searchContributor" class="table table-hover ks-table-cells-vertical-align-middle ks-crm-contacts-users-list-column-table">
+          <tbody>
+            <tr (click)="selectContributor(i)" *ngFor="let contributor of contributorsSearch; let i=index">
+              <td width="1">
+                <img src="{{contributor.currentAvatar}}" class="ks-avatar rounded-circle" width="36" height="36">
+              </td>
+              <td width="200">
+                <div class="ks-name">{{contributor.username}}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Contributors list -->
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label *ngFor="let contributor of selectedContributors; let i=index;" class="custom-control custom-checkbox">
+          <input type="checkbox" [checked]="contributor" (change)="deleteContributor(i)" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{contributor}}</span>
         </label>
       </div>
     </div>
@@ -177,7 +214,7 @@
         <!-- Validation -->
         <span *ngIf="expiredAt.errors?.required && expiredAt.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <!--<span *ngIf="expiredAt.errors?.validateDate && expiredAt.dirty" class="help-block form-error" translate>
-                            {{'validation.expiredAt-validation'}}</span>-->
+        {{'validation.expiredAt-validation'}}</span>-->
       </div>
     </div>
     <!-- ExpiredAt time-->

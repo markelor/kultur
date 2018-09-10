@@ -7,9 +7,7 @@ export class ObservableService {
   public mapEvents;
   public mapSingleEvent;
   public mapClickType;
-  public applicationEvents;
-  public applicationServices;
-  public applicationObservations;
+  public application;
   public confirmationModalType;
   public createModalType;
   public avatarType;

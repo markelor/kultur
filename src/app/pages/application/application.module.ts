@@ -14,13 +14,14 @@ import { EditEventsApplicationComponent } from './manage-applications/applicatio
 import { EditServicesApplicationComponent } from './manage-applications/application-crud/edit-services-application/edit-services-application.component';
 import { EditObservationsApplicationComponent } from './manage-applications/application-crud/edit-observations-application/edit-observations-application.component';
 import { ManageApplicationsComponent } from './manage-applications/manage-applications.component';
+import { EditContributorsApplicationComponent } from './manage-applications/application-crud/edit-contributors-application/edit-contributors-application.component';
 import { InlineSVGModule } from 'ng-inline-svg';
 @NgModule({
   imports: [
   	CommonModule,FormsModule,ReactiveFormsModule,TranslateModule,SharedModule,TemplatesModule,
     ApplicationRoutingModule,DataTablesModule,NgbModule,InlineSVGModule
   ],
-  declarations: [CreateApplicationComponent, ManageApplicationsComponent,ApplicationCrudComponent,EditEventsApplicationComponent,EditServicesApplicationComponent,EditObservationsApplicationComponent],
+  declarations: [CreateApplicationComponent, ManageApplicationsComponent,ApplicationCrudComponent,EditEventsApplicationComponent,EditServicesApplicationComponent,EditObservationsApplicationComponent,EditContributorsApplicationComponent],
   providers: [
    {provide: COMPOSITION_BUFFER_MODE, useValue: false},
   ],

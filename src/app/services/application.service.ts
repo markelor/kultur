@@ -23,6 +23,11 @@ export class ApplicationService {
   public getApplications(language) {
     return this.http.get<any>(this.domain + 'application/getApplications/'+language);
   }
+   // Function to get all user applications from the database
+  public getUserApplications(userId,language) {
+    this.route= userId +'/';
+    return this.http.get<any>(this.domain + 'application/userApplications/'+this.route+language);
+  }
   // Function to get application events from the database
   public getApplicationEvents(id,language) {
     this.route= encodeURIComponent(id) +'/';
@@ -38,10 +43,15 @@ export class ApplicationService {
     this.route= encodeURIComponent(id) +'/';
     return this.http.get<any>(this.domain + 'application/getApplicationObservations/'+this.route+language);
   }
-  // Function to get all user applications from the database
-  public getUserApplications(userId,language) {
+  // Function to get all aplication moderators from the database
+  public getApplicationModerators(userId,language) {
     this.route= userId +'/';
-    return this.http.get<any>(this.domain + 'application/userApplications/'+this.route+language);
+    return this.http.get<any>(this.domain + 'application/getApplicationModerators/'+this.route+language);
+  }
+  // Function to get all aplication contributors from the database
+  public getApplicationContributors(userId,language) {
+    this.route= userId +'/';
+    return this.http.get<any>(this.domain + 'application/getApplicationContributors/'+this.route+language);
   }
   // Function to edit/update theme post
   public editApplication(application) {

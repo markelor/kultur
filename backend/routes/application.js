@@ -65,6 +65,11 @@ module.exports = (router) => {
                   if (!req.body.imagesApplication) {
                     res.json({ success: false, message: eval(language + '.newApplication.imagesProvidedError') }); // Return error message
                   } else {
+                    if (req.body.contributors) {
+                      for (var i = 0; i < req.body.contributors.length; i++) {
+                        req.body.contributors[i] = ObjectId(req.body.contributors[i]);
+                      }
+                    }
                     User.findOne({ _id: req.decoded.userId }, function(err, mainUser) {
                       if (err) {
                         // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
@@ -110,7 +115,7 @@ module.exports = (router) => {
                               updatedAt: Date.now()
                             });
                             // Save application into database
-                            application.save((err,application) => {
+                            application.save((err, application) => {
                               // Check if error
                               if (err) {
                                 console.log(err);
@@ -130,7 +135,7 @@ module.exports = (router) => {
                                   res.json({ success: false, message: eval(language + '.newApplication.saveError'), err }); // Return general error message
                                 }
                               } else {
-                                res.json({ success: true, message: eval(language + '.newApplication.success'),application:application }); // Return success message
+                                res.json({ success: true, message: eval(language + '.newApplication.success'), application: application }); // Return success message
                               }
                             });
                           }
@@ -166,7 +171,7 @@ module.exports = (router) => {
             var mailOptions = {
               from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
-              subject: ' Find 3 get application events error ',
+              subject: ' Find 31get application events error ',
               text: 'The following error has been reported in Kultura: ' + err,
               html: 'The following error has been reported in Kultura:<br><br>' + err
             };
@@ -186,7 +191,7 @@ module.exports = (router) => {
               res.json({ success: false, message: eval(language + '.getApplication.applicationError') }); // Return error of no application found
             } else {
               User.find({
-                 _id: { $in: application.moderators }
+                _id: { $in: application.moderators }
               }, (err, moderators) => {
                 // Check if error was found or not
                 if (err) {
@@ -194,7 +199,7 @@ module.exports = (router) => {
                   var mailOptions = {
                     from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                     to: [emailConfig.email], // list of receivers
-                    subject: ' Find 4 get application events error ',
+                    subject: ' Find 2 get application events error ',
                     text: 'The following error has been reported in Kultura: ' + err,
                     html: 'The following error has been reported in Kultura:<br><br>' + err
                   };
@@ -213,37 +218,70 @@ module.exports = (router) => {
                   if (!moderators) {
                     res.json({ success: false, message: eval(language + '.getApplication.applicationError') }); // Return error of no application found
                   } else {
-                    //res.json({ success: true, application: application }); // Return success and place 
-                    Event.aggregate([{
-                        $match: {
-                          _id: { $in: application.events }
-                        }
-                      }, {
-                        // Join with Place table
-                        $lookup: {
-                          from: "places", // other table name
-                          localField: "placeId", // placeId of Event table field
-                          foreignField: "_id", // _id of Place table field
-                          as: "place" // alias for userinfo table
-                        }
-                      }, { $unwind: "$place" },
-                      // Join with Category table
-                      {
-                        $lookup: {
-                          from: "categories",
-                          localField: "categoryId",
-                          foreignField: "_id",
-                          as: "category"
-                        }
-                      }, { $unwind: "$category" },
-                    ]).exec(function(err, events) {
-                      // Check if places were found in database
-                      if (!events) {
-                        res.json({ success: false, message: eval(language + '.eventsSearch.placesError') }); // Return error of no places found
+                    User.find({
+                      _id: { $in: application.contributors }
+                    }, (err, contributors) => {
+                      // Check if error was found or not
+                      if (err) {
+                        // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
+                        var mailOptions = {
+                          from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                          to: [emailConfig.email], // list of receivers
+                          subject: ' Find 3 get application events error ',
+                          text: 'The following error has been reported in Kultura: ' + err,
+                          html: 'The following error has been reported in Kultura:<br><br>' + err
+                        };
+                        // Function to send e-mail to myself
+                        transporter.sendMail(mailOptions, function(err, info) {
+                          if (err) {
+                            console.log(err); // If error with sending e-mail, log to console/terminal
+                          } else {
+                            console.log(info); // Log success message to console if sent
+                            console.log(user.email); // Display e-mail that it was sent to
+                          }
+                        });
+                        res.json({ success: false, message: eval(language + '.general.generalError') });
                       } else {
-                        res.json({ success: true, application: application, events: events,moderatorsArray:moderators }); // Return success and place 
+                        // Check if application were found in database
+                        if (!contributors) {
+                          res.json({ success: false, message: eval(language + '.getApplication.applicationError') }); // Return error of no application found
+                        } else {
+                          //res.json({ success: true, application: application }); // Return success and place 
+                          Event.aggregate([{
+                              $match: {
+                                _id: { $in: application.events }
+                              }
+                            }, {
+                              // Join with Place table
+                              $lookup: {
+                                from: "places", // other table name
+                                localField: "placeId", // placeId of Event table field
+                                foreignField: "_id", // _id of Place table field
+                                as: "place" // alias for userinfo table
+                              }
+                            }, { $unwind: "$place" },
+                            // Join with Category table
+                            {
+                              $lookup: {
+                                from: "categories",
+                                localField: "categoryId",
+                                foreignField: "_id",
+                                as: "category"
+                              }
+                            }, { $unwind: "$category" },
+                          ]).exec(function(err, events) {
+                            // Check if places were found in database
+                            if (!events) {
+                              res.json({ success: false, message: eval(language + '.eventsSearch.placesError') }); // Return error of no places found
+                            } else {
+                              res.json({ success: true, application: application, events: events, moderatorsArray: moderators, contributorsArray: contributors }); // Return success and place 
+                            }
+                          });
+
+                        }
                       }
                     });
+
                   }
                 }
               });
@@ -274,7 +312,7 @@ module.exports = (router) => {
             var mailOptions = {
               from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
-              subject: ' Find 3 get application services error ',
+              subject: ' Find 1 get application services error ',
               text: 'The following error has been reported in Kultura: ' + err,
               html: 'The following error has been reported in Kultura:<br><br>' + err
             };
@@ -350,7 +388,7 @@ module.exports = (router) => {
             var mailOptions = {
               from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
-              subject: ' Find 3 get application observations error ',
+              subject: ' Find 1 get application observations error ',
               text: 'The following error has been reported in Kultura: ' + err,
               html: 'The following error has been reported in Kultura:<br><br>' + err
             };
@@ -377,7 +415,7 @@ module.exports = (router) => {
                   var mailOptions = {
                     from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                     to: [emailConfig.email],
-                    subject: ' Find 4 get application observations error ',
+                    subject: ' Find 2 get application observations error ',
                     text: 'The following error has been reported in Kultura: ' + err,
                     html: 'The following error has been reported in Kultura:<br><br>' + err
                   }; // Function to send e-mail to myself
@@ -396,6 +434,80 @@ module.exports = (router) => {
                     res.json({ success: false, message: eval(language + '.newObservation.observationsError') }); // Return error of no observations found
                   } else {
                     res.json({ success: true, application: application, observations: observations }); // Return success and place 
+                  }
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+  });
+  /* ===============================================================
+           GET Application
+        =============================================================== */
+  router.get('/getApplicationContributors/:id/:language', (req, res) => {
+    var language = req.params.language;
+    if (!language) {
+      res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
+    } else {
+      if (!req.params.id) {
+        res.json({ success: false, message: eval(language + '.getApplication.idProvidedError') }); // Return error
+      } else {
+        Application.findOne({
+          _id: ObjectId(req.params.id)
+        }, (err, application) => {
+          // Check if error was found or not
+          if (err) {
+            // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
+            var mailOptions = {
+              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+              to: [emailConfig.email], // list of receivers
+              subject: ' Find 1 get application contributors error ',
+              text: 'The following error has been reported in Kultura: ' + err,
+              html: 'The following error has been reported in Kultura:<br><br>' + err
+            };
+            // Function to send e-mail to myself
+            transporter.sendMail(mailOptions, function(err, info) {
+              if (err) {
+                console.log(err); // If error with sending e-mail, log to console/terminal
+              } else {
+                console.log(info); // Log success message to console if sent
+                console.log(user.email); // Display e-mail that it was sent to
+              }
+            });
+            res.json({ success: false, message: eval(language + '.general.generalError') });
+          } else {
+            // Check if application were found in database
+            if (!application) {
+              res.json({ success: false, message: eval(language + '.getApplication.applicationError') }); // Return error of no application found
+            } else {
+              // Look for users in database
+              User.find({ _id: { $in: application.contributors } }, function(err, contributors) {
+                if (err) {
+                  // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
+                  var mailOptions = {
+                    from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                    to: [emailConfig.email],
+                    subject: ' Find 2 edit application error ',
+                    text: 'The following error has been reported in Kultura: ' + err,
+                    html: 'The following error has been reported in Kultura:<br><br>' + err
+                  }; // Function to send e-mail to myself
+                  transporter.sendMail(mailOptions, function(err, info) {
+                    if (err) {
+                      console.log(err); // If error with sending e-mail, log to console/terminal
+                    } else {
+                      console.log(info); // Log success message to console if sent
+                      console.log(user.email); // Display e-mail that it was sent to
+                    }
+                  });
+                  res.json({ success: false, message: eval(language + '.general.generalError') });
+                } else {
+                  // Check if user is in database
+                  if (!contributors) {
+                    res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
+                  } else {
+                    res.json({ success: true, application: application, contributors: contributors }); // Return success and place 
                   }
                 }
               });
@@ -593,8 +705,17 @@ module.exports = (router) => {
         if (!req.body.moderators || req.body.moderators.length <= 0) {
           res.json({ success: false, message: eval(language + '.editApplication.moderatorsProvidedError') }); // Return error
         } else {
+          for (var i = 0; i < req.body.moderators.length; i++) {
+            req.body.moderators[i] = ObjectId(req.body.moderators[i]);
+          }
+          if (req.body.contributors) {
+            for (var i = 0; i < req.body.contributors.length; i++) {
+              req.body.contributors[i] = ObjectId(req.body.contributors[i]);
+            }
+          }
           if (req.body.language) var newLanguage = req.body.language; // Check if a change to language was requested
-          if (req.body.moderators) var newUsers = req.body.moderators; // Check if a change to users was requested
+          if (req.body.moderators) var newModerators = req.body.moderators; // Check if a change to moderators was requested
+          if (req.body.contributors) var newContributors = req.body.contributors; // Check if a change to contributors was requested
           if (req.body.title) var newTitle = req.body.title; // Check if a change to title was requested
           if (req.body.events) var newEvents = req.body.events; // Check if a change to events was requested
           if (req.body.services) var newServices = req.body.services; // Check if a change to services was requested
@@ -696,8 +817,10 @@ module.exports = (router) => {
                             } else {
                               if (newLanguage)
                                 application.language = newLanguage; // Assign new language to application in database
-                              if (newUsers)
-                                application.users = newUsers; // Assign new users to application in database
+                              if (newModerators)
+                                application.moderators = newModerators; // Assign new moderators to application in database
+                              if (newContributors)
+                                application.contributors = newContributors; // Assign new contributors to application in database
                               if (newTitle)
                                 application.title = newTitle; // Assign new title to application in database
                               if (newEvents)

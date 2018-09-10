@@ -152,7 +152,7 @@ export class EditObservationsApplicationComponent implements OnInit {
   }
   private tabClick(){
     this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === this.observableService.applicationObservations) {
+      if (res.hasOwnProperty('option') && res.option === "application-observations") {
         this.getApplicationObservations();   
       }
     }); 
@@ -168,11 +168,6 @@ export class EditObservationsApplicationComponent implements OnInit {
     });
     // Get application id
     this.applicationId=this.activatedRoute.snapshot.params['id'];
-    $('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    }); 
     this.createSettings(); 
     this.getApplicationObservationsInit();
     this.getObservations(); 

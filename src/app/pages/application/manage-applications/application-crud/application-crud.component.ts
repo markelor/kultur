@@ -10,17 +10,21 @@ export class ApplicationCrudComponent implements OnInit {
 
   constructor(private observableService: ObservableService) { }
   public refreshEvents(){
-    this.observableService.applicationEvents="application-events";
-    this.observableService.notifyOther({option: this.observableService.applicationEvents});
+    this.observableService.application="application-events";
+    this.observableService.notifyOther({option: this.observableService.application});
   }
   public refreshServices(){
-    this.observableService.applicationServices="application-services";
-    this.observableService.notifyOther({option: this.observableService.applicationServices});
+    this.observableService.application="application-services";
+    this.observableService.notifyOther({option: this.observableService.application});
     
   }
   public refreshObservations(){
-    this.observableService.applicationObservations="application-observations";
-    this.observableService.notifyOther({option: this.observableService.applicationObservations});
+    this.observableService.application="application-observations";
+    this.observableService.notifyOther({option: this.observableService.application});
+  }
+  public refreshContributors(){
+    this.observableService.application="application-contributors";
+    this.observableService.notifyOther({option: this.observableService.application});
     
   }
   ngOnInit() {

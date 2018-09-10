@@ -14,17 +14,17 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { ObservableService } from '../../../../../services/observable.service';
 
 @Component({
-  selector: 'app-edit-services-application',
-  templateUrl: './edit-services-application.component.html',
-  styleUrls: ['./edit-services-application.component.css']
+  selector: 'app-edit-contributors-application',
+  templateUrl: './edit-contributors-application.component.html',
+  styleUrls: ['./edit-contributors-application.component.css']
 })
-export class EditServicesApplicationComponent implements OnInit {
+export class EditContributorsApplicationComponent implements OnInit {
   public message;
   public messageClass;
   private applicationId;
   private application;
-  public servicesApplication=[];
-  public services;
+  public contributorsApplication=[];
+  public users;
   @ViewChildren(DataTableDirective)
   dtElements: QueryList<DataTableDirective>;
   public dtOptions: any = {};
@@ -36,7 +36,6 @@ export class EditServicesApplicationComponent implements OnInit {
     private applicationService:ApplicationService,
     private authService:AuthService,
     private observableService: ObservableService,
-    private serviceService:ServiceService,
     private translate: TranslateService,
     private router:Router,
     private activatedRoute: ActivatedRoute,
@@ -57,31 +56,32 @@ export class EditServicesApplicationComponent implements OnInit {
       ],
       responsive: true,
       columnDefs: [
-        { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 10, targets: 1 },
-        { responsivePriority: 3, targets: 2 },
-        { responsivePriority: 8, targets: 3 },
-        { responsivePriority: 4, targets: 4 },
-        { responsivePriority: 6, targets: 5 },
-        { responsivePriority: 5, targets: 6 },
-        { responsivePriority: 9, targets: 7 },
-        { responsivePriority: 7, targets: 8 },
-        { responsivePriority: 2, targets: 9 }
+        { responsivePriority: 3, targets: 0 },
+        { responsivePriority: 4, targets: 1 },
+        { responsivePriority: 1, targets: 2 },
+        { responsivePriority: 5, targets: 3 },
+        { responsivePriority: 6, targets: 4 },
+        { responsivePriority: 7, targets: 5 },
+        { responsivePriority: 2, targets: 6 }
       ]
     };
   }
-  private addServiceApplicationTable(indexService){
-    if(!this.application || !this.application.services.includes(this.services[indexService]._id)){
-      this.application.services.push(this.services[indexService]._id);
+  private addUserApplicationTable(indexUser){
+      console.log(this.application);
+    if(!this.application || !this.application.contributors.includes(this.users[indexUser]._id)){
+      this.application.contributors.push(this.users[indexUser]._id);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
+        console.log(data);
+        console.log(this.application);
         if(data.success){ 
           this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
             if(index===0){
               dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
                 // Destroy the table first
                 dtInstance.destroy();
-                this.servicesApplication.push(this.services[indexService]);
+                console.log(this.users[indexUser]);
+                this.contributorsApplication.push(this.users[indexUser]);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
               });
@@ -91,9 +91,9 @@ export class EditServicesApplicationComponent implements OnInit {
       });
     }  
   }
-  private deleteServiceApplicationTable(indexService){
-      var indexAplicatonService=this.application.services.indexOf(this.servicesApplication[indexService]._id);
-      this.application.services.splice(indexAplicatonService,1);
+  private deleteUserApplicationTable(indexUser){
+      var indexAplicatonUser=this.application.contributors.indexOf(this.contributorsApplication[indexUser]._id);
+      this.application.contributors.splice(indexAplicatonUser,1);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
         if(data.success){ 
@@ -102,7 +102,7 @@ export class EditServicesApplicationComponent implements OnInit {
               dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               // Destroy the table first
               dtInstance.destroy();
-              this.servicesApplication.splice(indexService,1);
+              this.contributorsApplication.splice(indexUser,1);
               // Call the addTrigger to rerender again
               this.deleteTrigger.next();
               });
@@ -111,19 +111,21 @@ export class EditServicesApplicationComponent implements OnInit {
         }
       });
   }
-  private getApplicationServicesInit(){
-    // Get application services
-    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+  private getApplicationContributorsInit(){
+    // Get application contributors
+    this.applicationService.getApplicationContributors(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+      console.log(data);
       if(data.success){
         this.application=data.application;
-        this.servicesApplication=data.services;
+        this.contributorsApplication=data.contributors;
+        console.log(this.contributorsApplication);
       }
       this.deleteTrigger.next();
     });
   }
-   private getApplicationServices(){
-    // Get application services
-    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+  private getApplicationContributors(){
+    // Get application contributors
+    this.applicationService.getApplicationContributors(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
         if(index===0){
           dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -131,10 +133,10 @@ export class EditServicesApplicationComponent implements OnInit {
             dtInstance.destroy();
             if(data.success){
               this.application=data.application;
-              this.servicesApplication=data.services;
+              this.contributorsApplication=data.contributors;
             }else{
               this.application=undefined;
-              this.servicesApplication=[];
+              this.contributorsApplication=[];
             }        
             this.deleteTrigger.next();
           });
@@ -142,11 +144,11 @@ export class EditServicesApplicationComponent implements OnInit {
       });   
     });
   }
-  // Function to get services from the database
-  private getServices() {
-    this.serviceService.getServices(this.localizeService.parser.currentLang).subscribe(data => {
+  // Function to get users from the database
+  private getUsers() {
+    this.authService.getAllUsers(this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
-        this.services=data.services;
+        this.users=data.users;
       }
       this.addTrigger.next();
     });
@@ -158,8 +160,8 @@ export class EditServicesApplicationComponent implements OnInit {
   }
   private tabClick(){
     this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === "application-services") {
-        this.getApplicationServices();
+      if (res.hasOwnProperty('option') && res.option === "application-contributors") {
+        this.getApplicationContributors();
       }
     }); 
   }
@@ -175,8 +177,8 @@ export class EditServicesApplicationComponent implements OnInit {
     // Get application id
     this.applicationId=this.activatedRoute.snapshot.params['id'];
     this.createSettings(); 
-    this.getApplicationServicesInit();
-    this.getServices(); 
+    this.getApplicationContributorsInit();
+    this.getUsers(); 
     this.tabClick();       
   }
    ngOnDestroy(){

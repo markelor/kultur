@@ -119,7 +119,7 @@ export class EditEventsApplicationComponent implements OnInit {
       this.deleteTrigger.next();
     });
   }
-     private getApplicationEvents(){
+  private getApplicationEvents(){
     // Get application events
     this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
       this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
@@ -157,7 +157,7 @@ export class EditEventsApplicationComponent implements OnInit {
   }
    private tabClick(){
     this.subscriptionTabClick=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === this.observableService.applicationEvents) {
+      if (res.hasOwnProperty('option') && res.option === "application-events") {
         this.getApplicationEvents();   
       }
     }); 
@@ -173,11 +173,6 @@ export class EditEventsApplicationComponent implements OnInit {
     });
     // Get application id
     this.applicationId=this.activatedRoute.snapshot.params['id'];
-    $('textarea').each(function () {
-      this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-      this.style.height = (this.scrollHeight) + 'px';
-    }); 
     this.createSettings(); 
     this.getApplicationEventsInit();
     this.getEvents();    

@@ -100,7 +100,6 @@ export class NavbarComponent implements OnInit {
   private getCommentsNotification(){
     if(this.authService.user){
       this.commentService.getCommentsNotification(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data=>{
-                 console.log(data);
         if(data.success){
  
           this.notificationComments=data.comments;

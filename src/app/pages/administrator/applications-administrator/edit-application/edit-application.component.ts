@@ -13,7 +13,8 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class EditApplicationComponent implements OnInit {
   public application;
-  public moderator;
+  public moderators;
+  public contributors;
   constructor(
   	private applicationService:ApplicationService,
   	private authService:AuthService,
@@ -28,7 +29,8 @@ export class EditApplicationComponent implements OnInit {
     this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.application=data.application;
-        this.moderator=data.moderatorsArray;
+        this.moderators=data.moderatorsArray;
+        this.contributors=data.contributorsArray;
         if(active){
           setTimeout(() => {
             $(".nav-"+this.localizeService.parser.currentLang).addClass('active');
@@ -40,7 +42,8 @@ export class EditApplicationComponent implements OnInit {
   }  
   private refreshApplication($event){
     this.application=undefined;
-    this.moderator=undefined;
+    this.moderators=undefined;
+    this.contributors=undefined;
     this.getApplication(false);
   }
   ngOnInit() {
