@@ -16,9 +16,10 @@ export class ObservationService {
   public newObservation(observation) {
     return this.http.post<any>(this.domain + 'observation/newObservation', observation);
   }
-   // Function to get observations from the database
-  public getObservations(language) {
-    return this.http.get<any>(this.domain + 'observation/getObservations/'+language);
+    // Function to get services from the database
+  public getObservations(filters,language) {
+    var data = {'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'observation/getObservations',data);
   }
   // Function to get observation from the database
   public getObservation(id,userId,language) {

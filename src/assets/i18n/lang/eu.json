@@ -266,6 +266,7 @@
   },
   "modal":
   {
+    "edit-user-header": "Erabiltzailea aldatu",
     "delete-user-header": "Erabiltzailea ezabatu",
     "delete-user-content": "Ziur zaude erabiltzailea ezabatzeaz?",
     "delete-category-header": "Kategoria ezabatu",
@@ -284,7 +285,7 @@
     "edit-observation-header": "Oharra aldatu",
     "delete-observation-header": "Oharra ezabatu",
     "delete-observation-content": "Ziur zaude oharra ezabatzeaz?",
-    "create-application-header": "Aplicazioa sortu",
+    "create-application-header": "Aplikazioa sortu",
     "edit-application-header": "Aplikazioa aldatu",
     "delete-application-header": "Aplikazioa ezabatu",
     "delete-application-content": "Ziur zaude aplikazioa ezabatzeaz?",

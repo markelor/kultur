@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
     this.maxSize=(event*this.range)-1;
   }
   ngOnInit() {
-
     moment.locale(this.localizeService.parser.currentLang);
   	this.getEvents();
   }

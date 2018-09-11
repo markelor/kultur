@@ -29,18 +29,18 @@ export class ApplicationService {
     return this.http.get<any>(this.domain + 'application/userApplications/'+this.route+language);
   }
   // Function to get application events from the database
-  public getApplicationEvents(id,language) {
-    this.route= encodeURIComponent(id) +'/';
+  public getApplicationEvents(id,userId,language) {
+    this.route=id +'/'+userId+'/';
     return this.http.get<any>(this.domain + 'application/getApplicationEvents/'+this.route+language);
   }
   // Function to get application services from the database
-  public getApplicationServices(id,language) {
-    this.route= encodeURIComponent(id) +'/';
+  public getApplicationServices(id,userId,language) {
+    this.route=id +'/'+userId+'/';
     return this.http.get<any>(this.domain + 'application/getApplicationServices/'+this.route+language);
   }
    // Function to get application services from the database
-  public getApplicationObservations(id,language) {
-    this.route= encodeURIComponent(id) +'/';
+  public getApplicationObservations(id,userId,language) {
+    this.route=id +'/'+userId+'/';
     return this.http.get<any>(this.domain + 'application/getApplicationObservations/'+this.route+language);
   }
   // Function to get all aplication moderators from the database

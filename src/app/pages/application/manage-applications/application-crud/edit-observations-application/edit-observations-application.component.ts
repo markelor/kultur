@@ -107,17 +107,18 @@ export class EditObservationsApplicationComponent implements OnInit {
   }
   private getApplicationObservationsInit(){
     // Get application observations
-    this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationObservation.getApplicationObservations(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.application=data.application;
         this.observationsApplication=data.observations;
+        this.getObservations(); 
       }
       this.deleteTrigger.next();
     });
   }
   private getApplicationObservations(){
     // Get application observations
-    this.applicationObservation.getApplicationObservations(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationObservation.getApplicationObservations(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
         if(index===0){
           dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -138,7 +139,11 @@ export class EditObservationsApplicationComponent implements OnInit {
   }
   // Function to get observations from the database
   private getObservations() {
-    this.observationObservation.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
+    var filtersObservations={};
+    if(this.application.contributors.includes(this.authService.user.id)){
+      filtersObservations['$or']= [{ createdBy: this.authService.user.id }, { translation: { $elemMatch: { createdBy: this.authService.user.id } } }];
+    }
+    this.observationObservation.getObservations(filtersObservations,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.observations=data.observations;
       }
@@ -170,7 +175,6 @@ export class EditObservationsApplicationComponent implements OnInit {
     this.applicationId=this.activatedRoute.snapshot.params['id'];
     this.createSettings(); 
     this.getApplicationObservationsInit();
-    this.getObservations(); 
     this.tabClick();        
   }
    ngOnDestroy(){

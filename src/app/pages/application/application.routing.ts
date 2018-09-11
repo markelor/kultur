@@ -5,12 +5,12 @@ import { CreateApplicationComponent } from './create-application/create-applicat
 import { ManageApplicationsComponent } from './manage-applications/manage-applications.component';
 import { ApplicationCrudComponent } from './manage-applications/application-crud/application-crud.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { ModeratorGuard } from '../guards/moderator.guard';
+import { ContributorGuard } from '../guards/contributor.guard';
 
 const routes: Routes = [
 	{ path: '', component: CreateApplicationComponent,canActivate:[AuthGuard], pathMatch: 'full' },
-	{ path: 'create-route', component: CreateApplicationComponent,canActivate:[ModeratorGuard] },
-	{ path: 'manage-route', component: ManageApplicationsComponent,canActivate:[ModeratorGuard] },
+	{ path: 'create-route', component: CreateApplicationComponent,canActivate:[ContributorGuard] },
+	{ path: 'manage-route', component: ManageApplicationsComponent,canActivate:[ContributorGuard] },
 	{ path: 'manage-route/:id',  component: ApplicationCrudComponent,canActivate:[AuthGuard]}	
 ];
 @NgModule({

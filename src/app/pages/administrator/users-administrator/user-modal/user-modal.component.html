@@ -1,6 +1,6 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h4 class="modal-title">{{modalHeader}}</h4>
+    <h4 class="modal-title" translate>{{'modal.edit-user-header'}}</h4>
     <button class="close" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -12,10 +12,13 @@
       <div class="form-group required" [ngClass]="{'has-error': (!permission.valid && permission.dirty), 'has-success': (permission.valid)}">
         <div class="input-icon icon-left icon-lg icon-color-primary">
           <select [formControl]="permission" class="form-control" id="permission">
+            <option [value]="'banned'" [selected]="permission.value === 'banned'">
+              Banned
+            </option>
             <option [value]="'user'" [selected]="permission.value === 'user'">
               User
             </option>
-            <option [value]="'contributor'" [selected]="permission.value === 'admin'">
+            <option [value]="'contributor'" [selected]="permission.value === 'contributor'">
               Contributor
             </option>
             <option [value]="'moderator'" [selected]="permission.value === 'moderator'">
@@ -26,7 +29,7 @@
             </option>
           </select>
           <span class="icon-addon">
-                    <span class="la la-key"></span>
+            <span class="la la-key"></span>
           </span>
         </div>
         <!-- Validation -->

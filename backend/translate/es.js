@@ -150,7 +150,7 @@ module.exports = {
     editUser: {
         usernameProvidedError: "El usuario no fue proporcionado.",
         userError: "No se encontró el usuario.",
-        nameUpdated: "¡El nombre ha sido actualizado!",
+        userUpdated: "¡El usuario ha sido actualizado!",
         usernameUpdated: "¡El nombre de usuario ha sido actualizado!",
         emailUpdated: "¡El correo electrónico ha sido actualizado!",
         avatarUpload: "¡El Avatar ha sido subido!",
@@ -282,6 +282,7 @@ module.exports = {
     //getEvent
     getEvent: {
         idProvidedError: "El ID del evento no fue proporcionado.",
+        userProvidedError: "El usurio de los eventos no fue proporcionado.",
         eventError: "No se encontro el evento.",
         placeError: "No se encontro el lugar.",
         categoryError: "No se encontró la categoría."
@@ -294,7 +295,7 @@ module.exports = {
     //getService
     getService: {
         idProvidedError: "El ID del servicio no fue proporcionado.",
-        usernameProvidedError: "El usurio de los servicios no fue proporcionado.",
+        userProvidedError: "El usurio de los servicios no fue proporcionado.",
         userError: "No se encontró el usuario.",
         serviceError: "No se encontro el servicio.",
         placeError: "No se encontro el lugar."
@@ -302,7 +303,7 @@ module.exports = {
     //getObservation
     getObservation: {
         idProvidedError: "El ID de la observación no fue proporcionado.",
-        usernameProvidedError: "El usurio de las observaciones no fue proporcionado.",
+        userProvidedError: "El usurio de las observaciones no fue proporcionado.",
         userError: "No se encontró el usuario.",
         observationError: "No se encontro la observación."
     },

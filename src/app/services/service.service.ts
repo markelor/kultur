@@ -17,9 +17,10 @@ export class ServiceService {
     var data = {'service': service, 'place': place };
     return this.http.post<any>(this.domain + 'service/newService', data);
   }
-   // Function to get services from the database
-  public getServices(language) {
-    return this.http.get<any>(this.domain + 'service/getServices/'+language);
+  // Function to get services from the database
+  public getServices(filters,language) {
+    var data = {'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'service/getServices',data);
   }
   // Function to get service from the database
   public getService(id,userId,language) {

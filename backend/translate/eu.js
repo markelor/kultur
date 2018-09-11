@@ -150,7 +150,7 @@ module.exports = {
     editUser: {
         usernameProvidedError: "Erabiltzailea ez da eman.",
         userError: "Erabiltzailea ez da aurkitu.",
-        nameUpdated: "Izena eguneratu da!",
+        userUpdated: "Erabiltzailea eguneratu da!",
         usernameUpdated: "Erabiltzaile izena eguneratu da!",
         emailUpdated: "Posta elektronikoa egunertu da!",
         avatarUpload: "Erabiltzaile argazkia igo da",
@@ -282,6 +282,7 @@ module.exports = {
     //getEvent
     getEvent: {
         idProvidedError: "Ekintzaren IDa ez da eman.",
+        userIdProvidedError: "Ekintzaren erabiltzaile indentifikazioa ez da eman.",
         eventError: "Ez da ekintza aurkitu.",
         placeError: "Ez da lekua aurkitu.",
         categoryError: "Ez da kategoria aurkitu."

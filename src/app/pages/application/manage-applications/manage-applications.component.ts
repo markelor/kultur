@@ -24,12 +24,20 @@ export class ManageApplicationsComponent implements OnInit {
 
   // Function to get all user applications from the database
   private getUserApplications() {
-    this.applicationService.getUserApplications(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
-      console.log(data);
-      if(data.success){
-        this.applications = data.applications; // Assign array to use in HTML
-      }
-    });
+    if(this.authService.user.permission==='admin'){
+      this.applicationService.getUserApplications(undefined,this.localizeService.parser.currentLang).subscribe(data => {
+        if(data.success){
+          this.applications = data.applications; // Assign array to use in HTML
+        }
+      });
+    }else{
+      this.applicationService.getUserApplications(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
+        if(data.success){
+          this.applications = data.applications; // Assign array to use in HTML
+        }
+      });
+    }
+
   }
   ngOnInit() {
   	// Get authentication on page load

@@ -264,6 +264,7 @@
   },
   "modal":
   {
+    "edit-user-header": "Edit user",
     "delete-user-header": "Delete user",
     "delete-user-content": "Are you sure to delete the user?",
     "delete-category-header": "Delete category",

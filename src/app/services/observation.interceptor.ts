@@ -27,7 +27,7 @@ export class ObservationInterceptor implements HttpInterceptor {
 	    'language':this.localizeService.parser.currentLang
 	  }
 	});
-	}else if(request.url===this.domain+"observation/getObservations/"+this.localizeService.parser.currentLang){
+	}else if(request.url===this.domain+"observation/getObservations"){
 	request = request.clone({
 	  setHeaders: {
 	    'Content-Type': 'application/json',

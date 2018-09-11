@@ -137,7 +137,7 @@ module.exports = (router) => {
                                         res.json({ success: false, message: eval(language + '.newEvent.saveError'), err }); // Return general error message
                                       }
                                     } else {
-                                      res.json({ success: true, message: eval(language + '.newEvent.success'),event:event }); // Return success message
+                                      res.json({ success: true, message: eval(language + '.newEvent.success'), event: event }); // Return success message
                                     }
                                   });
                                 }
@@ -350,25 +350,29 @@ module.exports = (router) => {
   =============================================================== */
   router.post('/getEvents', (req, res) => {
     var language = req.body.language;
-    if (req.body.filters.categoryId) {
-      for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
-        req.body.filters.categoryId.$in[i] = ObjectId(req.body.filters.categoryId.$in[i]);
-      }
-    }
-    if (req.body.filters.placeId) {
-      for (var i = 0; i < req.body.filters.placeId.$in.length; i++) {
-        req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
-      }
-    }
-    if (req.body.filters.start) {
-      req.body.filters.start.$gte = isodate(req.body.filters.start.$gte);
-    }
-    if (req.body.filters.end) {
-      req.body.filters.end.$lte = isodate(req.body.filters.end.$lte);
-    }
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
+      if (req.body.filters.$or) {
+        req.body.filters.$or[0].createdBy = ObjectId(req.body.filters.$or[0].createdBy);
+        req.body.filters.$or[1].translation.$elemMatch.createdBy = ObjectId(req.body.filters.$or[1].translation.$elemMatch.createdBy);
+      }
+      if (req.body.filters.categoryId) {
+        for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
+          req.body.filters.categoryId.$in[i] = ObjectId(req.body.filters.categoryId.$in[i]);
+        }
+      }
+      if (req.body.filters.placeId) {
+        for (var i = 0; i < req.body.filters.placeId.$in.length; i++) {
+          req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
+        }
+      }
+      if (req.body.filters.start) {
+        req.body.filters.start.$gte = isodate(req.body.filters.start.$gte);
+      }
+      if (req.body.filters.end) {
+        req.body.filters.end.$lte = isodate(req.body.filters.end.$lte);
+      }
       //$gte: new Date()
       Event.aggregate([ // Join with Place table
         {

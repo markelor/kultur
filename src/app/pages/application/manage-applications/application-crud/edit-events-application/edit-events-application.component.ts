@@ -94,6 +94,7 @@ export class EditEventsApplicationComponent implements OnInit {
       this.application.events.splice(indexAplicatonEvent,1);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
+        console.log(data);
         if(data.success){ 
           this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
             if(index===0){
@@ -111,17 +112,18 @@ export class EditEventsApplicationComponent implements OnInit {
   }
   private getApplicationEventsInit(){
     // Get application events
-    this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationService.getApplicationEvents(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.application=data.application;
         this.eventsApplication=data.events;
+        this.getEvents();
       }
       this.deleteTrigger.next();
     });
   }
   private getApplicationEvents(){
     // Get application events
-    this.applicationService.getApplicationEvents(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationService.getApplicationEvents(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
         if(index===0){
           dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -142,7 +144,11 @@ export class EditEventsApplicationComponent implements OnInit {
   }
   // Function to get events from the database
   private getEvents() {
-    this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
+    var filtersEvent={};   
+    if(this.application.contributors.includes(this.authService.user.id)){
+      filtersEvent['$or']= [{ createdBy: this.authService.user.id }, { translation: { $elemMatch: { createdBy: this.authService.user.id } } }];
+    }
+    this.eventService.getEvents(filtersEvent,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events=data.events;
       }
@@ -174,8 +180,7 @@ export class EditEventsApplicationComponent implements OnInit {
     // Get application id
     this.applicationId=this.activatedRoute.snapshot.params['id'];
     this.createSettings(); 
-    this.getApplicationEventsInit();
-    this.getEvents();    
+    this.getApplicationEventsInit();  
     this.tabClick();
   }
    ngOnDestroy(){

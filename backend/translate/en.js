@@ -150,7 +150,7 @@ module.exports = {
     editUser: {
         usernameProvidedError: "Username was not provided.",
         userError: "No user was found.",
-        nameUpdated: "Name has been updated!",
+        userUpdated: "user has been updated!",
         usernameUpdated: "Username has been updated!",
         emailUpdated: "E-mail has been updated!",
         avatarUpload: "Avatar has been upload!",
@@ -283,6 +283,7 @@ module.exports = {
     //getEvent
     getEvent: {
         idProvidedError: "Event ID is not provided.",
+        userIdProvidedError: "The user identifier of event was not provided",
         eventError: "No event found.",
         placeError: "No place found.",
         categoryError: "No category found."

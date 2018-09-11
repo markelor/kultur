@@ -267,6 +267,7 @@
   },
   "modal":
   {
+    "edit-user-header": "Editar usuario",
     "delete-user-header": "Eliminar usuario",
     "delete-user-content": "¿Estas seguro de eliminar el usuario?",
     "delete-category-header": "Eliminar categoría",

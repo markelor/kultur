@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { AlphanumericValidator, EmailValidator } from '../../../../validators';
+import { AlphanumericValidator, EmailValidator, TitleValidator } from '../../../../validators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObservableService } from '../../../../services/observable.service';
 import { AuthService } from '../../../../services/auth.service';
@@ -22,7 +22,6 @@ export class UserModalComponent implements OnInit {
   public emailMessage;
   public usernameValid:boolean=true;
   public usernameMessage;
-  public modalHeader;
   constructor(
     private localizeService:LocalizeRouterService,
     private formBuilder:FormBuilder,
@@ -37,7 +36,7 @@ export class UserModalComponent implements OnInit {
       // Permission Input
       'permission': ['', Validators.compose([Validators.required])],
       // Name Input
-      'name': ['', Validators.compose([Validators.required,AlphanumericValidator.validate, Validators.minLength(5),Validators.maxLength(35)])],
+      'name': ['', Validators.compose([Validators.required,TitleValidator.validate, Validators.minLength(5),Validators.maxLength(35)])],
       // Email Input
       'email': ['', Validators.compose([Validators.required, EmailValidator.validate, Validators.minLength(5),Validators.maxLength(30)])],
       // Username Input

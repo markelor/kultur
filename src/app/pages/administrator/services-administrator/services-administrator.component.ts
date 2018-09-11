@@ -104,7 +104,7 @@ export class ServicesAdministratorComponent implements OnInit {
   }
     // Function to get services from the database
   private getServices() {
-    this.serviceService.getServices(this.localizeService.parser.currentLang).subscribe(data => {
+    this.serviceService.getServices({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.services=data.services;
       }

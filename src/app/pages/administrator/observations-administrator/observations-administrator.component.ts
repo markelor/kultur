@@ -99,7 +99,7 @@ export class ObservationsAdministratorComponent implements OnInit {
   }
     // Function to get observations from the database
   private getObservations() {
-    this.observationService.getObservations(this.localizeService.parser.currentLang).subscribe(data => {
+    this.observationService.getObservations({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.observations=data.observations;
       }

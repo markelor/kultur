@@ -113,17 +113,18 @@ export class EditServicesApplicationComponent implements OnInit {
   }
   private getApplicationServicesInit(){
     // Get application services
-    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationService.getApplicationServices(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.application=data.application;
         this.servicesApplication=data.services;
+        this.getServices(); 
       }
       this.deleteTrigger.next();
     });
   }
    private getApplicationServices(){
     // Get application services
-    this.applicationService.getApplicationServices(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationService.getApplicationServices(this.applicationId,this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
         if(index===0){
           dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -144,7 +145,11 @@ export class EditServicesApplicationComponent implements OnInit {
   }
   // Function to get services from the database
   private getServices() {
-    this.serviceService.getServices(this.localizeService.parser.currentLang).subscribe(data => {
+    var filtersServices={};   
+    if(this.application.contributors.includes(this.authService.user.id)){
+      filtersServices['$or']= [{ createdBy: this.authService.user.id }, { translation: { $elemMatch: { createdBy: this.authService.user.id } } }];
+    }
+    this.serviceService.getServices(filtersServices,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.services=data.services;
       }
@@ -176,7 +181,6 @@ export class EditServicesApplicationComponent implements OnInit {
     this.applicationId=this.activatedRoute.snapshot.params['id'];
     this.createSettings(); 
     this.getApplicationServicesInit();
-    this.getServices(); 
     this.tabClick();       
   }
    ngOnDestroy(){

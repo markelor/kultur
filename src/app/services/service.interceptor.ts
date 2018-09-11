@@ -27,7 +27,7 @@ export class ServiceInterceptor implements HttpInterceptor {
 	    'language':this.localizeService.parser.currentLang
 	  }
 	});
-	}else if(request.url===this.domain+"service/getServices/"+this.localizeService.parser.currentLang){
+	}else if(request.url===this.domain+"service/getServices"){
 	request = request.clone({
 	  setHeaders: {
 	    'Content-Type': 'application/json',
