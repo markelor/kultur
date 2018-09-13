@@ -318,8 +318,6 @@ export class ApplicationFormComponent implements OnInit {
     var oldContributors;
     var deletedModerators=[];
     var deletedContributors=[];
-    var addModerators=[];
-    var addContributors=[];
     if(this.inputApplication){
       var hasTranslationApplication=false;
       var oldModerators = JSON.parse(JSON.stringify(this.inputApplication.moderators));
@@ -339,20 +337,6 @@ export class ApplicationFormComponent implements OnInit {
           deletedContributors.push(oldContributors[i]);
         }
       }
-      //fill add contributors and moderators
-      for (var i = 0; i < this.inputApplication.moderators.length; ++i) {
-        if(!oldModerators.includes(this.inputApplication.moderators[i])){
-          addModerators.push(this.inputApplication.moderators[i]);
-        }
-      }
-      for (var i = 0; i < this.inputApplication.contributors.length; ++i) {
-        if(!oldContributors.includes(this.inputApplication.contributors[i])){
-          addContributors.push(this.inputApplication.contributors[i]);
-        }
-      }
-      console.log(addContributors);
-      this.inputApplication.addModerators=addModerators;
-      this.inputApplication.addContributors=addContributors;
       this.inputApplication.deletedModerators=deletedModerators;
       this.inputApplication.deletedContributors=deletedContributors;
       this.deleteEditImages();   

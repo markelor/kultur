@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter} from '@angular/core';
 import { ObservableService } from '../../../../services/observable.service';
 declare let $: any;
 @Component({
@@ -7,7 +7,7 @@ declare let $: any;
   styleUrls: ['./application-crud.component.css']
 })
 export class ApplicationCrudComponent implements OnInit {
-
+  public contributorsTab=false;  
   constructor(private observableService: ObservableService) { }
   public refreshEvents(){
     this.observableService.application="application-events";
@@ -26,6 +26,9 @@ export class ApplicationCrudComponent implements OnInit {
     this.observableService.application="application-contributors";
     this.observableService.notifyOther({option: this.observableService.application});
     
+  }
+  public activeContributorTab($event){
+    this.contributorsTab=$event.contributorsTab;
   }
   ngOnInit() {
   	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

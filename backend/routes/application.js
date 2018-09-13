@@ -990,7 +990,7 @@ module.exports = (router) => {
                                 });
                               }
 
-                              function downgradeContributorPermissionApplications(moderatorsArray) {
+                              function downgradeContributorPermissionApplications(moderatorsArray, permission) {
                                 var conditionMatch;
                                 if (!moderatorsArray) {
                                   conditionMatch = req.body.deletedContributors;
@@ -1018,15 +1018,16 @@ module.exports = (router) => {
                                         contributorsArray.push(contributors[i]._id);
                                       }
                                     }
-                                    if (contributorsArray.length > 0 && !moderatorsArray) {
-                                      updateUser(contributorsArray, "contributor","user");
+                                    if (contributorsArray.length > 0 && !moderatorsArray && permission===false) {
+                                      updateUser(contributorsArray, "contributor", "user");
                                       upgradeContributorPermissionApplications();
-                                    } else if (contributorsArray.length === 0 && moderatorsArray) {
-                                      updateUser(moderatorsArray, "moderator","user");
+                                    }  
+                                    else if (contributorsArray.length === 0 && moderatorsArray && permission===false) {
+                                      updateUser(moderatorsArray, "moderator", "user");
                                       upgradeModeratorPermissionApplications();
-                                    } else if(contributorsArray.length >0 && moderatorsArray) {
+                                    }else if ( moderatorsArray && permission===true) {
                                       upgradeContributorPermissionApplications();
-                                      updateUser(contributorsArray, "moderator","contributor");
+                                      updateUser(moderatorsArray, "moderator", "contributor");
                                     }
                                   }
                                 });
@@ -1055,8 +1056,21 @@ module.exports = (router) => {
                                       }
                                     }
                                     if (moderatorsArray.length > 0) {
-                                      downgradeContributorPermissionApplications(moderatorsArray);
-                                    }else{
+                                      if (req.body.deletedContributors && req.body.deletedContributors.length>0) {
+                                        var copyModeratorsArray = JSON.parse(JSON.stringify(moderatorsArray));
+                                        for (var i = 0; i < moderatorsArray.length; i++) {
+                                          for (var j = 0; j < req.body.contributors.length; j++) {
+                                            if (moderatorsArray[i].toString() === req.body.contributors[j].toString()) {
+                                              copyModeratorsArray.splice(i, 1);
+                                            }
+                                          }
+                                        }
+                                        downgradeContributorPermissionApplications(copyModeratorsArray, false);
+                                        downgradeContributorPermissionApplications(moderatorsArray, true);
+                                      } else {
+                                        downgradeContributorPermissionApplications(moderatorsArray, false);
+                                      }
+                                    } else {
                                       upgradeModeratorPermissionApplications();
                                     }
                                   }
@@ -1113,6 +1127,7 @@ module.exports = (router) => {
                                 });
 
                               }
+
                               function upgradeContributorPermissionApplications() {
                                 User.updateMany({
                                   $and: [{ _id: req.body.contributors }, { permission: "user" }]
@@ -1160,7 +1175,7 @@ module.exports = (router) => {
                                   }
                                 });
                               }
-                              if (req.body.deletedModerators.length > 0) {
+                              if (req.body.deletedModerators && req.body.deletedModerators.length > 0) {
                                 for (var i = 0; i < req.body.deletedModerators.length; i++) {
                                   req.body.deletedModerators[i] = ObjectId(req.body.deletedModerators[i]);
                                 }
@@ -1168,11 +1183,11 @@ module.exports = (router) => {
                               } else {
                                 upgradeModeratorPermissionApplications();
                               }
-                              if (req.body.deletedContributors.length > 0) {
+                              if (req.body.deletedContributors && req.body.deletedContributors.length > 0) {
                                 for (var i = 0; i < req.body.deletedContributors.length; i++) {
                                   req.body.deletedContributors[i] = ObjectId(req.body.deletedContributors[i]);
                                 }
-                                downgradeContributorPermissionApplications(undefined);
+                                downgradeContributorPermissionApplications(undefined, false);
                               } else {
                                 upgradeContributorPermissionApplications();
                               }

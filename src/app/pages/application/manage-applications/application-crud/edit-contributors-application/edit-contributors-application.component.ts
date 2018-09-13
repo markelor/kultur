@@ -1,5 +1,5 @@
 
-import { Component, OnInit,Injectable,Input,ViewChildren,QueryList } from '@angular/core';
+import { Component, OnInit,Injectable,Input,ViewChildren,QueryList,Output,EventEmitter } from '@angular/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthService } from '../../../../../services/auth.service';
 import { ServiceService } from '../../../../../services/service.service';
@@ -31,6 +31,7 @@ export class EditContributorsApplicationComponent implements OnInit {
   public addTrigger: Subject<any> = new Subject();
   public deleteTrigger: Subject<any> = new Subject();
   private subscriptionTabClick: Subscription;
+  @Output() ActiveContributorTab = new EventEmitter();
   constructor(
     private localizeService:LocalizeRouterService,
     private applicationService:ApplicationService,
@@ -64,9 +65,7 @@ export class EditContributorsApplicationComponent implements OnInit {
     };
   }
   private addUserApplicationTable(indexUser){
-    if(!this.application || !this.application.contributors.includes(this.users[indexUser]._id)){
-      this.application.userId=this.users[indexUser]._id;
-      this.application.operation="addContributor";
+    if(this.application && this.users[indexUser].permission!=="admin" && !this.application.contributors.includes(this.users[indexUser]._id) && !this.application.moderators.includes(this.users[indexUser]._id)){
       this.application.contributors.push(this.users[indexUser]._id);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
@@ -88,9 +87,10 @@ export class EditContributorsApplicationComponent implements OnInit {
   }
   private deleteUserApplicationTable(indexUser){
       var indexAplicatonUser=this.application.contributors.indexOf(this.contributorsApplication[indexUser]._id);
-      this.application.userId=this.application.contributors[indexAplicatonUser]._id;
-      this.application.operation="deleteContributor";
       this.application.contributors.splice(indexAplicatonUser,1);
+      var deletedContributors=[];
+      deletedContributors.push(this.contributorsApplication[indexUser]._id);
+      this.application.deletedContributors=deletedContributors;
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
         if(data.success){ 
@@ -114,6 +114,10 @@ export class EditContributorsApplicationComponent implements OnInit {
       if(data.success){
         this.application=data.application;
         this.contributorsApplication=data.contributors;
+        if(this.application.moderators.includes(this.authService.user.id) || this.authService.user.permission==="admin"){
+          var contributorsTab=true;
+           this.ActiveContributorTab.emit({contributorsTab:contributorsTab});
+        }
       }
       this.deleteTrigger.next();
     });

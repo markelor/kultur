@@ -94,7 +94,6 @@ export class EditEventsApplicationComponent implements OnInit {
       this.application.events.splice(indexAplicatonEvent,1);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
-        console.log(data);
         if(data.success){ 
           this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
             if(index===0){

@@ -29,7 +29,7 @@
                         {{'navbar.observations'}}
                       </a>
                     </li>
-                    <li class="nav-item" (click)="refreshContributors()">
+                    <li *ngIf="contributorsTab" class="nav-item" (click)="refreshContributors()">
                       <a class="nav-link" href="#" data-toggle="tab" data-target="#tab4" translate>
                         <span class="ks-icon la la-mobile-phone text-danger"></span>
                         {{'navbar.contributors'}}
@@ -47,7 +47,7 @@
                       <app-edit-observations-application></app-edit-observations-application>
                     </div>
                     <div class="tab-pane" id="tab4" role="tabpanel">
-                      <app-edit-contributors-application></app-edit-contributors-application>
+                      <app-edit-contributors-application (ActiveContributorTab)="activeContributorTab($event)"></app-edit-contributors-application>
                     </div>
                   </div>
                 </div>
