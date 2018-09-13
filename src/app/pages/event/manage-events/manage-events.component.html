@@ -137,7 +137,8 @@
             <ngb-pagination *ngIf="collectionSize" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="1" [maxSize]="5" [boundaryLinks]="true" size="lg" (pageChange)="onPageChange($event)"></ngb-pagination>
           </section>
           <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-            <!--<right-sidebar></right-sidebar>-->
+            <!-- Filter Form -->
+            <app-filter-form [inputType]="'editEvents'"></app-filter-form>
           </aside>
         </div>
       </div>

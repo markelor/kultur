@@ -16,8 +16,8 @@ import { Meta,Title } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
   public events;
   private page :number = 1;
-  private range=3;
-  public maxSize=2;
+  private range=5;
+  public maxSize=4;
   public minSize=0;
   public collectionSize;
   private subscription:Subscription;
@@ -47,8 +47,8 @@ export class HomeComponent implements OnInit {
   // Function to get all user events from the database
   private getEvents() {
     this.observableService.eventsEvent="event-events";
-     this.subscription=this.observableService.notifyObservable.subscribe(res => {
-      if (res.hasOwnProperty('option') && res.option === this.observableService.eventsEvent) {
+    this.subscription=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === "see-events") {
         this.events=res.value;
         this.collectionSize= Math.ceil(this.events.length/this.range);         
       }
@@ -65,6 +65,5 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   } 
-
 }
 

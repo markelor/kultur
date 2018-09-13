@@ -267,6 +267,7 @@ module.exports = (router) => {
                                             if (newDescription) category.description = newDescription; // Assign new description to category in database
                                             if (newIcons) category.icons = newIcons; // Assign new icons to category in database
                                             if (newTranslation) category.translation = newTranslation; // Assign new translation to category in database
+                                            category.updatedAt=Date.now();
                                             category.save((err) => {
                                                 if (err) {
                                                     if (err.errors) {

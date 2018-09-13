@@ -54,6 +54,9 @@ module.exports = (router) => {
               user.language = req.body.language;
               user.aboutYourself = req.body.aboutYourself;
               user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+              user.privacictyConsent=true;
+              user.createdAt= Date.now(),
+              user.updatedAt= Date.now(),
               // Save user to database
               user.save((err) => {
                 // Check if error occured
@@ -292,6 +295,7 @@ module.exports = (router) => {
               } else {
                 user.temporaryToken = false; // Remove temporary token
                 user.active = true; // Change account status to Activated
+                user.updatedAt=Date.now();
                 // Mongoose Method to save user into the database
                 user.save(function(err) {
                   if (err) {
@@ -414,6 +418,7 @@ module.exports = (router) => {
             res.json({ success: false, message: eval(language + '.general.generalError') });
           } else {
             user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+            user.updatedAt=Date.now();
             // Save user's new token to the database
             user.save(function(err) {
               if (err) {
@@ -524,6 +529,7 @@ module.exports = (router) => {
               res.json({ success: false, message: eval(language + '.resetPassword.accountError') }); // Return error if account is not yet activated
             } else {
               user.resetToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); //New token to reset
+              user.updatedAt=Date.now();
               // Save token to user in database
               user.save(function(err) {
                 if (err) {
@@ -649,6 +655,7 @@ module.exports = (router) => {
             } else {
               user.password = req.body.password; // Save user's new password to the user object
               user.resetToken = false; // Clear user's resetToken 
+              user.updatedAt=Date.now();
               // Save user's new data
               user.save(function(err) {
                 if (err) {
@@ -1232,6 +1239,7 @@ module.exports = (router) => {
                         user.currentAvatar = newCurrentAvatar; // Assign new avatars to user in database
                       if (newAvatars)
                         user.avatars = newAvatars; // Assign new avatars to user in database
+                      user.updatedAt = Date.now();
                       var saveErrorPermission;
                       if (newPermission) {
                         // Check if attempting to set the contributor permission

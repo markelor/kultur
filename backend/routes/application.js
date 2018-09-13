@@ -101,7 +101,7 @@ module.exports = (router) => {
                           } else {
                             User.updateMany({
                               $and: [{ _id: req.body.contributors }, { permission: "user" }]
-                            }, { $set: { permission: "contributor" } }, function(err, user) {
+                            }, { $set: { permission: "contributor", updatedAt:Date.now() } }, function(err, user) {
                               // Check if error
                               if (err) {
                                 // Check if error is an error indicating duplicate account
@@ -144,7 +144,7 @@ module.exports = (router) => {
                                 User.updateMany({
                                   _id: req.body.moderators,
                                   $or: [{ permission: "contributor" }, { permission: "user" }]
-                                }, { $set: { permission: "moderator" } }, function(err, user) {
+                                }, { $set: { permission: "moderator", updatedAt:Date.now() } }, function(err, user) {
                                   // Check if error
                                   if (err) {
                                     console.log(err);
@@ -946,7 +946,7 @@ module.exports = (router) => {
                                 User.updateMany({
                                   _id: usersArray,
                                   permission: currentPermission
-                                }, { $set: { permission: newPermission } }, function(err, user) {
+                                }, { $set: { permission: newPermission, updatedAt:Date.now() } }, function(err, user) {
                                   // Check if error
                                   if (err) {
                                     console.log(err);
@@ -1081,7 +1081,7 @@ module.exports = (router) => {
                                 User.updateMany({
                                   _id: req.body.moderators,
                                   $or: [{ permission: "contributor" }, { permission: "user" }]
-                                }, { $set: { permission: "moderator" } }, function(err, user) {
+                                }, { $set: { permission: "moderator", updatedAt:Date.now() } }, function(err, user) {
                                   // Check if error
                                   if (err) {
                                     console.log(err);
@@ -1131,7 +1131,7 @@ module.exports = (router) => {
                               function upgradeContributorPermissionApplications() {
                                 User.updateMany({
                                   $and: [{ _id: req.body.contributors }, { permission: "user" }]
-                                }, { $set: { permission: "contributor" } }, function(err, user) {
+                                }, { $set: { permission: "contributor", updatedAt:Date.now() } }, function(err, user) {
                                   // Check if error
                                   if (err) {
                                     // Check if error is an error indicating duplicate account
@@ -1284,16 +1284,6 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } else {}
-                        } else {
-                          // Check if the current permission is moderator
-                          if (mainUser.permission === 'moderator') {
-                            // Check if contributor making changes has access
-                            if (user.permission === 'contributor') {} else {
-                              saveErrorPermission = language + '.general.adminOneError';
-                            }
-                          } else {
-                            saveErrorPermission = language + '.general.permissionError';
                           }
                         }
                       }

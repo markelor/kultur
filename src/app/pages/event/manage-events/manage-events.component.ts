@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { ObservableService } from '../../../services/observable.service';
+import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment-timezone';
 @Component({
   selector: 'app-manage-events',
@@ -13,15 +13,16 @@ import * as moment from 'moment-timezone';
   styleUrls: ['./manage-events.component.css']
 })
 export class ManageEventsComponent implements OnInit {
-  private subscriptionLanguage: Subscription;
   public events;
   private page :number = 1;
-  private range=3;
-  public maxSize=2;
+  private range=5;
+  public maxSize=4;
   public minSize=0;
   public collectionSize;
+  private subscription:Subscription;
   constructor(
   	private eventService:EventService,
+    private observableService:ObservableService,
   	private authService:AuthService,
     private localizeService:LocalizeRouterService,
     private translate:TranslateService,
@@ -31,12 +32,19 @@ export class ManageEventsComponent implements OnInit {
   }
   // Function to get all user events from the database
   private getAllUserEvents() {
-    this.eventService.getUserEvents(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
+    this.observableService.eventsEvent="event-events";
+    this.subscription=this.observableService.notifyObservable.subscribe(res => {
+      if (res.hasOwnProperty('option') && res.option === "edit-events") {
+        this.events=res.value;
+        this.collectionSize= Math.ceil(this.events.length/this.range);         
+      }
+    });
+    /*this.eventService.getUserEvents(this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events = data.events; // Assign array to use in HTML
         this.collectionSize= Math.ceil(this.events.length/this.range);
       }
-    });
+    });*/
   }
   private getDatePoster(datetime){
     var date=new Date(datetime);
@@ -66,12 +74,5 @@ export class ManageEventsComponent implements OnInit {
       }
     });  
   	this.getAllUserEvents();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.getAllUserEvents(); 
-    });
   }
-  ngOnDestroy(){
-      this.subscriptionLanguage.unsubscribe();
-  } 
 }

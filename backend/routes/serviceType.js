@@ -187,6 +187,7 @@ module.exports = (router) => {
                                             if (newTitle) serviceType.title = newTitle; // Assign new title to serviceType in database
                                             if (newIcons) serviceType.icons = newIcons; // Assign new icons to serviceType in database
                                             if (newTranslation) serviceType.translation = newTranslation; // Assign new translation to serviceType in database
+                                            serviceType.updatedAt=Date.now();
                                             serviceType.save((err) => {
                                                 if (err) {
                                                     if (err.errors) {

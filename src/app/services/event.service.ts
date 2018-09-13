@@ -24,9 +24,9 @@ export class EventService {
     return this.http.post<any>(this.domain + 'event/newEvent', data);
   }
   // Function to get all user events from the database
-  public getUserEvents(userId,language) {
-    this.route= userId +'/';
-    return this.http.get<any>(this.domain + 'event/userEvents/'+this.route+language);
+  public getUserEvents(userId,filters,language) {
+    var data = {'userId': userId,'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'event/userEvents',data);
   }
   // Function to get events from the database
   public getEvents(filters,language) {

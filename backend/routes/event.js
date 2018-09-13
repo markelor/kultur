@@ -249,21 +249,40 @@ module.exports = (router) => {
   /* ===============================================================
      GET ALL user events
   =============================================================== */
-  router.get('/userEvents/:userId/:language', (req, res) => {
-    var language = req.params.language;
+  router.post('/userEvents', (req, res) => {
+    var language = req.body.language;
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
-      if (!req.params.userId) {
+      if (!req.body.userId) {
         res.json({ success: false, message: eval(language + '.userEvents.userIdProvidedError') }); // Return error
       } else {
+        if (req.body.filters.$or) {
+          req.body.filters.$or[0].createdBy = ObjectId(req.body.filters.$or[0].createdBy);
+          req.body.filters.$or[1].translation.$elemMatch.createdBy = ObjectId(req.body.filters.$or[1].translation.$elemMatch.createdBy);
+        }
+        if (req.body.filters.categoryId) {
+          for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
+            req.body.filters.categoryId.$in[i] = ObjectId(req.body.filters.categoryId.$in[i]);
+          }
+        }
+        if (req.body.filters.placeId) {
+          for (var i = 0; i < req.body.filters.placeId.$in.length; i++) {
+            req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
+          }
+        }
+        if (req.body.filters.start) {
+          req.body.filters.start.$gte = isodate(req.body.filters.start.$gte);
+        }
+        if (req.body.filters.end) {
+          req.body.filters.end.$lte = isodate(req.body.filters.end.$lte);
+        }
+        req.body.filters.$or=[{ createdBy: ObjectId(req.body.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.body.userId) } } }];
 
         Event.aggregate([
           // Join with Place table
           {
-            $match: {
-              $or: [{ createdBy: ObjectId(req.params.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.params.userId) } } }]
-            }
+            $match: req.body.filters
           },
           {
             $lookup: {
@@ -377,16 +396,16 @@ module.exports = (router) => {
       Event.aggregate([ // Join with Place table
         {
           $match: req.body.filters
-        }, 
+        },
         {
           // Join with User table
           $lookup: {
             from: "users",
-            localField: "createdBy", 
-            foreignField: "_id", 
-            as: "user" 
+            localField: "createdBy",
+            foreignField: "_id",
+            as: "user"
           }
-        },{ $unwind: "$user" },
+        }, { $unwind: "$user" },
         {
           // Join with Place table
           $lookup: {
@@ -693,6 +712,7 @@ module.exports = (router) => {
                       //save traduction
                       function eventSave(place) {
                         place.translation = req.body.place.translation;
+                        place.updatedAt = Date.now();
                         place.save((err, place) => {
                           // Check if error
                           if (err) {
@@ -996,16 +1016,6 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } else {}
-                        } else {
-                          // Check if the current permission is moderator
-                          if (mainUser.permission === 'moderator') {
-                            // Check if contributor making changes has access
-                            if (user.permission === 'contributor') {} else {
-                              saveErrorPermission = language + '.general.adminOneError';
-                            }
-                          } else {
-                            saveErrorPermission = language + '.general.permissionError';
                           }
                         }
                       }

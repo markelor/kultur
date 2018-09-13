@@ -204,18 +204,6 @@ module.exports = (router) => {
                                                                     } else {
                                                                         user.avatars.push(url); // Assign avats to user 
                                                                     }
-                                                                } else {
-                                                                    // Check if the current permission is moderator
-                                                                    if (mainUser.permission === 'moderator') {
-                                                                        // Check if contributor making changes has access
-                                                                        if (user.permission === 'contributor') {
-                                                                            user.avatars.push(url); // Assign avats to user
-                                                                        } else {
-                                                                            saveErrorPermission = language + '.general.adminOneError';
-                                                                        }
-                                                                    } else {
-                                                                        saveErrorPermission = language + '.general.permissionError';
-                                                                    }
                                                                 }
 
                                                             }
@@ -384,8 +372,6 @@ module.exports = (router) => {
                                                         var saveErrorPermission = false;
                                                         // Check if is owner
                                                         if (mainUser._id.toString() === user._id.toString()) {
-                                                            user.avatars.splice(index, 1); // Assign avats to user
-                                                            user.currentAvatar = "assets/img/avatars/default-avatar.jpg";
 
                                                         } else {
                                                             // Check if the current permission is 'admin'
@@ -393,26 +379,13 @@ module.exports = (router) => {
                                                                 // Check if user making changes has access
                                                                 if (user.permission === 'admin') {
                                                                     saveErrorPermission = language + '.general.adminOneError';
-                                                                } else {
-                                                                    user.avatars.splice(index, 1); // Assign avats to user 
-                                                                    user.currentAvatar = "assets/img/avatars/default-avatar.jpg";
                                                                 }
-                                                            } else {
-                                                                // Check if the current permission is moderator
-                                                                if (mainUser.permission === 'moderator') {
-                                                                    // Check if contributor making changes has access
-                                                                    if (user.permission === 'contributor') {
-                                                                        user.avatars.splice(index, 1); // Assign avats to user
-                                                                        user.currentAvatar = "assets/img/avatars/default-avatar.jpg";
-                                                                    } else {
-                                                                        saveErrorPermission = language + '.general.adminOneError';
-                                                                    }
-                                                                } else {
-                                                                    saveErrorPermission = language + '.general.permissionError';
-                                                                }
-                                                            }
+                                                            } 
 
                                                         }
+                                                        user.avatars.splice(index, 1); // Assign avats to user
+                                                        user.currentAvatar = "assets/img/avatars/default-avatar.jpg";
+                                                        user.updatedAt=Date.now();
                                                         //check saveError permision to save changes or not
                                                         if (saveErrorPermission) {
                                                             res.json({ success: false, message: eval(saveErrorPermission) }); // Return error

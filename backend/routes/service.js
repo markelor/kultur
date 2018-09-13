@@ -344,18 +344,8 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } else {}
-                        } else {
-                          // Check if the current permission is moderator
-                          if (mainUser.permission === 'moderator') {
-                            // Check if contributor making changes has access
-                            if (user.permission === 'contributor') {} else {
-                              saveErrorPermission = language + '.general.adminOneError';
-                            }
-                          } else {
-                            saveErrorPermission = language + '.general.permissionError';
                           }
-                        }
+                        } 
                       }
                       //check saveError permision to save changes or not
                       if (saveErrorPermission) {
@@ -532,18 +522,8 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } else {}
-                        } else {
-                          // Check if the current permission is moderator
-                          if (mainUser.permission === 'moderator') {
-                            // Check if contributor making changes has access
-                            if (user.permission === 'contributor') {} else {
-                              saveErrorPermission = language + '.general.adminOneError';
-                            }
-                          } else {
-                            saveErrorPermission = language + '.general.permissionError';
-                          }
-                        }
+                          } 
+                        } 
                       }
                       //check saveError permision to save changes or not
                       if (saveErrorPermission) {
@@ -588,6 +568,7 @@ module.exports = (router) => {
                             //save traduction
                             function serviceSave(place) {
                               place.translation = req.body.place.translation;
+                              place.updatedAt=Date.now();
                               place.save((err, place) => {
                                 // Check if error
                                 if (err) {
@@ -828,16 +809,6 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } else {}
-                        } else {
-                          // Check if the current permission is moderator
-                          if (mainUser.permission === 'moderator') {
-                            // Check if contributor making changes has access
-                            if (user.permission === 'contributor') {} else {
-                              saveErrorPermission = language + '.general.adminOneError';
-                            }
-                          } else {
-                            saveErrorPermission = language + '.general.permissionError';
                           }
                         }
                       }

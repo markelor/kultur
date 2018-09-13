@@ -507,11 +507,8 @@ export class ApplicationFormComponent implements OnInit {
 
     this.uploader.onWhenAddingFileFailed = (fileItem) => {
       if(fileItem.size>10*1024*1024){
-        console.log("fitzategi haundiegia");
       }else if(!(fileItem.type === "image/png" ||fileItem.type === "image/jpg" ||fileItem.type === "image/jpeg" || fileItem.type === "image/gif")){
-        console.log("formatu okerra");
       }
-      console.log("fail", fileItem);
     }
 
   }

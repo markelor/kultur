@@ -915,17 +915,14 @@ export class EventFormComponent implements OnInit {
     };
     this.uploader.onWhenAddingFileFailed = (fileItem) => {
       if(fileItem.size>10*1024*1024){
-        console.log("fitzategi haundiegia");
       }else if(!(fileItem.type === "image/png" ||fileItem.type === "image/jpg" ||fileItem.type === "image/jpeg" || fileItem.type === "image/gif")){
-        console.log("formatu okerra");
       }
-      console.log("fail", fileItem);
     }
 
   }
   public froalaOptions= {
-     // Set max image size to 5MB.
-    imageMaxSize: 5 * 1024 * 1024,
+     // Set max image size to 10MB.
+    imageMaxSize: 10 * 1024 * 1024,
     // Allow to upload PNG and JPG.
     imageAllowedTypes: ['jpeg', 'jpg', 'png','gif'],
     charCounterMax: 20000,

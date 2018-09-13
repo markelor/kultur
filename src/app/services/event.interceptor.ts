@@ -29,7 +29,7 @@ export class EventInterceptor implements HttpInterceptor {
             'language':this.localizeService.parser.currentLang
           }
         }); 
-     }else if(request.url===this.domain+"event/userEvents/"+this.eventService.route+this.localizeService.parser.currentLang){
+     }else if(request.url===this.domain+"event/userEvents"){
         request = request.clone({
           setHeaders: {
             'Content-Type': 'application/json',

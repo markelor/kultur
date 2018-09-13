@@ -202,8 +202,8 @@ export class ObservationFormComponent implements OnInit {
     }       
   } 
   public froalaOptions= {
-     // Set max image size to 5MB.
-    imageMaxSize: 5 * 1024 * 1024,
+     // Set max image size to 10MB.
+    imageMaxSize: 10 * 1024 * 1024,
     // Allow to upload PNG and JPG.
     imageAllowedTypes: ['jpeg', 'jpg', 'png','gif'],
     charCounterMax: 20000,

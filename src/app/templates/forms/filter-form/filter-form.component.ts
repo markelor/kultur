@@ -85,6 +85,7 @@ export class FilterFormComponent  {
     private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
     private router: Router,
+    private authService:AuthService,
     private eventService:EventService,
     private categoryService:CategoryService,
     private placeService:PlaceService,
@@ -249,26 +250,39 @@ export class FilterFormComponent  {
         }
         filtersEvent["placeId"]= { $in:placesId };
       }
-      this.eventService.getEvents(filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
-        if(dataEvents.success){
-          this.events = dataEvents.events;
-          var count=0;
-          var exists=false; 
-          if(this.inputType==="events"){
-            this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
-          }else if(this.inputType==="map"){
-            for (var i = 0; i < this.events.length; ++i) {
-              exists=true;
-              this.events[i].selectedCategory=this.categoryId[this.categoryId.length-1];
-              this.observableService.notifyOther({option: this.observableService.mapEvents, value: this.events[i],count:count,exists:exists});     
-              count=count+1;
-            }
-            if(!exists){
-              this.observableService.notifyOther({option: this.observableService.mapEvents, value: [],count:count,exists:exists});
-            }
-          }   
-        }
-      });
+      if(this.inputType==="editEvents"){
+        this.eventService.getUserEvents(this.authService.user.id,filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
+          if(dataEvents.success){
+            this.events = dataEvents.events;
+            if(this.inputType==="editEvents"){
+              this.observableService.eventsEvent="edit-events";
+              this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
+            }  
+          }
+        });
+      }else{
+        this.eventService.getEvents(filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
+          if(dataEvents.success){
+            this.events = dataEvents.events;
+            var count=0;
+            var exists=false; 
+            if(this.inputType==="seeEvents"){
+              this.observableService.eventsEvent="see-events";
+              this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
+            }else if(this.inputType==="map"){
+              for (var i = 0; i < this.events.length; ++i) {
+                exists=true;
+                this.events[i].selectedCategory=this.categoryId[this.categoryId.length-1];
+                this.observableService.notifyOther({option: this.observableService.mapEvents, value: this.events[i],count:count,exists:exists});     
+                count=count+1;
+              }
+              if(!exists){
+                this.observableService.notifyOther({option: this.observableService.mapEvents, value: [],count:count,exists:exists});
+              }
+            }   
+          }
+        });
+      }
     });
   }
   public onEventSubmit(){
