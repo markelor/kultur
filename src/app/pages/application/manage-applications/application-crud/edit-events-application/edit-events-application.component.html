@@ -42,7 +42,7 @@
       <!--Location-->
        <td>{{eventApplication.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td>{{eventApplication | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{eventApplication.user.username}}</td>
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteEventApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -84,7 +84,7 @@
       <!--Location-->
        <td>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td>{{event | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{event.user.username}}</td>
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addEventApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

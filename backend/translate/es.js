@@ -352,7 +352,7 @@ module.exports = {
     },
     editApplication: {
         idProvidedError: 'El ID de la aplicación, no fue proporcionado.',
-        usersProvidedError: "El usuario de la aplicación no fueron proporcionados.",
+        moderatorsProvidedError: "La aplicación requiere al menos un moderador.",
         saveError: "No se pudo editar la aplicación. Error: ",
         success: "¡Aplicación editada!"
     },

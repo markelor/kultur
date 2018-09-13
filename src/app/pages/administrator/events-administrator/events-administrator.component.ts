@@ -107,6 +107,7 @@ export class EventsAdministratorComponent implements OnInit {
     this.eventService.getEvents({},this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.events=data.events;
+        console.log(this.events);
       }
       this.dtTrigger.next();
     });

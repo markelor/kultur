@@ -349,6 +349,14 @@ module.exports = (router) => {
                             Event.aggregate([{
                                 $match: filtersEvent
                               }, {
+                                // Join with User table
+                                $lookup: {
+                                  from: "users",
+                                  localField: "createdBy",
+                                  foreignField: "_id",
+                                  as: "user"
+                                }
+                              }, { $unwind: "$user" }, {
                                 // Join with Place table
                                 $lookup: {
                                   from: "places", // other table name
@@ -441,6 +449,14 @@ module.exports = (router) => {
                 Service.aggregate([{
                     $match: filtersService
                   }, {
+                    // Join with User table
+                    $lookup: {
+                      from: "users",
+                      localField: "createdBy",
+                      foreignField: "_id",
+                      as: "user"
+                    }
+                  }, { $unwind: "$user" }, {
                     // Join with Place table
                     $lookup: {
                       from: "places", // other table name
@@ -521,32 +537,22 @@ module.exports = (router) => {
                     filtersObservation['$or'] = [{ createdBy: ObjectId(req.params.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.params.userId) } } }];
                   }
                 }
-                Observation.find(filtersObservation, function(err, observations) {
-                  if (err) {
-                    // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
-                    var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
-                      to: [emailConfig.email],
-                      subject: ' Find 2 get application observations error ',
-                      text: 'The following error has been reported in Kultura: ' + err,
-                      html: 'The following error has been reported in Kultura:<br><br>' + err
-                    }; // Function to send e-mail to myself
-                    transporter.sendMail(mailOptions, function(err, info) {
-                      if (err) {
-                        console.log(err); // If error with sending e-mail, log to console/terminal
-                      } else {
-                        console.log(info); // Log success message to console if sent
-                        console.log(user.email); // Display e-mail that it was sent to
-                      }
-                    });
-                    res.json({ success: false, message: eval(language + '.general.generalError') });
+                Observation.aggregate([{
+                  $match: filtersObservation
+                }, {
+                  // Join with User table
+                  $lookup: {
+                    from: "users",
+                    localField: "createdBy",
+                    foreignField: "_id",
+                    as: "user"
+                  }
+                }, { $unwind: "$user" }]).exec(function(err, observations) {
+                  // Check if observation is in database
+                  if (!observations) {
+                    res.json({ success: false, message: eval(language + '.newObservation.observationsError') }); // Return error of no observations found
                   } else {
-                    // Check if observation is in database
-                    if (!observations) {
-                      res.json({ success: false, message: eval(language + '.newObservation.observationsError') }); // Return error of no observations found
-                    } else {
-                      res.json({ success: true, application: application, observations: observations }); // Return success and place 
-                    }
+                    res.json({ success: true, application: application, observations: observations }); // Return success and place 
                   }
                 });
               }
@@ -761,6 +767,7 @@ module.exports = (router) => {
       if (!req.body._id) {
         res.json({ success: false, message: eval(language + '.editApplication.idProvidedError') }); // Return error
       } else {
+
         // Check if application moderators was provided
         if (!req.body.moderators || req.body.moderators.length <= 0) {
           res.json({ success: false, message: eval(language + '.editApplication.moderatorsProvidedError') }); // Return error
@@ -814,7 +821,7 @@ module.exports = (router) => {
                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
               } else {
                 // Look for users in database
-                User.find({  $or: [{ _id: req.body.moderators }, { _id: req.body.contributors }] }, function(err, users) {
+                User.find({ $or: [{ _id: req.body.moderators }, { _id: req.body.contributors }] }, function(err, users) {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
@@ -840,14 +847,14 @@ module.exports = (router) => {
                     } else {
                       var saveErrorPermission = false;
                       // Check if is owner
-                      var exists=false;
+                      var exists = false;
                       for (var i = 0; i < users.length; i++) {
-                        if(users[i]._id.toString()===mainUser._id.toString()){
-                          exists=true;
+                        if (users[i]._id.toString() === mainUser._id.toString()) {
+                          exists = true;
                         }
                       }
-                      if(!exists){
-                         if (mainUser.permission !== 'admin') {
+                      if (!exists) {
+                        if (mainUser.permission !== 'admin') {
                           saveErrorPermission = language + '.general.permissionError';
                         }
                       }
@@ -910,32 +917,269 @@ module.exports = (router) => {
                                 application.translation = newTranslation; // Assign new Translation to application in database
                               application.updatedAt = Date.now();
                               // Save application into database
-                              application.save((err, application) => {
-                                // Check if error
-                                if (err) {
-                                  // Check if error is a validation error
-                                  if (err.errors) {
-                                    // Check if validation error is in the category field
-                                    if (err.errors['title']) {
-                                      res.json({ success: false, message: eval(language + err.errors['title'].message) }); // Return error message
-                                    } else {
-                                      if (err.errors['name']) {
-                                        res.json({ success: false, message: eval(language + err.errors['name'].message) }); // Return error message
+                              function saveApplication() {
+                                application.save((err, application) => {
+                                  // Check if error
+                                  if (err) {
+                                    // Check if error is a validation error
+                                    if (err.errors) {
+                                      // Check if validation error is in the category field
+                                      if (err.errors['title']) {
+                                        res.json({ success: false, message: eval(language + err.errors['title'].message) }); // Return error message
                                       } else {
-                                        res.json({ success: false, message: err }); // Return general error message
+                                        if (err.errors['name']) {
+                                          res.json({ success: false, message: eval(language + err.errors['name'].message) }); // Return error message
+                                        } else {
+                                          res.json({ success: false, message: err }); // Return general error message
+                                        }
+                                      }
+                                    } else {
+                                      res.json({ success: false, message: eval(language + '.editApplication.saveError'), err }); // Return general error message
+                                    }
+                                  } else {
+                                    res.json({ success: true, message: eval(language + '.editApplication.success') }); // Return success message
+                                  }
+                                });
+                              }
+
+                              function updateUser(usersArray, currentPermission, newPermission) {
+                                User.updateMany({
+                                  _id: usersArray,
+                                  permission: currentPermission
+                                }, { $set: { permission: newPermission } }, function(err, user) {
+                                  // Check if error
+                                  if (err) {
+                                    console.log(err);
+                                    // Check if error is an error indicating duplicate account
+                                    if (err.code === 11000) {
+                                      res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
+                                    } else {
+                                      // Check if error is a validation error
+                                      if (err.errors) {
+                                        // Check if validation error is in the name field
+                                        if (err.errors.name) {
+                                          res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
+                                        } else {
+                                          // Check if validation error is in the email field
+                                          if (err.errors.email) {
+                                            res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
+                                          } else {
+                                            // Check if validation error is in the username field
+                                            if (err.errors.username) {
+                                              res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
+                                            } else {
+                                              // Check if validation error is in the password field
+                                              if (err.errors.password) {
+                                                res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
+                                              } else {
+                                                // Check if validation error is in the aboutYourself field
+                                                if (err.errors.aboutYourself) {
+                                                  res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                                } else {
+                                                  res.json({ success: false, message: err }); // Return any other error not already covered
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else {
+                                        res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
+                                      }
+                                    }
+                                  }
+                                });
+                              }
+
+                              function downgradeContributorPermissionApplications(moderatorsArray) {
+                                var conditionMatch;
+                                if (!moderatorsArray) {
+                                  conditionMatch = req.body.deletedContributors;
+                                } else {
+                                  conditionMatch = moderatorsArray;
+                                }
+                                Application.aggregate([ // Join with Place table
+                                  {
+                                    $match: { contributors: { $in: conditionMatch } }
+                                  }, { $unwind: "$contributors" },
+                                  {
+                                    $group: {
+                                      _id: "$contributors",
+                                      count: { $sum: 1 }
+                                    }
+                                  }
+                                ]).exec(function(err, contributors) {
+                                  if (err) {
+                                    console.log(err);
+                                    res.json({ success: false, message: err }); // Error if cannot connect
+                                  } else {
+                                    var contributorsArray = [];
+                                    for (var i = 0; i < contributors.length; i++) {
+                                      if (contributors[i].count === 1) {
+                                        contributorsArray.push(contributors[i]._id);
+                                      }
+                                    }
+                                    if (contributorsArray.length > 0 && !moderatorsArray) {
+                                      updateUser(contributorsArray, "contributor","user");
+                                      upgradeContributorPermissionApplications();
+                                    } else if (contributorsArray.length === 0 && moderatorsArray) {
+                                      updateUser(moderatorsArray, "moderator","user");
+                                      upgradeModeratorPermissionApplications();
+                                    } else if(contributorsArray.length >0 && moderatorsArray) {
+                                      upgradeContributorPermissionApplications();
+                                      updateUser(contributorsArray, "moderator","contributor");
+                                    }
+                                  }
+                                });
+                              }
+
+                              function downgradeModeratorPermissionApplications() {
+                                Application.aggregate([ // Join with Place table
+                                  {
+                                    $match: { moderators: { $in: req.body.deletedModerators } }
+                                  }, { $unwind: "$moderators" },
+                                  {
+                                    $group: {
+                                      _id: "$moderators",
+                                      count: { $sum: 1 }
+                                    }
+                                  }
+                                ]).exec(function(err, moderators) {
+                                  if (err) {
+                                    console.log(err);
+                                    res.json({ success: false, message: err }); // Error if cannot connect
+                                  } else {
+                                    var moderatorsArray = [];
+                                    for (var i = 0; i < moderators.length; i++) {
+                                      if (moderators[i].count === 1) {
+                                        moderatorsArray.push(moderators[i]._id);
+                                      }
+                                    }
+                                    if (moderatorsArray.length > 0) {
+                                      downgradeContributorPermissionApplications(moderatorsArray);
+                                    }else{
+                                      upgradeModeratorPermissionApplications();
+                                    }
+                                  }
+                                });
+                              }
+
+                              function upgradeModeratorPermissionApplications() {
+                                User.updateMany({
+                                  _id: req.body.moderators,
+                                  $or: [{ permission: "contributor" }, { permission: "user" }]
+                                }, { $set: { permission: "moderator" } }, function(err, user) {
+                                  // Check if error
+                                  if (err) {
+                                    console.log(err);
+                                    // Check if error is an error indicating duplicate account
+                                    if (err.code === 11000) {
+                                      res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
+                                    } else {
+                                      // Check if error is a validation error
+                                      if (err.errors) {
+                                        // Check if validation error is in the name field
+                                        if (err.errors.name) {
+                                          res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
+                                        } else {
+                                          // Check if validation error is in the email field
+                                          if (err.errors.email) {
+                                            res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
+                                          } else {
+                                            // Check if validation error is in the username field
+                                            if (err.errors.username) {
+                                              res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
+                                            } else {
+                                              // Check if validation error is in the password field
+                                              if (err.errors.password) {
+                                                res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
+                                              } else {
+                                                // Check if validation error is in the aboutYourself field
+                                                if (err.errors.aboutYourself) {
+                                                  res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                                } else {
+                                                  res.json({ success: false, message: err }); // Return any other error not already covered
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else {
+                                        res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
                                       }
                                     }
                                   } else {
-                                    res.json({ success: false, message: eval(language + '.editApplication.saveError'), err }); // Return general error message
+
                                   }
-                                } else {
-                                  res.json({ success: true, message: eval(language + '.editApplication.success') }); // Return success message
+                                });
+
+                              }
+                              function upgradeContributorPermissionApplications() {
+                                User.updateMany({
+                                  $and: [{ _id: req.body.contributors }, { permission: "user" }]
+                                }, { $set: { permission: "contributor" } }, function(err, user) {
+                                  // Check if error
+                                  if (err) {
+                                    // Check if error is an error indicating duplicate account
+                                    if (err.code === 11000) {
+                                      res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
+                                    } else {
+                                      // Check if error is a validation error
+                                      if (err.errors) {
+                                        // Check if validation error is in the name field
+                                        if (err.errors.name) {
+                                          res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
+                                        } else {
+                                          // Check if validation error is in the email field
+                                          if (err.errors.email) {
+                                            res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
+                                          } else {
+                                            // Check if validation error is in the username field
+                                            if (err.errors.username) {
+                                              res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
+                                            } else {
+                                              // Check if validation error is in the password field
+                                              if (err.errors.password) {
+                                                res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
+                                              } else {
+                                                // Check if validation error is in the aboutYourself field
+                                                if (err.errors.aboutYourself) {
+                                                  res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                                } else {
+                                                  res.json({ success: false, message: err }); // Return any other error not already covered
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      } else {
+                                        res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
+                                      }
+                                    }
+                                  } else {
+
+                                  }
+                                });
+                              }
+                              if (req.body.deletedModerators.length > 0) {
+                                for (var i = 0; i < req.body.deletedModerators.length; i++) {
+                                  req.body.deletedModerators[i] = ObjectId(req.body.deletedModerators[i]);
                                 }
-                              });
+                                downgradeModeratorPermissionApplications();
+                              } else {
+                                upgradeModeratorPermissionApplications();
+                              }
+                              if (req.body.deletedContributors.length > 0) {
+                                for (var i = 0; i < req.body.deletedContributors.length; i++) {
+                                  req.body.deletedContributors[i] = ObjectId(req.body.deletedContributors[i]);
+                                }
+                                downgradeContributorPermissionApplications(undefined);
+                              } else {
+                                upgradeContributorPermissionApplications();
+                              }
+                              saveApplication();
                             }
                           }
                         });
-
                       }
                     }
                   }
@@ -945,6 +1189,7 @@ module.exports = (router) => {
           });
         }
       }
+
     }
   });
   /* ===============================================================

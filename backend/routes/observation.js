@@ -85,6 +85,7 @@ module.exports = (router) => {
   /* ===============================================================
      GET Observations
   =============================================================== */
+
   router.post('/getObservations', (req, res) => {
     var language = req.body.language;
     if (!language) {
@@ -94,32 +95,22 @@ module.exports = (router) => {
         req.body.filters.$or[0].createdBy = ObjectId(req.body.filters.$or[0].createdBy);
         req.body.filters.$or[1].translation.$elemMatch.createdBy = ObjectId(req.body.filters.$or[1].translation.$elemMatch.createdBy);
       }
-      Observation.find(req.body.filters, function(err, observations) {
-        if (err) {
-          // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
-          var mailOptions = {
-            from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
-            to: [emailConfig.email],
-            subject: ' Find one 1 get observations error ',
-            text: 'The following error has been reported in Kultura: ' + err,
-            html: 'The following error has been reported in Kultura:<br><br>' + err
-          }; // Function to send e-mail to myself
-          transporter.sendMail(mailOptions, function(err, info) {
-            if (err) {
-              console.log(err); // If error with sending e-mail, log to console/terminal
-            } else {
-              console.log(info); // Log success message to console if sent
-              console.log(user.email); // Display e-mail that it was sent to
-            }
-          });
-          res.json({ success: false, message: eval(language + '.general.generalError') });
+      Observation.aggregate([{
+        $match: req.body.filters
+      }, {
+        // Join with User table
+        $lookup: {
+          from: "users",
+          localField: "createdBy",
+          foreignField: "_id",
+          as: "user"
+        }
+      }, { $unwind: "$user" }]).exec(function(err, observations) {
+        // Check if observation is in database
+        if (!observations) {
+          res.json({ success: false, message: eval(language + '.newObservation.observationsError') }); // Return error of no observations found
         } else {
-          // Check if observation is in database
-          if (!observations) {
-            res.json({ success: false, message: eval(language + '.newObservation.observationsError') }); // Return error of no observations found
-          } else {
-            res.json({ success: true, observations: observations }); // Return success and place 
-          }
+          res.json({ success: true, observations: observations }); // Return success and place 
         }
       });
     }

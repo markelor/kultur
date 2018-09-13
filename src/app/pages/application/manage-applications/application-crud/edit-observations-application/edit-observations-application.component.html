@@ -23,7 +23,7 @@
       <!--Expired at-->
       <td>{{observationApplication.expiredAt | timezone}}</td>
        <!--CreatedBy-->
-      <td>{{observationApplication | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{observationApplication.user.username}}</td>
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteObservationApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -50,7 +50,7 @@
       <!--Expired at-->
       <td>{{observation.expiredAt | timezone}}</td>
        <!--CreatedBy-->
-      <td>{{observation | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{observation.user.username}}</td>
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addObservationApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

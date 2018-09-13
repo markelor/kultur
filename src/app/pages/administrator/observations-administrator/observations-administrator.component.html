@@ -27,7 +27,7 @@
               <!--Expired at-->
               <td>{{observation.expiredAt | timezone}}</td>
                <!--CreatedBy-->
-              <td>{{observation | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+              <td>{{observation.user.username}}</td>
               <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/observation-route','manage-route','edit-route',observation._id]| localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>

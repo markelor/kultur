@@ -26,7 +26,7 @@ export class EditApplicationComponent implements OnInit {
 
   private getApplication(active){
     // Get application events
-    this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data => {
+    this.applicationService.getApplicationEvents(this.activatedRoute.snapshot.params['id'],this.authService.user.id,this.localizeService.parser.currentLang).subscribe(data => {
       if(data.success){
         this.application=data.application;
         this.moderators=data.moderatorsArray;

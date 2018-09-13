@@ -42,7 +42,7 @@
               <!--Location-->
                <td>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
               <!--CreatedBy-->
-              <td>{{event | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+              <td>{{event.user.username}}</td>
               <!--Edit/Delete-->
               <td class="ks-status">
                 <a href="javascript:void(0)" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>

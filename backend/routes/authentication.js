@@ -730,9 +730,12 @@ module.exports = (router) => {
       } else {
         // Search database for all users posts
         User.find({
-          username: {
-            $regex: new RegExp(".*" + search + ".*", "i")
-          }
+          $and: [{
+            username: {
+              $regex: new RegExp(".*" + search + ".*", "i")
+            }
+          }, { permission: { $ne: "admin" } }]
+
         }, (err, users) => {
           // Check if error was found or not
           if (err) {

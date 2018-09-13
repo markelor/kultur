@@ -56,31 +56,26 @@ export class EditContributorsApplicationComponent implements OnInit {
       ],
       responsive: true,
       columnDefs: [
-        { responsivePriority: 3, targets: 0 },
+        { responsivePriority: 1, targets: 0 },
         { responsivePriority: 4, targets: 1 },
-        { responsivePriority: 1, targets: 2 },
-        { responsivePriority: 5, targets: 3 },
-        { responsivePriority: 6, targets: 4 },
-        { responsivePriority: 7, targets: 5 },
-        { responsivePriority: 2, targets: 6 }
+        { responsivePriority: 3, targets: 2 },
+        { responsivePriority: 2, targets: 3 },
       ]
     };
   }
   private addUserApplicationTable(indexUser){
-      console.log(this.application);
     if(!this.application || !this.application.contributors.includes(this.users[indexUser]._id)){
+      this.application.userId=this.users[indexUser]._id;
+      this.application.operation="addContributor";
       this.application.contributors.push(this.users[indexUser]._id);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
-        console.log(data);
-        console.log(this.application);
         if(data.success){ 
           this.dtElements.forEach((dtElement: DataTableDirective, index: number) => {
             if(index===0){
               dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
                 // Destroy the table first
                 dtInstance.destroy();
-                console.log(this.users[indexUser]);
                 this.contributorsApplication.push(this.users[indexUser]);
                 // Call the addTrigger to rerender again
                 this.deleteTrigger.next();
@@ -93,6 +88,8 @@ export class EditContributorsApplicationComponent implements OnInit {
   }
   private deleteUserApplicationTable(indexUser){
       var indexAplicatonUser=this.application.contributors.indexOf(this.contributorsApplication[indexUser]._id);
+      this.application.userId=this.application.contributors[indexAplicatonUser]._id;
+      this.application.operation="deleteContributor";
       this.application.contributors.splice(indexAplicatonUser,1);
       // Edit application
       this.applicationService.editApplication(this.application).subscribe(data => {
@@ -114,11 +111,9 @@ export class EditContributorsApplicationComponent implements OnInit {
   private getApplicationContributorsInit(){
     // Get application contributors
     this.applicationService.getApplicationContributors(this.applicationId,this.localizeService.parser.currentLang).subscribe(data => {
-      console.log(data);
       if(data.success){
         this.application=data.application;
         this.contributorsApplication=data.contributors;
-        console.log(this.contributorsApplication);
       }
       this.deleteTrigger.next();
     });

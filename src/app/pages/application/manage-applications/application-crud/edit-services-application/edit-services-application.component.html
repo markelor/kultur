@@ -38,7 +38,7 @@
       <!--Location-->
       <td>{{serviceApplication.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td>{{serviceApplication | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{serviceApplication.user.username}}</td>
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteServiceApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -80,7 +80,7 @@
       <!--Location-->
       <td>{{service.place | translateLanguage:'location':localizeService.parser.currentLang}}</td>    
       <!--CreatedBy-->
-      <td>{{service | translateLanguage:'createdBy':localizeService.parser.currentLang}}</td>
+      <td>{{service.user.username}}</td>
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addServiceApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

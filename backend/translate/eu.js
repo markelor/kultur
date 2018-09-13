@@ -352,7 +352,7 @@ module.exports = {
     },
     editApplication: {
         idProvidedError: 'Ez da aplikazioaren IDa eman.',
-        usersProvidedError: "Aplikazioen erabiltzaileak ez dira eman.",
+        moderatorsProvidedError: "Aplikazioak gutxienez moderatzaile bat behar du.",
         saveError: "Ezin izan da aplikazioa aldatu. Akatsa: ",
         success: "Aplikazioa aldatu da!"
     },

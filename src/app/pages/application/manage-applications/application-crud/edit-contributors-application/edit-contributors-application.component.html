@@ -7,21 +7,15 @@
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="deleteTrigger" class="row-border hover" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th translate>{{'auth-form.id'}}</th>
-      <th translate>{{'auth-form.permission'}}</th>
       <th translate>{{'auth-form.username'}}</th>
       <th translate>{{'auth-form.name'}}</th>
       <th translate>{{'auth-form.email'}}</th>
-      <th translate>{{'auth-form.about-yourself'}}</th>
+      <!--<th translate>{{'auth-form.about-yourself'}}</th>-->
       <th translate>{{'crud.delete'}}</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let contributorApplication of contributorsApplication; let i=index">
-      <!--Id-->
-      <td>{{ contributorApplication._id }}</td>
-      <!--Permission-->
-      <td>{{ contributorApplication.permission}}</td>
       <!--Username-->
       <td>
         <div class="ks-user">
@@ -34,7 +28,7 @@
       <!--Email-->
       <td>{{ contributorApplication.email }}</td>
       <!--About Yourself-->
-      <td>{{ contributorApplication | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td>  
+      <!--<td>{{ contributorApplication | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td> --> 
       <!--Delete-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="deleteUserApplicationTable(i)"><span class="fa fa-trash ks-color-danger" translate>{{'crud.delete'}}</span></a>
@@ -45,21 +39,15 @@
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="addTrigger" class="row-border hover" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th translate>{{'auth-form.id'}}</th>
-      <th translate>{{'auth-form.permission'}}</th>
       <th translate>{{'auth-form.username'}}</th>
       <th translate>{{'auth-form.name'}}</th>
       <th translate>{{'auth-form.email'}}</th>
-      <th translate>{{'auth-form.about-yourself'}}</th>
+      <!--<th translate>{{'auth-form.about-yourself'}}</th>-->
       <th translate>{{'crud.edit-delete'}}</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of users; let i=index">
-      <!--Id-->
-      <td>{{ user._id }}</td>
-      <!--Permission-->
-      <td>{{ user.permission}}</td>
       <!--Username-->
       <td>
         <div class="ks-user">
@@ -72,7 +60,7 @@
       <!--Email-->
       <td>{{ user.email }}</td>
       <!--About Yourself-->
-      <td>{{ contributor | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td>  
+      <!--<td>{{ contributor | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td> --> 
       <!--Add-->
       <td class="ks-status">
         <a href="javascript:void(0)" (click)="addUserApplicationTable(i)"><span class="fa fa-plus ks-color-success" translate>{{'crud.add'}}</span></a>

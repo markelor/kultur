@@ -314,12 +314,47 @@ export class ApplicationFormComponent implements OnInit {
     }
   }
   private editApplication() {
+    var oldModerators;
+    var oldContributors;
+    var deletedModerators=[];
+    var deletedContributors=[];
+    var addModerators=[];
+    var addContributors=[];
     if(this.inputApplication){
       var hasTranslationApplication=false;
+      var oldModerators = JSON.parse(JSON.stringify(this.inputApplication.moderators));
+      var oldContributors = JSON.parse(JSON.stringify(this.inputApplication.contributors));
       this.inputApplication.moderators=this.selectedModeratorsId; // Users field 
       this.inputApplication.contributors=this.selectedContributorsId; // Users field   
       this.inputApplication.price=this.form.get('price').value; // Price field
       this.inputApplication.expiredAt=new Date(this.form.get('expiredAt').value.year,this.form.get('expiredAt').value.month-1,this.form.get('expiredAt').value.day,this.timeExpiredAt.hour,this.timeExpiredAt.minute);
+      //fill deleted contributors and moderators
+      for (var i = 0; i < oldModerators.length; ++i) {
+        if(!this.inputApplication.moderators.includes(oldModerators[i])){
+          deletedModerators.push(oldModerators[i]);
+        }
+      }
+      for (var i = 0; i < oldContributors.length; ++i) {
+        if(!this.inputApplication.contributors.includes(oldContributors[i])){
+          deletedContributors.push(oldContributors[i]);
+        }
+      }
+      //fill add contributors and moderators
+      for (var i = 0; i < this.inputApplication.moderators.length; ++i) {
+        if(!oldModerators.includes(this.inputApplication.moderators[i])){
+          addModerators.push(this.inputApplication.moderators[i]);
+        }
+      }
+      for (var i = 0; i < this.inputApplication.contributors.length; ++i) {
+        if(!oldContributors.includes(this.inputApplication.contributors[i])){
+          addContributors.push(this.inputApplication.contributors[i]);
+        }
+      }
+      console.log(addContributors);
+      this.inputApplication.addModerators=addModerators;
+      this.inputApplication.addContributors=addContributors;
+      this.inputApplication.deletedModerators=deletedModerators;
+      this.inputApplication.deletedContributors=deletedContributors;
       this.deleteEditImages();   
       //application translation
       for (var i = 0; i < this.inputApplication.translation.length; ++i) {
@@ -354,6 +389,7 @@ export class ApplicationFormComponent implements OnInit {
         }
       }
     }
+
     // Function to save event into database
     this.applicationService.editApplication(this.inputApplication).subscribe(data => {
       // Check if event was saved to database or not
@@ -370,7 +406,7 @@ export class ApplicationFormComponent implements OnInit {
         this.RefreshApplication.emit({service: this.inputApplication });
         this.submitted = false; // Enable submit button
       }
-    });   
+    });
   }
   public addModerator(){
     if( this.moderator.value && !this.selectedModerators.includes(this.moderator.value) && this.moderatorsSearch.filter(moderator => moderator.username === this.moderator.value).length > 0 && !this.selectedContributors.includes(this.moderator.value)){

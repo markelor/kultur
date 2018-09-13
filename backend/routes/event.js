@@ -377,7 +377,17 @@ module.exports = (router) => {
       Event.aggregate([ // Join with Place table
         {
           $match: req.body.filters
-        }, {
+        }, 
+        {
+          // Join with User table
+          $lookup: {
+            from: "users",
+            localField: "createdBy", 
+            foreignField: "_id", 
+            as: "user" 
+          }
+        },{ $unwind: "$user" },
+        {
           // Join with Place table
           $lookup: {
             from: "places", // other table name
