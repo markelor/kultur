@@ -57,7 +57,7 @@ module.exports = (router) => {
                 user.language = req.body.language;
                 user.aboutYourself = req.body.aboutYourself;
                 user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
-                user.privacictyConsent = req.body.privacyPolicy;
+                user.privacityConsent = req.body.privacyPolicy;
                 user.createdAt = Date.now();
                 user.updatedAt = Date.now();
                 // Save user to database

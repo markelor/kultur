@@ -14,10 +14,10 @@
                 </div>
                 <div class="card-header">
                   <!--Title-->
-                  <div >
+                  <div class="col-sm-7 col-xs-6">
                     <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
                   </div>
-                  <div class="col-sm-3 col-xs-4">
+                  <div class="col-sm-3 col-xs-3">
                     <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event col-sm-4 col-xs-4"></i></span>
                     <div class="dropdown col-sm-8 col-xs-8">
                       <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +35,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="ks-controls col-sm-2 col-xs-2">
+                  <div class="ks-controls col-sm-2 col-xs-3">
                     <!-- showCollapse-->
                     <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
                       <span class="ks-icon la la-minus"></span>

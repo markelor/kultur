@@ -211,7 +211,7 @@ const userSchema = new Schema({
   permission: { type: String, required: true, default: 'contributor' },
   currentAvatar: { type: String, required: true, default: 'assets/img/avatars/default-avatar.jpg' },
   avatars: { type: Array, required: false },
-  privacictyConsent: { type: Boolean, required: true },
+  privacityConsent: { type: Boolean, required: true },
   createdAt: { type: Date, required: true },
   updatedAt: { type: Date, required: true }
 });

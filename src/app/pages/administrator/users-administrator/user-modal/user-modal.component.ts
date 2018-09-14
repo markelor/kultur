@@ -97,7 +97,8 @@ export class UserModalComponent implements OnInit {
     this.oldUser.email=this.form.get('email').value;
     this.oldUser.aboutYourself=this.form.get('aboutYourself').value;
     this.authService.editUser(this.oldUser).subscribe(data=>{
-    this.observableService.notifyOther({option: this.observableService.confirmationModalType,data:data});
+      console.log(data);
+      this.observableService.notifyOther({option: this.observableService.confirmationModalType,data:data});
     });
     this.closeModal();
   }
