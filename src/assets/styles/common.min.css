@@ -7530,7 +7530,8 @@ h6 .badge {
 .ks-tabs-container.ks-tabs-default {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  border: solid 1px #d7dceb
+  border: solid 1px #d7dceb;
+  border-top:0;
 }
 
 .ks-tabs-container.ks-tabs-default .nav-link {

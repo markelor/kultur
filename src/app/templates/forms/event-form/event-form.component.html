@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
   <div class="row">
     <!-- Title -->
-    <div class="col-sm-12">
+    <div class="col-sm-9">
       <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
         <label for="inputTitle" translate>{{'event-form.title'}}</label>
         <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
@@ -12,8 +12,15 @@
         <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
       </div>
     </div>
+    <!-- Price -->
+    <div class="col-sm-3">
+      <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
+        <label for="inputPrice" translate>{{'application-form.price'}}</label>
+        <input [formControl]="price" type="number" class="form-control" id="inputPrice">
+      </div>
+    </div>
     <!-- Category -->
-    <div formArrayName="categories" class="col-sm-12">
+    <div formArrayName="categories" class="col-sm-6">
       <label for="selectCategory" translate>{{'event-form.category'}}</label>
       <div *ngFor="let category of form | formArrayPipe:'categories' | disableCategories:disableCategories; let i = index;">
         <div class="form-group required" [ngClass]="{'has-error': (!category.valid && category.dirty), 'has-success': (category.valid)}">
@@ -40,7 +47,7 @@
       </div>
     </div>
     <!-- Participants input -->
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
         <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
         <div class="input-group icon">
@@ -135,7 +142,7 @@
     </div>
     <!-- File upload end-->
     <!-- Start date-->
-    <div class="col-sm-6">
+    <div class="col-sm-3 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
         <label for="inputStart" translate>{{'event-form.start'}}</label>
         <div class="input-group icon">
@@ -153,13 +160,13 @@
       </div>
     </div>
     <!-- Start time-->
-    <div class="col-sm-6 margin-top">
+    <div class="col-sm-3 col-xs-6 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeStart" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
       </div>
     </div>
     <!-- End date -->
-    <div class="col-sm-6">
+    <div class="col-sm-3 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
         <label for="inputEnd" translate>{{'event-form.end'}}</label>
         <div class="input-group icon">
@@ -177,16 +184,9 @@
       </div>
     </div>
     <!-- End time-->
-    <div class="col-sm-6 margin-top">
+    <div class="col-sm-3 col-xs-6 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeEnd" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
-      </div>
-    </div>
-    <!-- Price -->
-    <div class="col-sm-12">
-      <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
-        <label for="inputPrice" translate>{{'application-form.price'}}</label>
-        <input [formControl]="price" type="number" class="form-control" id="inputPrice">
       </div>
     </div>
     <!-- Province -->

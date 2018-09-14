@@ -6,13 +6,14 @@
           <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <ng-container *ngFor="let event of events let i=index;">
               <article *ngIf="minSize<=i && maxSize>=i" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
-                <h5 class="card-header">
-                    <span class="ks-text">
-                      <span class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
-                      <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event"></i></span>
-                      <span class="ks-text"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event"></i></span>
-                    </span>
-                    <div class="dropdown">
+                 <div class="card-header">
+                  <!--Title-->
+                  <div>
+                    <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
+                  </div>
+                  <div class="col-sm-3 col-xs-4">
+                    <span class="ks-text"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event col-sm-2 col-xs-4"></i></span>
+                    <div class="dropdown col-sm-8 col-xs-6">
                       <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="la la-language" [ngClass]="event | translateCount"></i>
                       </a>
@@ -21,42 +22,15 @@
                           <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
                           <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
                           <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'eu')"><i class="la la-language"></i>Euskara</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'es')"><i class="la la-language"></i>Español</span></div>
-                          <div [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span *ngIf="!(event | hasBeenTranslatedPipe:'en')"><i class="la la-language"></i>English</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
+                          <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
                         </div>
                       </div>
-                    </div>
-                  <!--<ng-container *ngFor="let translation of event.translation">
-                    <span *ngIf="translation.language===localizeService.parser.currentLang" class="ks-text event-title"> {{translation.title}} 
-                    <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
-                    </span>
-                  </ng-container>
-                    <span *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text  event-title"> {{event.title}} 
-                    <i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-eye ks-icon view-event"></i>
-                    <i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event"></i>
-                    </span>
-                  <div class="ks-text-translation"> 
-                    <span *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><i class="la la-language"></i>eu</span>
-                    <span *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><i class="la la-language"></i>es</span>
-                    <span *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><i class="la la-language"></i>en</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'eu')" class="language-pendant"><i class="la la-language"></i>eu</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'es')" class="language-pendant"><i class="la la-language"></i>es</span>
-                    <span *ngIf="!(event | hasBeenTranslatedPipe:'en')" class="language-pendant"><i class="la la-language"></i>en</span>
-                  </div>-->
-                  <div class="ks-controls">
-                    <!-- showCollapse-->
-                    <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                      <span class="ks-icon la la-minus"></span>
-                    </a>
-                    <a *ngIf="event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                      <span class="ks-icon la la-expand"></span>
-                    </a>
-                    <a (click)="event.showAll = !event.showAll" class="ks-control">
-                      <span class="ks-icon la la-close"></span>
-                    </a>
-                  </div>
-                </h5>
+                    </div> 
+                  </div>   
+
+                </div>                  
                 <div *ngIf="!event.showCollapse" class="card-block">
                   <!-- Date/Time -->
                   <div class="event-datetime">
