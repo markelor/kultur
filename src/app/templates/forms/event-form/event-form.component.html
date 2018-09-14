@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
   <div class="row">
     <!-- Title -->
-    <div class="col-sm-9">
+    <div class="col-sm-9 col-xs-9">
       <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
         <label for="inputTitle" translate>{{'event-form.title'}}</label>
         <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- Price -->
-    <div class="col-sm-3">
+    <div class="col-sm-3 col-xs-3">
       <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
         <label for="inputPrice" translate>{{'application-form.price'}}</label>
         <input [formControl]="price" type="number" class="form-control" id="inputPrice">
@@ -190,7 +190,7 @@
       </div>
     </div>
     <!-- Province -->
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!province.value && province.dirty), 'has-success': (province.value && province.valid)}">
         <label for="selectProvinceEvent" translate>{{'event-form.province'}}</label>
         <select [formControl]="province" class="form-control" id="selectProvinceEvent" (change)="onSelectedProvince($event.target.selectedIndex-1)">
@@ -204,7 +204,7 @@
       </div>
     </div>
     <!-- Municipality -->
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!municipality.value && municipality.dirty), 'has-success': (municipality.value && municipality.valid)}">
         <label for="selectMunicipalityEvent" translate>{{'event-form.municipality'}}</label>
         <select [formControl]="municipality" class="form-control" id="selectMunicipalityEvent" (change)="onSelectedMunicipality($event.target.selectedIndex-1)">
@@ -250,7 +250,7 @@
       </div>
     </div>
     <!-- Latitude -->
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!lat.valid && lat.dirty), 'has-success': (lat.valid)}">
         <label for="inputLat" translate>{{'event-form.lat'}}</label>
         <input [formControl]="lat" type="text" class="form-control" id="inputLat">
@@ -260,7 +260,7 @@
       </div>
     </div>
     <!-- Longitude -->
-    <div class="col-sm-6 ">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!lng.valid && lng.dirty), 'has-success': (lng.valid)}">
         <label for="inputLng" translate>{{'event-form.lng'}}</label>
         <input [formControl]="lng" type="text" class="form-control" id="inputLng">
