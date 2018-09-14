@@ -23,7 +23,7 @@ export class ContributorGuard implements CanActivate {
     // Get permission
     return this.authService.getPermission(this.localizeService.parser.currentLang).map(data => {
       // Check if response was a success or error
-      if (data.success && (data.permission==='moderator' ||data.permission==='admin'||data.permission==='contributor')) {
+      if (data.success && (data.permission==='moderator' || data.permission==='admin'|| data.permission==='contributor')) {
         return true;       
       }else{
         this.authService.logout();

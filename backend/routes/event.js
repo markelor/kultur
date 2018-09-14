@@ -257,10 +257,6 @@ module.exports = (router) => {
       if (!req.body.userId) {
         res.json({ success: false, message: eval(language + '.userEvents.userIdProvidedError') }); // Return error
       } else {
-        if (req.body.filters.$or) {
-          req.body.filters.$or[0].createdBy = ObjectId(req.body.filters.$or[0].createdBy);
-          req.body.filters.$or[1].translation.$elemMatch.createdBy = ObjectId(req.body.filters.$or[1].translation.$elemMatch.createdBy);
-        }
         if (req.body.filters.categoryId) {
           for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
             req.body.filters.categoryId.$in[i] = ObjectId(req.body.filters.categoryId.$in[i]);

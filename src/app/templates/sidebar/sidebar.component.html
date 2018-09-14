@@ -45,7 +45,7 @@
       </div>
       <!--Create application-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/application-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a [hidden]="permission!=='admin'" class="dropdown-item" [routerLink]="['/application-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
         <a class="dropdown-item" [routerLink]="['/application-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
       </div>
     </li>
@@ -59,7 +59,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="['/service-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
         <a class="dropdown-item" [routerLink]="['/service-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
-        <a class="dropdown-item" [routerLink]="['/service-type-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.service-type'}}</a>
+        <a [hidden]="permission!=='admin'" class="dropdown-item" [routerLink]="['/service-type-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.service-type'}}</a>
       </div>
     </li>   
      <!--Observation item-->

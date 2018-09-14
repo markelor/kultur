@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { ConfirmationModalComponent } from './modals/confirmation-modal/confirmation-modal.component';
 import { CreateModalComponent } from './modals/create-modal/create-modal.component';
+import { InformationModalComponent } from './modals/information-modal/information-modal.component';
 import { SharedModule } from "../shared/shared.module";
 import { GroupByPipe } from '../shared/pipes/group-by.pipe';
 import { DisableCategoriesPipe } from '../shared/pipes/disable-categories.pipe';
@@ -44,16 +45,16 @@ import { FilterFormComponent } from './forms/filter-form/filter-form.component';
     SharedModule,TranslateModule,TemplatesRoutingModule,DataTablesModule,NgbModule,InlineSVGModule
   ],
   declarations: [
-    NavbarComponent,SidebarComponent,RightSidebarComponent,ConfirmationModalComponent,CreateModalComponent, EventFormComponent,SingleEventComponent, ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
+    NavbarComponent,SidebarComponent,RightSidebarComponent,ConfirmationModalComponent,CreateModalComponent,InformationModalComponent, EventFormComponent,SingleEventComponent, ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
   ],
   exports: [
-    NavbarComponent,SidebarComponent,RightSidebarComponent,ConfirmationModalComponent,CreateModalComponent,EventFormComponent,SingleEventComponent,ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
+    NavbarComponent,SidebarComponent,RightSidebarComponent,ConfirmationModalComponent,CreateModalComponent,InformationModalComponent,EventFormComponent,SingleEventComponent,ApplicationFormComponent,CategoryFormComponent,FormsComponent,ServiceFormComponent,ServiceTypeFormComponent,ObservationFormComponent,CommentComponent,FilterFormComponent
     ],
    providers:[
      GroupByPipe,SpacePipe,BindContentPipe,CompareDatePipe,DisableCategoriesPipe,FormArrayPipe,{provide: COMPOSITION_BUFFER_MODE, useValue: false}
    ],
   entryComponents: [
-    ConfirmationModalComponent,CreateModalComponent
+    ConfirmationModalComponent,CreateModalComponent,InformationModalComponent
   ]
 })
 export class TemplatesModule { } 

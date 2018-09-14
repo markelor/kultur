@@ -7,6 +7,7 @@ import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-manage-events',
   templateUrl: './manage-events.component.html',

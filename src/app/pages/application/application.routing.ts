@@ -4,14 +4,14 @@ import { LocalizeRouterModule } from 'localize-router';
 import { CreateApplicationComponent } from './create-application/create-application.component';
 import { ManageApplicationsComponent } from './manage-applications/manage-applications.component';
 import { ApplicationCrudComponent } from './manage-applications/application-crud/application-crud.component';
-import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
 import { ContributorGuard } from '../guards/contributor.guard';
 
 const routes: Routes = [
-	{ path: '', component: CreateApplicationComponent,canActivate:[AuthGuard], pathMatch: 'full' },
-	{ path: 'create-route', component: CreateApplicationComponent,canActivate:[ContributorGuard] },
+	{ path: '', component: CreateApplicationComponent,canActivate:[AdminGuard], pathMatch: 'full' },
+	{ path: 'create-route', component: CreateApplicationComponent,canActivate:[AdminGuard] },
 	{ path: 'manage-route', component: ManageApplicationsComponent,canActivate:[ContributorGuard] },
-	{ path: 'manage-route/:id',  component: ApplicationCrudComponent,canActivate:[AuthGuard]}	
+	{ path: 'manage-route/:id',  component: ApplicationCrudComponent,canActivate:[ContributorGuard]}	
 ];
 @NgModule({
   imports: [

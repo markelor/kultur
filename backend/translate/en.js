@@ -33,6 +33,7 @@ module.exports = {
         emailProvidedError: "You must provide an e-mail.",
         usernameProvidedError: "You must provide a username.",
         passwordProvidedError: "You must provide a password.",
+        privacyPolicyProvidedError: "You must accept the privacy policy in order to register.",
         duplicateError: "Username or e-mail already exists.",
         saveError: "Could not save user. Error: ",
         emailSubject: "Your activation link",

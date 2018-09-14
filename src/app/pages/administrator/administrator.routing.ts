@@ -7,16 +7,16 @@ import { ServicesAdministratorComponent } from './services-administrator/service
 import { ObservationsAdministratorComponent } from './observations-administrator/observations-administrator.component';
 import { ApplicationsAdministratorComponent } from './applications-administrator/applications-administrator.component';
 import { EditApplicationComponent } from './applications-administrator/edit-application/edit-application.component';
-import { ModeratorGuard } from '../guards/moderator.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
-	{ path: '', component: UsersAdministratorComponent, pathMatch: 'full',canActivate:[ModeratorGuard] },
-	{ path: 'users-route', component: UsersAdministratorComponent,canActivate:[ModeratorGuard] },
-	{ path: 'events-route', component: EventsAdministratorComponent,canActivate:[ModeratorGuard] },
-	{ path: 'services-route', component: ServicesAdministratorComponent,canActivate:[ModeratorGuard] },
-	{ path: 'observations-route', component: ObservationsAdministratorComponent,canActivate:[ModeratorGuard] },
-	{ path: 'applications-route', component: ApplicationsAdministratorComponent,canActivate:[ModeratorGuard] },
-	{ path: 'applications-route/edit-route/:id', component: EditApplicationComponent,canActivate:[ModeratorGuard] }
+	{ path: '', component: UsersAdministratorComponent, pathMatch: 'full',canActivate:[AdminGuard] },
+	{ path: 'users-route', component: UsersAdministratorComponent,canActivate:[AdminGuard] },
+	{ path: 'events-route', component: EventsAdministratorComponent,canActivate:[AdminGuard] },
+	{ path: 'services-route', component: ServicesAdministratorComponent,canActivate:[AdminGuard] },
+	{ path: 'observations-route', component: ObservationsAdministratorComponent,canActivate:[AdminGuard] },
+	{ path: 'applications-route', component: ApplicationsAdministratorComponent,canActivate:[AdminGuard] },
+	{ path: 'applications-route/edit-route/:id', component: EditApplicationComponent,canActivate:[AdminGuard] }
 ];
 @NgModule({
   imports: [

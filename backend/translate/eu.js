@@ -33,6 +33,7 @@ module.exports = {
         emaiProvidedlError: "Posta elektroniko bat eman behar duzu.",
         usernameProvidedError: "Erabiltzaile izen bat eman behar duzu.",
         passwordProvidedError: "Pasahitz bat eman behar duzu.",
+        privacyPolicyProvidedError: "Pribatutasun politika onartu behar duzu izena emateko.",
         duplicateError: "Erabiltzaile izena edo posta elektronikoa existitzen da.",
         saveError: "Ezin izan da erabiltzailea gorde. Akatsa: ",
         emailSubject: "Zure aktibazio esteka",

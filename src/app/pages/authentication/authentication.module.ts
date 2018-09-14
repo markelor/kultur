@@ -12,6 +12,7 @@ import { NewPasswordComponent } from './reset/new-password/new-password.componen
 import { ResetPasswordComponent } from './reset/reset-password/reset-password.component';
 import { ResetUsernameComponent } from './reset/reset-username/reset-username.component';
 import { SharedModule } from "../../shared/shared.module";
+import { TemplatesModule } from "../../templates/templates.module";
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 @NgModule({
   imports: [

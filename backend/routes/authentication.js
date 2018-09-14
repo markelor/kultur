@@ -45,77 +45,81 @@ module.exports = (router) => {
             if (!req.body.password) {
               res.json({ success: false, message: eval(language + '.register.passwordProvidedError') }); // Return error
             } else {
-              // Create the user object for insertion into database
-              let user = new User(); // Create new User object
-              user.username = req.body.username; // Save username from request to User object
-              user.password = req.body.password; // Save password from request to User object
-              user.email = req.body.email; // Save email from request to User object
-              user.name = req.body.name; // Save name from request to User object
-              user.language = req.body.language;
-              user.aboutYourself = req.body.aboutYourself;
-              user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
-              user.privacictyConsent=true;
-              user.createdAt= Date.now(),
-              user.updatedAt= Date.now(),
-              // Save user to database
-              user.save((err) => {
-                // Check if error occured
-                if (err) {
-                  // Check if error is an error indicating duplicate account
-                  if (err.code === 11000) {
-                    res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
-                  } else {
-                    // Check if error is a validation error
-                    if (err.errors) {
-                      // Check if validation error is in the name field
-                      if (err.errors.name) {
-                        res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
-                      } else {
-                        // Check if validation error is in the email field
-                        if (err.errors.email) {
-                          res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
+              if (!req.body.privacyPolicy) {
+                res.json({ success: false, message: eval(language + '.register.privacyPolicyProvidedError') }); // Return error
+              } else {
+                // Create the user object for insertion into database
+                let user = new User(); // Create new User object
+                user.username = req.body.username; // Save username from request to User object
+                user.password = req.body.password; // Save password from request to User object
+                user.email = req.body.email; // Save email from request to User object
+                user.name = req.body.name; // Save name from request to User object
+                user.language = req.body.language;
+                user.aboutYourself = req.body.aboutYourself;
+                user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+                user.privacictyConsent = req.body.privacyPolicy;
+                user.createdAt = Date.now();
+                user.updatedAt = Date.now();
+                // Save user to database
+                user.save((err) => {
+                  // Check if error occured
+                  if (err) {
+                    // Check if error is an error indicating duplicate account
+                    if (err.code === 11000) {
+                      res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
+                    } else {
+                      // Check if error is a validation error
+                      if (err.errors) {
+                        // Check if validation error is in the name field
+                        if (err.errors.name) {
+                          res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
                         } else {
-                          // Check if validation error is in the username field
-                          if (err.errors.username) {
-                            res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
+                          // Check if validation error is in the email field
+                          if (err.errors.email) {
+                            res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
                           } else {
-                            // Check if validation error is in the password field
-                            if (err.errors.password) {
-                              res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
+                            // Check if validation error is in the username field
+                            if (err.errors.username) {
+                              res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
                             } else {
-                              // Check if validation error is in the aboutYourself field
-                              if (err.errors.aboutYourself) {
-                                res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                              // Check if validation error is in the password field
+                              if (err.errors.password) {
+                                res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
                               } else {
-                                res.json({ success: false, message: err }); // Return any other error not already covered
+                                // Check if validation error is in the aboutYourself field
+                                if (err.errors.aboutYourself) {
+                                  res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                } else {
+                                  res.json({ success: false, message: err }); // Return any other error not already covered
+                                }
                               }
                             }
                           }
                         }
+                      } else {
+                        res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
                       }
-                    } else {
-                      res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
                     }
+                  } else {
+                    // setup email data with unicode symbols
+                    let mailOptions = {
+                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      to: [user.email, emailConfig.email], // list of receivers
+                      subject: eval(language + '.register.emailSubject'),
+                      text: eval(language + '.register.emailTextOne') + user.name + eval(language + '.register.emailTextTwo') + user.temporaryToken,
+                      html: eval(language + '.register.emailHtmlOne') + user.name + eval(language + '.register.emailHtmlTwo') + user.temporaryToken + eval(language + '.register.emailHtmlThree')
+                    };
+                    // send mail with defined transport object
+                    transporter.sendMail(mailOptions, (error, info) => {
+                      if (error) {
+                        return console.log(error);
+                      }
+                      console.log('Message %s sent: %s', info.messageId, info.response);
+                    });
+                    res.json({ success: true, message: eval(language + '.register.success') }); // Return success
                   }
-                } else {
-                  // setup email data with unicode symbols
-                  let mailOptions = {
-                    from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
-                    to: [user.email, emailConfig.email], // list of receivers
-                    subject: eval(language + '.register.emailSubject'),
-                    text: eval(language + '.register.emailTextOne') + user.name + eval(language + '.register.emailTextTwo') + user.temporaryToken,
-                    html: eval(language + '.register.emailHtmlOne') + user.name + eval(language + '.register.emailHtmlTwo') + user.temporaryToken + eval(language + '.register.emailHtmlThree')
-                  };
-                  // send mail with defined transport object
-                  transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                      return console.log(error);
-                    }
-                    console.log('Message %s sent: %s', info.messageId, info.response);
-                  });
-                  res.json({ success: true, message: eval(language + '.register.success') }); // Return success
-                }
-              });
+                });
+              }
             }
           }
         }
@@ -295,7 +299,7 @@ module.exports = (router) => {
               } else {
                 user.temporaryToken = false; // Remove temporary token
                 user.active = true; // Change account status to Activated
-                user.updatedAt=Date.now();
+                user.updatedAt = Date.now();
                 // Mongoose Method to save user into the database
                 user.save(function(err) {
                   if (err) {
@@ -418,7 +422,7 @@ module.exports = (router) => {
             res.json({ success: false, message: eval(language + '.general.generalError') });
           } else {
             user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
-            user.updatedAt=Date.now();
+            user.updatedAt = Date.now();
             // Save user's new token to the database
             user.save(function(err) {
               if (err) {
@@ -529,7 +533,7 @@ module.exports = (router) => {
               res.json({ success: false, message: eval(language + '.resetPassword.accountError') }); // Return error if account is not yet activated
             } else {
               user.resetToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); //New token to reset
-              user.updatedAt=Date.now();
+              user.updatedAt = Date.now();
               // Save token to user in database
               user.save(function(err) {
                 if (err) {
@@ -655,7 +659,7 @@ module.exports = (router) => {
             } else {
               user.password = req.body.password; // Save user's new password to the user object
               user.resetToken = false; // Clear user's resetToken 
-              user.updatedAt=Date.now();
+              user.updatedAt = Date.now();
               // Save user's new data
               user.save(function(err) {
                 if (err) {

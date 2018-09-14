@@ -6,6 +6,7 @@ export class User{
     password: string;
     active: boolean;
     aboutYourself:string;
+    privacyPolicy: boolean;
     temporaryToken: string;
     resetToken: string;
     permission: string;
@@ -51,6 +52,12 @@ export class User{
     }
     set setAboutYourself(aboutYourself:string) {
         this.aboutYourself = aboutYourself;
+    }
+    get getPrivacyPolicy():boolean {
+        return this.privacyPolicy;
+    }
+    set setPrivacyPolicy(privacyPolicy:boolean) {
+        this.privacyPolicy = privacyPolicy;
     }
     get getTemporaryToken():string {
         return this.temporaryToken;
