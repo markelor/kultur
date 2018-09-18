@@ -16,6 +16,7 @@
               <th translate>{{'auth-form.name'}}</th>
               <th translate>{{'auth-form.email'}}</th>
               <th translate>{{'auth-form.about-yourself'}}</th>
+              <th translate>{{'auth-form.privacity-consent'}}</th>
               <th translate>{{'crud.edit-delete'}}</th>
             </tr>
           </thead>
@@ -37,7 +38,9 @@
               <!--Email-->
               <td>{{ user.email }}</td>
               <!--About Yourself-->
-              <td>{{ user | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td>  
+              <td>{{ user | translateLanguage:'aboutYourself':localizeService.parser.currentLang }}</td> 
+              <!--Privacity consent-->
+              <td>{{ user.privacityConsent}}</td>   
               <!--Edit/Delete-->      
               <td class="ks-status">
                 <a href="javascript:void(0)" (click)="userEditClick(user)"><span class="fa fa-edit ks-color-info" translate>{{'crud.edit'}}</span></a>

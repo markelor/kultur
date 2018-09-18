@@ -8,6 +8,7 @@ import { AuthGuard} from '../../guards/auth.guard';
 import { LocalizeRouterService } from 'localize-router';
 import { Router } from '@angular/router';
 const URL = 'http://localhost:8080/fileUploader/uploadImages/user-profile';
+//const URL = 'fileUploader/uploadImages/user-profile';
 @Component({
    selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -131,11 +132,8 @@ export class ProfileComponent implements OnInit {
 	};
 	this.uploader.onWhenAddingFileFailed = (fileItem) => {
 	  if(fileItem.size>10*1024*1024){
-	    console.log("fitzategi haundiegia");
 	  }else if(!(fileItem.type === "image/png" ||fileItem.type === "image/jpg" ||fileItem.type === "image/jpeg" || fileItem.type === "image/gif" || fileItem.type === "image/svg+xml")){
-	    console.log("formatu okerra");
 	  }
-	  console.log("fail", fileItem);
 	  //this.failFlag = true;
 	}
 	//call the angular http method
@@ -162,6 +160,7 @@ export class ProfileComponent implements OnInit {
 		this.authService.editUser(user).subscribe(data=>{
 			if(data.success){
 				this.authService.user.currentAvatar=this.avatars[index];
+				localStorage.setItem('user', JSON.stringify(this.authService.user));
 				this.observableService.notifyOther({option: this.observableService.avatarType,data:this.avatars[index]})
 			}
 		});

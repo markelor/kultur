@@ -22,10 +22,10 @@
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-success btn-s" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length">
-  <span class="glyphicon glyphicon-upload"></span> Upload all
+<button type="button" class="btn btn-success btn-s" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length" translate>
+  <span class="glyphicon glyphicon-upload"></span> {{'auth-form.upload-image'}}
 </button>
-<h5 class="ks-header">Irudia igo</h5>
+<h5 class="ks-header" translate>{{'auth-form.my-images'}}</h5>
 <div class="ks-files">
   <ul>
     <li *ngFor="let avatar of avatars; let i=index" class="ks-file">
@@ -34,6 +34,6 @@
     </li>
   </ul>
 </div>
-<button *ngIf="selectedAvatar!==false" type="button" class="btn btn-success btn-s" (click)="chooseImage(selectedAvatar)">
-  <span class="glyphicon glyphicon-upload"></span> Aukeratu irudia
+<button *ngIf="selectedAvatar!==false" type="button" class="btn btn-success btn-s" (click)="chooseImage(selectedAvatar)" translate>
+  <span class="glyphicon glyphicon-upload"></span> {{'auth-form.choose-image'}}
 </button>

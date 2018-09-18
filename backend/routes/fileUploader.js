@@ -368,7 +368,7 @@ module.exports = (router) => {
                                                     if (!user) {
                                                         res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
                                                     } else {
-                                                        var index = user.avatars.indexOf(imageId);
+                                                        var index = user.avatars.indexOf("https://s3-eu-west-1.amazonaws.com/culture-bucket/user-profile/"+imageId);
                                                         var saveErrorPermission = false;
                                                         // Check if is owner
                                                         if (mainUser._id.toString() === user._id.toString()) {

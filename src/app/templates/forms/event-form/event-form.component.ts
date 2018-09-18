@@ -22,6 +22,7 @@ import { CreateModalComponent } from '../../../templates/modals/create-modal/cre
 import * as moment from 'moment-timezone';
 declare let $: any;
 const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+//const URL = 'fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],

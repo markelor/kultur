@@ -14,6 +14,7 @@ import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
 const URL = 'http://localhost:8080/fileUploader/uploadImages/service-type-icon';
+//const URL = 'fileUploader/uploadImages/service-type-icon';
 @Component({
   selector: 'app-service-type-form',
   templateUrl: './service-type-form.component.html',
