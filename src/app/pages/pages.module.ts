@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ContributorGuard } from './guards/contributor.guard';
+import { UserGuard } from './guards/user.guard';
 import { ModeratorGuard } from './guards/moderator.guard';
 import { AuthService } from '../services/auth.service';
 import { CategoryService } from '../services/category.service';
@@ -98,6 +99,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
       useClass: CommentInterceptor,
       multi: true
     },
-   AuthService,CategoryService,EventService,PlaceService,ServiceService,ServiceTypeService,ObservationService,FileUploaderService,ObservableService,ApplicationService,AuthGuard,NotAuthGuard,ContributorGuard,ModeratorGuard,AdminGuard,CommentService]
+   AuthService,CategoryService,EventService,PlaceService,ServiceService,ServiceTypeService,ObservationService,FileUploaderService,ObservableService,ApplicationService,AuthGuard,NotAuthGuard,UserGuard,ContributorGuard,ModeratorGuard,AdminGuard,CommentService]
 })
 export class PagesModule { }

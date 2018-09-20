@@ -29,32 +29,45 @@ export class SeeEventComponent implements OnInit {
   private existReactionAndUsernames;
   public currentUrl;
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private meta: Meta,
-    private metaTitle: Title,
-    private authService:AuthService,
-    private eventService:EventService,
-    private observableService:ObservableService,
-    private localizeService:LocalizeRouterService,
-    private translate:TranslateService,
-    private router:Router,
-    private bindContent:BindContentPipe,
-    private activatedRoute: ActivatedRoute,
-    private authGuard:AuthGuard,
-    private modalService:NgbModal) {
-      this.translate.get('metatag.see-event-title').subscribe(
-        data => {       
-        this.metaTitle.setTitle(data);
-      });
-      this.translate.get('metatag.see-event-description').subscribe(
-        data => {         
-        this.meta.addTag({ name: 'description', content: data });
-      });
-       this.translate.get('metatag.see-event-keywords').subscribe(
-        data => {         
-        this.meta.addTag({ name: 'keywords', content: data });
-      });
-    }
+  @Inject(PLATFORM_ID) private platformId: Object,
+  private meta: Meta,
+  private metaTitle: Title,
+  private authService:AuthService,
+  private eventService:EventService,
+  private observableService:ObservableService,
+  private localizeService:LocalizeRouterService,
+  private translate:TranslateService,
+  private router:Router,
+  private bindContent:BindContentPipe,
+  private activatedRoute: ActivatedRoute,
+  private authGuard:AuthGuard,
+  private modalService:NgbModal) {
+    this.translate.get('metatag.see-event-title').subscribe(
+      data => {       
+      this.metaTitle.setTitle(data);
+    });
+    this.translate.get('metatag.see-event-description').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'description', content: data });
+    });
+     this.translate.get('metatag.see-event-keywords').subscribe(
+      data => {         
+      this.meta.addTag({ name: 'keywords', content: data });
+    });
+  }
+  private addSocialMetaTags(title,description,image){
+    //twitter
+    this.meta.addTag({ name: 'twitter:card', content: 'summary' });
+    this.meta.addTag({ name: 'twitter:site', content: '@kulturekintzak' });
+    this.meta.addTag({ name: 'twitter:title', content: title });
+    this.meta.addTag({ name: 'twitter:description', content: description });
+    this.meta.addTag({ name: 'twitter:image', content: image });
+    //facebbok
+    this.meta.addTag({ property: 'og:title', content: title });
+    this.meta.addTag({ property: 'og:type', content: 'article' });
+    this.meta.addTag({ property: 'og:description', content: description });
+    this.meta.addTag({ property: 'og:image', content: image});
+  }
   private initializeGalleryOptions(){
     this.galleryOptions = [
       { thumbnails: false },
@@ -75,6 +88,7 @@ export class SeeEventComponent implements OnInit {
             big: this.event.images.poster[0].url
           }
         ];
+        this.addSocialMetaTags(this.event.title,this.event.description,this.event.images.poster[0].url);
       }
     }else{
       for (var i = 0; i < this.event.translation.length; ++i) {
@@ -88,6 +102,7 @@ export class SeeEventComponent implements OnInit {
                 big: this.event.translation[i].images.poster[0].url
               }
             ];
+            this.addSocialMetaTags(this.event.translation[i].title,this.event.translation[i].description,this.event.translation[i].images.poster[0].url);
           }
         }           
       }
@@ -100,6 +115,7 @@ export class SeeEventComponent implements OnInit {
             big:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'
         }
       ];
+      this.addSocialMetaTags(this.event.title,this.event.description,'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png');
     }   
   }
   private addReaction(reaction){

@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     private observableService:ObservableService,
 	) {
     this.changeLanguage(this.localizeService.parser.currentLang);
-    console.log('ROUTES', this.localizeService.parser.routes);
+    //console.log('ROUTES', this.localizeService.parser.routes);
   }
 
   public translateRoutes(lang){

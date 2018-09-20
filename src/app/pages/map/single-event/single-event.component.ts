@@ -29,7 +29,7 @@ export class SingleEventComponent implements OnInit{
     ) {    
   }
   private clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    //console.log(`clicked the marker: ${label || index}`)
   }
   public placeClick($event){
     this.observableService.mapClickType="map-click-place";

@@ -38,10 +38,10 @@ module.exports = {
         saveError: "Ezin izan da erabiltzailea gorde. Akatsa: ",
         emailSubject: "Zure aktibazio esteka",
         emailTextOne: "Kaixo ",
-        emailTextTwo: ", eskerrik asko localhost.com-en izena emateagatik. Egin klik honako estekan aktibazioa osatzeko: http://localhost:4200/eu/aktibatu/",
+        emailTextTwo: ", eskerrik asko kulturekintzan izena emateagatik. Egin klik honako estekan aktibazioa osatzeko: www.kulturekintzak.eus/eu/aktibatu/",
         emailHtmlOne: "Kaixo<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>Eskerrik asko localhost.com-en izena emateagatik. Egin klik honako estekan aktibazioa osatzeko:<br><br><a href="http://localhost:4200/eu/aktibatu/',
-        emailHtmlThree: '">http://localhost:4200/eu/aktibatu/</a>',
+        emailHtmlTwo: '</strong>,<br><br>Eskerrik asko kulturekintzan izena emateagatik. Egin klik honako estekan aktibazioa osatzeko:<br><br><a href="www.kulturekintzak.eus/eu/aktibatu/',
+        emailHtmlThree: '">www.kulturekintzak.eus/eu/aktibatu/</a>',
         success: "Kontua erregistratuta! Egiaztatu zure posta elektronikoko aktibazio esteka."
     },
     checkEmail: {
@@ -83,10 +83,10 @@ module.exports = {
         accountError: "Kontua dagoeneko aktibatuta dago.",
         emailSubject: "Aktibazio estekaren eskaera",
         emailTextOne: "Kaixo ",
-        emailTextTwo: ", Berriki, kontu berri bat aktibatzeko esteka eskatu duzu. Egin klik beheko estekan zure aktibazioa osatzeko: http://localhost:4200/eu/aktibatu/",
+        emailTextTwo: ", Berriki, kontu berri bat aktibatzeko esteka eskatu duzu. Egin klik beheko estekan zure aktibazioa osatzeko: www.kulturekintzak.eus/eu/aktibatu/",
         emailHtmlOne: "Kaixo<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>Berriki, kontu berri bat aktibatzeko esteka eskatu duzu. Egin klik beheko estekan zure aktibazioa osatzeko:<br><br><a href="http://localhost:4200/eu/aktibatu/',
-        emailHtmlThree: '">http://localhost:4200/eu/aktibatu/</a>',
+        emailHtmlTwo: '</strong>,<br><br>Berriki, kontu berri bat aktibatzeko esteka eskatu duzu. Egin klik beheko estekan zure aktibazioa osatzeko:<br><br><a href="www.kulturekintzak.eus/eu/aktibatu/',
+        emailHtmlThree: '">www.kulturekintzak.eus/eu/aktibatu/</a>',
         success: "Aktibazio esteka hona bidali da "
     },
     resetUsername: {
@@ -105,10 +105,10 @@ module.exports = {
         accountError: "Kontua oraindik ez da aktibatu.",
         emailSubject: "Berrezarri pasahitz eskaera",
         emailTextOne: "Kaixo ",
-        emailTextTwo: ', Berriki, pasahitza berrezartzeko esteka eskatu duzu. Egin klik beheko estekan zure pasahitza berrezartzeko:<br><br><a href="http://localhost:4200/eu/pasahitz-berria/',
+        emailTextTwo: ', Berriki, pasahitza berrezartzeko esteka eskatu duzu. Egin klik beheko estekan zure pasahitza berrezartzeko:<br><br><a href="www.kulturekintzak.eus/eu/pasahitz-berria/',
         emailHtmlOne: "Kaixo<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>Berriki, pasahitza berrezartzeko esteka eskatu duzu. Egin klik beheko estekan zure pasahitza berrezartzeko:<br><br><a href="http://localhost:4200/eu/pasahitz-berria/',
-        emailHtmlThree: '">http://localhost:4200/eu/pasahitz-berria/</a>',
+        emailHtmlTwo: '</strong>,<br><br>Berriki, pasahitza berrezartzeko esteka eskatu duzu. Egin klik beheko estekan zure pasahitza berrezartzeko:<br><br><a href="www.kulturekintzak.eus/eu/pasahitz-berria/',
+        emailHtmlThree: '">www.kulturekintzak.eus/eu/pasahitz-berria/</a>',
         success: "Pasahitza berrezartzeko, egiaztatu zure posta elekronikoko esteka.",
         expiredError: "Pasahitz esteka iraungi da.",
 

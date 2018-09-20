@@ -146,8 +146,8 @@ module.exports = (router) => {
                                                 from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                                                 to: [emailConfig.email],
                                                 subject: ' Find one 1 uploadImagesBase64 error ',
-                                                text: 'The following error has been reported in Kultura: ' + err,
-                                                html: 'The following error has been reported in Kultura:<br><br>' + err
+                                                text: 'The following error has been reported in kulturekintzak: ' + err,
+                                                html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                                             };
                                             // Function to send e-mail to myself
                                             transporter.sendMail(mailOptions, function(err, info) {
@@ -173,8 +173,8 @@ module.exports = (router) => {
                                                             from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                                                             to: [emailConfig.email],
                                                             subject: ' Find one 2 edit uploadImagesBase64 ',
-                                                            text: 'The following error has been reported in Kultura: ' + err,
-                                                            html: 'The following error has been reported in Kultura:<br><br>' + err
+                                                            text: 'The following error has been reported in kulturekintzak: ' + err,
+                                                            html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                                                         }; // Function to send e-mail to myself
                                                         transporter.sendMail(mailOptions, function(err, info) {
                                                             if (err) {
@@ -324,8 +324,8 @@ module.exports = (router) => {
                                             from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                                             to: [emailConfig.email],
                                             subject: ' Find one 1 deleteProfileImage error ',
-                                            text: 'The following error has been reported in Kultura: ' + err,
-                                            html: 'The following error has been reported in Kultura:<br><br>' + err
+                                            text: 'The following error has been reported in kulturekintzak: ' + err,
+                                            html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                                         };
                                         // Function to send e-mail to myself
                                         transporter.sendMail(mailOptions, function(err, info) {
@@ -351,8 +351,8 @@ module.exports = (router) => {
                                                         from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                                                         to: [emailConfig.email],
                                                         subject: ' Find one 2 edit deleteProfileImage ',
-                                                        text: 'The following error has been reported in Kultura: ' + err,
-                                                        html: 'The following error has been reported in Kultura:<br><br>' + err
+                                                        text: 'The following error has been reported in kulturekintzak: ' + err,
+                                                        html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                                                     }; // Function to send e-mail to myself
                                                     transporter.sendMail(mailOptions, function(err, info) {
                                                         if (err) {

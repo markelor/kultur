@@ -128,8 +128,8 @@ module.exports = (router) => {
                 from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 1 get place coordinates error ',
-                text: 'The following error has been reported in Kultura: ' + err,
-                html: 'The following error has been reported in Kultura:<br><br>' + err
+                text: 'The following error has been reported in kulturekintzak: ' + err,
+                html: 'The following error has been reported in kulturekintzak:<br><br>' + err
               };
               // Function to send e-mail to myself
               transporter.sendMail(mailOptions, function(err, info) {
@@ -170,8 +170,8 @@ module.exports = (router) => {
             from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
             to: [emailConfig.email], // list of receivers
             subject: ' Find 1 get place coordinates error ',
-            text: 'The following error has been reported in Kultura: ' + err,
-            html: 'The following error has been reported in Kultura:<br><br>' + err
+            text: 'The following error has been reported in kulturekintzak: ' + err,
+            html: 'The following error has been reported in kulturekintzak:<br><br>' + err
           };
           // Function to send e-mail to myself
           transporter.sendMail(mailOptions, function(err, info) {

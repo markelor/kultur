@@ -52,8 +52,8 @@ module.exports = (router) => {
                   from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                   to: [emailConfig.email],
                   subject: ' Find 1 new comment error ',
-                  text: 'The following error has been reported in Kultura: ' + err,
-                  html: 'The following error has been reported in Kultura:<br><br>' + err
+                  text: 'The following error has been reported in kulturekintzak: ' + err,
+                  html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                 };
                 // Function to send e-mail to myself
                 transporter.sendMail(mailOptions, function(err, info) {
@@ -276,8 +276,8 @@ module.exports = (router) => {
                   from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                   to: [emailConfig.email],
                   subject: ' Find one 1 edit comment error ',
-                  text: 'The following error has been reported in Kultura: ' + err,
-                  html: 'The following error has been reported in Kultura:<br><br>' + err
+                  text: 'The following error has been reported in kulturekintzak: ' + err,
+                  html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                 };
                 // Function to send e-mail to myself
                 transporter.sendMail(mailOptions, function(err, info) {
@@ -302,8 +302,8 @@ module.exports = (router) => {
                         from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                         to: [emailConfig.email],
                         subject: ' Find one 2 edit comment error ',
-                        text: 'The following error has been reported in Kultura: ' + err,
-                        html: 'The following error has been reported in Kultura:<br><br>' + err
+                        text: 'The following error has been reported in kulturekintzak: ' + err,
+                        html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                       }; // Function to send e-mail to myself
                       transporter.sendMail(mailOptions, function(err, info) {
                         if (err) {
@@ -342,8 +342,8 @@ module.exports = (router) => {
                                 from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                                 to: [emailConfig.email],
                                 subject: ' Find one 3 edit comment error ',
-                                text: 'The following error has been reported in Kultura: ' + err,
-                                html: 'The following error has been reported in Kultura:<br><br>' + err
+                                text: 'The following error has been reported in kulturekintzak: ' + err,
+                                html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                               }; // Function to send e-mail to myself
                               transporter.sendMail(mailOptions, function(err, info) {
                                 if (err) {
@@ -367,8 +367,8 @@ module.exports = (router) => {
                                       from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                                       to: [emailConfig.email],
                                       subject: ' Find 1 new comment error ',
-                                      text: 'The following error has been reported in Kultura: ' + err,
-                                      html: 'The following error has been reported in Kultura:<br><br>' + err
+                                      text: 'The following error has been reported in kulturekintzak: ' + err,
+                                      html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                                     };
                                     // Function to send e-mail to myself
                                     transporter.sendMail(mailOptions, function(err, info) {
@@ -461,8 +461,8 @@ module.exports = (router) => {
               from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: ' Find one 1 edit comment error ',
-              text: 'The following error has been reported in Kultura: ' + err,
-              html: 'The following error has been reported in Kultura:<br><br>' + err
+              text: 'The following error has been reported in kulturekintzak: ' + err,
+              html: 'The following error has been reported in kulturekintzak:<br><br>' + err
             };
             // Function to send e-mail to myself
             transporter.sendMail(mailOptions, function(err, info) {
@@ -487,8 +487,8 @@ module.exports = (router) => {
                     from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                     to: [emailConfig.email],
                     subject: ' Find one 2 edit comment error ',
-                    text: 'The following error has been reported in Kultura: ' + err,
-                    html: 'The following error has been reported in Kultura:<br><br>' + err
+                    text: 'The following error has been reported in kulturekintzak: ' + err,
+                    html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                   }; // Function to send e-mail to myself
                   transporter.sendMail(mailOptions, function(err, info) {
                     if (err) {
@@ -575,8 +575,8 @@ module.exports = (router) => {
                 from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 delete comment error ',
-                text: 'The following error has been reported in Kultura: ' + err,
-                html: 'The following error has been reported in Kultura:<br><br>' + err
+                text: 'The following error has been reported in kulturekintzak: ' + err,
+                html: 'The following error has been reported in kulturekintzak:<br><br>' + err
               };
               // Function to send e-mail to myself
               transporter.sendMail(mailOptions, function(err, info) {
@@ -601,8 +601,8 @@ module.exports = (router) => {
                       from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 2 delete comment error ',
-                      text: 'The following error has been reported in Kultura: ' + err,
-                      html: 'The following error has been reported in Kultura:<br><br>' + err
+                      text: 'The following error has been reported in kulturekintzak: ' + err,
+                      html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                     }; // Function to send e-mail to myself
                     transporter.sendMail(mailOptions, function(err, info) {
                       if (err) {
@@ -641,8 +641,8 @@ module.exports = (router) => {
                               from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find one and remove for delete comment ',
-                              text: 'The following error has been reported in Kultura: ' + err,
-                              html: 'The following error has been reported in Kultura:<br><br>' + err
+                              text: 'The following error has been reported in kulturekintzak: ' + err,
+                              html: 'The following error has been reported in kulturekintzak:<br><br>' + err
                             };
                             // Function to send e-mail to myself
                             transporter.sendMail(mailOptions, function(err, info) {

@@ -51,7 +51,7 @@ export class EventsComponent  {
     
   }
   private clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    //console.log(`clicked the marker: ${label || index}`)
   }
   private handleSVG(svg: SVGElement, parent: Element | null): SVGElement {
     svg.setAttribute('width', '80');
@@ -78,8 +78,8 @@ export class EventsComponent  {
       data.images.poster.push({url:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'});      
     }
     var icon;
-    if(!data.selectedCategory){
-      icon=data.categories[1].icons[0].url
+    if(!data.selectedCategory && data.categories.length>1){
+      icon=data.categories[1].icons[0].url;
     }else{
       var exists=false;
       for (var i = 0; i < data.categories.length; ++i) {

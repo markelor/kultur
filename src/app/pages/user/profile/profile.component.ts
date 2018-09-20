@@ -7,8 +7,8 @@ import { ObservableService } from '../../../services/observable.service';
 import { AuthGuard} from '../../guards/auth.guard';
 import { LocalizeRouterService } from 'localize-router';
 import { Router } from '@angular/router';
-const URL = 'http://localhost:8080/fileUploader/uploadImages/user-profile';
-//const URL = 'fileUploader/uploadImages/user-profile';
+//const URL = 'http://localhost:8080/fileUploader/uploadImages/user-profile';
+const URL = 'fileUploader/uploadImages/user-profile';
 @Component({
    selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
     public profileCropperSettings: CropperSettings;
     private images=[];
 	private uploadOptions;
+	public submitted:boolean = false;
     private hasBaseDropZoneOver: boolean = false;
     private hasAnotherDropZoneOver: boolean = false;
     private uploadAllSuccess:Boolean=true;
@@ -67,6 +68,7 @@ export class ProfileComponent implements OnInit {
 	    this.data = {};
     }
     public uploadBase64(){
+       this.submitted = true;	
       const uploadData = {
        username:this.authService.user.username,
        language:this.localizeService.parser.currentLang,
@@ -76,6 +78,7 @@ export class ProfileComponent implements OnInit {
       };
       this.fileUploaderService.uploadImagesBase64(uploadData).subscribe(data=>{
       	if(data.success){
+      		this.submitted = false;
       		this.avatars.push(data.url);
       		this.chooseImage(this.avatars.length-1);
       	}

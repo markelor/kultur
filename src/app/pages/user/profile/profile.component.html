@@ -22,7 +22,7 @@
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-success btn-s" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length" translate>
+<button [disabled]="submitted" type="button" class="btn btn-success btn-s" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length" translate>
   <span class="glyphicon glyphicon-upload"></span> {{'auth-form.upload-image'}}
 </button>
 <h5 class="ks-header" translate>{{'auth-form.my-images'}}</h5>

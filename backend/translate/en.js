@@ -38,10 +38,10 @@ module.exports = {
         saveError: "Could not save user. Error: ",
         emailSubject: "Your activation link",
         emailTextOne: "Hello ",
-        emailTextTwo: ", thank you for registering at localhost.com. Please click on the following link to complete your activation: http://localhost:4200/en/activate/",
+        emailTextTwo: ", thank you for registering at kulturekintzak Please click on the following link to complete your activation: www.kulturekintzak.eus/en/activate/",
         emailHtmlOne: "Hello<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>Thank you for registering at localhost.com. Please click on the link below to complete your activation:<br><br><a href="http://localhost:4200/en/activate/',
-        emailHtmlThree: '">http://localhost:4200/en/activate/</a>',
+        emailHtmlTwo: '</strong>,<br><br>Thank you for registering at kulturekintzak Please click on the link below to complete your activation:<br><br><a href="www.kulturekintzak.eus/en/activate/',
+        emailHtmlThree: '">www.kulturekintzak.eus/en/activate/</a>',
         success: "Account registered! Please check your e-mail for activation link."
     },
     checkEmail: {
@@ -83,10 +83,10 @@ module.exports = {
         accountError: "Account is already activated.",
         emailSubject: "Activation link request",
         emailTextOne: "Hello ",
-        emailTextTwo: ", You recently requested a new account activation link. Please click on the following link to complete your activation: http://localhost:4200/en/activate/",
+        emailTextTwo: ", You recently requested a new account activation link. Please click on the following link to complete your activation: www.kulturekintzak.eus/en/activate/",
         emailHtmlOne: "Hello<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>You recently requested a new account activation link. Please click on the link below to complete your activation:<br><br><a href="http://localhost:4200/en/activate/',
-        emailHtmlThree: '">http://localhost:4200/en/activate/</a>',
+        emailHtmlTwo: '</strong>,<br><br>You recently requested a new account activation link. Please click on the link below to complete your activation:<br><br><a href="www.kulturekintzak.eus/en/activate/',
+        emailHtmlThree: '">www.kulturekintzak.eus/en/activate/</a>',
         success: "Activation link has been sent to "
     },
     resetUsername: {
@@ -105,10 +105,10 @@ module.exports = {
         accountError: "Account has not yet been activated.",
         emailSubject: "Reset password request",
         emailTextOne: "Hello ",
-        emailTextTwo: ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="http://localhost:4200/en/new-password/',
+        emailTextTwo: ', You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="www.kulturekintzak.eus/en/new-password/',
         emailHtmlOne: "Hello<strong> ",
-        emailHtmlTwo: '</strong>,<br><br>You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="http://localhost:4200/en/new-password/',
-        emailHtmlThree: '">http://localhost:4200/en/new-password/</a>',
+        emailHtmlTwo: '</strong>,<br><br>You recently request a password reset link. Please click on the link below to reset your password:<br><br><a href="www.kulturekintzak.eus/en/new-password/',
+        emailHtmlThree: '">www.kulturekintzak.eus/en/new-password/</a>',
         success: "Please, check your e-mail for password reset link.",
         expiredError: "Password link has expired.",
 
