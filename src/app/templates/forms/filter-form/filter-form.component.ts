@@ -13,8 +13,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
 import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
-const URL = 'fileUploader/uploadImages/category-icon';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
+//const URL = 'fileUploader/uploadImages/category-icon';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],

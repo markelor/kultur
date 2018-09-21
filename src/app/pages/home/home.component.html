@@ -65,8 +65,7 @@
                   <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
                   <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="post-image ks-thumbnail img-responsive">
                    <!--Description-->
-                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText">
-                  </div>
+                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                   <div class="ks-text"></div>
                   <div class="ks-actions">
                     <!--

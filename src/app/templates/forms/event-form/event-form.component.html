@@ -2,7 +2,7 @@
 <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
   <div class="row">
     <!-- Title -->
-    <div class="col-sm-9 col-xs-9">
+    <div class="col-sm-9 col-xs-8">
       <div class="form-group required" [ngClass]="{'has-error': (!title.valid && title.dirty), 'has-success': (title.valid)}">
         <label for="inputTitle" translate>{{'event-form.title'}}</label>
         <input [formControl]="title" capitalize type="text" class="form-control" id="inputTitle">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- Price -->
-    <div class="col-sm-3 col-xs-3">
+    <div class="col-sm-3 col-xs-4">
       <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
         <label for="inputPrice" translate>{{'application-form.price'}}</label>
         <input [formControl]="price" type="number" class="form-control" id="inputPrice">
@@ -86,7 +86,8 @@
       </div>
       <div *ngIf="uploader?.queue?.length>0">
         <h3 translate>{{'event-form.list-images'}} <span>{{ uploader?.queue?.length }}</span> </h3>
-        <table class="table">
+       <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+       <!--<table class="table">-->
           <thead>
             <tr>
               <th translate>{{'event-form.preview'}}</th>
@@ -100,8 +101,8 @@
             <tr *ngFor="let item of uploader.queue">
               <td>
                 <div class="media-left">
-                  <img *ngIf="item.isUploaded" class="img-rounded" width="80" height="80" src="https://s3.eu-west-1.amazonaws.com/culture-bucket%2Fevent-poster/{{item.file.name}}" class="media-object" />
-                  <img *ngIf="!item.isUploaded" class="img-rounded" width="80" height="80" src="" appImagePreview [image]="item?._file" class="media-object" />
+                  <img *ngIf="item.isUploaded" src="https://s3.eu-west-1.amazonaws.com/culture-bucket%2Fevent-poster/{{item.file.name}}" class="media-object clip-circle" />
+                  <img *ngIf="!item.isUploaded" src="" appImagePreview [image]="item?._file" class="media-object clip-circle" />
                 </div>
               </td>
               <td><strong>{{ item?.file?.name }}</strong></td>
@@ -112,8 +113,8 @@
                 <span *ngIf="item.isError"><i class="ion-close-round"></i></span>
               </td>
               <td nowrap>
-                <button *ngIf="!disableUploader" type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
-                  <span class="fa fa-trash" translate>{{'event-form.delete'}}</span>
+                <button *ngIf="!disableUploader" type="button" class="btn btn-danger btn-xs .table-btn" (click)="item.remove()">
+                  <span class="fa fa-trash" translate></span>
                 </button>
               </td>
             </tr>
@@ -142,7 +143,7 @@
     </div>
     <!-- File upload end-->
     <!-- Start date-->
-    <div class="col-sm-3 col-xs-6">
+    <div class="col-sm-3 col-xs-12">
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
         <label for="inputStart" translate>{{'event-form.start'}}</label>
         <div class="input-group icon">
@@ -160,13 +161,13 @@
       </div>
     </div>
     <!-- Start time-->
-    <div class="col-sm-3 col-xs-6 margin-top">
+    <div class="col-sm-3 col-xs-12 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeStart" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
       </div>
     </div>
     <!-- End date -->
-    <div class="col-sm-3 col-xs-6">
+    <div class="col-sm-3 col-xs-12">
       <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
         <label for="inputEnd" translate>{{'event-form.end'}}</label>
         <div class="input-group icon">
@@ -184,7 +185,7 @@
       </div>
     </div>
     <!-- End time-->
-    <div class="col-sm-3 col-xs-6 margin-top">
+    <div class="col-sm-3 col-xs-12 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeEnd" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
       </div>

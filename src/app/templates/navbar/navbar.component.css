@@ -99,5 +99,34 @@
 
 .ks-wrapper-search .ks-info {
   margin-left: 10px;
+  width: 85%;
 }
 
+.ks-wrapper-search .ks-avatar {
+  width: 15%;
+}
+
+.description {
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 5;
+  -moz-line-clamp: 5;
+  line-clamp: 5;
+  /*
+    */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clip-circle {
+  clip-path: circle(25px at center);
+  position: relative;
+  margin-left: -71%;
+  height: 100%;
+}
+
+.ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu {
+  height: auto;
+}

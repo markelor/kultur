@@ -21,8 +21,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
-const URL = 'fileUploader/uploadImages/event-poster';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+//const URL = 'fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -147,6 +147,23 @@ export class EventFormComponent implements OnInit {
         Validators.required
       ])],
     });
+  }
+
+  private createSettings(){
+    this.dtOptions = {
+      // Declare the use of the extension in the dom parameter
+      dom: 'Brt',
+      // Configure the buttons
+      buttons: [],
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 4, targets: 1 },
+        { responsivePriority: 3, targets: 2 },
+        { responsivePriority: 5, targets: 3 },
+        { responsivePriority: 2, targets: 4 }
+      ]
+    };
   }
 
   // Function to create new event form
@@ -975,6 +992,7 @@ export class EventFormComponent implements OnInit {
     this.setUploaderOptions();
     this.form.get('municipality').disable(); // Disable municipality field
     this.chargeAll();
+    this.createSettings(); 
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;
         if(this.inputOperation==="create"){

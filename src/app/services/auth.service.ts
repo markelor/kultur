@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 @Injectable()
 export class AuthService {
-  //public domain = "http://localhost:8080/"; // Development Domain - Not Needed in Production
-  public domain="";
+  public domain = "http://localhost:8080/"; // Development Domain - Not Needed in Production
+  //public domain="";
   public authToken;
   public user;
   public permission;

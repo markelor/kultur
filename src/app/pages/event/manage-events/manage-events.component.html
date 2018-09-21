@@ -65,8 +65,7 @@
                   </ng-container>
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length>0" src="{{event.images.poster[0].url}}" class="post-image ks-thumbnail img-responsive">
-                  <div *ngIf="event.language===localizeService.parser.currentLang||event.translation.length===0" class="ks-text description" [innerHTML]="event.description">
-                  </div>
+                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                   <div class="col-sm-12 details-container">
                     <!-- Category info-->
                     <div class="col-sm-6">

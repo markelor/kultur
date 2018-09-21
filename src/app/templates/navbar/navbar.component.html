@@ -21,13 +21,13 @@
           <!-- BEGIN NAVBAR LANGUAGES -->
           <div *ngIf="eventsSearch" class="ks-wrapper-search ks-scrollable search-container">
             <a *ngFor="let event of eventsSearch" href="javascript:void(0);" class="dropdown-item ks-message">
-              <div class="ks-avatar ks-online">
-                <img *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" width="36" height="36">
+              <div class="ks-avatar">
+                <img *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" class="clip-circle">
               </div>
               <div class="ks-info">
                 <div class="ks-user-name">{{event.title}}</div>
-                <div class="ks-text" [innerHTML]="event.description"></div>
-                <div class="ks-datetime">{{event.createdAt | timezone}}</div>
+                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
+                <div class="ks-datetime">{{event.start | timezone}}</div>
               </div>
             </a>
           </div>

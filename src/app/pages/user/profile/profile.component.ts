@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild,HostListener } from '@angular/core';
 import { ImageCropperComponent, CropperSettings } from "ngx-img-cropper";
 import { FileUploaderService} from '../../../services/file-uploader.service';
 import { FileUploader,FileUploaderOptions } from 'ng2-file-upload';
@@ -7,8 +7,8 @@ import { ObservableService } from '../../../services/observable.service';
 import { AuthGuard} from '../../guards/auth.guard';
 import { LocalizeRouterService } from 'localize-router';
 import { Router } from '@angular/router';
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/user-profile';
-const URL = 'fileUploader/uploadImages/user-profile';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/user-profile';
+//const URL = 'fileUploader/uploadImages/user-profile';
 @Component({
    selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -27,6 +27,8 @@ export class ProfileComponent implements OnInit {
     private uploadAllSuccess:Boolean=true;
     public avatars=[];
     public selectedAvatar=false;
+    public screenHeight=0;
+    public screenWidth=0;
     public uploader:FileUploader = new FileUploader({
     url: URL,itemAlias: 'user-profile',
     isHTML5: true,
@@ -37,6 +39,11 @@ export class ProfileComponent implements OnInit {
     profileCropper: ImageCropperComponent;
 
     @ViewChild('profileEditorModal') profileEditorModal;
+    @HostListener('window:resize', ['$event'])
+    	onResize(event?) {
+    	  this.screenHeight = window.innerHeight;
+    	  this.screenWidth = window.innerWidth;
+		}
 
     constructor(
     	private authService:AuthService,
@@ -46,16 +53,24 @@ export class ProfileComponent implements OnInit {
     	private router:Router,
     	private authGuard: AuthGuard,
     ) {
+    	this.onResize();
     	this.profileCropperSettings = new CropperSettings();
     	this.profileCropperSettings.noFileInput = true;
-	    this.profileCropperSettings.width = 200;
-	    this.profileCropperSettings.height = 200;
+	    //this.profileCropperSettings.width = 200;
+	    //this.profileCropperSettings.height = 200;
 
-	    this.profileCropperSettings.croppedWidth = 200;
-	    this.profileCropperSettings.croppedHeight = 200;
+	    this.profileCropperSettings.croppedWidth = 150;
+	    this.profileCropperSettings.croppedHeight = 150;
 
-	    this.profileCropperSettings.canvasWidth = 500;
-	    this.profileCropperSettings.canvasHeight = 300;
+	    //this.profileCropperSettings.dynamicSizing = true;
+	    if(this.screenWidth>450){
+	    	this.profileCropperSettings.canvasWidth = (this.screenWidth*0.8)/2;
+	    	this.profileCropperSettings.canvasHeight = (this.screenWidth*0.8)/4; 	
+	    }else{
+	    	this.profileCropperSettings.canvasWidth = (this.screenWidth*0.6);
+	    	this.profileCropperSettings.canvasHeight = (this.screenWidth*0.6)/2; 	
+
+	    }
 
 	    this.profileCropperSettings.minWidth = 10;
 	    this.profileCropperSettings.minHeight = 10;

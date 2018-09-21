@@ -1,3 +1,45 @@
-.margin-top{
-	margin-top: -6px;
+.margin-top {
+  margin-top: -6px;
+}
+
+.table-btn {
+  padding: 10px;
+  font-size: initial;
+}
+
+.media-object {
+  width: 150px;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+  top: 9px;
+  left: 4px;
+  height: 14px;
+  width: 14px;
+  display: block;
+  position: absolute;
+  color: white;
+  border: 2px solid white;
+  border-radius: 14px;
+  box-shadow: 0 0 3px #444;
+  box-sizing: content-box;
+  text-align: center;
+  text-indent: 0 !important;
+  font-family: '';
+  line-height: 14px;
+  content: '+';
+  background-color: var(--main-dark-color);
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before {
+  content: '-';
+  background-color: var(--main-red-background-color);
+}
+
+@media (max-width: 420px) {
+  .media-object {
+    width: 100px;
+  }
 }

@@ -1,5 +1,6 @@
 :root {
   --main-grey-light-color: #e5e5e5;
+  --main-red-background-color: #e73838;
 }
 
 body,
@@ -6284,7 +6285,7 @@ pre[class*=language-]+h6 {
 
 .badge-info {
   border: solid 1px var(--main-dark-color);
-  background-color: var(--main-dark-color);
+  background-color: var(--main-red-background-color);
   color: #fff
 }
 
@@ -9208,7 +9209,7 @@ h6 .badge {
 }
 
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu>.tab-content>.tab-pane>.ks-wrapper {
-  height: 426px;
+  max-height: 426px;
   overflow-y: scroll;
 }
 

@@ -469,7 +469,7 @@
     background: #fff
   }
   .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions.ks-open>.nav-item>.nav-link {
-    color: #db4935;
+    color: var(--main-dark-color);
     border-bottom: 1px solid #dee0e1
   }
   .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions.ks-open>.nav-item.ks-user .ks-info>.ks-description {
