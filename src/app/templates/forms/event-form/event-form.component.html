@@ -86,7 +86,7 @@
       </div>
       <div *ngIf="uploader?.queue?.length>0">
         <h3 translate>{{'event-form.list-images'}} <span>{{ uploader?.queue?.length }}</span> </h3>
-       <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" cellspacing="0" width="100%">
+       <table datatable [dtOptions]="dtOptions" class="row-border hover" cellspacing="0" width="100%">
        <!--<table class="table">-->
           <thead>
             <tr>

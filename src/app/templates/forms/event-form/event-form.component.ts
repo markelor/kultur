@@ -114,6 +114,7 @@ export class EventFormComponent implements OnInit {
     allowedMimeType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
     maxFileSize: 10*1024*1024 // 10 MB
   });
+    public dtOptions: any = {};
   private uploadOptions;
   private hasBaseDropZoneOver:boolean = false;
   private hasAnotherDropZoneOver:boolean = false;
