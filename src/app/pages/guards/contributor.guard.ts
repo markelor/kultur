@@ -19,7 +19,7 @@ export class ContributorGuard implements CanActivate {
     router: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
-
+    this.authService.loadToken();
     // Get permission
     return this.authService.getPermission(this.localizeService.parser.currentLang).map(data => {
       // Check if response was a success or error

@@ -75,8 +75,6 @@ export class NavbarComponent implements OnInit {
     });
   }
   private getAndChangeAvatar(){
-
-
     //Change avatar
     this.observableService.avatarType="current-avatar";
     this.subscription=this.observableService.notifyObservable.subscribe(res => {    
