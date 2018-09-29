@@ -13,13 +13,15 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { InlineSVGDirective} from 'ng-inline-svg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DateNamePipe } from "../../shared/pipes/date-name.pipe";
+
 @NgModule({
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,AgmCoreModule,MapRoutingModule,TranslateModule,SharedModule,TemplatesModule,AgmSnazzyInfoWindowModule,InlineSVGModule,NgbModule
   ],
   declarations: [EventsComponent],
   exports: [EventsComponent],
-  providers:[{provide: COMPOSITION_BUFFER_MODE, useValue: false},BindContentPipe]
+  providers:[{provide: COMPOSITION_BUFFER_MODE, useValue: false},BindContentPipe,DateNamePipe]
 })
 
 export class MapModule { }

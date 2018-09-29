@@ -40,7 +40,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.9",
+    "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@nguniversal/express-engine": "^5.0.0-beta.5",
     "@nguniversal/module-map-ngfactory-loader": "^5.0.0-beta.5",
     "@ngx-cache/core": "^5.0.0",

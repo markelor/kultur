@@ -28,6 +28,7 @@ export class DateNamePipe implements PipeTransform {
     }
     var result=
                 {
+                  "year":moment(date).tz("Europe/Madrid").format('YYYY'),
                   "month":monthName[0].toUpperCase() + monthName.substring(1),
                   "day":dayName[0].toUpperCase() + dayName.substring(1),
                   "dayNumber":moment(date).tz("Europe/Madrid").format('DD'),

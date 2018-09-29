@@ -23,8 +23,8 @@
             </select>
           </div>
         </div>
-      </div>  
-    </div>  
+      </div>
+    </div>
     <!-- Province -->
     <div class="col-sm-6">
       <div class="form-group required">
@@ -54,7 +54,7 @@
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
         <label for="inputStart" translate>{{'event-form.start'}}</label>
         <div class="input-group icon">
-          <input [formControl]="start"  ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
+          <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
           <div class="input-group-append ">
             <button (click)="calendarStart.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
               <span class="la la-calendar ks-icon"></span>
@@ -85,6 +85,14 @@
         {{'validation.compare-date-validation'}}</span>
       </div>
     </div>
+    <!--
+    <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+    </ngb-datepicker>
+    <ng-template #t let-date="date" let-focused="focused">
+      <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+  </span>
+    </ng-template>
+  -->
     <!-- Price -->
     <div class="col-sm-12">
       <div class="form-group required">

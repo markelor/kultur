@@ -99,6 +99,7 @@ export class EventsComponent  {
       customInfo: {
         icon: icon,
         title:data.title,
+        start:data.start,
         cretedBy:data.createdBy,
         images:data.images.poster[0].url,
         description:data.description

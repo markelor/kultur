@@ -4,7 +4,7 @@
       <div class="container-fluid ks-rows-section">
         <div class="row">
           <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <h1>{{ title }}</h1>
+            <h1>{{ 'menu.map'|translate}}</h1>
             <!-- this creates a google map on the page with the given lat/lng from -->
             <!-- the component as the initial center of the map: -->
             <agm-map [latitude]="lat" [longitude]="lng" [usePanning]='true' [zoom]="zoom" [fullscreenControl]="true" [mapTypeControl]="true" [keyboardShortcuts]="false">
@@ -12,11 +12,10 @@
                 <agm-snazzy-info-window [maxWidth]="500" [closeWhenOthersOpen]="true">
                   <ng-template>
                     <div id="iw-container">
-                      <div class="iw-title"><a href="">{{m.customInfo.title}}</a></div>
+                      <div class="iw-title"><a href="">{{m.customInfo.title}}</a><span class="datetime">{{(m.customInfo.start | dateNamePipe:localizeService.parser.currentLang).year}}ko {{(m.customInfo.start | dateNamePipe:localizeService.parser.currentLang).month}} {{(m.customInfo.start | dateNamePipe:localizeService.parser.currentLang).dayNumber}} | {{(m.customInfo.start | dateNamePipe:localizeService.parser.currentLang).hour}}</span></div>
                       <div class="iw-content">
-                        <div class="iw-subTitle">{{m.customInfo.createdBy}}</div>
-                        <span class="map-window"><a href=""><img class="info-img" [src]="m.customInfo.images"> </a></span>
-                        <div [innerHTML]="m.customInfo.description"></div>
+                        <div><img class="info-img" [src]="m.customInfo.images"></div>
+                        <div class="iw-description" [innerHTML]="m.customInfo.description"></div>
                       </div>
                       <div class="iw-bottom-gradient"></div>
                     </div>

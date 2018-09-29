@@ -12,7 +12,8 @@ import { Category } from '../../../class/category';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
 import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
-import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date'
+import { NgbDatepickerI18n, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
 //const URL = 'fileUploader/uploadImages/category-icon';
 const I18N_VALUES = {
@@ -58,6 +59,8 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   styleUrls: ['./filter-form.component.css'],
    providers: [{provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}] // define custom NgbDatepickerI18n provider
 })
+
+
 export class FilterFormComponent  {  
   @Input() inputType:string;
   public form:FormGroup;
@@ -81,6 +84,11 @@ export class FilterFormComponent  {
   private categoriesTree=[];
   private geonameIdProvince;
   private geonameIdMunicipality;
+
+  private hoveredDate: NgbDate;
+
+  private fromDate: NgbDate;
+  private toDate: NgbDate;
   constructor(
     private fb: FormBuilder,
     private localizeService:LocalizeRouterService,
@@ -91,9 +99,13 @@ export class FilterFormComponent  {
     private placeService:PlaceService,
     private translate:TranslateService,
     private observableService: ObservableService,
-    private groupByPipe:GroupByPipe
+    private groupByPipe:GroupByPipe,
+    private calendar: NgbCalendar
   ) { 
     this.createNewFilterForm();
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    
     
   }
     private createItem(value) {
@@ -120,7 +132,7 @@ export class FilterFormComponent  {
     this.start = this.form.controls['start'];
     this.end = this.form.controls['end'];
     this.price = this.form.controls['price'];
-  }
+    }
   
      // Function on seleccted categories
   public onSelectedCategory(value,level){
@@ -284,6 +296,28 @@ export class FilterFormComponent  {
         });
       }
     });
+  }
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return true;//date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
   }
   public onEventSubmit(){
     this.getEvents();
