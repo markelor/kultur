@@ -133,6 +133,8 @@
     "id": "Id",
     "upload-image": "Subir imagen",
     "my-images": "Mis imágenes",
+    "new-image": "Subir nueva imagen",
+    "profile-image": "Imagen de perfil",
     "choose-image": "Seleccionar imagen"
   },
   "category-form":

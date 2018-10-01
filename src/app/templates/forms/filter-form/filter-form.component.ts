@@ -180,6 +180,7 @@ export class FilterFormComponent  {
         }       
       }    
     }
+    this.getEvents();
   }   
    // Function on seleccted event Continent
   public onSelectedProvince(index){
@@ -193,12 +194,14 @@ export class FilterFormComponent  {
       });
     }
     this.form.controls['municipality'].setValue("");
+    this.getEvents();
   }
   // Function on seleccted event municipality
   public onSelectedMunicipality(index){
     if(index!==-1){  
       this.geonameIdMunicipality=this.municipalitiesEvent[index].geonameId;
     }
+    this.getEvents();
   }
   private getProvinces(){
     //Get provinces on page load
@@ -297,6 +300,7 @@ export class FilterFormComponent  {
       }
     });
   }
+
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;

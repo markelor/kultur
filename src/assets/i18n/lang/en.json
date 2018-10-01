@@ -132,6 +132,8 @@
     "id": "Id",
     "upload-image": "Upload image",
     "my-images": "My images",
+    "new-image": "Upload a new image",
+    "profile-image": "Profil image",
     "choose-image": "Choose image"
   },
   "category-form":
