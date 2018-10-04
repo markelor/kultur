@@ -212,7 +212,7 @@
     width: 120px;
     padding: 10px 0;
     background-color: #0ca23e;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 14px/1 'Lato', sans-serif;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -279,6 +279,36 @@
     left: 10px;
     top: 12px;
     transform: rotate(45deg);
+}
+
+/* bottom right*/
+
+.ribbon-bottom-right {
+    bottom: -10px;
+    right: -10px;
+    z-index: 1;
+}
+
+.ribbon-bottom-right::before,
+.ribbon-bottom-right::after {
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+.ribbon-bottom-right::before {
+    bottom: 0;
+    left: 17px;
+}
+
+.ribbon-bottom-right::after {
+    bottom: 73px;
+    right: 0;
+}
+
+.ribbon-bottom-right span {
+    left: 10px;
+    bottom: 12px;
+    transform: rotate(-45deg);
 }
 
 .reaction:hover {

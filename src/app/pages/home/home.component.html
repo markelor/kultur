@@ -6,10 +6,10 @@
                     <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                         <ng-container *ngFor="let event of events let i=index;">
                             <article *ngIf="minSize<=i && maxSize>=i && event.visible" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
-                                <div *ngIf="event.price===0" class="ribbon-free ribbon-top-right">
+                                <div *ngIf="event.price===0" class="ribbon-free ribbon-bottom-right">
                                     <span>{{'event.free'|translate}} </span>
                                 </div>
-                                <div *ngIf="event.price!=0" class="ribbon ribbon-top-right">
+                                <div *ngIf="event.price!=0" class="ribbon ribbon-bottom-right">
                                     <span>{{event.price}} €</span>
                                 </div>
                                 <!-- header
@@ -70,7 +70,7 @@
                                     <!--Title -->
                                     <div class="col-sm-11 col-xs-10" style="padding:0;">
                                         <span class="ks-text event-title col-xs-11"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
-                                        <span class="ks-text  view-event col-xs-1"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon"></i></span>
+                                        <span class="ks-text view-event col-xs-1"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon"></i></span>
                                     </div>
                                     <!--Translate -->
                                     <div class="dropdown col-sm-1 col-xs-2">
