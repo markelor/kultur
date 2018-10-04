@@ -16,18 +16,18 @@
 <div class="form-group required">
     <label class="col-sm-12" for="fileUploadArcheology" translate>{{'auth-form.new-image'}}</label>
 </div>
-<div class="col-sm-6">
-        <button class="btn btn-primary ks-btn-file d-block">
-            <span class="ks-text" translate>{{'event-form.choose-image'}}</span>
-            <input (change)="fileChangeListener($event)" id="photos" class="form-control" type="file" ng2FileSelect [uploader]="uploader" />
-        </button>
+<div class="col-sm-6 centered">
+    <button class="btn btn-primary ks-btn-file d-block btn-select">
+        <span class="ks-text" translate>{{'event-form.choose-image'}}</span>
+        <input (change)="fileChangeListener($event)" id="photos" class="form-control" type="file" ng2FileSelect [uploader]="uploader" />
+    </button>
     <img-cropper #profileCropper [image]="data" [settings]="profileCropperSettings"></img-cropper>
 </div>
-<div class="col-sm-6">
-        <button [disabled]="submitted" type="button" class="btn btn-success ks-btn-file  d-block" (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length" translate>
-            <span class="la la-cloud-upload ks-icon"></span>
-            <span class="ks-text" translate>{{'auth-form.upload-image'}}</span>
-        </button>
+<div class="col-sm-6 centered">
+    <button [disabled]="submitted" type="button" class="btn btn-success ks-btn-file d-block btn-upload"  (click)="uploadBase64()" [disabled]="!uploader.getNotUploadedItems().length" translate>
+        <span class="la la-cloud-upload ks-icon"></span>
+        <span class="ks-text" translate>{{'auth-form.upload-image'}}</span>
+    </button>
     <img *ngIf="data.image" [src]="data.image" [width]="profileCropperSettings.croppedWidth" [height]="profileCropperSettings.croppedHeight">
 </div>
 <!--<label class="col-sm-12" for="progressbar" translate>{{'event-form.queue-progress'}}</label>

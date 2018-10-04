@@ -1,131 +1,128 @@
 <div class="ks-page-content">
-  <div class="ks-page-content-body">
-    <div class="ks-nav-body-wrapper">
-      <div class="container-fluid ks-rows-section">
-        <div class="row">
-          <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <ng-container *ngFor="let event of events let i=index;">
-              <article *ngIf="minSize<=i && maxSize>=i && event.visible" [hidden]="event.showAll"  class="card panel ks-widget ks-widget-post">
-                <div *ngIf="event.price===0" class="ribbon-free ribbon-top-left">
-                  <span >{{'event.free'|translate}} </span>
+    <div class="ks-page-content-body">
+        <div class="ks-nav-body-wrapper">
+            <div class="container-fluid ks-rows-section">
+                <div class="row">
+                    <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <ng-container *ngFor="let event of events let i=index;">
+                            <article *ngIf="minSize<=i && maxSize>=i && event.visible" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
+                                <div *ngIf="event.price===0" class="ribbon-free ribbon-top-right">
+                                    <span>{{'event.free'|translate}} </span>
+                                </div>
+                                <div *ngIf="event.price!=0" class="ribbon ribbon-top-right">
+                                    <span>{{event.price}} €</span>
+                                </div>
+                                <!-- header
+                                  <div class="card-header">
+                                  -->
+                                <!--Title
+                                    <div class="col-sm-7 col-xs-6">
+                                        <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
+                                    </div>-->
+                                <!-- Translation and view
+                                    <div class="col-sm-3 col-xs-3">
+                                        <span class="ks-text"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event col-sm-4 col-xs-4"></i></span>
+                                        <div class="dropdown col-sm-8 col-xs-8">
+                                            <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="la la-language" [ngClass]="event | translateCount"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
+                                                <div class="ks-wrapper">
+                                                    <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
+                                                    <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
+                                                    <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
+                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
+                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
+                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    -->
+                                <!-- showCollapse
+                                    <div class="ks-controls col-sm-2 col-xs-3">
+                                        <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
+                                            <span class="ks-icon la la-minus"></span>
+                                        </a>
+                                        <a *ngIf="event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
+                                            <span class="ks-icon la la-expand"></span>
+                                        </a>
+                                        <a (click)="event.showAll = !event.showAll" class="ks-control">
+                                            <span class="ks-icon la la-close"></span>
+                                        </a>
+                                    </div>
+                                </div> HEADER
+                                    -->
+                                <div *ngIf="!event.showCollapse" class="card-block">
+                                    <!-- Date/Time -->
+                                    <div class="event-datetime">
+                                        <div class="event-datetime-day" [innerHTML]="(event.start | dateNamePipe:localizeService.parser.currentLang).day"></div>
+                                        <div class="event-datetime-subcontainer">
+                                            <div class="event-datetime-month">
+                                                <span>{{(event.start | dateNamePipe:localizeService.parser.currentLang).month}}</span>
+                                            </div>
+                                            <div class="event-datetime-date">
+                                                <div class="event-datetime-day-num" [innerHTML]="(event.start | dateNamePipe:localizeService.parser.currentLang).dayNumber"></div>
+                                                <div class="event-datetime-hour"><span class="la la-clock-o ks-icon"></span>{{(event.start | dateNamePipe:localizeService.parser.currentLang).hour}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Title -->
+                                    <div class="col-sm-11 col-xs-10" style="padding:0;">
+                                        <span class="ks-text event-title col-xs-11"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                                        <span class="ks-text  view-event col-xs-1"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon"></i></span>
+                                    </div>
+                                    <!--Translate -->
+                                    <div class="dropdown col-sm-1 col-xs-2">
+                                        <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="la la-language" [ngClass]="event | translateCount"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
+                                            <div class="ks-wrapper">
+                                                <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
+                                                <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
+                                                <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
+                                                <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
+                                                <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
+                                                <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4 post-image" style="padding:0;">
+                                        <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="ks-thumbnail img-responsive">
+                                        <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="ks-thumbnail img-responsive">
+                                    </div>
+                                    <!--Description-->
+                                    <div class="col-sm-8 col-xs-8">
+                                        <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
+                                    </div>
+                                    <div class="col-sm-12 col-xs-12 ks-actions">
+                                        <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
+                                          <span class="la la-comment-o ks-icon"></span>
+                                        <span class="ks-amount">{{event.comments.length}}</span>
+                                        </span>
+                                        <span class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
+                                          <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
+                                        <span *ngIf="event.reactions.loveBy.length>0" class="reaction reaction-love"></span>
+                                        <span *ngIf="event.reactions.hahaBy.length>0" class="reaction reaction-haha"></span>
+                                        <span *ngIf="event.reactions.wowBy.length>0" class="reaction reaction-wow"></span>
+                                        <span *ngIf="event.reactions.sadBy.length>0" class="reaction reaction-sad"></span>
+                                        <span *ngIf="event.reactions.angryBy.length>0" class="reaction reaction-angry"></span>
+                                        <span *ngIf="(event.reactions.angryBy.length+event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length==0)" class="reaction reaction-like"></span>
+                                        <span class="ks-amount ks-amount-reactions">{{event.reactions.angryBy.length +event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </ng-container>
+                        <ngb-pagination *ngIf="collectionSize" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="1" [maxSize]="5" [boundaryLinks]="true" size="lg" (pageChange)="onPageChange($event)"></ngb-pagination>
+                    </section>
+                    <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <!-- Filter Form -->
+                        <app-filter-form [inputType]="'seeEvents'"></app-filter-form>
+                    </aside>
                 </div>
-                <div *ngIf="event.price!=0" class="ribbon ribbon-top-left">
-                  <span>{{event.price}} €</span>
-                </div>
-                <div class="card-header">
-                  <!--Title-->
-                  <div class="col-sm-7 col-xs-6">
-                    <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
-                  </div>
-                  <div class="col-sm-3 col-xs-3">
-                    <span class="ks-text" ><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event col-sm-4 col-xs-4"></i></span>
-                    <div class="dropdown col-sm-8 col-xs-8">
-                      <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="la la-language" [ngClass]="event | translateCount"></i>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
-                        <div class="ks-wrapper">
-                          <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
-                          <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
-                          <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
-                          <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
-                          <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
-                          <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="ks-controls col-sm-2 col-xs-3">
-                    <!-- showCollapse-->
-                    <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                      <span class="ks-icon la la-minus"></span>
-                    </a>
-                    <a *ngIf="event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                      <span class="ks-icon la la-expand"></span>
-                    </a>
-                    <a (click)="event.showAll = !event.showAll" class="ks-control">
-                      <span class="ks-icon la la-close"></span>
-                    </a>
-                  </div>
-                </div>
-                <div *ngIf="!event.showCollapse" class="card-block">
-                  <!-- Date/Time -->
-                  <div class="event-datetime">
-                    <div class="event-datetime-day" [innerHTML]="(event.start | dateNamePipe:localizeService.parser.currentLang).day"></div>
-                    <div class="event-datetime-subcontainer">
-                      <div class="event-datetime-month">
-                        <span>{{(event.start | dateNamePipe:localizeService.parser.currentLang).month}}</span>
-                      </div>
-                      <div class="event-datetime-date">
-                        <div class="event-datetime-day-num" [innerHTML]="(event.start | dateNamePipe:localizeService.parser.currentLang).dayNumber"></div>
-                        <div class="event-datetime-hour"><span class="la la-clock-o ks-icon"></span>{{(event.start | dateNamePipe:localizeService.parser.currentLang).hour}}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
-                  <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="post-image ks-thumbnail img-responsive">
-                   <!--Description-->
-                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
-                  <div class="ks-text"></div>
-                  <div class="ks-actions">
-                    <!--
-                    <p class="time">
-                      <span class="la la-user ks-icon"></span>
-                      <span translate>{{'event.created-by'}}</span> {{event.createdBy}}
-                    </p>
-                    <button [routerLink]="['/event-route','see-route',event._id] | localize" class="btn btn-success right" translate>{{'event.see-event'}}</button>
-                  -->
-                    <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
-                      <span class="la la-comment-o ks-icon"></span>
-                      <span class="ks-amount" >{{event.comments.length}}</span>
-                    </span>
-                    <span class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
-                      <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
-                      <span *ngIf="event.reactions.loveBy.length>0" class="reaction reaction-love" ></span>
-                      <span *ngIf="event.reactions.hahaBy.length>0" class="reaction reaction-haha" ></span>
-                      <span *ngIf="event.reactions.wowBy.length>0" class="reaction reaction-wow" ></span>
-                      <span *ngIf="event.reactions.sadBy.length>0" class="reaction reaction-sad" ></span>
-                      <span *ngIf="event.reactions.angryBy.length>0" class="reaction reaction-angry" ></span>
-                      <span *ngIf="(event.reactions.angryBy.length+event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length==0)" class="reaction reaction-like" ></span>
-                      
-                      <span  class="ks-amount ks-amount-reactions">{{event.reactions.angryBy.length +event.reactions.hahaBy.length+event.reactions.likeBy.length+event.reactions.loveBy.length+event.reactions.sadBy.length+event.reactions.wowBy.length}}</span>
-                    </span>
-                  </div>
-                  <!--
-                  <div class="ks-likes-block">
-                    <div class="ks-users">
-                      <a href="#" class="ks-user">
-                        <img class="ks-avatar" src="assets/img/avatars/avatar-1.jpg" width="26" height="26">
-                      </a>
-                      <a href="#" class="ks-user">
-                        <img class="ks-avatar" src="assets/img/avatars/avatar-7.jpg" width="26" height="26">
-                      </a>
-                      <a href="#" class="ks-user">
-                        <img class="ks-avatar" src="assets/img/avatars/avatar-11.jpg" width="26" height="26">
-                      </a>
-                      <a href="#" class="ks-user">
-                        <img class="ks-avatar" src="assets/img/avatars/avatar-2.jpg" width="26" height="26">
-                      </a>
-                      <a href="#" class="ks-user">
-                        <img class="ks-avatar" src="assets/img/avatars/avatar-6.jpg" width="26" height="26">
-                      </a>
-                    </div>
-                    <span class="ks-text">and 103 other like this</span>
-                  </div>
-                  <div class="ks-comments">
-                  </div>
-                  -->
-                </div>
-              </article>
-            </ng-container>  
-            <ngb-pagination *ngIf="collectionSize" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="1" [maxSize]="5" [boundaryLinks]="true" size="lg" (pageChange)="onPageChange($event)"></ngb-pagination>
-          </section>
-          <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-            <!-- Filter Form -->
-            <app-filter-form [inputType]="'seeEvents'"></app-filter-form>
-          </aside>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

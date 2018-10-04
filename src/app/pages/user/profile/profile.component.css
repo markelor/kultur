@@ -1,3 +1,21 @@
 .img-thumbnail {
     background: black;
 }
+
+.btn-select {
+    width: 40vw;
+}
+
+@media (max-width: 450px) {
+    .btn-select {
+        width: 60vw;
+    }
+}
+
+.btn-upload {
+    width: 150px;
+}
+
+.centered {
+    text-align: -webkit-center;
+}
