@@ -9,7 +9,7 @@ import { PlaceService } from '../../../services/place.service';
 import { ObservableService } from '../../../services/observable.service';
 import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { FileUploaderService} from '../../../services/file-uploader.service';
-import { TitleValidator,LatitudeValidator,LongitudeValidator } from '../../../validators';
+import { LatitudeValidator,LongitudeValidator } from '../../../validators';
 import { Service } from '../../../class/service';
 import { Place } from '../../../class/place';
 import { Subscription } from 'rxjs/Subscription';
@@ -116,8 +116,7 @@ export class ServiceFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(35),
-        Validators.minLength(3),
-        TitleValidator.validate
+        Validators.minLength(3)
       ])],
       description: ['', Validators.compose([
         Validators.required,

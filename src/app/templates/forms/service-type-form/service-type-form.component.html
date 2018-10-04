@@ -15,7 +15,6 @@
         <!-- Validation -->
         <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
-        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
       </div>
     </div>
     <!-- File upload start-->

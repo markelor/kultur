@@ -257,6 +257,17 @@ module.exports = (router) => {
       if (!req.body.userId) {
         res.json({ success: false, message: eval(language + '.userEvents.userIdProvidedError') }); // Return error
       } else {
+        if (req.body.filters.$and) {
+          if(req.body.filters.$and[0]){
+            req.body.filters.$and[0].$or[0].start.$gte = isodate(req.body.filters.$and[0].$or[0].start.$gte);
+            req.body.filters.$and[0].$or[1].end.$gte = isodate(req.body.filters.$and[0].$or[1].end.$gte);
+          }
+          if(req.body.filters.$and[1]){
+            req.body.filters.$and[1].$or[0].end.$lte = isodate(req.body.filters.$and[1].$or[0].end.$lte);
+            req.body.filters.$and[1].$or[1].start.$lte = isodate(req.body.filters.$and[1].$or[1].start.$lte);
+          }
+          
+        }
         if (req.body.filters.categoryId) {
           for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
             req.body.filters.categoryId.$in[i] = ObjectId(req.body.filters.categoryId.$in[i]);
@@ -368,9 +379,16 @@ module.exports = (router) => {
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
-      if (req.body.filters.$or) {
-        req.body.filters.$or[0].createdBy = ObjectId(req.body.filters.$or[0].createdBy);
-        req.body.filters.$or[1].translation.$elemMatch.createdBy = ObjectId(req.body.filters.$or[1].translation.$elemMatch.createdBy);
+      if (req.body.filters.$and) {
+        if(req.body.filters.$and[0]){
+          req.body.filters.$and[0].$or[0].start.$gte = isodate(req.body.filters.$and[0].$or[0].start.$gte);
+          req.body.filters.$and[0].$or[1].end.$gte = isodate(req.body.filters.$and[0].$or[1].end.$gte);
+        }
+        if(req.body.filters.$and[1]){
+          req.body.filters.$and[1].$or[0].end.$lte = isodate(req.body.filters.$and[1].$or[0].end.$lte);
+          req.body.filters.$and[1].$or[1].start.$lte = isodate(req.body.filters.$and[1].$or[1].start.$lte);
+        }
+        
       }
       if (req.body.filters.categoryId) {
         for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
@@ -381,12 +399,6 @@ module.exports = (router) => {
         for (var i = 0; i < req.body.filters.placeId.$in.length; i++) {
           req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
         }
-      }
-      if (req.body.filters.start) {
-        req.body.filters.start.$gte = isodate(req.body.filters.start.$gte);
-      }
-      if (req.body.filters.end) {
-        req.body.filters.end.$lte = isodate(req.body.filters.end.$lte);
       }
       //$gte: new Date()
       Event.aggregate([ // Join with Place table

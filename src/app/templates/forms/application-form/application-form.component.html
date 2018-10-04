@@ -9,7 +9,6 @@
         <!-- Validation -->
         <span *ngIf="title.errors?.required && title.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="title.errors?.minlength && title.dirty || title.errors?.maxlength && title.dirty " class="help-block form-error" translate>{{'validation.title-length'}}</span>
-        <span *ngIf="title.errors?.validateTitle && title.dirty" class="help-block form-error" translate>{{'validation.title-validation'}}</span>
       </div>
     </div>
     <!-- Entity -->
@@ -20,7 +19,6 @@
        <!-- Validation -->
         <span *ngIf="entityName.errors?.required && entityName.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="entityName.errors?.minlength && entityName.dirty || entityName.errors?.maxlength && entityName.dirty " class="help-block form-error" translate>{{'validation.entityName-length'}}</span>
-        <span *ngIf="entityName.errors?.validateTitle && entityName.dirty" class="help-block form-error" translate>{{'validation.entityName-validation'}}</span>
       </div>
     </div>
     <!-- File upload start-->

@@ -19,29 +19,12 @@ let titleLengthChecker = (title) => {
     }
 };
 
-// Validate Function to check if valid title format
-let alphaNumericTitleChecker = (title) => {
-    // Check if title exists
-    if (!title) {
-        return false; // Return error
-    } else {
-        // Regular expression to test for a valid title
-        const regExp = new RegExp(/^[A-zÀ-ÖØ-öø-ÿ\s]+$/);
-        return regExp.test(title); // Return regular expression test results (true or false)
-    }
-};
-
 // Array of Title Validators
 const titleValidators = [
     // First Title Validator
     {
         validator: titleLengthChecker,
         message: '.validation.titleLength'
-    },
-    // Second Title Validator
-    {
-        validator: alphaNumericTitleChecker,
-        message: '.validation.titleValid'
     }
 ];
 

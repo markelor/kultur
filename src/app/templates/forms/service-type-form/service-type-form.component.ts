@@ -8,7 +8,6 @@ import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { FileUploaderService} from '../../../services/file-uploader.service';
 import { FileUploader,FileUploaderOptions,FileItem } from 'ng2-file-upload';
-import { TitleValidator } from '../../../validators';
 import { ServiceType } from '../../../class/service-type';
 import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { Subscription } from 'rxjs/Subscription';
@@ -62,8 +61,7 @@ export class ServiceTypeFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(35),
-        Validators.minLength(3),
-        TitleValidator.validate
+        Validators.minLength(3)
       ])]
     })
     this.title = this.form.controls['title'];

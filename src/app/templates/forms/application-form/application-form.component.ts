@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 //import { ApplicationModalComponent } from './application-modal/application-modal.component';
 import { ObservableService } from '../../../services/observable.service';
-import { TitleValidator } from '../../../validators';
 import { Application } from '../../../class/application';
 import { Subject } from 'rxjs/Subject';
 import { FileUploaderService} from '../../../services/file-uploader.service';
@@ -126,14 +125,12 @@ export class ApplicationFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30),
-        Validators.minLength(5),
-        TitleValidator.validate
+        Validators.minLength(5)
       ])],
       entityName: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(35),
-        Validators.minLength(5),
-        TitleValidator.validate
+        Validators.minLength(5)
       ])],
       moderator: [''],
       contributor: [''],

@@ -1,7 +1,7 @@
 import { Component, OnInit,ElementRef,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder,FormArray, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { TitleValidator,LatitudeValidator,LongitudeValidator,DateValidator } from '../../../validators';
+import { LatitudeValidator,LongitudeValidator,DateValidator } from '../../../validators';
 import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
 import { EventService } from '../../../services/event.service';
@@ -173,8 +173,7 @@ export class EventFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(30),
-        Validators.minLength(5),
-        TitleValidator.validate
+        Validators.minLength(5)
       ])],
       categories: this.fb.array([ this.createItem('') ]),
       participant: ['', Validators.compose([

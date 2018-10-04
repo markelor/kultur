@@ -19,18 +19,6 @@ let titleLengthChecker = (title) => {
     }
 };
 
-// Validate Function to check if valid title format
-let alphaNumericTitleChecker = (title) => {
-    // Check if title exists
-    if (!title) {
-        return false; // Return error
-    } else {
-        // Regular expression to test for a valid title
-        const regExp = new RegExp(/^[A-zÀ-ÖØ-öø-ÿ\s]+$/);
-        return regExp.test(title); // Return regular expression test results (true or false)
-    }
-};
-
 // Array of Title Validators
 const titleValidators = [
     // First Title Validator
@@ -38,11 +26,6 @@ const titleValidators = [
         validator: titleLengthChecker,
         message: '.validation.titleLength'
     },
-    // Second Title Validator
-    {
-        validator: alphaNumericTitleChecker,
-        message: '.validation.titleValid'
-    }
 ];
 // Validate Function to check application name length
 let nameLengthChecker = (name) => {
@@ -59,17 +42,6 @@ let nameLengthChecker = (name) => {
     }
 };
 
-// Validate Function to check if valid name format
-let alphaNumericNameChecker = (name) => {
-    // Check if name exists
-    if (!name) {
-        return false; // Return error
-    } else {
-        // Regular expression to test for a valid name
-        const regExp = new RegExp(/^[a-zA-Z0-9 ]+$/);
-        return regExp.test(name); // Return regular expression test results (true or false)
-    }
-};
 
 // Array of Name Validators
 const nameValidators = [
@@ -77,11 +49,6 @@ const nameValidators = [
     {
         validator: nameLengthChecker,
         message: '.validation.nameLength'
-    },
-    // Second Name Validator
-    {
-        validator: alphaNumericNameChecker,
-        message: '.validation.nameValid'
     }
 ];
 // Validate Function to check description length

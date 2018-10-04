@@ -232,13 +232,51 @@ export class FilterFormComponent  {
     }
   }
   private getEvents() {
-    var filtersEvent={
+    /*var filtersEvent={
       start:{
         $gte:new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute)
       },
       end:{
         $lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute)
       }
+    }*/
+
+  
+      //db.things.find({$and: [{$or : [{'a':1},{'b':2}]},{$or : [{'a':2},{'b':3}]}] })
+
+
+    var filtersEvent={     
+      $and: [
+        {
+          $or : [
+            {
+              start:{
+                $gte:new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute)
+              }
+            },
+            {
+              end:{
+                $gte:new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeEnd.hour,this.timeEnd.minute)
+              }
+            }
+          ]
+        },
+        {
+          $or : [
+            {
+              end:{
+                $lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute)
+              }
+            },
+            {
+              start:{
+                $lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day+1,this.timeEnd.hour,this.timeEnd.minute)
+              }
+            }
+          ]
+        }
+      ] 
+      // start:{$lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute)}      
     }
     var filtersPlace={}
     this.categoriesTree=[];

@@ -7,7 +7,7 @@ import { ObservationService } from '../../../services/observation.service';
 import { ObservableService } from '../../../services/observable.service';
 import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { FileUploaderService} from '../../../services/file-uploader.service';
-import { TitleValidator,LatitudeValidator,LongitudeValidator } from '../../../validators';
+import { LatitudeValidator,LongitudeValidator } from '../../../validators';
 import { Observation } from '../../../class/observation';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -96,8 +96,7 @@ export class ObservationFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(35),
-        Validators.minLength(3),
-        TitleValidator.validate
+        Validators.minLength(3)
       ])],
       description: ['', Validators.compose([
         Validators.required,

@@ -8,7 +8,6 @@ import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { FileUploaderService} from '../../../services/file-uploader.service';
 import { FileUploader,FileUploaderOptions,FileItem } from 'ng2-file-upload';
-import { TitleValidator } from '../../../validators';
 import { Category } from '../../../class/category';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
@@ -63,8 +62,7 @@ export class CategoryFormComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.maxLength(35),
-        Validators.minLength(3),
-        TitleValidator.validate
+        Validators.minLength(3)
       ])],
       description: ['', Validators.compose([
         Validators.required,
