@@ -104,7 +104,7 @@
     <div class="col-sm-12">
       <div class="form-group required">
         <label for="inputPrice" translate>{{'application-form.price'}}</label>
-        <input [formControl]="price" (keyup)="searchPrice.next($event.target.value)" type="number" class="form-control" id="inputPrice">
+        <input [formControl]="price" (keyup)="searchPrice.next($event.target.value)" type="number" min="0" class="form-control" id="inputPrice">
       </div>
     </div>
   </div>

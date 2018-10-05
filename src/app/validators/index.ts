@@ -7,4 +7,5 @@ export * from './password.validator';
 export * from './equalPasswords.validator';
 export * from './latitude.validator';
 export * from './longitude.validator';
+export * from './price.validator';
 

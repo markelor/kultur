@@ -1,4 +1,5 @@
 import { Component, OnInit,Injectable,Input,Output,EventEmitter } from '@angular/core';
+import { PriceValidator } from '../../../validators';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { LocalizeRouterService } from 'localize-router';
@@ -140,6 +141,7 @@ export class ApplicationFormComponent implements OnInit {
       condition: [''],
       price: ['', Validators.compose([
         Validators.required,
+        PriceValidator.validate
       ])],
       expiredAt: ['', Validators.compose([
         Validators.required/*,DateValidator.validate*/

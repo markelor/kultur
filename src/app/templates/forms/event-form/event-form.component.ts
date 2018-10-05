@@ -1,7 +1,7 @@
 import { Component, OnInit,ElementRef,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder,FormArray, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { LatitudeValidator,LongitudeValidator,DateValidator } from '../../../validators';
+import { LatitudeValidator,LongitudeValidator,DateValidator,PriceValidator } from '../../../validators';
 import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
 import { EventService } from '../../../services/event.service';
@@ -161,8 +161,7 @@ export class EventFormComponent implements OnInit {
         { responsivePriority: 1, targets: 0 },
         { responsivePriority: 4, targets: 1 },
         { responsivePriority: 3, targets: 2 },
-        { responsivePriority: 5, targets: 3 },
-        { responsivePriority: 2, targets: 4 }
+        { responsivePriority: 2, targets: 3 }
       ]
     };
   }
@@ -199,7 +198,10 @@ export class EventFormComponent implements OnInit {
       end: ['', Validators.compose([
         Validators.required/*,DateValidator.validate*/
       ])],
-      price: [''],
+      price: ['', Validators.compose([
+        Validators.required,
+        PriceValidator.validate
+      ])],
        lat: ['', Validators.compose([
         Validators.required,LatitudeValidator.validate
       ])],

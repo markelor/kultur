@@ -20,9 +20,9 @@
           </a>
           <!-- BEGIN NAVBAR LANGUAGES -->
           <div *ngIf="eventsSearch" class="ks-wrapper-search ks-scrollable search-container">
-            <a *ngFor="let event of eventsSearch" href="javascript:void(0);" class="dropdown-item ks-message">
+            <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" class="dropdown-item ks-message">
               <div class="ks-avatar">
-                <img *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" class="clip-circle">
+                <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" class="clip-circle">
               </div>
               <div class="ks-info">
                 <div class="ks-user-name">{{event.title}}</div>

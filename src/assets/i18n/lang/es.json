@@ -249,6 +249,7 @@
     "about-yourself-length": "Máximo de caracteres: 500.",
     "title-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
     "title-validation": "El título no debe tener caracteres especiales.",
+    "price-validation": "Máximo de decimales: 2.",
     "coordinator-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
     "coordinator-validation": "El coordinador no debe tener caracteres especiales.",
     "latitude-validation": "Inserte la latitud en formato decimal.",
@@ -308,13 +309,5 @@
     "edit": "Editar",
     "cancel": "Cancelar",
     "manage": "Gestionar"
-  },
-  "dates":
-  {
-    "month":
-    {
-      "short": ["Urt", "Ots", "Mar", "Api", "Mai", "Eka", "Uzt", "Abu", "Ira", "Urr", "Aza", "Abe"],
-      "long": ["Urtarrila", "Otsaila", "Martxoa", "Apirila", "Maiatza", "Ekaina", "Uztaila", "Abuztua", "Iraila", "Urria", "Azaroa", "Abendua"]
-    }
   }
 }

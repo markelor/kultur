@@ -248,6 +248,7 @@
     "about-yourself-length": "Gehienezko karaktereak: 500.",
     "title-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
     "title-validation": "Tituluak ezin du karaktere berezirik izan.",
+    "price-validation": "Gehienezko hamartarrak: 2.",
     "coordinator-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
     "coordinator-validation": "Koordinatzaileak ezin du karaktere berezirik izan.",
     "latitude-validation": "Sar ezazu latitudea hamartar formatuan.",
@@ -307,42 +308,5 @@
     "edit": "Aldatu",
     "cancel": "Ezeztatu",
     "manage": "Kudeatu"
-  },
-  "dates":
-  {
-    "month":
-    {
-      "short":
-      {
-        "1": "Urt",
-        "2": "Ots",
-        "3": "Mar",
-        "4": "Api",
-        "5": "Mai",
-        "6": "Eka",
-        "7": "Uzt",
-        "8": "Abu",
-        "9": "Ira",
-        "10": "Urr",
-        "11": "Aza",
-        "12": "Abe"
-      },
-      "long":
-      {
-        "1": "Urtarrila",
-        "2": "Ots",
-        "3": "Mar",
-        "4": "Api",
-        "5": "Mai",
-        "6": "Eka",
-        "7": "Uzt",
-        "8": "Abu",
-        "9": "Ira",
-        "10": "Urr",
-        "11": "Aza",
-        "12": "Abe"
-      }
-    }
   }
-
 }

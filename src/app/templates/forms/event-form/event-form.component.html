@@ -14,8 +14,11 @@
     <!-- Price -->
     <div class="col-sm-3 col-xs-4">
       <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
-        <label for="inputPrice" translate>{{'application-form.price'}}</label>
-        <input [formControl]="price" type="number" class="form-control" id="inputPrice">
+        <label for="inputPrice" translate>{{'application-form.price'}} </label>
+        <input [formControl]="price" type="number" [value]="0" min="0" class="form-control" id="inputPrice">
+        <!-- Validation -->
+         <span *ngIf="price.errors?.required && price.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="price.errors?.validatePrice && price.dirty" class="help-block form-error" translate>{{'validation.price-validation'}}</span>
       </div>
     </div>
     <!-- Category -->
@@ -92,7 +95,6 @@
               <th translate>{{'event-form.preview'}}</th>
               <th translate>{{'event-form.name'}}</th>
               <th translate>{{'event-form.size'}}</th>
-              <th translate>{{'event-form.status'}}</th>
               <th translate>{{'event-form.delete'}}</th>
             </tr>
           </thead>
@@ -106,11 +108,6 @@
               </td>
               <td><strong>{{ item?.file?.name }}</strong></td>
               <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-              <td class="text-center">
-                <span *ngIf="item.isSuccess"><i class="ion-checkmark-round"></i></span>
-                <span *ngIf="item.isCancel"><i class="fa fa-exclamation-triangle"></i></span>
-                <span *ngIf="item.isError"><i class="ion-close-round"></i></span>
-              </td>
               <td nowrap>
                 <button *ngIf="!disableUploader" type="button" class="btn btn-danger btn-xs .table-btn" (click)="item.remove()">
                   <span class="fa fa-trash" translate></span>

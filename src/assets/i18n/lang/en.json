@@ -245,6 +245,7 @@
     "about-yourself-length": "Maximum characters: 500.",
     "title-length": "Minimum characters: 5, Maximum characters: 35.",
     "title-validation": "Title must not have any special characters.",
+    "price-validation": "Maximum de decimals: 2.",
     "coordinator-length": "Minimum characters: 5, Maximum characters: 35.",
     "coordinator-validation": "Coordinator must not have any special characters.",
     "latitude-validation": "Insert latitude in decimal format.",
