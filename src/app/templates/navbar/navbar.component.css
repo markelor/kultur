@@ -31,6 +31,7 @@
   -webkit-border-radius: 2px;
   border-radius: 2px;
   overflow: hidden;
+  left:-85px;
 }
 
 .show>.search-container {

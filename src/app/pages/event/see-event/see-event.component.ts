@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
 import { ObservableService } from '../../../services/observable.service';
@@ -28,6 +28,14 @@ export class SeeEventComponent implements OnInit {
   private allReactions;
   private existReactionAndUsernames;
   public currentUrl;
+  public screenHeight=0;
+  public screenWidth=0;
+  @HostListener('window:resize', ['$event'])
+    onResize(event?) {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+  }
+
   constructor(
   @Inject(PLATFORM_ID) private platformId: Object,
   private meta: Meta,
@@ -69,11 +77,16 @@ export class SeeEventComponent implements OnInit {
     this.meta.addTag({ property: 'og:image', content: image});
   }
   private initializeGalleryOptions(){
-    this.galleryOptions = [
-      { thumbnails: false },
-      { breakpoint: 500, "width": "100%", "height": "100%" }
-      
-  ];
+    if(this.screenWidth>450){
+      this.galleryOptions = [
+        { thumbnails: false, width: (this.screenWidth*0.75)+"px", height: "300px" },
+      ];
+    }else{
+      this.galleryOptions = [
+        { thumbnails: false, width: (this.screenWidth*0.70)+"px", height: "200px" },
+      ];
+
+    }
 
   }
   private initializeGalleryImages(){
@@ -259,6 +272,7 @@ export class SeeEventComponent implements OnInit {
 
 
   ngOnInit() {
+    this.onResize();
     this.getEvent();
     this.initializeGalleryOptions();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {

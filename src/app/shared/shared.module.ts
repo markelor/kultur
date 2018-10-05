@@ -36,6 +36,7 @@ import { FormArrayPipe} from './pipes/form-array.pipe';
 import { TranslateLanguagePipe} from './pipes/translate-language.pipe';
 import { HtmlTextPipe} from './pipes/html-text.pipe';
 import { TranslateCountPipe} from './pipes/translate-count.pipe';
+import { HowLongPipe} from './pipes/how-long.pipe';
 @NgModule({
   imports: [
     CommonModule
@@ -76,7 +77,8 @@ import { TranslateCountPipe} from './pipes/translate-count.pipe';
     FormArrayPipe,
     TranslateLanguagePipe,
     HtmlTextPipe,
-    TranslateCountPipe
+    TranslateCountPipe,
+    HowLongPipe
   ],
   exports: [
     TouchspinDirective,
@@ -113,7 +115,8 @@ import { TranslateCountPipe} from './pipes/translate-count.pipe';
     FormArrayPipe,
     TranslateLanguagePipe,
     HtmlTextPipe,
-    TranslateCountPipe
+    TranslateCountPipe,
+    HowLongPipe
   ]
 })
 export class SharedModule { }
