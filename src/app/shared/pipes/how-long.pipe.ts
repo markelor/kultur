@@ -27,7 +27,6 @@ export class HowLongPipe implements PipeTransform {
        yeartxt="urte";
     }
     var dayName=moment(date).locale(locale).tz("Europe/Madrid").format('dddd');
-    console.log(date,now,minDiff,hoursDiff,daysDiff)
     if(hoursDiff<1){
       result=
         {

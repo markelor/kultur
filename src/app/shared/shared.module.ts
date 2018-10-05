@@ -22,7 +22,6 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { SpacePipe } from './pipes/space.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
-import { PipesPipe } from './pipes.pipe';
 import { EventCategoryPipe } from './pipes/event-category.pipe';
 import { TimezonePipe } from './pipes/timezone.pipe';
 import { CompareDatePipe } from './pipes/compare-date.pipe';
@@ -36,11 +35,8 @@ import { FormArrayPipe} from './pipes/form-array.pipe';
 import { TranslateLanguagePipe} from './pipes/translate-language.pipe';
 import { HtmlTextPipe} from './pipes/html-text.pipe';
 import { TranslateCountPipe} from './pipes/translate-count.pipe';
-<<<<<<< HEAD
 import { ImageMarginPipe} from './pipes/image-margin.pipe';
-=======
 import { HowLongPipe} from './pipes/how-long.pipe';
->>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
 @NgModule({
   imports: [
     CommonModule
@@ -68,7 +64,6 @@ import { HowLongPipe} from './pipes/how-long.pipe';
     OrderByPipe,
     SpacePipe,
     CapitalizePipe,
-    PipesPipe,
     EventCategoryPipe,
     TimezonePipe,
     CompareDatePipe,
@@ -82,11 +77,9 @@ import { HowLongPipe} from './pipes/how-long.pipe';
     TranslateLanguagePipe,
     HtmlTextPipe,
     TranslateCountPipe,
-<<<<<<< HEAD
-    ImageMarginPipe
-=======
+    ImageMarginPipe,
     HowLongPipe
->>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
+
   ],
   exports: [
     TouchspinDirective,
@@ -124,11 +117,8 @@ import { HowLongPipe} from './pipes/how-long.pipe';
     TranslateLanguagePipe,
     HtmlTextPipe,
     TranslateCountPipe,
-<<<<<<< HEAD
-    ImageMarginPipe
-=======
+    ImageMarginPipe,
     HowLongPipe
->>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
   ]
 })
 export class SharedModule { }
