@@ -278,11 +278,11 @@ module.exports = (router) => {
             req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
           }
         }
-        if (req.body.filters.start) {
-          req.body.filters.start.$gte = isodate(req.body.filters.start.$gte);
+        if(req.body.filters.title){
+          req.body.filters.title.$regex=new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
         }
-        if (req.body.filters.end) {
-          req.body.filters.end.$lte = isodate(req.body.filters.end.$lte);
+        if(req.body.filters.price){
+          req.body.filters.price.$lte=Number(req.body.filters.price.$lte);
         }
         req.body.filters.$or=[{ createdBy: ObjectId(req.body.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.body.userId) } } }];
 
@@ -399,6 +399,12 @@ module.exports = (router) => {
         for (var i = 0; i < req.body.filters.placeId.$in.length; i++) {
           req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
         }
+      }
+      if(req.body.filters.title){
+        req.body.filters.title.$regex=new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
+      }
+      if(req.body.filters.price){
+        req.body.filters.price.$lte=Number(req.body.filters.price.$lte);
       }
       //$gte: new Date()
       Event.aggregate([ // Join with Place table

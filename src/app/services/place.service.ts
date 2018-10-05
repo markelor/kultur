@@ -31,4 +31,26 @@ export class PlaceService {
   public getGeonamesJson(geonameType,language,name){
     return this.http.get<any>('assets/json/'+geonameType+'/'+language+'/'+name+'.json');     
   }
+  public placesGeonameIdFilterSearchTitle(title: Observable<string>,filters,language) {
+    return title.debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(search => this.getPlacesGeonameIdTitleFilter(title,filters,language));
+  }
+  public placesGeonameIdFilterSearchPrice(price: Observable<string>,filters,language) {
+    return price.debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(search => this.getPlacesGeonameIdPriceFilter(price,filters,language));
+  }
+  // Function to get events title from the database
+  public getPlacesGeonameIdTitleFilter(title,filters,language) {
+    var data = {'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'place/getPlacesGeonameId',data);
+
+  }
+  // Function to get events price from the database
+  public getPlacesGeonameIdPriceFilter(price,filters,language) {
+    var data = {'filters': filters, 'language': language };
+    return this.http.post<any>(this.domain + 'place/getPlacesGeonameId',data);
+    
+  }
 }

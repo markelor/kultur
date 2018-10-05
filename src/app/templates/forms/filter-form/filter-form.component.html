@@ -1,5 +1,12 @@
-<form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
+<form [formGroup]="form" class="form-horizontal">
   <div class="row">
+      <!-- Title -->
+    <div class="col-sm-12">
+      <div class="form-group required">
+        <label for="inputTitle" translate>{{'event-form.title'}}</label>
+        <input [formControl]="title" (keyup)="searchTitle.next($event.target.value)" capitalize type="text" class="form-control" id="inputTitle">
+      </div>
+    </div>
     <!-- Category -->
     <div formArrayName="categories" class="col-sm-12">
       <label for="selectCategory" translate>{{'event-form.category'}}</label>
@@ -54,7 +61,7 @@
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
         <label for="inputStart" translate>{{'event-form.start'}}</label>
         <div class="input-group icon">
-          <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
+          <input [formControl]="start" ngbDatepicker #calendarStart="ngbDatepicker" (dateSelect)="onDateSelect($event)" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputStart">
           <div class="input-group-append ">
             <button (click)="calendarStart.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
               <span class="la la-calendar ks-icon"></span>
@@ -72,7 +79,7 @@
       <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
         <label for="inputEnd" translate>{{'event-form.end'}}</label>
         <div class="input-group icon">
-          <input [formControl]="end" ngbDatepicker #calendarEnd="ngbDatepicker" type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputEnd">
+          <input [formControl]="end" ngbDatepicker #calendarEnd="ngbDatepicker" (dateSelect)="onDateSelect($event)"  type="text" class="form-control ks-placeholder-mask-input" placeholder="yyyy-mm-dd" id="inputEnd">
           <div class="input-group-append ">
             <button (click)="calendarEnd.toggle()" type="button" class="btn btn-success ks-light ks-no-text">
               <span class="la la-calendar ks-icon"></span>
@@ -97,13 +104,7 @@
     <div class="col-sm-12">
       <div class="form-group required">
         <label for="inputPrice" translate>{{'application-form.price'}}</label>
-        <input [formControl]="price" type="number" class="form-control" id="inputPrice">
-      </div>
-    </div>
-    <!-- Submit Button -->
-    <div class="col-sm-12">
-      <div class="form-group text-center">
-        <button [disabled]="!form.valid || (end.value | compareDate:timeEnd :start.value:timeStart)" type="submit" class="btn btn-default btn-auth" translate>{{'event-form.send'}}</button>
+        <input [formControl]="price" (keyup)="searchPrice.next($event.target.value)" type="number" class="form-control" id="inputPrice">
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@ import { AuthGuard} from '../../../pages/guards/auth.guard';
 import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date'
 import { NgbDatepickerI18n, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs/Subject';
 const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
 //const URL = 'fileUploader/uploadImages/category-icon';
 const I18N_VALUES = {
@@ -64,6 +65,7 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 export class FilterFormComponent  {  
   @Input() inputType:string;
   public form:FormGroup;
+  public title:AbstractControl;
   public category:AbstractControl;
   private events;
   private startTimestamp;
@@ -84,7 +86,10 @@ export class FilterFormComponent  {
   private categoriesTree=[];
   private geonameIdProvince;
   private geonameIdMunicipality;
-
+  private filtersEvent;
+  private filtersPlace={};
+  public searchTitle = new Subject<string>();
+  public searchPrice = new Subject<string>();
   private hoveredDate: NgbDate;
 
   private fromDate: NgbDate;
@@ -116,6 +121,11 @@ export class FilterFormComponent  {
   // Function to create new event form
   private createNewFilterForm() {
     this.form = this.fb.group({
+      title: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.minLength(5)
+      ])],
       categories: this.fb.array([ this.createItem('') ]),
       province: [''],
       municipality: [''],
@@ -127,6 +137,7 @@ export class FilterFormComponent  {
       ])],
       price: ['']
     })
+    this.title = this.form.controls['title'];
     this.province = this.form.controls['province'];
     this.municipality = this.form.controls['municipality'];
     this.start = this.form.controls['start'];
@@ -186,20 +197,28 @@ export class FilterFormComponent  {
   public onSelectedProvince(index){
     if (index===-1){
       this.form.get('municipality').disable(); // Disable municipality field
+      this.filtersPlace={};
+      this.getEvents();
     }else{
       this.form.get('municipality').enable(); // Enable municipality field
       this.placeService.getGeonamesJson('municipality',this.localizeService.parser.currentLang,this.provincesEvent[index].toponymName.toLowerCase()).subscribe(municipalitiesEvent => {
         this.geonameIdProvince=this.provincesEvent[index].geonameId;
         this.municipalitiesEvent=municipalitiesEvent.geonames;
+        if(this.form.get('province').value){
+          this.filtersPlace["province.geonameId"]=this.geonameIdProvince;
+        }
+        this.getEvents();
       });
     }
     this.form.controls['municipality'].setValue("");
-    this.getEvents();
   }
   // Function on seleccted event municipality
   public onSelectedMunicipality(index){
     if(index!==-1){  
       this.geonameIdMunicipality=this.municipalitiesEvent[index].geonameId;
+      if(this.form.get('municipality').value){
+        this.filtersPlace["municipality.geonameId"]=this.geonameIdMunicipality;
+      }
     }
     this.getEvents();
   }
@@ -231,21 +250,62 @@ export class FilterFormComponent  {
       }    
     }
   }
-  private getEvents() {
-    /*var filtersEvent={
-      start:{
-        $gte:new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute)
-      },
-      end:{
-        $lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute)
+
+  public filterValues(dataPlaces){
+    this.categoriesTree=[];
+    if(this.categoryId[this.categoryId.length-1]){
+      this.categoriesTree.push(this.categoryId[this.categoryId.length-1]);
+      this.findCategory(this.categoryId[this.categoryId.length-1]);
+      this.filtersEvent["categoryId"]= { $in:this.categoriesTree };
+    }
+    this.filtersEvent["title"]={$regex: this.form.get('title').value};
+    //this.filtersEvent["price"]=null;
+    if(this.form.get('price').value){
+      this.filtersEvent["price"]={$lte: this.form.get('price').value};
+    }else{
+      delete this.filtersEvent["price"];
+    }
+    if(dataPlaces.success){
+      var placesId=[];
+      for (var i = 0; i < dataPlaces.places.length; ++i) {
+        placesId.push(dataPlaces.places[i]._id);
       }
-    }*/
-
-  
-      //db.things.find({$and: [{$or : [{'a':1},{'b':2}]},{$or : [{'a':2},{'b':3}]}] })
-
-
-    var filtersEvent={     
+      this.filtersEvent["placeId"]= { $in:placesId };
+    }
+    if(this.inputType==="editEvents"){
+      this.eventService.getUserEvents(this.authService.user.id,this.filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
+        if(dataEvents.success){
+          this.events = dataEvents.events;
+          this.observableService.eventsEvent="edit-events";
+          this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
+        }
+      });
+    }else{
+      this.eventService.getEvents(this.filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
+        if(dataEvents.success){
+          this.events = dataEvents.events;
+          var count=0;
+          var exists=false; 
+          if(this.inputType==="seeEvents"){
+            this.observableService.eventsEvent="see-events";
+            this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
+          }else if(this.inputType==="map"){
+            for (var i = 0; i < this.events.length; ++i) {
+              exists=true;
+              this.events[i].selectedCategory=this.categoryId[this.categoryId.length-1];
+              this.observableService.notifyOther({option: this.observableService.mapEvents, value: this.events[i],count:count,exists:exists});     
+              count=count+1;
+            }
+            if(!exists){
+              this.observableService.notifyOther({option: this.observableService.mapEvents, value: [],count:count,exists:exists});
+            }
+          } 
+        } 
+      });
+    }
+  }
+  private getEvents() {
+    this.filtersEvent={     
       $and: [
         {
           $or : [
@@ -278,68 +338,12 @@ export class FilterFormComponent  {
       ] 
       // start:{$lte:new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute)}      
     }
-    var filtersPlace={}
-    this.categoriesTree=[];
-    if(this.categoryId[this.categoryId.length-1]){
-      this.categoriesTree.push(this.categoryId[this.categoryId.length-1]);
-      this.findCategory(this.categoryId[this.categoryId.length-1]);
-      filtersEvent["categoryId"]= { $in:this.categoriesTree };
-    }
-    if(this.form.get('province').value){
-      filtersPlace["province.geonameId"]=this.geonameIdProvince;
-    }
-    if(this.form.get('municipality').value){
-      filtersPlace["municipality.geonameId"]=this.geonameIdMunicipality;
-    }
-     //
-    if(this.form.get('price').value){
-      filtersEvent["price"]={ $lte:this.form.get('price').value };
-    }
-    this.placeService.getPlacesGeonameId(filtersPlace,this.localizeService.parser.currentLang).subscribe(dataPlaces => {
-      if(dataPlaces.success){
-        var placesId=[];
-        for (var i = 0; i < dataPlaces.places.length; ++i) {
-          placesId.push(dataPlaces.places[i]._id);
-        }
-        filtersEvent["placeId"]= { $in:placesId };
-      }
-      if(this.inputType==="editEvents"){
-        this.eventService.getUserEvents(this.authService.user.id,filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
-          if(dataEvents.success){
-            this.events = dataEvents.events;
-            if(this.inputType==="editEvents"){
-              this.observableService.eventsEvent="edit-events";
-              this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
-            }  
-          }
-        });
-      }else{
-        this.eventService.getEvents(filtersEvent,this.localizeService.parser.currentLang).subscribe(dataEvents => {
-          if(dataEvents.success){
-            this.events = dataEvents.events;
-            var count=0;
-            var exists=false; 
-            if(this.inputType==="seeEvents"){
-              this.observableService.eventsEvent="see-events";
-              this.observableService.notifyOther({option: this.observableService.eventsEvent,value: this.events});
-            }else if(this.inputType==="map"){
-              for (var i = 0; i < this.events.length; ++i) {
-                exists=true;
-                this.events[i].selectedCategory=this.categoryId[this.categoryId.length-1];
-                this.observableService.notifyOther({option: this.observableService.mapEvents, value: this.events[i],count:count,exists:exists});     
-                count=count+1;
-              }
-              if(!exists){
-                this.observableService.notifyOther({option: this.observableService.mapEvents, value: [],count:count,exists:exists});
-              }
-            }   
-          }
-        });
-      }
+    this.placeService.getPlacesGeonameId(this.filtersPlace,this.localizeService.parser.currentLang).subscribe(dataPlaces => {
+      this.filterValues(dataPlaces);
     });
   }
 
-  onDateSelection(date: NgbDate) {
+  /*onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
@@ -360,9 +364,19 @@ export class FilterFormComponent  {
 
   isRange(date: NgbDate) {
     return true;//date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
-  }
-  public onEventSubmit(){
+  }*/
+  public onDateSelect(event){
     this.getEvents();
+  }
+  private eventFilterSearchTitle(){
+    this.placeService.placesGeonameIdFilterSearchTitle(this.searchTitle,this.filtersPlace,this.localizeService.parser.currentLang).subscribe(dataPlaces=>{
+      this.filterValues(dataPlaces);
+    });
+  }
+  private eventFilterSearchPrice(){
+    this.placeService.placesGeonameIdFilterSearchPrice(this.searchPrice,this.filtersPlace,this.localizeService.parser.currentLang).subscribe(dataPlaces=>{
+      this.filterValues(dataPlaces);     
+    });
   }
   ngOnInit() {
     var defaultStart=new Date();
@@ -373,11 +387,13 @@ export class FilterFormComponent  {
     this.getProvinces();
     this.getCategories();
     this.getEvents();
+    this.eventFilterSearchTitle();
+    this.eventFilterSearchPrice();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;
         this.categoryId=[];
         this.categoriesTree=[];
-         this.createNewFilterForm();
+        this.createNewFilterForm();
         this.getProvinces();
         this.getCategories();
     }); 
