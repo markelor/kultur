@@ -172,6 +172,7 @@
     "municipality": "Municipio",
     "lat": "Latitud",
     "lng": "Longitud",
+    "coordinates": "Coordenadas",
     "check": "Comprobar",
     "locations-exists": "Localización existente",
     "location": "Localización",
@@ -224,10 +225,10 @@
   "comment":
   {
     "leave-comment": "Escribe un comentario.",
-    "delete": "Delete",
-    "edit": "Edit",
-    "reply": "Reply",
-    "hide-replies": "Hide Replies",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "reply": "Responder",
+    "hide-replies": "Ocutar respuestas",
     "deleted": "Eliminado",
     "deleted-text": "El usuario ha eliminado el comentario."
   },

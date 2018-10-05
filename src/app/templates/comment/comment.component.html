@@ -11,20 +11,20 @@
             <div class="ks-name">
               <a *ngIf="!comment.deleted" href="javascript:void(0);">{{comment.user.username}}</a>
               <a *ngIf="comment.deleted" href="javascript:void(0);" translate>{{'comment.deleted'}}</a>
-              <span class="ks-time">{{comment.createdAt | timezone}}</span>
+              <span class="ks-time">{{(comment.createdAt | howLongPipe:localizeService.parser.currentLang).howlong}}</span>
             </div>
             <div *ngIf="!comment.deleted" [innerHTML]="comment.comment" class="ks-message"></div>
             <div *ngIf="comment.deleted" class="ks-message" translate>{{'comment.deleted-text'}}</div>
             <div class="ks-controls">
-              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control">Reply</a>
-              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.user.username===authService.user.username" (click)="editComment(comment)" class="ks-control">Edit</a>
-              <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.user.username===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control">Delete</a>
-              <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">Hide Replies</a>
+              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control" translate>{{'comment.reply'}}</a>
+              <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.user.username===authService.user.username" (click)="editComment(comment)" class="ks-control" translate>{{'comment.edit'}}</a>
+              <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.user.username===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control" translate>{{'comment.delete'}}</a>
+              <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control" translate>{{'comment.hide-replies'}}</a>
               <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">View 36 Replies</a>
               <a href="javascript:void(0);" *ngIf="authService.user && comment.deleted && comment.user.username===authService.user.username" (click)="recoverComment(comment)" class="ks-control">Berreskuratu</a>
             </div>
           </div>
-        </div> 
+        </div>
         <div *ngIf="comment.level!==0" class="ks-replies">
           <div class="ks-reply">
             <a href="javascript:void(0);" class="ks-avatar">
@@ -35,21 +35,21 @@
               <div class="ks-name">
                 <a *ngIf="!comment.deleted" href="javascript:void(0);">{{comment.user.username}}</a>
                 <a *ngIf="comment.deleted" href="javascript:void(0);" translate>{{'comment.deleted'}}</a>
-                <span class="ks-time">{{comment.createdAt | timezone}}</span>
+                <span class="ks-time">{{(comment.createdAt | howLongPipe:localizeService.parser.currentLang).howlong}}</span>
               </div>
-              <div *ngIf="!comment.deleted"[innerHTML]="comment.comment" class="ks-message"></div>
+              <div *ngIf="!comment.deleted" [innerHTML]="comment.comment" class="ks-message"></div>
               <div *ngIf="comment.deleted" class="ks-message" translate>{{'comment.deleted-text'}}</div>
               <div class="ks-controls">
-                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control">Reply</a>
-                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.user.username===authService.user.username" (click)="editComment(comment)" class="ks-control">Edit</a>
-                <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.user.username===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control">Delete</a>
-                <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">Hide Replies</a>
+                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted" (click)="addReply(comment)" class="ks-control" translate>{{'comment.reply'}}</a>
+                <a href="javascript:void(0);" *ngIf="authService.user && !comment.deleted && comment.user.username===authService.user.username" (click)="editComment(comment)" class="ks-control" translate>{{'comment.edit'}}</a>
+                <a href="javascript:void(0);" *ngIf="authService.user  && !comment.deleted && comment.user.username===authService.user.username" (click)="deleteComment(comment,i)" class="ks-control" translate>{{'comment.delete'}}</a>
+                <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control" translate>{{'comment.hide-replies'}}</a>
                 <a href="javascript:void(0);" *ngIf="!comment.deleted" class="ks-control">View 36 Replies</a>
-                 <a href="javascript:void(0);" *ngIf="authService.user && comment.deleted && comment.user.username===authService.user.username" (click)="recoverComment(comment)" class="ks-control">Berreskuratu</a>
+                <a href="javascript:void(0);" *ngIf="authService.user && comment.deleted && comment.user.username===authService.user.username" (click)="recoverComment(comment)" class="ks-control">Berreskuratu</a>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
         <!-- Comment Edit Form -->
         <form *ngIf="editId===comment._id" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
           <div class="ks-new-comment">
@@ -59,13 +59,13 @@
               <!-- Validation -->
               <span *ngIf="commentEdit.errors?.required && commentEdit.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
               <span *ngIf="commentEdit.errors?.maxlength && commentEdit.dirty " class="help-block form-error" translate>{{'validation.comment-length'}}</span>
-            </div>     
+            </div>
           </div>
           <div class="form-group text-center">
             <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'auth-form.sign-up'}}</button>
           </div>
         </form>
-      </ng-container>  
+      </ng-container>
     </ng-container>
   </div>
   <!-- Comment Form -->
@@ -77,11 +77,10 @@
         <!-- Validation -->
         <span *ngIf="comment.errors?.required && comment.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="comment.errors?.maxlength && comment.dirty " class="help-block form-error" translate>{{'validation.comment-length'}}</span>
-      </div>     
+      </div>
     </div>
     <div class="form-group text-center">
       <button [disabled]="!form.valid || submitted " type="submit" class="btn btn-default" translate>{{'auth-form.sign-up'}}</button>
     </div>
   </form>
- 
 </div>

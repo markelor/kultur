@@ -171,6 +171,7 @@
     "municipality": "Udalerria",
     "lat": "Latitudea",
     "lng": "Longitudea",
+    "coordinates": "Koordenatuak",
     "check": "Egiaztatau",
     "locations-exists": "Existitzen diren kokapenak",
     "location": "Kokapena",
@@ -223,10 +224,10 @@
   "comment":
   {
     "leave-comment": "Idatzi iruzkin bat.",
-    "delete": "Delete",
-    "edit": "Edit",
-    "reply": "Reply",
-    "hide-replies": "Hide Replies",
+    "delete": "Ezabatu",
+    "edit": "Aldatu",
+    "reply": "Erantzun",
+    "hide-replies": "Ezkutatu erantzunak",
     "deleted": "Ezabatuta",
     "deleted-text": "Erabiltzaileak iruzkina ezabatu du."
   },

@@ -36,7 +36,11 @@ import { FormArrayPipe} from './pipes/form-array.pipe';
 import { TranslateLanguagePipe} from './pipes/translate-language.pipe';
 import { HtmlTextPipe} from './pipes/html-text.pipe';
 import { TranslateCountPipe} from './pipes/translate-count.pipe';
+<<<<<<< HEAD
 import { ImageMarginPipe} from './pipes/image-margin.pipe';
+=======
+import { HowLongPipe} from './pipes/how-long.pipe';
+>>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
 @NgModule({
   imports: [
     CommonModule
@@ -78,7 +82,11 @@ import { ImageMarginPipe} from './pipes/image-margin.pipe';
     TranslateLanguagePipe,
     HtmlTextPipe,
     TranslateCountPipe,
+<<<<<<< HEAD
     ImageMarginPipe
+=======
+    HowLongPipe
+>>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
   ],
   exports: [
     TouchspinDirective,
@@ -116,7 +124,11 @@ import { ImageMarginPipe} from './pipes/image-margin.pipe';
     TranslateLanguagePipe,
     HtmlTextPipe,
     TranslateCountPipe,
+<<<<<<< HEAD
     ImageMarginPipe
+=======
+    HowLongPipe
+>>>>>>> 21e0d3c9019b30b4547cc425e7e59a714ee17490
   ]
 })
 export class SharedModule { }

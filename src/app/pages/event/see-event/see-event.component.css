@@ -1,4 +1,3 @@
-
 ngx-gallery /deep/ ngx-gallery-image {
   z-index: 0;
 }
@@ -34,8 +33,8 @@ ngx-gallery /deep/ ngx-gallery-image {
   cursor: pointer;
 }
 
-.facebook-reaction{
-  max-width:100%;
+.facebook-reaction {
+  max-width: 100%;
   /*margin:150px auto;
   padding:0 60px;*/
   position: relative;
@@ -52,6 +51,7 @@ ngx-gallery /deep/ ngx-gallery-image {
 .like-btn:hover {
   text-decoration: underline;
 }
+
 .comment-btn {
   font-weight: bold;
   color: #7f7f7f;
@@ -63,30 +63,35 @@ ngx-gallery /deep/ ngx-gallery-image {
 .comment-btn:hover {
   text-decoration: underline;
 }
+
 .like-btn-default {
   background-image: url('../../../../assets/img/reactions/facebook.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -277px -446px;
 }
+
 .comment-btn-default {
   background-image: url('../../../../assets/img/reactions/facebook.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -261px -446px;
 }
+
 .share-btn-default {
   background-image: url('../../../../assets/img/reactions/facebook.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -322px -446px;
 }
+
 .like-btn-emo {
   display: inline-block;
   margin: 0 0px -3px 0;
   width: 16px;
   height: 16px;
 }
+
 .comment-btn-emo {
   display: inline-block;
   margin: 0 0px -3px 0;
@@ -162,6 +167,7 @@ ngx-gallery /deep/ ngx-gallery-image {
   transition-delay: .25s;
   background-image: url('../../../../assets/img/reactions/reactions_angry.png');
 }
+
 /*Social*/
 .reaction-facebook {
   left: 10px;
@@ -183,7 +189,7 @@ ngx-gallery /deep/ ngx-gallery-image {
   transition-delay: .1s;
 }
 
-.reaction-telegram{
+.reaction-telegram {
   left: 242px;
   transition-delay: .15s;
 }
@@ -206,11 +212,13 @@ ngx-gallery /deep/ ngx-gallery-image {
     height: 48px;
     top: 60px;
   }
+
   48% {
     width: 56px;
     height: 56px;
     top: 5px;
-  } 
+  }
+
   100% {
     width: 48px;
     height: 48px;
@@ -265,7 +273,7 @@ ngx-gallery /deep/ ngx-gallery-image {
   opacity: 0;
   transition: opacity .2s ease-in-out 0s;
   -webkit-box-sizing: none !important;
-  box-sizing: none !important; 
+  box-sizing: none !important;
 }
 
 .reaction:hover::before {
@@ -277,47 +285,48 @@ ngx-gallery /deep/ ngx-gallery-image {
 }
 
 .reaction-love::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-haha::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-wow::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 
 .reaction-sad::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-angry::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-facebook::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-twitter::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
+
 .reaction-google::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-whats-up::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-telegram::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .reaction-pinterest::before {
-   content: attr(data-reaction);
+  content: attr(data-reaction);
 }
 
 .like-stat {
@@ -325,96 +334,117 @@ ngx-gallery /deep/ ngx-gallery-image {
 }
 
 
-.like-btn-like{
+.like-btn-like {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -17px -151px;
 }
 
-.like-btn-love{
+.like-btn-love {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: 0 -168px;
 }
 
-.like-btn-haha{
+.like-btn-haha {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: 0 -151px;
 }
 
-.like-btn-wow{
+.like-btn-wow {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -17px -185px;
 }
 
-.like-btn-sad{
+.like-btn-sad {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -17px -168px;
 }
 
-.like-btn-angry{
+.like-btn-angry {
   background-image: url('../../../../assets/img/reactions/reaction-small.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: -17px -117px;
 }
 
-.like-btn-text-like {
-  color:rgb(88, 144, 255);
-}
-.like-btn-text-wow,.like-btn-text-haha,.like-btn-text-sad {
-  color:rgb(240, 186, 21)
-}
-.like-btn-text-love{
-  color:rgb(242, 82, 104)
-}
-.like-btn-text-angry{
-  color:rgb(247, 113, 75);
-}
-
-.like-emo > span{
-    display: inline-block;
-    margin: 0 -3px -3px 0px;
-    width: 16px;
-    height: 16px;
-    /*border: 1px solid #EEE;*/
-    border-radius: 50%;
-
-}
-
-.like-details{
-  margin-left:10px;
-  color:#9197a3;
-  font-size:12px;
-}
-.ks-icon:hover {
-  /*color: #25628f;*/
-}
 .ks-icon {
-  /*color: #333;
-  font-size: 19px;
+  display: none;
+}
+
+
+.information {
+  display: block;
+}
+
+@media (min-width: 450px) {
+  .ks-icon {
+    display: contents;
+  }
+
+  .information {
+    display: inline-block;
+  }
+
+}
+
+.like-btn-text-like {
+  color: rgb(88, 144, 255);
+}
+
+.like-btn-text-wow,
+.like-btn-text-haha,
+.like-btn-text-sad {
+  color: rgb(240, 186, 21)
+}
+
+.like-btn-text-love {
+  color: rgb(242, 82, 104)
+}
+
+.like-btn-text-angry {
+  color: rgb(247, 113, 75);
+}
+
+.like-emo>span {
   display: inline-block;
-  margin-right: 1px;
-  position: relative;
-  top: 2px;*/
+  margin: 0 -3px -3px 0px;
+  width: 16px;
+  height: 16px;
+  /*border: 1px solid #EEE;*/
+  border-radius: 50%;
+
 }
+
+.like-details {
+  margin-left: 10px;
+  color: #9197a3;
+  font-size: 12px;
+}
+
 .sb-button {
-    margin: -0.1em;
+  margin: -0.1em;
 }
+
 /deep/ .tooltip.bottom .tooltip-arrow {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
+
 .reaction-names {
   display: block;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+}
+
+.ngx-gallery {
+  text-align: center;
 }

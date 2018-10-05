@@ -3,14 +3,16 @@
     <div class="ks-nav-body-wrapper">
       <div class="container-fluid ks-rows-section">
         <div class="row">
-          <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+          <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <article *ngIf="event" class="card panel ks-widget ks-widget-post">
               <h5 class="card-header">
                 <!--Title--> 
                 <span class="ks-text">{{event | translateLanguage:'title':localizeService.parser.currentLang}}</span>
               </h5>
               <div class="card-block">
-                <ngx-gallery *ngIf="galleryImages" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                <div class="ngx-gallery">
+                  <ngx-gallery *ngIf="galleryImages" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                </div>
                 <div class="ks-actions">
                   <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
                     <!--<span class="ks-amount">3Like</span>-->
@@ -20,7 +22,7 @@
                     <span class="like-btn"> <!-- Default like button -->
                         <span class="like-btn-emo like-btn-default"></span>
                     <!-- Default like button emotion-->
-                    <span (click)="deleteReaction()" class="ks-icon like-btn-text" translate>{{'event.like'}}</span>
+                    <span (click)="deleteReaction()" class="ks-icon" translate>{{'event.like'}}</span>
                     <!-- Default like button text,(Like, wow, sad..) default:Like  -->
                     <ul class="reactions-box">
                       <!-- Reaction buttons container-->
@@ -159,98 +161,81 @@
                 <br>
                 <h2 translate>{{'event.general-info'}}</h2>
                 <div *ngIf="event" class="row">
+                  <!--Dates-->
+                  <p *ngIf="event.start" class="col-sm-8">
+                    <span>
+                        <strong translate>{{'event-form.start'}}</strong>
+                        - 
+                        <strong translate>{{'event-form.end'}}</strong>: 
+                      </span>
+                    <span class="information">
+                      {{event.start | timezone}}
+                      |
+                  </span>
+                    <span class="information">
+                      {{event.end | timezone}}
+                  </span>
+                  </p>
+                  <!--Price info-->
+                  <p *ngIf="event.price" class="col-sm-4">
+                    <span>
+                        <strong translate>{{'application-form.price'}}</strong>: 
+                      </span>{{event.price}}€
+                  </p>
+                  <!--Location info-->
+                  <p class="col-sm-8">
+                    <span>
+                        <strong translate>{{'event-form.location'}}</strong>: 
+                      </span>
+                    <span class="information">
+                      {{event.place | translateLanguage:'province.name':localizeService.parser.currentLang}} 
+                      </span>
+                    <span class="information">
+                      - 
+                      {{event.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}
+                      </span>
+                    <span class="information">
+                      -
+                      {{event.place | translateLanguage:'location':localizeService.parser.currentLang}}
+                      </span>
+                  </p>
+                  <!--Coordinates info-->
+                    <p *ngIf="event.place.coordinates.lat" class="col-sm-4">
+                      <span>
+                        <strong translate>{{'event-form.coordinates'}}</strong>: 
+                      </span>
+                      <span class="information">
+                      {{event.place.coordinates.lat}}
+                      |
+                      </span>
+                      <span class="information">
+                      {{event.place.coordinates.lng}}
+                      </span>
+                    </p>
                   <!-- Category info-->
-                  <div class="col-sm-6">
-                    <p>
+                    <p class="col-sm-12">
                       <span>
                         <strong translate>{{'event-form.category'}}</strong>: 
                       </span>
                       <ng-container *ngFor="let category of categories">
-                        <span *ngIf="!category.firstParentId">{{category | translateLanguage:'title':localizeService.parser.currentLang}}</span>
-                        <span *ngIf="category.firstParentId">- {{category | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                        <span class="information" *ngIf="!category.firstParentId">- {{category | translateLanguage:'title':localizeService.parser.currentLang}}</span>
+                        <span class="information" *ngIf="category.firstParentId">{{category | translateLanguage:'title':localizeService.parser.currentLang}} </span>
                       </ng-container>
                     </p>
-                  </div>
                   <!--Participants info-->
-                  <div *ngFor="let participant of event.participants" class="col-sm-6">
-                    <p>
+                    <p *ngFor="let participant of event.participants" class="col-sm-12">
                       <span>
                         <strong translate>{{'event-form.participants'}}</strong>: 
                       </span>{{ participant }}
                     </p>
-                  </div>
-                  <!--Start-->
-                  <div class="col-sm-6">
-                    <p *ngIf="event.start">
-                      <span>
-                        <strong translate>{{'event-form.start'}}</strong>: 
-                      </span>{{event.start | timezone}}
-                    </p>
-                  </div>
-                  <!--End info-->
-                  <div class="col-sm-6">
-                    <p *ngIf="event.end">
-                      <span>
-                        <strong translate>{{'event-form.end'}}</strong>: 
-                      </span>{{event.end | timezone}}
-                    </p>
-                  </div>
-                  <!--Price info-->
-                  <div class="col-sm-12">
-                    <p *ngIf="event.price">
-                      <span>
-                        <strong translate>{{'application-form.price'}}</strong>: 
-                      </span>{{event.price}}€
-                    </p>
-                  </div>
-                  <!--Province info-->
-                  <div class="col-sm-6">
-                    <p>
-                      <span>
-                        <strong translate>{{'event-form.province'}}</strong>: 
-                      </span>{{event.place | translateLanguage:'province.name':localizeService.parser.currentLang}}
-                    </p>
-                  </div>
-                  <!--Municipality info-->
-                  <div class="col-sm-6">   
-                    <p>
-                      <span>
-                        <strong translate>{{'event-form.municipality'}}</strong>: 
-                      </span>{{event.place | translateLanguage:'municipality.name':localizeService.parser.currentLang}}
-                    </p>
-                  </div>
-                  <!--Location info-->
-                  <div class="col-sm-12"> 
-                    <p>
-                      <span>
-                        <strong translate>{{'event-form.location'}}</strong>: 
-                      </span>{{event.place | translateLanguage:'location':localizeService.parser.currentLang}}
-                    </p>
-                  </div>
-                  <!--Latitude info-->
-                  <div class="col-sm-6">
-                    <p *ngIf="event.place.coordinates.lat">
-                      <span>
-                        <strong translate>{{'event-form.lat'}}</strong>: 
-                      </span>{{event.place.coordinates.lat}}
-                    </p>
-                  </div>
-                  <!--Longitude info-->
-                  <div class="col-sm-6">
-                    <p *ngIf="event.place.coordinates.lng">
-                      <span>
-                        <strong translate>{{'event-form.lng'}}</strong>: 
-                      </span>{{event.place.coordinates.lng}}
-                    </p>
-                  </div>
                   <!--Description info-->
                   <div class="col-sm-12">
-                  <!--Description--> 
+                    <!--Description-->
                     <p>
                       <span>
                         <strong translate>{{'event-form.description'}}</strong>: 
                       </span>
-                      <span [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang"></span>
+                      <span [innerHTML]="event | translateLanguage:'description':localizeService.parser.currentLang" style="text-align: justify;"></span>
                     </p>
                   </div>
                   <!--Observations info-->
@@ -262,7 +247,7 @@
                     </p>
                   </div>
                 </div>
-                <div  class="col-sm-12">
+                <div class="col-sm-12">
                   <div class="form-group text-center">
                     <button (click)="showMap = !showMap" type="submit" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
                     <single-event-map [hidden]="!showMap"></single-event-map>
