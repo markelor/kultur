@@ -15,6 +15,9 @@ module.exports = (router) => {
     auth: {
       user: emailConfig.email,
       pass: emailConfig.password
+    },
+    tls: {
+      rejectUnauthorized: emailConfig.rejectUnauthorized
     }
   });
 
@@ -125,7 +128,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 1 get place coordinates error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -167,7 +170,7 @@ module.exports = (router) => {
         if (err) {
           // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
           var mailOptions = {
-            from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+            from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
             to: [emailConfig.email], // list of receivers
             subject: ' Find 1 get place coordinates error ',
             text: 'The following error has been reported in kulturekintzak: ' + err,

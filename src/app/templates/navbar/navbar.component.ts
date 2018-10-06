@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     private router:Router,
     private eventService:EventService,
     private commentService:CommentService,
-    private observableService:ObservableService,
+    private observableService:ObservableService
 	) {
     this.changeLanguage(this.localizeService.parser.currentLang);
     //console.log('ROUTES', this.localizeService.parser.routes);

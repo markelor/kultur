@@ -17,7 +17,7 @@
         <label for="inputPrice" translate>{{'application-form.price'}} </label>
         <input [formControl]="price" type="number" [value]="0" min="0" class="form-control" id="inputPrice">
         <!-- Validation -->
-         <span *ngIf="price.errors?.required && price.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
+        <span *ngIf="price.errors?.required && price.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="price.errors?.validatePrice && price.dirty" class="help-block form-error" translate>{{'validation.price-validation'}}</span>
       </div>
     </div>

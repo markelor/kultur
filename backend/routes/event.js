@@ -22,6 +22,9 @@ module.exports = (router) => {
     auth: {
       user: emailConfig.email,
       pass: emailConfig.password
+    },
+    tls: {
+      rejectUnauthorized: emailConfig.rejectUnauthorized
     }
   });
   var s3 = new aws.S3(configAws);
@@ -178,7 +181,7 @@ module.exports = (router) => {
                                   if (err) {
                                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                     var mailOptions = {
-                                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                                       to: [emailConfig.email], // list of receivers
                                       subject: ' Find 1 newEvent error ',
                                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -322,7 +325,7 @@ module.exports = (router) => {
               if (err) {
                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                 var mailOptions = {
-                  from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                   to: [emailConfig.email], // list of receivers
                   subject: ' Find 3 getEvent error ',
                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -452,7 +455,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 3 getEvent error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -537,7 +540,7 @@ module.exports = (router) => {
               if (err) {
                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                 var mailOptions = {
-                  from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                   to: [emailConfig.email], // list of receivers
                   subject: ' Find 3 getEvent error ',
                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -657,7 +660,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 edit event error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -706,7 +709,7 @@ module.exports = (router) => {
                     if (err) {
                       // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                       var mailOptions = {
-                        from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                        from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                         to: [emailConfig.email], // list of receivers
                         subject: ' Find one 2 edit event error ',
                         text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -757,7 +760,7 @@ module.exports = (router) => {
                               if (err) {
                                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                 var mailOptions = {
-                                  from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                                   to: [emailConfig.email],
                                   subject: ' Find one 3 edit event error ',
                                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -923,7 +926,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: ' Find 1 allThemes error ',
               text: 'The following error has been reported in the kulturekintzak: ' + err,
@@ -976,7 +979,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 delete event error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1002,7 +1005,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 2 delete event error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1042,7 +1045,7 @@ module.exports = (router) => {
                           if (err) {
                             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                             var mailOptions = {
-                              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find one and remove for delete event ',
                               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1114,7 +1117,7 @@ module.exports = (router) => {
                                 if (err) {
                                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                   var mailOptions = {
-                                    from: emailConfig.email,
+                                    from: "Kulturekintzak" +"<"+emailConfig.email+">",
                                     to: emailConfig.email,
                                     subject: 'Error delete images event',
                                     text: 'The following error has been reported in File Upload part: ' + 'Date:' + Date.now().toString() + err,
@@ -1187,7 +1190,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 1 addReactionEvent error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1215,7 +1218,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                       to: [emailConfig.email], // list of receivers
                       subject: ' Find one 2 addReactionEvent event error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1299,7 +1302,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: ' Find one 1 deleteReactionEvent error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1327,7 +1330,7 @@ module.exports = (router) => {
                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
 
                   var mailOptions = {
-                    from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                     to: [emailConfig.email], // list of receivers
                     subject: ' Find one 2 deleteReactionEvent error ',
                     text: 'The following error has been reported in kulturekintzak: ' + err,

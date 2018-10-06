@@ -20,6 +20,9 @@ module.exports = (router) => {
     auth: {
       user: emailConfig.email,
       pass: emailConfig.password
+    },
+    tls: {
+      rejectUnauthorized: emailConfig.rejectUnauthorized
     }
   });
   var s3 = new aws.S3(configAws);
@@ -134,7 +137,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 get observation error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -160,7 +163,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 2 get observation error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -189,7 +192,7 @@ module.exports = (router) => {
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
                           }
-                        } 
+                        }
                       }
                       //check saveError permision to save changes or not
                       if (saveErrorPermission) {
@@ -202,7 +205,7 @@ module.exports = (router) => {
                           if (err) {
                             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                             var mailOptions = {
-                              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find one 3 get observation error ',
                               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -254,7 +257,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
               to: [emailConfig.email],
               subject: ' Find one 1 get user observations error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -313,7 +316,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 edit observation error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -339,7 +342,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 1 edit observation error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -368,7 +371,7 @@ module.exports = (router) => {
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
                           }
-                        } 
+                        }
                       }
                       //check saveError permision to save changes or not
                       if (saveErrorPermission) {
@@ -379,7 +382,7 @@ module.exports = (router) => {
                           if (err) {
                             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                             var mailOptions = {
-                              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find one 3 edit observation error ',
                               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -474,7 +477,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Fred Foo 👻 <" + emailConfig.email + ">", // sender address
+                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 delete observation error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -500,7 +503,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 2 delete observation error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -528,8 +531,8 @@ module.exports = (router) => {
                           // Check if user making changes has access
                           if (user.permission === 'admin') {
                             saveErrorPermission = language + '.general.adminOneError';
-                          } 
-                        } 
+                          }
+                        }
                       }
                       //check saveError permision to save changes or not
                       if (saveErrorPermission) {
@@ -541,7 +544,7 @@ module.exports = (router) => {
                           if (err) {
                             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                             var mailOptions = {
-                              from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find 3 delete application error ',
                               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -567,7 +570,7 @@ module.exports = (router) => {
                                   if (err) {
                                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                     var mailOptions = {
-                                      from: "Fred Foo 👻" < +emailConfig.email + ">", // sender address
+                                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
                                       to: [emailConfig.email],
                                       subject: ' Find one and remove for delete observation ',
                                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -606,7 +609,7 @@ module.exports = (router) => {
                                         if (err) {
                                           // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                           var mailOptions = {
-                                            from: emailConfig.email,
+                                            from: "Kulturekintzak" +"<"+emailConfig.email+">",
                                             to: emailConfig.email,
                                             subject: 'Error delete images observation',
                                             text: 'The following error has been reported in File Upload part: ' + 'Date:' + Date.now().toString() + err,
