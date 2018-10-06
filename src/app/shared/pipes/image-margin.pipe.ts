@@ -9,8 +9,8 @@ export class ImageMarginPipe implements PipeTransform {
   transform(index: any): any { 
     var img=$('.ks-avatar img').get(index);
     $("img").one("load", function() {
-      var margin=((100-this.width)/2)+"px";
-      $(this).attr("style", "left:"+margin);
+      var margin=((40-this.width)/2)+"px";
+      $(this).attr("style", "left:"+margin+";visibility:visible;");
     }).each(function() {
     });
   }

@@ -229,7 +229,9 @@
     "reply": "Erantzun",
     "hide-replies": "Ezkutatu erantzunak",
     "deleted": "Ezabatuta",
-    "deleted-text": "Erabiltzaileak iruzkina ezabatu du."
+    "deleted-text": "Erabiltzaileak iruzkina ezabatu du.",
+    "hide-replies": "Ezkutatu erantzunak...",
+    "see-replies": "Ikusi erantzunak..."
   },
   "validation":
   {

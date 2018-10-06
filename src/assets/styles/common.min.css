@@ -8792,7 +8792,7 @@ h6 .badge {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 260px;
+  width: max-content;
   padding: 0 25px;
   margin: 0
 }
@@ -9888,7 +9888,7 @@ body.ks-sidebar-iconbar_compact .ks-navbar .navbar-brand {
   }
   .ks-navbar>.ks-wrapper>.nav .ks-navbar-menu.ks-open .ks-search-form {
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     left: 0;
     padding-left: 0;

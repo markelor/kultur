@@ -226,7 +226,9 @@
     "reply": "Reply",
     "hide-replies": "Hide Replies",
     "deleted": "Deleted",
-    "deleted-text": "The user has deleted the comment."
+    "deleted-text": "The user has deleted the comment.",
+    "hide-replies": "Hide replies...",
+    "see-replies": "See replies..."
   },
   "validation":
   {

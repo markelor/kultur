@@ -11,48 +11,7 @@
                                 </div>
                                 <div *ngIf="event.price!=0" class="ribbon ribbon-bottom-right">
                                     <span>{{event.price}} €</span>
-                                </div>
-                                <!-- header
-                                  <div class="card-header">
-                                  -->
-                                <!--Title
-                                    <div class="col-sm-7 col-xs-6">
-                                        <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
-                                    </div>-->
-                                <!-- Translation and view
-                                    <div class="col-sm-3 col-xs-3">
-                                        <span class="ks-text"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon view-event col-sm-4 col-xs-4"></i></span>
-                                        <div class="dropdown col-sm-8 col-xs-8">
-                                            <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <i class="la la-language" [ngClass]="event | translateCount"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right ks-scrollable" aria-labelledby="Preview">
-                                                <div class="ks-wrapper">
-                                                    <div *ngIf="event | hasBeenTranslatedPipe:'eu'" class="language-done"><span><i class="la la-language"></i>Euskara</span></div>
-                                                    <div *ngIf="event | hasBeenTranslatedPipe:'es'" class="language-done"><span><i class="la la-language"></i>Español</span></div>
-                                                    <div *ngIf="event | hasBeenTranslatedPipe:'en'" class="language-done"><span><i class="la la-language"></i>English</span></div>
-                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'eu')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Euskara</span></div>
-                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'es')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>Español</span></div>
-                                                    <div *ngIf="!(event | hasBeenTranslatedPipe:'en')" [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="language-pendant"><span><i class="la la-language"></i>English</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    -->
-                                <!-- showCollapse
-                                    <div class="ks-controls col-sm-2 col-xs-3">
-                                        <a *ngIf="!event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                                            <span class="ks-icon la la-minus"></span>
-                                        </a>
-                                        <a *ngIf="event.showCollapse" (click)="event.showCollapse = !event.showCollapse" class="ks-control">
-                                            <span class="ks-icon la la-expand"></span>
-                                        </a>
-                                        <a (click)="event.showAll = !event.showAll" class="ks-control">
-                                            <span class="ks-icon la la-close"></span>
-                                        </a>
-                                    </div>
-                                </div> HEADER
-                                    -->
+                                </div>                                
                                 <div *ngIf="!event.showCollapse" class="card-block">
                                     <!-- Date/Time -->
                                     <div class="event-datetime">
@@ -69,7 +28,7 @@
                                     </div>
                                     <!--Title -->
                                     <div class="col-sm-11 col-xs-10" style="padding:0;">
-                                        <span class="ks-text event-title col-xs-11"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                                        <span class="ks-text event-title col-xs-11" [routerLink]="['/event-route','see-route',event._id] | localize"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
                                         <span class="ks-text view-event col-xs-1"><i [routerLink]="['/event-route','see-route',event._id] | localize" class="la la-chevron-circle-right ks-icon"></i></span>
                                     </div>
                                     <!--Translate -->

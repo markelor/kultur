@@ -110,6 +110,7 @@ ngx-gallery /deep/ ngx-gallery-image {
   box-shadow: 1px 1px 2px #cccccc, -1px 0px 2px #eeeeee;
   border-radius: 44px 44px;
   display: none;
+  background-color: #e7f3ff;
 }
 
 .reaction {

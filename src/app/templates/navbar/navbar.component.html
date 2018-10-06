@@ -6,7 +6,7 @@
     <a class="ks-sidebar-toggle"><i class="ks-icon la la-bars" aria-hidden="true"></i></a>
     <a class="ks-sidebar-mobile-toggle"><i class="ks-icon la la-bars" aria-hidden="true"></i></a>
     <!-- END RESPONSIVE SIDEBAR TOGGLER -->
-    <div class="ks-navbar-logo"><a href="index.html" class="ks-logo"><img src="assets/img/logos/kultura.png" alt="Kultura.eus"></a></div>
+    <div class="ks-navbar-logo"><a href="index.html" class="ks-logo"><img class="logo-element" src="" alt="Kultura.eus"></a></div>
   </div>
   <!-- END LOGO -->
   <!-- BEGIN MENUS -->
@@ -22,7 +22,7 @@
           <div *ngIf="eventsSearch" class="ks-wrapper-search ks-scrollable search-container">
             <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" class="dropdown-item ks-message">
               <div class="ks-avatar">
-                <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" class="clip-circle">
+                <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" style="visibility:hidden;" class="clip-circle">
               </div>
               <div class="ks-info">
                 <div class="ks-user-name">{{event.title}}</div>

@@ -230,7 +230,9 @@
     "reply": "Responder",
     "hide-replies": "Ocutar respuestas",
     "deleted": "Eliminado",
-    "deleted-text": "El usuario ha eliminado el comentario."
+    "deleted-text": "El usuario ha eliminado el comentario.",
+    "hide-replies": "Ocultar respuestas...",
+    "see-replies": "Ver respuestas..."
   },
   "validation":
   {

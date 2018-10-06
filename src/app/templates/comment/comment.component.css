@@ -1,3 +1,160 @@
-.ks-comments-section{
-	padding:10px;
+.ks-comments-section {
+  padding: 0px;
+  border-color: transparent;
+}
+
+.ks-replies-box>span {
+  border: solid 1px #dbdbdb;
+  border-radius: 3px;
+  color: #858585;
+  background-color: #f2f2f2;
+  margin-left: 45px;
+  padding: 1px 7px 1px 7px;
+  font-size: 9pt;
+  cursor: pointer;
+}
+
+.ks-replies-box>span:hover {
+  background-color: #fff;
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 3px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies {
+  margin-left: 48px;
+  margin-top: 15px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  margin-bottom: 15px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply:last-child {
+  margin-bottom: 0
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-avatar {
+  margin-right: 12px;
+  width: 25px;
+  height: 25px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 3px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name>a {
+  color: #333;
+  font-size: 13px;
+  font-weight: 500
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name>.ks-time {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #858585
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-message {
+  font-size: 12px;
+  margin-bottom: 3px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-message>.ks-reply-to {
+  color: #333;
+  font-weight: 500
+}
+
+.ks-comments-section>.ks-comment>.ks-body>.ks-comment-box>.ks-controls>.ks-control {
+  color: #25628f;
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-controls>.ks-control {
+  color: #25628f;
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+@media (max-width: 450px) {
+  .ks-comments-section>.ks-comment>.ks-body>.ks-comment-box>.ks-controls>.ks-control>span {
+    display: none;
+  }
+
+  .ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-controls>.ks-control>span {
+    display: none;
+  }
+
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-controls>.ks-control:last-child {
+  margin-right: 0
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name>a {
+  color: #333;
+  font-size: 13px;
+  font-weight: 500
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-name>.ks-time {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #858585
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-message {
+  font-size: 12px;
+  margin-bottom: 3px
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-message>.ks-reply-to {
+  color: #333;
+  font-weight: 500
+}
+
+.ks-comments-section>.ks-comment>.ks-replies-box>.ks-replies>.ks-reply>.ks-reply-box>.ks-controls>.ks-control:last-child {
+  margin-right: 0
 }

@@ -15,6 +15,7 @@
 .event-title {
     padding-left: 70px;
     font-size: 30px;
+    cursor: pointer;
 }
 
 .event-datetime {

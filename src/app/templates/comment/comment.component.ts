@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { AuthGuard} from '../../pages/guards/auth.guard';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
-import { GroupByPipe } from '../../shared/pipes/group-by.pipe';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 declare let $: any;
 @Component({
@@ -40,8 +39,7 @@ export class CommentComponent implements OnInit {
   private commentService:CommentService,
   private router:Router,
   private activatedRoute: ActivatedRoute,
-  private authGuard:AuthGuard,
-  private groupByPipe:GroupByPipe
+  private authGuard:AuthGuard
   ) {
     this.createForm();  //Create Angular form when components load
   }
@@ -234,6 +232,7 @@ export class CommentComponent implements OnInit {
         this.createForm(); // Reset all form fields
         this.submitted = false; // Enable submit button
         this.comments=data.comments;
+        console.log(data.comments);
       }
     });
   }

@@ -11,17 +11,24 @@
 .ks-navbar .nav-item.show .search-container {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-  margin: 0;
   -webkit-border-top-left-radius: 0;
   border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
   border-top-right-radius: 0;
+  margin: 0;
+}
+
+@media (min-width: 1500px) {
+  .ks-navbar .nav-item.show .search-container {
+    margin: 12px 0 0 0;
+  }
 }
 
 .ks-navbar .dropdown .search-container {
   min-width: 230px;
   overflow: visible;
 }
+
 
 .dropdown .search-container {
   font-size: 12px;
@@ -31,8 +38,21 @@
   -webkit-border-radius: 2px;
   border-radius: 2px;
   overflow: hidden;
-  left:-85px;
 }
+
+
+@media (max-width: 800px) {
+  .ks-navbar .nav-item.show .search-container {
+    left: -205px;
+  }
+}
+@media (max-width: 600px) {
+  .ks-navbar .nav-item.show .search-container {
+    left: -101px;
+    max-width: 320px;
+  }
+}
+
 
 .show>.search-container {
   display: block;
@@ -107,6 +127,27 @@
   width: 15%;
 }
 
+
+.logo-element {
+  content: url(/assets/img/logos/kulturekintzak.png)
+}
+
+@media (max-width: 450px) {
+  .logo-element {
+    content: url(/assets/img/logos/k.png)
+  }
+
+  .navbar-brand {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .ks-navbar>.ks-wrapper>.nav .ks-navbar-menu.ks-open .ks-search-form .ks-search-close {
+    margin-left: 5px;
+  }
+}
+
 .description {
   display: box;
   -moz-box-orient: vertical;
@@ -124,8 +165,19 @@
 .clip-circle {
   clip-path: circle(25px at center);
   position: relative;
-  margin-left: -71%;
   height: 100%;
+  animation-name: come-in;
+  animation-duration: 0.7s;
+}
+
+@keyframes come-in {
+  from {
+    clip-path: circle(0px at center);
+  }
+
+  to {
+    clip-path: circle(25px at center);
+  }
 }
 
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu {
