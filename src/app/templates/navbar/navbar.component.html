@@ -20,7 +20,7 @@
           </a>
           <!-- BEGIN NAVBAR LANGUAGES -->
           <div *ngIf="eventsSearch" class="ks-wrapper-search ks-scrollable search-container">
-            <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" class="dropdown-item ks-message">
+            <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" [routerLink]="['/event-route','see-route',event._id] | localize" class="dropdown-item ks-message">
               <div class="ks-avatar">
                 <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" style="visibility:hidden;" class="clip-circle">
               </div>

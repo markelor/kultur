@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './see-event.component.html',
   styleUrls: ['./see-event.component.css']
 })
-export class SeeEventComponent implements OnInit {
+export class SeeEventComponent {
   private subscriptionLanguage: Subscription;
   public event;
   private categories;
@@ -30,6 +30,7 @@ export class SeeEventComponent implements OnInit {
   public currentUrl;
   public screenHeight=0;
   public screenWidth=0;
+  public navigationSubscription;
   @HostListener('window:resize', ['$event'])
     onResize(event?) {
       this.screenHeight = window.innerHeight;
@@ -49,7 +50,13 @@ export class SeeEventComponent implements OnInit {
   private bindContent:BindContentPipe,
   private activatedRoute: ActivatedRoute,
   private authGuard:AuthGuard,
-  private modalService:NgbModal) {
+  private modalService:NgbModal) {  
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+     // If it is a NavigationEnd event re-initalise the component
+     if (e instanceof NavigationEnd) {
+      this.initialize();
+     }
+    });
     this.translate.get('metatag.see-event-title').subscribe(
       data => {       
       this.metaTitle.setTitle(data);
@@ -234,7 +241,6 @@ export class SeeEventComponent implements OnInit {
     } 
   }
   private getEvent(){
-    this.currentUrl="http://localhost:4200"+this.router.url;
     this.eventService.getEvent(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
         this.event=data.event;
@@ -270,8 +276,7 @@ export class SeeEventComponent implements OnInit {
     //var editor=$("#textareaComment").froalaEditor('events.focus', true);
   }
 
-
-  ngOnInit() {
+  private initialize() {
     this.onResize();
     this.getEvent();
     this.initializeGalleryOptions();
@@ -283,6 +288,9 @@ export class SeeEventComponent implements OnInit {
   }
   ngOnDestroy(){
     this.subscriptionLanguage.unsubscribe();
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   } 
 }
 

@@ -359,6 +359,9 @@ export class ServiceFormComponent implements OnInit {
     imageAllowedTypes: ['jpeg', 'jpg', 'png','gif'],
     charCounterMax: 20000,
     imageUploadToS3: undefined,
+    videoUpload: false,
+    imageInsertButtons:['imageUpload','imageByURL'],
+    toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo']
   }
   public initializeFroala(initControls) {
     this.froalaEvent=initControls;

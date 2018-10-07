@@ -12,7 +12,7 @@ const routes: Routes = [
 	{ path: '', component: CreateEventComponent,canActivate:[UserGuard], pathMatch: 'full' },
 	{ path: 'create-route', component: CreateEventComponent,canActivate:[UserGuard] },	
 	{ path: 'manage-route', component: ManageEventsComponent,canActivate:[UserGuard] },	
-	{ path: 'see-route/:id', component: SeeEventComponent },
+	{ path: 'see-route/:id', component: SeeEventComponent,runGuardsAndResolvers: 'always' },
 	{ path: 'manage-route/edit-route/:id', component: EditEventComponent,canActivate:[UserGuard] }	
 
 ];

@@ -57,11 +57,8 @@ export class CommentComponent implements OnInit {
     this.commentEdit = this.formEdit.controls['commentEdit'];
   }
   public froalaOptions= {
-     fileUpload: false,
-     imageUpload: false,
-     imageInsertButtons:[],
-     videoUpload: false,
-     videoInsertButtons:[]
+    toolbarButtons: ['undo', 'redo' ,'insertLink','emoticons'],
+    pluginsEnabled: ['emoticons','link']
   }
   public initializeFroala(initControls) {
     initControls.initialize();
