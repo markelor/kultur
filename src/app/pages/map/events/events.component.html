@@ -12,9 +12,9 @@
                 <agm-snazzy-info-window [maxWidth]="500" [closeWhenOthersOpen]="true">
                   <ng-template>
                     <div id="iw-container">
-                      <div class="iw-title"><a href="">{{m.customInfo.event | translateLanguage:'title':localizeService.parser.currentLang}}</a><span class="datetime">{{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).year}}ko {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).month}} {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).dayNumber}} | {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).hour}}</span></div>
+                      <div [routerLink]="['/event-route','see-route',m.customInfo.event._id] | localize" class="iw-title"><a href="javascript:void(0);">{{m.customInfo.event | translateLanguage:'title':localizeService.parser.currentLang}}</a><span class="datetime">{{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).year}}ko {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).month}} {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).dayNumber}} | {{(m.customInfo.event.start | dateNamePipe:localizeService.parser.currentLang).hour}}</span></div>
                       <div class="iw-content">
-                        <div><img class="info-img" [src]="m.customInfo.event.images.poster[0].url" alt="{{m.customInfo.event | translateLanguage:'title':localizeService.parser.currentLang}}"></div>
+                        <div><img class="info-img" [src]="m.customInfo.event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang" alt="{{m.customInfo.event | translateLanguage:'title':localizeService.parser.currentLang}}"></div>
                         <div class="iw-description"  [innerHTML]="(m.customInfo.event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                       </div>
                       <div class="iw-bottom-gradient"></div>
