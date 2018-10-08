@@ -16,6 +16,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ReactionsModalComponent } from './see-event/reactions-modal/reactions-modal.component';
 import { HasBeenTranslatedPipe } from "../../shared/pipes/has-been-translated.pipe";
+import { TranslateLanguagePipe } from "../../shared/pipes/translate-language.pipe";
+import { HtmlTextPipe} from "../../shared/pipes/html-text.pipe";
 
 @NgModule({
   imports: [
@@ -23,7 +25,7 @@ import { HasBeenTranslatedPipe } from "../../shared/pipes/has-been-translated.pi
   ],
   declarations: [SeeEventComponent,CreateEventComponent, ManageEventsComponent,EditEventComponent,ReactionsModalComponent],
   providers: [
-   {provide: COMPOSITION_BUFFER_MODE, useValue: false},HasBeenTranslatedPipe
+   {provide: COMPOSITION_BUFFER_MODE, useValue: false},HasBeenTranslatedPipe,TranslateLanguagePipe,HtmlTextPipe
   ],
     entryComponents: [
       ReactionsModalComponent

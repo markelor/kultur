@@ -8,6 +8,8 @@ import { AuthGuard} from '../../guards/auth.guard';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { BindContentPipe } from '../../../shared/pipes/bind-content.pipe';
+import { TranslateLanguagePipe } from '../../../shared/pipes/translate-language.pipe';
+import { HtmlTextPipe } from '../../../shared/pipes/html-text.pipe';
 import { ReactionsModalComponent } from './reactions-modal/reactions-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
@@ -50,26 +52,17 @@ export class SeeEventComponent {
   private translate:TranslateService,
   private router:Router,
   private bindContent:BindContentPipe,
+  private translateLanguagePipe:TranslateLanguagePipe,
+  private htmlTextPipe:HtmlTextPipe,
   private activatedRoute: ActivatedRoute,
   private authGuard:AuthGuard,
-  private modalService:NgbModal) {  
+  private modalService:NgbModal,
+  ) {  
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
      // If it is a NavigationEnd event re-initalise the component
      if (e instanceof NavigationEnd) {
       this.initialize();
      }
-    });
-    this.translate.get('metatag.see-event-title').subscribe(
-      data => {       
-      this.metaTitle.setTitle(data);
-    });
-    this.translate.get('metatag.see-event-description').subscribe(
-      data => {         
-      this.meta.addTag({ name: 'description', content: data });
-    });
-     this.translate.get('metatag.see-event-keywords').subscribe(
-      data => {         
-      this.meta.addTag({ name: 'keywords', content: data });
     });
   }
   private addSocialMetaTags(title,description,image){
@@ -246,6 +239,9 @@ export class SeeEventComponent {
       if(data.success){
         this.event=data.event;
         this.event.reactionsUsernames=data.reactionsUsernames;
+        //Title and description meta tags
+        this.metaTitle.setTitle(this.translateLanguagePipe.transform(this.event,'title',this.localizeService.parser.currentLang));
+        this.meta.addTag({ name: 'description', content: this.htmlTextPipe.transform(this.translateLanguagePipe.transform(this.event,'description',this.localizeService.parser.currentLang)) });
         this.categories=data.categories;
         this.initializeGalleryImages();
         setTimeout(() => {
