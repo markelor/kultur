@@ -24,7 +24,7 @@
           </div>
         </div>
         <!-- Comment Edit Form -->
-        <form *ngIf="editId===comment._id" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
+        <form *ngIf="editId===comment._id && comment.level===0" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
           <div class="ks-new-comment">
             <!-- Comment Edit textarea -->
             <div class="form-group" [ngClass]="{'has-error': (!commentEdit.valid && commentEdit.dirty), 'has-success': (commentEdit.value && commentEdit.valid)}">
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="form-group text-center">
-            <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'auth-form.sign-up'}}</button>
+            <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'comment.save-changes'}}</button>
           </div>
         </form>
       </ng-container>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <!-- Comment Edit Form -->
-        <form *ngIf="editId===comment._id" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
+        <form *ngIf="editId===comment._id && comment.level!==0" [formGroup]="formEdit" (ngSubmit)="onSubmitEdit(comment)" class="form-container">
           <div class="ks-new-comment">
             <!-- Comment Edit textarea -->
             <div class="form-group" [ngClass]="{'has-error': (!commentEdit.valid && commentEdit.dirty), 'has-success': (commentEdit.value && commentEdit.valid)}">
@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="form-group text-center">
-            <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'comment.reply'}}</button>
+            <button [disabled]="!formEdit.valid || submittedEdit " type="submit" class="btn btn-default" translate>{{'comment.save-changes'}}</button>
           </div>
         </form>
       </ng-container>

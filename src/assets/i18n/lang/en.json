@@ -224,6 +224,7 @@
     "delete": "Delete",
     "edit": "Edit",
     "reply": "Reply",
+    "save-changes": "Save changes",
     "hide-replies": "Hide Replies",
     "deleted": "Deleted",
     "deleted-text": "The user has deleted the comment.",
