@@ -6,7 +6,7 @@
     <a class="ks-sidebar-toggle"><i class="ks-icon la la-bars" aria-hidden="true"></i></a>
     <a class="ks-sidebar-mobile-toggle"><i class="ks-icon la la-bars" aria-hidden="true"></i></a>
     <!-- END RESPONSIVE SIDEBAR TOGGLER -->
-    <div class="ks-navbar-logo"><a href="index.html" class="ks-logo"><img class="logo-element" src="" alt="Kultura.eus"></a></div>
+    <div class="ks-navbar-logo"><a href="javascript:void(0);" class="ks-logo"><img class="logo-element" src="" alt="kulturekintzak"></a></div>
   </div>
   <!-- END LOGO -->
   <!-- BEGIN MENUS -->
@@ -22,10 +22,10 @@
           <div *ngIf="eventsSearch" class="ks-wrapper-search ks-scrollable search-container">
             <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" [routerLink]="['/event-route','see-route',event._id] | localize" class="dropdown-item ks-message">
               <div class="ks-avatar">
-                <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" style="visibility:hidden;" class="clip-circle">
+                <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" alt="{{event | translateLanguage:'title':localizeService.parser.currentLang}}" style="visibility:hidden;" class="clip-circle">
               </div>
               <div class="ks-info">
-                <div class="ks-user-name">{{event.title}}</div>
+                <div class="ks-user-name">{{event | translateLanguage:'title':localizeService.parser.currentLang}}</div>
                   <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                 <div class="ks-datetime">{{event.start | timezone}}</div>
               </div>
@@ -90,7 +90,7 @@
                   <ng-container *ngFor="let groupComment of notificationComent.groupComments; let i=index">
                     <a *ngIf="i<20" href="javascript:void(0)" [routerLink]="['/event-route','see-route',groupComment.eventId] | localize"  class="ks-message">
                       <div class="ks-avatar ks-online">
-                        <img src="{{groupComment.user.currentAvatar}}" width="36" height="36">
+                        <img src="{{groupComment.user.currentAvatar}}" alt="{{groupComment.user.username}}" width="36" height="36">
                       </div>
                       <div class="ks-info">
                         <div class="ks-user-name">{{groupComment.createdBy}}</div>
@@ -110,7 +110,7 @@
         <div *ngIf="authService.user" class="nav-item dropdown ks-user">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <span class="ks-avatar">
-                <img *ngIf="authService.user.currentAvatar" [src]="authService.user.currentAvatar" width="36" height="36">
+                <img *ngIf="authService.user.currentAvatar" [src]="authService.user.currentAvatar" alt="authService.user.username" width="36" height="36">
             </span>
             <span class="ks-info">
                 <span class="ks-name">{{authService.user.username}}</span>

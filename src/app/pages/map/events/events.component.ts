@@ -98,11 +98,7 @@ export class EventsComponent  {
       lng: Number(data.place.coordinates.lng),
       customInfo: {
         icon: icon,
-        title:data.title,
-        start:data.start,
-        cretedBy:data.createdBy,
-        images:data.images.poster[0].url,
-        description:data.description
+        event:data
       },
       /*labelOptions: {
         color: '#CC0000',

@@ -1,4 +1,4 @@
-import { Component, OnInit, PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
+import { Component, PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
 import { ObservableService } from '../../../services/observable.service';
@@ -33,8 +33,10 @@ export class SeeEventComponent {
   public navigationSubscription;
   @HostListener('window:resize', ['$event'])
     onResize(event?) {
+    if (isPlatformBrowser(this.platformId)) {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
+    }  
   }
 
   constructor(
@@ -94,7 +96,6 @@ export class SeeEventComponent {
       ];
 
     }
-
   }
   private initializeGalleryImages(){
     var exists=false;
@@ -287,9 +288,11 @@ export class SeeEventComponent {
     });
   }
   ngOnDestroy(){
-    this.subscriptionLanguage.unsubscribe();
-    if (this.navigationSubscription) {  
-       this.navigationSubscription.unsubscribe();
+    if (isPlatformBrowser(this.platformId)) {
+      this.subscriptionLanguage.unsubscribe();
+      if (this.navigationSubscription) {  
+         this.navigationSubscription.unsubscribe();
+      }
     }
   } 
 }
