@@ -4,8 +4,8 @@
       <ng-container *ngFor="let comment of firstComments.groupComments">
         <div *ngIf="comment.level===0" class="ks-body">
           <a href="javascript:void(0);" class="ks-avatar">
-            <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" width="36" height="36">
-            <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" width="36" height="36">  
+            <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" alt="{{comment.user.username}}" width="36" height="36">
+            <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" alt="kulturekintzak-comment-deleted-default" width="36" height="36">  
           </a>
           <div class="ks-comment-box">
             <div class="ks-name">
@@ -46,8 +46,8 @@
         <div *ngIf="comment.level!==0" [hidden]="firstComments.groupComments[0]._id" class="ks-replies">
           <div class="ks-reply">
             <a href="javascript:void(0);" class="ks-avatar">
-              <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" width="25" height="25">
-              <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" width="25" height="25">
+              <img *ngIf="!comment.deleted" src="{{comment.user.currentAvatar}}" alt="{{comment.user.username}}" width="25" height="25">
+              <img *ngIf="comment.deleted" src="assets/img/defaults/deleted-comment.png" alt="kulturekintzak-comment-deleted-default" width="25" height="25">
             </a>
             <div class="ks-reply-box">
               <div class="ks-name">

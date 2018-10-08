@@ -48,8 +48,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-xs-4 post-image" style="padding:0;">
-                                        <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="ks-thumbnail img-responsive">
-                                        <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" class="ks-thumbnail img-responsive">
+                                        <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" alt="kulturekintzak-event-default" class="ks-thumbnail img-responsive">
+                                        <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" alt="{{event | translateLanguage:'title':localizeService.parser.currentLang}}" class="ks-thumbnail img-responsive">
                                     </div>
                                     <!--Description-->
                                     <div class="col-sm-8 col-xs-8">
