@@ -275,6 +275,7 @@ export class SeeEventComponent {
 
   private initialize() {
     this.onResize();
+    this.event=undefined;
     this.getEvent();
     this.initializeGalleryOptions();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
