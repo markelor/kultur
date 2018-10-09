@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
 		this.fileUploaderService.deleteProfileImage(this.authService.user.username,this.avatars[index].split("https://s3-eu-west-1.amazonaws.com/culture-bucket/user-profile/")[1],'user-profile',this.localizeService.parser.currentLang).subscribe(data=>{		
 			if(data.success){
 				this.avatars.splice(index,1);
-				this.observableService.notifyOther({option: this.observableService.avatarType,data:"assets/img/avatars/default-avatar.jpg"})
+				this.observableService.notifyOther({option: this.observableService.avatarType,data:"assets/img/default/default-avatar.png"})
 			}
 		})
 		

@@ -7,6 +7,13 @@ body {
   display: inline;
   margin-right: 0.5rem;
 }
+.auth-link{
+  color: #98ccff;
+}
+
+.custom-control-description{
+  color:#fff;
+}
 
 .ks-page {
   width: 100%;
@@ -89,10 +96,12 @@ body {
  /* min-height: 467px*/
 }
 
+.ks-page .ks-page-content .ks-panel.ks-confirm>.card-block>.ks-header,
 .ks-page .ks-page-content .ks-panel.ks-forgot-password>.card-block>.form-container>.ks-header,
 .ks-page .ks-page-content .ks-panel.ks-login>.card-block>.form-container>.ks-header,
 .ks-page .ks-page-content .ks-panel.ks-auth>.card-block>.form-container>.ks-header {
   margin-bottom: 20px;
+  color:#fff;
 }
 
 .ks-page .ks-page-content .ks-panel.ks-confirm>.card-block>.ks-header {
@@ -289,4 +298,13 @@ body {
 
 .form-group.has-success>.help-block.form-error {
     color: #5cb85c;
+}
+
+.ks-page>.ks-page-content>div.auth-card{
+  border-radius: 15px;
+}
+.auth-card>div{
+  text-align: center;
+  background-color: #0c58a2;
+  border-radius: 15px;
 }

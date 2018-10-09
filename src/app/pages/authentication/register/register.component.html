@@ -1,6 +1,6 @@
 <div class="ks-page">
     <div class="ks-page-content">
-        <div class="card panel panel-default ks-light ks-panel ks-signup ks-auth">
+        <div class="card panel panel-default ks-light ks-panel ks-signup ks-auth auth-card">
             <div class="card-block">
             	<!-- Registration Form -->
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
@@ -8,7 +8,8 @@
                     <div [ngClass]="messageClass">
                     {{message}}
                     </div>
-                    <h4 class="ks-header" translate>{{'auth-form.sign-up-title'}}</h4>
+                    <img src="assets/img/logos/kulturekintzak.png" alt="kulturekintzak">
+                    <h1 class="ks-header" translate>{{'auth-form.sign-up-title'}}</h1>
                     <!-- Name Input -->
                     <div class="form-group" [ngClass]="{'has-error': (!name.valid && name.dirty), 'has-success': name.valid}">
                         <div class="input-icon icon-left icon-lg icon-color-primary">
@@ -89,15 +90,18 @@
                           <input type="checkbox" (change)="changePrivacyPolicy($event)" class="custom-control-input">
                           <span class="custom-control-indicator"></span>
                         </label>
-                        <span (click)="staticModalShow()" class="custom-control-description" [innerHTML]="'auth-form.privacy-policy' | translate"></span>
+                        <span (click)="staticModalShow()" class="custom-control-description" [innerHTML]="'auth-form.accept' | translate">
+                        </span>
+                        <span (click)="staticModalShow()" class='auth-link' [innerHTML]="'auth-form.privacy-policy' | translate">
+                        </span>
                         <!-- Validation -->
                         <span *ngIf="privacyPolicy.value===false" class="help-block form-error" translate>{{'validation.required'}}</span>
                       </div>
                     <div class="form-group">
-                        <button [disabled]="!form.valid||submitted || !emailValid || !usernameValid" type="submit" class="btn btn-primary btn-block" translate>{{'auth-form.sign-up'}}</button>
+                        <button [disabled]="!form.valid||submitted || !emailValid || !usernameValid" type="submit" class="btn btn-success btn-block" translate>{{'auth-form.sign-up'}}</button>
                     </div>
                     <div class="ks-text-center">
-                        <a [routerLink]="['/sign-in-route'] | localize" translate>{{'auth-form.sign-up-sign-in-link'}}</a>
+                        <a class="auth-link" [routerLink]="['/sign-in-route'] | localize" translate>{{'auth-form.sign-up-sign-in-link'}}</a>
                     </div>
                 </form>
             </div>
