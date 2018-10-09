@@ -129,6 +129,27 @@
             </a>
           </div>
         </div>
+        <div *ngIf="!authService.user" class="nav-item dropdown ks-user">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="ks-avatar">
+              <img [src]="'/assets/img/avatars/default-avatar.jpg'" alt="authService.user.username" width="36" height="36">
+            </span>
+            <span class="ks-info">
+              <span class="ks-name" translate>{{'navbar.user'}}</span>
+                <!--<span class="ks-description">Premium User</span>-->
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Preview">
+            <a (click)="login()" class="dropdown-item" href="javascript:void(0);">
+              <span class="la la-sign-out ks-icon" aria-hidden="true"></span>
+              <span translate>{{'auth-form.sign-in'}}</span>
+            </a>
+            <a [routerLink]="['/sign-up-route'] | localize" class="dropdown-item" href="javascript:void(0);">
+              <span class="la la-sign-out ks-icon" aria-hidden="true"></span>
+              <span translate>{{'auth-form.sign-up'}}</span>
+            </a>
+          </div>
+        </div>
         <!-- END NAVBAR USER -->
       </div>
       <!-- END NAVBAR ACTIONS -->

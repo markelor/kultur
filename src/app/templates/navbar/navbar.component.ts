@@ -8,6 +8,7 @@ import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 import { ObservableService} from '../../services/observable.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthGuard} from '../../pages/guards/auth.guard';
 declare let $: any;
 @Component({
   selector: 'app-navbar',
@@ -32,7 +33,8 @@ export class NavbarComponent implements OnInit {
     private router:Router,
     private eventService:EventService,
     private commentService:CommentService,
-    private observableService:ObservableService
+    private observableService:ObservableService,
+    private authGuard:AuthGuard
 	) {
     this.changeLanguage(this.localizeService.parser.currentLang);
     //console.log('ROUTES', this.localizeService.parser.routes);
@@ -61,6 +63,10 @@ export class NavbarComponent implements OnInit {
   }
   public logout(){
     this.authService.logout();
+    this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]);
+  }
+  public login(){
+    //this.authGuard.redirectUrl=this.router.url;
     this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]);
   }
   private resizeWindow(){
@@ -117,9 +123,16 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {   
-    this.getAndChangeAvatar();
+    // Get authentication on page load
+    this.authService.getAuthentication(this.localizeService.parser.currentLang).subscribe(authentication => {
+      if(!authentication.success){
+        this.authService.logout();
+      }else{
+        this.getCommentsNotification();
+        this.getAndChangeAvatar();
+      }
+    });
     this.eventSearch();
-    this.getCommentsNotification();
   }
 
 }
