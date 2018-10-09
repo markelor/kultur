@@ -209,8 +209,8 @@ const userSchema = new Schema({
   temporaryToken: { type: String, required: true },
   resetToken: { type: String, required: false },
   permission: { type: String, required: true, default: 'user' },
-  currentAvatar: { type: String, required: true, default: 'assets/img/avatars/default-avatar.jpg' },
-  avatars: { type: Array, required: false },
+  currentAvatar: { type: String, required: true, default: 'assets/img/defaults/default-avatar.png' },
+  avatars: { type: Array, required: false, default: ['assets/img/defaults/default-avatar.png'] },
   privacityConsent: { type: Boolean, required: true },
   createdAt: { type: Date, required: true },
   updatedAt: { type: Date, required: true }

@@ -4,7 +4,7 @@
         <ul>
             <li *ngFor="let avatar of avatars; let i=index" class="ks-file">
                 <img (click)="selectedAvatar = i;" [ngClass]="{'img-thumbnail':selectedAvatar===i}" class="ks-thumb" src="{{avatar}}">
-                <a (click)="deleteAvatar(i)" class="ks-icon la la-trash"></a>
+                <a *ngIf="avatar.indexOf('assets/img/defaults')==-1" (click)="deleteAvatar(i)" class="ks-icon la la-trash"></a>
             </li>
         </ul>
     </div>

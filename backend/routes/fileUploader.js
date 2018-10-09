@@ -387,7 +387,7 @@ module.exports = (router) => {
 
                             }
                             user.avatars.splice(index, 1); // Assign avats to user
-                            user.currentAvatar = "assets/img/avatars/default-avatar.jpg";
+                            user.currentAvatar = "assets/img/defaults/default-avatar.png";
                             user.updatedAt = Date.now();
                             //check saveError permision to save changes or not
                             if (saveErrorPermission) {
