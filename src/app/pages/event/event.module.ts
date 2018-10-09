@@ -18,6 +18,7 @@ import { ReactionsModalComponent } from './see-event/reactions-modal/reactions-m
 import { HasBeenTranslatedPipe } from "../../shared/pipes/has-been-translated.pipe";
 import { TranslateLanguagePipe } from "../../shared/pipes/translate-language.pipe";
 import { HtmlTextPipe} from "../../shared/pipes/html-text.pipe";
+import { EventResolverComponent } from './see-event/event-resolver/event-resolver.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { HtmlTextPipe} from "../../shared/pipes/html-text.pipe";
   ],
   declarations: [SeeEventComponent,CreateEventComponent, ManageEventsComponent,EditEventComponent,ReactionsModalComponent],
   providers: [
-   {provide: COMPOSITION_BUFFER_MODE, useValue: false},HasBeenTranslatedPipe,TranslateLanguagePipe,HtmlTextPipe
+   {provide: COMPOSITION_BUFFER_MODE, useValue: false},HasBeenTranslatedPipe,TranslateLanguagePipe,HtmlTextPipe,EventResolverComponent
   ],
     entryComponents: [
       ReactionsModalComponent

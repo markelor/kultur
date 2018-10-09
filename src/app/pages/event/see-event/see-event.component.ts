@@ -40,7 +40,6 @@ export class SeeEventComponent {
       this.screenWidth = window.innerWidth;
     }  
   }
-
   constructor(
   @Inject(PLATFORM_ID) private platformId: Object,
   private meta: Meta,
@@ -102,7 +101,7 @@ export class SeeEventComponent {
             big: this.event.images.poster[0].url
           }
         ];
-        this.addSocialMetaTags(this.event.title,this.event.description,this.event.images.poster[0].url);
+        this.addSocialMetaTags(this.event.title,this.htmlTextPipe.transform(this.event.description),this.event.images.poster[0].url);
       }
     }else{
       for (var i = 0; i < this.event.translation.length; ++i) {
@@ -116,7 +115,7 @@ export class SeeEventComponent {
                 big: this.event.translation[i].images.poster[0].url
               }
             ];
-            this.addSocialMetaTags(this.event.translation[i].title,this.event.translation[i].description,this.event.translation[i].images.poster[0].url);
+            this.addSocialMetaTags(this.event.translation[i].title,this.htmlTextPipe.transform(this.event.translation[i].description),this.event.translation[i].images.poster[0].url);
           }
         }           
       }
@@ -129,7 +128,7 @@ export class SeeEventComponent {
             big:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'
         }
       ];
-      this.addSocialMetaTags(this.event.title,this.event.description,'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png');
+      this.addSocialMetaTags(this.event.title,this.htmlTextPipe.transform(this.event.description),'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png');
     }   
   }
   private addReaction(reaction){
@@ -235,24 +234,21 @@ export class SeeEventComponent {
     } 
   }
   private getEvent(){
-    this.eventService.getEvent(this.activatedRoute.snapshot.params['id'],this.localizeService.parser.currentLang).subscribe(data=>{
-      if(data.success){
-        this.event=data.event;
-        this.event.reactionsUsernames=data.reactionsUsernames;
-        //Title and description meta tags
-        this.metaTitle.setTitle(this.translateLanguagePipe.transform(this.event,'title',this.localizeService.parser.currentLang));
-        this.meta.addTag({ name: 'description', content: this.htmlTextPipe.transform(this.translateLanguagePipe.transform(this.event,'description',this.localizeService.parser.currentLang)) });
-        this.categories=data.categories;
-        this.initializeGalleryImages();
-        setTimeout(() => {
-          this.passCoordinates();
-          if (isPlatformBrowser(this.platformId)) {
-            this.initReactions();
-          }   
-        });
-      }
-
-    });
+    if(this.activatedRoute.snapshot.data.event.success){
+      this.event=this.activatedRoute.snapshot.data.event.event;
+      this.event.reactionsUsernames=this.activatedRoute.snapshot.data.event.reactionsUsernames;
+      //Title and description meta tags
+      this.metaTitle.setTitle(this.translateLanguagePipe.transform(this.event,'title',this.localizeService.parser.currentLang));
+      this.meta.addTag({ name: 'description', content: this.htmlTextPipe.transform(this.translateLanguagePipe.transform(this.event,'description',this.localizeService.parser.currentLang)) });
+      this.categories=this.activatedRoute.snapshot.data.event.categories;
+      this.initializeGalleryImages();
+      setTimeout(() => {
+        this.passCoordinates();
+        if (isPlatformBrowser(this.platformId)) {
+          this.initReactions();
+        }   
+      });
+    }
   }
    //reactions modal
 
@@ -275,9 +271,9 @@ export class SeeEventComponent {
 
   private initialize() {
     this.onResize();
+    this.initializeGalleryOptions();
     this.event=undefined;
     this.getEvent();
-    this.initializeGalleryOptions();
     this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.localizeService.parser.currentLang=event.lang;
       this.initializeGalleryImages();

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { Component, OnInit, Input,PLATFORM_ID, APP_ID, Inject,OnChanges } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { LocalizeRouterService } from 'localize-router';
 import { Comment } from '../../class/comment';
@@ -13,7 +13,7 @@ declare let $: any;
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.css'],
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit, OnChanges{
   public form:FormGroup;
   public comment:AbstractControl;
   public formEdit:FormGroup;
@@ -248,6 +248,9 @@ export class CommentComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.browser=true
     } 
+    this.getComments();
+  }
+  ngOnChanges() {
     this.getComments();
   }
 

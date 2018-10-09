@@ -91,7 +91,6 @@ app.get('/api/*', (req, res) => {
 
 // Server static files from /browser
 app.get('*.*', express.static(path.join(DIST_FOLDER, 'browser')));
-
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
   var seeArr = req.originalUrl.split('/');
@@ -107,8 +106,6 @@ app.get('*', (req, res) => {
   }else{  
     res.sendFile(path.join(path.join(DIST_FOLDER, 'browser','index.html')));
   }
-
- 
 });
 /*app.get('*', (req, res) => {
     res.sendFile(path.join(path.join(DIST_FOLDER, 'browser','index.html')));
