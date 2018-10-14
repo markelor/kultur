@@ -10,7 +10,7 @@ import { EditApplicationComponent } from './applications-administrator/edit-appl
 import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
-	{ path: '', component: UsersAdministratorComponent, pathMatch: 'full',canActivate:[AdminGuard] },
+	{ path: '', redirectTo: 'users-route', pathMatch: 'full' },
 	{ path: 'users-route', component: UsersAdministratorComponent,canActivate:[AdminGuard] },
 	{ path: 'events-route', component: EventsAdministratorComponent,canActivate:[AdminGuard] },
 	{ path: 'services-route', component: ServicesAdministratorComponent,canActivate:[AdminGuard] },

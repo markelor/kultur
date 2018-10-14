@@ -9,7 +9,7 @@ import { UserGuard } from '../guards/user.guard';
 import { ModeratorGuard } from '../guards/moderator.guard';
 import { EventResolverComponent } from './see-event/event-resolver/event-resolver.component';
 const routes: Routes = [
-	{ path: '', component: CreateEventComponent,canActivate:[UserGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route', pathMatch: 'full' },
 	{ path: 'create-route', component: CreateEventComponent,canActivate:[UserGuard] },	
 	{ path: 'manage-route', component: ManageEventsComponent,canActivate:[UserGuard] },	
 	{ path: 'see-route/:id', component: SeeEventComponent,runGuardsAndResolvers: 'always',resolve: { event: EventResolverComponent} },

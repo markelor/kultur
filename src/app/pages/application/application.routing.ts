@@ -8,7 +8,7 @@ import { AdminGuard } from '../guards/admin.guard';
 import { ContributorGuard } from '../guards/contributor.guard';
 
 const routes: Routes = [
-	{ path: '', component: CreateApplicationComponent,canActivate:[AdminGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route',pathMatch: 'full' },
 	{ path: 'create-route', component: CreateApplicationComponent,canActivate:[AdminGuard] },
 	{ path: 'manage-route', component: ManageApplicationsComponent,canActivate:[ContributorGuard] },
 	{ path: 'manage-route/:id',  component: ApplicationCrudComponent,canActivate:[ContributorGuard]}	

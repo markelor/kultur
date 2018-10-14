@@ -15,8 +15,6 @@ import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date'
 import { NgbDatepickerI18n, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs/Subject';
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
-const URL = 'fileUploader/uploadImages/category-icon';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],

@@ -13,7 +13,7 @@ import { NotAuthGuard } from '../guards/notAuth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent,canActivate:[NotAuthGuard], pathMatch: 'full' },
+  { path: '', redirectTo: 'sign-in-route', pathMatch: 'full' },
   { path: 'sign-up-route', component: RegisterComponent,canActivate:[NotAuthGuard] },
   { path: 'activate-route/:temporaryToken', component: ActivateComponent,canActivate:[NotAuthGuard] },
   { path: 'sign-in-route', component: LoginComponent,canActivate:[NotAuthGuard] },          

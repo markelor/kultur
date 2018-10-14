@@ -18,7 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
 import * as moment from 'moment-timezone';
 //const URL = 'http://localhost:8080/fileUploader/uploadImages/application';
-const URL = 'fileUploader/uploadImages/application';
+const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/application';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],

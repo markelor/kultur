@@ -5,7 +5,7 @@ import { CreateServiceTypeComponent } from './create-service-type/create-service
 import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
-	{ path: '', component: CreateServiceTypeComponent,canActivate:[AdminGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route', pathMatch: 'full' },
 	{ path: 'create-route', component: CreateServiceTypeComponent,canActivate:[AdminGuard] },
 
 ];

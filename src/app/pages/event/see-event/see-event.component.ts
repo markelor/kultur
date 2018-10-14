@@ -1,4 +1,4 @@
-import { Component, PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
+import { Component,OnInit,PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
 import { ObservableService } from '../../../services/observable.service';
@@ -12,7 +12,7 @@ import { TranslateLanguagePipe } from '../../../shared/pipes/translate-language.
 import { HtmlTextPipe } from '../../../shared/pipes/html-text.pipe';
 import { ReactionsModalComponent } from './reactions-modal/reactions-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser, CommonModule,Location } from '@angular/common';
 import { Meta,Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './see-event.component.html',
   styleUrls: ['./see-event.component.css']
 })
-export class SeeEventComponent {
+export class SeeEventComponent implements OnInit{
   private subscriptionLanguage: Subscription;
   public event;
   private categories;
@@ -57,25 +57,19 @@ export class SeeEventComponent {
   private authGuard:AuthGuard,
   private modalService:NgbModal,
   ) {  
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-     // If it is a NavigationEnd event re-initalise the component
-     if (e instanceof NavigationEnd) {
-      this.initialize();
-     }
-    });
   }
   private addSocialMetaTags(title,description,image){
     //twitter
-    this.meta.addTag({ name: 'twitter:card', content: 'summary' });
-    this.meta.addTag({ name: 'twitter:site', content: '@kulturekintzak' });
-    this.meta.addTag({ name: 'twitter:title', content: title });
-    this.meta.addTag({ name: 'twitter:description', content: description });
-    this.meta.addTag({ name: 'twitter:image', content: image });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    this.meta.updateTag({ name: 'twitter:site', content: '@kulturekintzak' });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: image });
     //facebbok
-    this.meta.addTag({ property: 'og:title', content: title });
-    this.meta.addTag({ property: 'og:type', content: 'article' });
-    this.meta.addTag({ property: 'og:description', content: description });
-    this.meta.addTag({ property: 'og:image', content: image});
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:type', content: 'article' });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({ property: 'og:image', content: image});
   }
   private initializeGalleryOptions(){
     if(this.screenWidth>450){
@@ -234,12 +228,12 @@ export class SeeEventComponent {
     } 
   }
   private getEvent(){
-    if(this.activatedRoute.snapshot.data.event.success){
+    if(this.activatedRoute.snapshot.data.event && this.activatedRoute.snapshot.data.event.success){
       this.event=this.activatedRoute.snapshot.data.event.event;
       this.event.reactionsUsernames=this.activatedRoute.snapshot.data.event.reactionsUsernames;
       //Title and description meta tags
       this.metaTitle.setTitle(this.translateLanguagePipe.transform(this.event,'title',this.localizeService.parser.currentLang));
-      this.meta.addTag({ name: 'description', content: this.htmlTextPipe.transform(this.translateLanguagePipe.transform(this.event,'description',this.localizeService.parser.currentLang)) });
+      this.meta.updateTag({ name: 'description', content: this.htmlTextPipe.transform(this.translateLanguagePipe.transform(this.event,'description',this.localizeService.parser.currentLang)) });
       this.categories=this.activatedRoute.snapshot.data.event.categories;
       this.initializeGalleryImages();
       setTimeout(() => {
@@ -269,15 +263,19 @@ export class SeeEventComponent {
     //var editor=$("#textareaComment").froalaEditor('events.focus', true);
   }
 
-  private initialize() {
-    this.onResize();
-    this.initializeGalleryOptions();
-    this.event=undefined;
-    this.getEvent();
-    this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.localizeService.parser.currentLang=event.lang;
-      this.initializeGalleryImages();
-      this.initReactions();
+  ngOnInit() {
+    //location.reload()
+    this.activatedRoute.data.subscribe((data) => {
+      this.currentUrl="http://www.kulturekintzak.eus"+this.router.url;
+      this.onResize();
+      this.initializeGalleryOptions();
+      this.event=undefined;
+      this.getEvent();
+      this.subscriptionLanguage =this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.localizeService.parser.currentLang=event.lang;
+        this.initializeGalleryImages();
+        this.initReactions();
+      });
     });
   }
   ngOnDestroy(){

@@ -29,10 +29,8 @@ export class ContributorGuard implements CanActivate {
         this.authService.logout();
       	this.redirectUrl = state.url; // Grab previous urul
       	this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
-      	return false; // Return false: contributor not authorized to view page
-                          
-      }
-             
+      	return false; // Return false: contributor not authorized to view page                         
+      }            
     });
   }
 }

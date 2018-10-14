@@ -85,7 +85,7 @@ export class NavbarComponent implements OnInit {
     this.observableService.avatarType="current-avatar";
     this.subscription=this.observableService.notifyObservable.subscribe(res => {    
       if (res.hasOwnProperty('option') && res.option === 'current-avatar') {
-        if(res.data){  
+        if(res.data){ 
             this.authService.user.currentAvatar=res.data;
           }
       }

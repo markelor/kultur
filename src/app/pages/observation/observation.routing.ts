@@ -7,7 +7,7 @@ import { ManageObservationsComponent } from './manage-observations/manage-observ
 import { EditObservationComponent } from './manage-observations/edit-observation/edit-observation.component';
 
 const routes: Routes = [
-	{ path: '', component: CreateObservationComponent,canActivate:[ContributorGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route', pathMatch: 'full' },
 	{ path: 'create-route', component: CreateObservationComponent,canActivate:[ContributorGuard] },
 	{ path: 'manage-route', component: ManageObservationsComponent,canActivate:[ContributorGuard] },	
 	{ path: 'manage-route/edit-route/:id', component: EditObservationComponent,canActivate:[ContributorGuard] }

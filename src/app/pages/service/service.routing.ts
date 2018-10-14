@@ -7,7 +7,7 @@ import { ManageServicesComponent } from './manage-services/manage-services.compo
 import { EditServiceComponent } from './manage-services/edit-service/edit-service.component';
 
 const routes: Routes = [
-	{ path: '', component: CreateServiceComponent,canActivate:[ContributorGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route', pathMatch: 'full' },
 	{ path: 'create-route', component: CreateServiceComponent,canActivate:[ContributorGuard] },
 	{ path: 'manage-route', component: ManageServicesComponent,canActivate:[ContributorGuard] },	
 	{ path: 'manage-route/edit-route/:id', component: EditServiceComponent,canActivate:[ContributorGuard] }

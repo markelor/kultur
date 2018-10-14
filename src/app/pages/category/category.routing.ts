@@ -6,7 +6,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { ModeratorGuard } from '../guards/moderator.guard';
 
 const routes: Routes = [
-	{ path: '', component: CreateCategoryComponent,canActivate:[AuthGuard], pathMatch: 'full' },
+	{ path: '', redirectTo: 'create-route', pathMatch: 'full' },
 	{ path: 'create-route', component: CreateCategoryComponent,canActivate:[AuthGuard] },
 
 	
