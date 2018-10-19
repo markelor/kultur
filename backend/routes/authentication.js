@@ -51,77 +51,82 @@ module.exports = (router) => {
               if (!req.body.privacyPolicy) {
                 res.json({ success: false, message: eval(language + '.register.privacyPolicyProvidedError') }); // Return error
               } else {
-                // Create the user object for insertion into database
-                let user = new User(); // Create new User object
-                user.username = req.body.username; // Save username from request to User object
-                user.password = req.body.password; // Save password from request to User object
-                user.email = req.body.email; // Save email from request to User object
-                user.name = req.body.name; // Save name from request to User object
-                user.language = req.body.language;
-                user.aboutYourself = req.body.aboutYourself;
-                user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
-                user.privacityConsent = req.body.privacyPolicy;
-                user.createdAt = Date.now();
-                user.updatedAt = Date.now();
-                // Save user to database
-                user.save((err) => {
-                  // Check if error occured
-                  if (err) {
-                    // Check if error is an error indicating duplicate account
-                    if (err.code === 11000) {
-                      res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
-                    } else {
-                      // Check if error is a validation error
-                      if (err.errors) {
-                        // Check if validation error is in the name field
-                        if (err.errors.name) {
-                          res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
-                        } else {
-                          // Check if validation error is in the email field
-                          if (err.errors.email) {
-                            res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
+                if (!req.body.useTerms) {
+                  res.json({ success: false, message: eval(language + '.register.useTermsProvidedError') }); // Return error
+                } else {
+                  // Create the user object for insertion into database
+                  let user = new User(); // Create new User object
+                  user.username = req.body.username; // Save username from request to User object
+                  user.password = req.body.password; // Save password from request to User object
+                  user.email = req.body.email; // Save email from request to User object
+                  user.name = req.body.name; // Save name from request to User object
+                  user.language = req.body.language;
+                  user.aboutYourself = req.body.aboutYourself;
+                  user.temporaryToken = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+                  user.privacityConsent = req.body.privacyPolicy;
+                  user.useConsent = req.useTerms;
+                  user.createdAt = Date.now();
+                  user.updatedAt = Date.now();
+                  // Save user to database
+                  user.save((err) => {
+                    // Check if error occured
+                    if (err) {
+                      // Check if error is an error indicating duplicate account
+                      if (err.code === 11000) {
+                        res.json({ success: false, message: eval(language + '.register.duplicateError') }); // Return error
+                      } else {
+                        // Check if error is a validation error
+                        if (err.errors) {
+                          // Check if validation error is in the name field
+                          if (err.errors.name) {
+                            res.json({ success: false, message: eval(language + err.errors.name.message) }); // Return error
                           } else {
-                            // Check if validation error is in the username field
-                            if (err.errors.username) {
-                              res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
+                            // Check if validation error is in the email field
+                            if (err.errors.email) {
+                              res.json({ success: false, message: eval(language + err.errors.email.message) }); // Return error
                             } else {
-                              // Check if validation error is in the password field
-                              if (err.errors.password) {
-                                res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
+                              // Check if validation error is in the username field
+                              if (err.errors.username) {
+                                res.json({ success: false, message: eval(language + err.errors.username.message) }); // Return error
                               } else {
-                                // Check if validation error is in the aboutYourself field
-                                if (err.errors.aboutYourself) {
-                                  res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                // Check if validation error is in the password field
+                                if (err.errors.password) {
+                                  res.json({ success: false, message: eval(language + err.errors.password.message) }); // Return error
                                 } else {
-                                  res.json({ success: false, message: err }); // Return any other error not already covered
+                                  // Check if validation error is in the aboutYourself field
+                                  if (err.errors.aboutYourself) {
+                                    res.json({ success: false, message: eval(language + err.errors.aboutYourself.message) }); // Return error
+                                  } else {
+                                    res.json({ success: false, message: err }); // Return any other error not already covered
+                                  }
                                 }
                               }
                             }
                           }
+                        } else {
+                          res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
                         }
-                      } else {
-                        res.json({ success: false, message: eval(language + '.register.saveError'), err }); // Return error if not related to validation
                       }
+                    } else {
+                      // setup email data with unicode symbols
+                      let mailOptions = {
+                        from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
+                        to: [user.email, emailConfig.email], // list of receivers
+                        subject: eval(language + '.register.emailSubject'),
+                        text: eval(language + '.register.emailTextOne') + user.name + eval(language + '.register.emailTextTwo') + user.temporaryToken,
+                        html: eval(language + '.register.emailHtmlOne') + user.name + eval(language + '.register.emailHtmlTwo') + user.temporaryToken + eval(language + '.register.emailHtmlThree')
+                      };
+                      // send mail with defined transport object
+                      transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                          return console.log(error);
+                        }
+                        console.log('Message %s sent: %s', info.messageId, info.response);
+                      });
+                      res.json({ success: true, message: eval(language + '.register.success') }); // Return success
                     }
-                  } else {
-                    // setup email data with unicode symbols
-                    let mailOptions = {
-                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
-                      to: [user.email, emailConfig.email], // list of receivers
-                      subject: eval(language + '.register.emailSubject'),
-                      text: eval(language + '.register.emailTextOne') + user.name + eval(language + '.register.emailTextTwo') + user.temporaryToken,
-                      html: eval(language + '.register.emailHtmlOne') + user.name + eval(language + '.register.emailHtmlTwo') + user.temporaryToken + eval(language + '.register.emailHtmlThree')
-                    };
-                    // send mail with defined transport object
-                    transporter.sendMail(mailOptions, (error, info) => {
-                      if (error) {
-                        return console.log(error);
-                      }
-                      console.log('Message %s sent: %s', info.messageId, info.response);
-                    });
-                    res.json({ success: true, message: eval(language + '.register.success') }); // Return success
-                  }
-                });
+                  });
+                }
               }
             }
           }
@@ -210,7 +215,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">",
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">",
                 to: emailConfig.email,
                 subject: 'Error Logged',
                 text: 'The following error has been reported in Login part: ' + err,
@@ -275,7 +280,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             let mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: 'Error Logged',
               text: 'The following error has been reported in the adminFestApp Application: ' + err,
@@ -310,7 +315,7 @@ module.exports = (router) => {
                   } else {
                     // If save succeeds, create e-mail object
                     var mailOptions = {
-                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                      from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                       to: [user.email, emailConfig.email],
                       subject: eval(language + '.activate.emailSubject'),
                       text: eval(language + '.activate.emailTextOne') + user.name + eval(language + '.activate.emailTextTwo'),
@@ -353,7 +358,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               let mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: 'Error resend verify credentials',
                 text: 'The following error has been reported in the adminFestApp Application: ' + err,
@@ -407,7 +412,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             let mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: 'Error send new activation link',
               text: 'The following error has been reported in the adminFestApp Application: ' + err,
@@ -433,7 +438,7 @@ module.exports = (router) => {
               } else {
                 // If user successfully saved to database, create e-mail object
                 let mailOptions = {
-                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                  from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                   to: [user.email, emailConfig.email], // list of receivers
                   subject: eval(language + '.resend.emailSubject'),
                   text: eval(language + '.resend.emailTextOne') + user.name + eval(language + '.resend.emailTextTwo') + user.temporaryToken,
@@ -473,7 +478,7 @@ module.exports = (router) => {
             } else {
               // If e-mail found in database, create e-mail object
               let mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [user.email],
                 subject: eval(language + '.resetUsername.emailSubject'),
                 text: eval(language + '.resetUsername.emailTextOne') + user.name + eval(language + '.resetUsername.emailTextTwo') + user.username,
@@ -513,7 +518,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             let mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: 'Error reset password Request',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -544,7 +549,7 @@ module.exports = (router) => {
                 } else {
                   // Create e-mail object to send to user
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [user.email],
                     subject: eval(language + '.resetPassword.emailSubject'),
                     text: eval(language + '.resetPassword.emailTextOne') + user.name + eval(language + '.resetPassword.emailTextTwo') + user.resetToken,
@@ -585,7 +590,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: 'Error get password reset token',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -643,7 +648,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email],
                 subject: 'Error saved reset password',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -670,7 +675,7 @@ module.exports = (router) => {
                 } else {
                   // Create e-mail object to send to user
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [user.email],
                     subject: eval(language + '.savePassword.emailSubject'),
                     text: eval(language + '.savePassword.emailTextOne') + user.name + eval(language + '.savePassword.emailTextTwo'),
@@ -707,7 +712,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: ' Find 1 for management error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -755,7 +760,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: ' Find 1 usersSearch error ',
               text: 'The following error has been reported in the kulturekintzak: ' + err,
@@ -855,7 +860,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: 'Renew token error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -898,7 +903,7 @@ module.exports = (router) => {
         if (err) {
           // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
           var mailOptions = {
-            from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+            from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
             to: [emailConfig.email],
             subject: ' Get permission error ',
             text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -940,7 +945,7 @@ module.exports = (router) => {
         if (err) {
           // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
           var mailOptions = {
-            from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+            from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
             to: [emailConfig.email],
             subject: ' Find 1 for management error ',
             text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -961,7 +966,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 2 for management error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1019,7 +1024,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: ' Find one for delete user ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1045,7 +1050,7 @@ module.exports = (router) => {
                 if (err) {
                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [emailConfig.email],
                     subject: ' Find one 2 delete event error ',
                     text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1082,7 +1087,7 @@ module.exports = (router) => {
                         if (err) {
                           // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                           var mailOptions = {
-                            from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                            from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                             to: [emailConfig.email],
                             subject: ' Find one and remove for delete user ',
                             text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1121,7 +1126,7 @@ module.exports = (router) => {
                               if (err) {
                                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                 var mailOptions = {
-                                  from: "Kulturekintzak" +"<"+emailConfig.email+">",
+                                  from: "Kulturekintzak" + "<" + emailConfig.email + ">",
                                   to: emailConfig.email,
                                   subject: 'Error delete images user',
                                   text: 'The following error has been reported in File Upload part: ' + 'Date:' + Date.now().toString() + err,
@@ -1185,7 +1190,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: ' Find one 1 edit user error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1212,7 +1217,7 @@ module.exports = (router) => {
                 if (err) {
                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [emailConfig.email],
                     subject: ' Find one 2 edit user error ',
                     text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1380,7 +1385,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email],
               subject: ' Find one 1 profile error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1407,7 +1412,7 @@ module.exports = (router) => {
                 if (err) {
                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [emailConfig.email],
                     subject: ' Find one 2 profile error',
                     text: 'The following error has been reported in kulturekintzak: ' + err,

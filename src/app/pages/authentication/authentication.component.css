@@ -9,6 +9,7 @@ body {
 }
 .auth-link{
   color: #98ccff;
+  cursor: pointer;
 }
 
 .custom-control-description{

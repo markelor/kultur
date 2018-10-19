@@ -56,11 +56,11 @@
                                         <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                                     </div>
                                     <div class="col-sm-12 col-xs-12 ks-actions">
-                                        <span class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
+                                        <span [routerLink]="['/event-route','see-route',event._id] | localize" class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
                                           <span class="la la-comment-o ks-icon"></span>
                                         <span class="ks-amount">{{event.comments.length}}</span>
                                         </span>
-                                        <span class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
+                                        <span [routerLink]="['/event-route','see-route',event._id] | localize" class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
                                           <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
                                         <span *ngIf="event.reactions.loveBy.length>0" class="reaction reaction-love"></span>
                                         <span *ngIf="event.reactions.hahaBy.length>0" class="reaction reaction-haha"></span>

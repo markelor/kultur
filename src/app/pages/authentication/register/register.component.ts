@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   public repeatPassword:AbstractControl;
   public passwords:FormGroup;
   public aboutYourself:AbstractControl;
-  public privacyPolicy:AbstractControl;
+  public privacyPolicyAndUseTerms:AbstractControl;
   public message;
   public messageClass;
   public submitted:boolean = false;
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       // About yourself Input
       'aboutYourself': ['', Validators.compose([Validators.maxLength(500)])],
             // Privacy policy Input
-      'privacyPolicy': ['', Validators.compose([Validators.requiredTrue])],
+      'privacyPolicyAndUseTerms': ['', Validators.compose([Validators.requiredTrue])],
     });
     this.name = this.form.controls['name'];
     this.username = this.form.controls['username'];
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
     this.passwords = <FormGroup> this.form.controls['passwords'];
     this.password = this.passwords.controls['password'];
     this.repeatPassword = this.passwords.controls['repeatPassword'];
-    this.privacyPolicy=this.form.controls['privacyPolicy']
+    this.privacyPolicyAndUseTerms=this.form.controls['privacyPolicyAndUseTerms']
     this.aboutYourself = this.form.controls['aboutYourself'];
   }
   // Function to disable the registration form
@@ -79,8 +79,8 @@ export class RegisterComponent implements OnInit {
    // Function to enable the registration form
    private enableForm(){
     this.form.enable(); // Enable form
-  }
-  public staticModalShow() {
+  }   
+  public privacyPolicyStaticModalShow() {
     const activeModal = this.modalService.open(InformationModalComponent, {backdrop: 'static',keyboard: false, centered: true, size: 'lg',});
     this.translate.get('modal.privacy-policy-header').subscribe(
       data => {   
@@ -90,7 +90,18 @@ export class RegisterComponent implements OnInit {
       data => {   
       activeModal.componentInstance.modalContent = data;
     });     
-  }   
+  } 
+  public useTermsStaticModalShow() {
+    const activeModal = this.modalService.open(InformationModalComponent, {backdrop: 'static',keyboard: false, centered: true, size: 'lg',});
+    this.translate.get('modal.use-terms-header').subscribe(
+      data => {   
+      activeModal.componentInstance.modalHeader = data;
+    });
+    this.translate.get('modal.use-terms-content').subscribe(
+      data => {   
+      activeModal.componentInstance.modalContent = data;
+    });     
+  } 
 
   public onSubmit(){
     if (this.form.valid) {
@@ -102,7 +113,8 @@ export class RegisterComponent implements OnInit {
       this.user.setEmail=this.form.get('email').value;
       this.user.setPassword=this.form.get('passwords').value.password
       this.user.setAboutYourself=this.form.get('aboutYourself').value;
-      this.user.setPrivacyPolicy=this.form.get('privacyPolicy').value;
+      this.user.setPrivacyPolicy=this.form.get('privacyPolicyAndUseTerms').value;
+      this.user.setUseTerms=this.form.get('privacyPolicyAndUseTerms').value;
       this.authService.registerUser(this.user).subscribe(data=>{
         if(!data.success){
           this.messageClass='alert alert-danger ks-solid';
@@ -126,7 +138,7 @@ export class RegisterComponent implements OnInit {
     
   }
   public changePrivacyPolicy(event){
-    this.privacyPolicy.setValue(event.target.checked);
+    this.privacyPolicyAndUseTerms.setValue(event.target.checked);
   }
   // Function to check if e-mail is taken
   public checkEmail() {

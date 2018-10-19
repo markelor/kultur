@@ -7,6 +7,7 @@ export class User{
     active: boolean;
     aboutYourself:string;
     privacyPolicy: boolean;
+    useTerms: boolean;
     temporaryToken: string;
     resetToken: string;
     permission: string;
@@ -58,6 +59,12 @@ export class User{
     }
     set setPrivacyPolicy(privacyPolicy:boolean) {
         this.privacyPolicy = privacyPolicy;
+    }
+    get getUseTerms():boolean {
+        return this.useTerms;
+    }
+    set setUseTerms(useTerms:boolean) {
+        this.useTerms = useTerms;
     }
     get getTemporaryToken():string {
         return this.temporaryToken;
