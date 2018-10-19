@@ -183,3 +183,7 @@
 .ks-navbar>.ks-wrapper>.nav>.ks-navbar-actions>.ks-messages>.dropdown-menu {
   height: auto;
 }
+
+.ks-navbar .nav-item.show .dropdown-menu .dropdown-item>.ks-icon, .ks-navbar .nav-item.show .dropdown-menu .dropdown>.ks-icon, .ks-navbar .nav-item.show .dropdown-menu .nav-link>.ks-icon {
+    color: #0ca23e;
+}

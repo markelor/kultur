@@ -57,3 +57,9 @@ agm-map {
   font-size: 10pt;
   font-style: oblique;
 }
+
+.info-img-container{
+
+  max-height: 200px;
+  overflow:hidden;
+}
