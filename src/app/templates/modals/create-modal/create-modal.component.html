@@ -1,19 +1,23 @@
-<div class="modal-content">
-  <div class="modal-header">
-    <h4 class="modal-title">{{modalHeader}}</h4>
-    <button class="close" aria-label="Close" (click)="closeModal()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div [inlineSVG]="modalImage" [onSVGLoaded]="handleSVG"></div>
-    {{modalContent}}
-  </div>
-  <div class="modal-footer justify-content-between" >
-    <button class="btn btn-primary confirm-btn" (click)="confirmModal()" translate>{{'modal.continue'}}</button>
-    <button *ngIf="operation==='edit'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.manage'}}</button>
-    <button *ngIf="operation==='create'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.edit'}}</button> 
-    <button class="btn btn-primary confirm-btn" (click)="homeModal()" translate>{{'modal.home'}}</button> 
-  </div>
+<div class="modal-header" [ngClass]="headerClass">
+  <h4 class="modal-title">{{modalHeader}}</h4>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
-
+<div class="modal-body">
+  <div class="check_mark">
+    <div class="sa-icon animate" [ngClass]="animationClass">
+      <span class="sa-line sa-tip animateSuccessTip"></span>
+      <span class="sa-line sa-long animateSuccessLong"></span>
+      <div class="sa-placeholder"></div>
+      <div class="sa-fix"></div>
+    </div>
+  </div>
+  {{modalContent}}
+</div>
+<div class="modal-footer justify-content-between">
+  <button class="btn btn-primary confirm-btn" (click)="confirmModal()" translate>{{'modal.continue'}}</button>
+  <button *ngIf="operation==='edit'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.manage'}}</button>
+  <button *ngIf="operation==='create'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.edit'}}</button>
+  <button class="btn btn-primary confirm-btn" (click)="homeModal()" translate>{{'modal.home'}}</button>
+</div>

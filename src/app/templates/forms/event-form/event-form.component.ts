@@ -444,9 +444,11 @@ export class EventFormComponent implements OnInit {
       activeModal.componentInstance.route=this.localizeService.translateRoute('/event-route')+"/"+this.localizeService.translateRoute('manage-route');
     }
     if(success){
-      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+      activeModal.componentInstance.headerClass="success-head";
+      activeModal.componentInstance.animationClass="sa-success";
     }else{
-      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
+      activeModal.componentInstance.headerClass="danger-head";
+      activeModal.componentInstance.animationClass="sa-error";
     }       
   }  
   private mapClickPlace(){

@@ -4,6 +4,9 @@
             <div class="container-fluid ks-rows-section">
                 <div class="row">
                     <section class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <button [hidden]="showFilter" (click)="showFilter = !showFilter" type="submit" class="btn btn-default btn-block btn-filter" translate>{{'event.see-filter'}}</button>
+                        <button [hidden]="!showFilter" (click)="showFilter = !showFilter" type="submit" class="btn btn-default btn-block btn-filter" translate>{{'event.hide-filter'}}</button>
+                        <app-filter-form  [hidden]="!showFilter" [inputType]="'seeEvents'"></app-filter-form>
                         <ng-container *ngFor="let event of events let i=index;">
                             <article *ngIf="minSize<=i && maxSize>=i && event.visible" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
                                 <div *ngIf="event.price===0" class="ribbon-free ribbon-bottom-right">
@@ -47,13 +50,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-xs-4 post-image" style="padding:0;">
+                                    <div [routerLink]="['/event-route','see-route',event._id] | localize" class="col-sm-4 col-xs-4 post-image" style="padding:0;">
                                         <img *ngIf="event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" alt="kulturekintzak-event-default" class="ks-thumbnail img-responsive">
                                         <img *ngIf="event.images.poster.length>0" src="{{event | translateLanguage:'images.poster[0].url':localizeService.parser.currentLang }}" alt="{{event | translateLanguage:'title':localizeService.parser.currentLang}}" class="ks-thumbnail img-responsive">
                                     </div>
                                     <!--Description-->
                                     <div class="col-sm-8 col-xs-8">
-                                        <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
+                                        <div [routerLink]="['/event-route','see-route',event._id] | localize" class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
                                     </div>
                                     <div class="col-sm-12 col-xs-12 ks-actions">
                                         <span [routerLink]="['/event-route','see-route',event._id] | localize" class="ks-control" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share">
@@ -78,7 +81,7 @@
                     </section>
                     <aside class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <!-- Filter Form -->
-                        <app-filter-form [inputType]="'seeEvents'"></app-filter-form>
+                        <app-filter-form class="right-filter" [inputType]="'seeEvents'"></app-filter-form>
                     </aside>
                 </div>
             </div>

@@ -417,6 +417,10 @@
     .right {
         float: right;
     }
+    .btn-filter{
+        display: none;
+    }
+
     /*.post-image {
         display: initial;
         float: left;
@@ -424,6 +428,12 @@
 }
 
 @media (max-width: 450px) {
+    .btn-filter{
+        margin-bottom: 20px;
+    }
+    .right-filter{
+        display: none;
+    }
     .event-title {
         margin-left: 0;
         font-size: 25px;

@@ -16,6 +16,10 @@ body {
   color:#fff;
 }
 
+ .img-logo{
+  width: 100%;
+ }
+
 .ks-page {
   width: 100%;
   display: -webkit-box;

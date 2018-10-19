@@ -13,9 +13,10 @@ import { LocalizeRouterService } from 'localize-router';
 export class CreateModalComponent implements OnInit {
   public modalHeader;
   public modalContent;
-  @Input() modalImage;
+  @Input() headerClass;
   @Input() route;
   @Input() operation;
+  @Input() animationClass;
   constructor(
     private localizeService:LocalizeRouterService,
     private activeModal: NgbActiveModal,
