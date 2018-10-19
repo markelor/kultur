@@ -809,7 +809,7 @@ module.exports = (router) => {
       next()
     } else if (req.path === '/getEvent/' + route + language && req.method === 'GET') {
       next()
-    } else if (req.path === '/getPlacesCoordinates/' + route + language && req.method === 'GET') {
+    } else if (req.path === '/getPlacesCoordinates' && req.method === 'POST') {
       next()
     } else if (req.path === '/getPlacesGeonameId' && req.method === 'POST') {
       next()

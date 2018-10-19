@@ -97,29 +97,31 @@ module.exports = (router) => {
   /* ===============================================================
          GET Place
       =============================================================== */
-  router.get('/getPlacesCoordinates/:province/:municipality/:language', (req, res) => {
-    var language = req.params.language;
+  router.post('/getPlacesCoordinates', (req, res) => {
+    var language = req.body.language;
     if (!language) {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
-      if (!req.params.province) {
+      if (!req.body.province) {
         res.json({ success: false, message: eval(language + '.getPlacesCoordinates.provinceProvidedError') }); // Return error
       } else {
-        if (!req.params.municipality) {
+        if (!req.body.municipality) {
           res.json({ success: false, message: eval(language + '.getPlacesCoordinates.municipalityProvidedError') }); // Return error
         } else {
+          req.body.province=decodeURI(req.body.province);
+          req.body.municipality=decodeURI(req.body.municipality);
           Place.find({
             $or: [{
               language: language,
-              "province.name": req.params.province,
-              "municipality.name": req.params.municipality
+              "province.name": req.body.province,
+              "municipality.name": req.body.municipality
 
             }, {
               translation: {
                 $elemMatch: {
                   language: language,
-                  "province.name": req.params.province,
-                  "municipality.name": req.params.municipality
+                  "province.name": req.body.province,
+                  "municipality.name": req.body.municipality
                 }
               }
             }]

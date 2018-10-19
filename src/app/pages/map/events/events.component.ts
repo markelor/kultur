@@ -25,6 +25,10 @@ export class EventsComponent  {
   public markers: marker[]=[];
   private subscription:Subscription;
   public browser=false;
+  public bigestLat;
+  public smallestLat;
+  public bigestLng;
+  public smallestLng;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private meta: Meta,
@@ -71,8 +75,26 @@ export class EventsComponent  {
     });   
   }
   private addMarker(data){
-    this.lat=Number(data.place.coordinates.lat);
-    this.lng=Number(data.place.coordinates.lng);
+    if(!this.bigestLat && !this.bigestLng && !this.smallestLat && !this.smallestLng){
+      this.bigestLat=data.place.coordinates.lat;
+      this.bigestLng=data.place.coordinates.lng;
+      this.smallestLat=data.place.coordinates.lat;
+      this.smallestLng=data.place.coordinates.lng;
+    }
+    if(data.place.coordinates.lat>this.bigestLat){
+      this.bigestLat=data.place.coordinates.lat;
+    }
+    if(data.place.coordinates.lat<this.smallestLat){
+      this.smallestLat=data.place.coordinates.lat;
+    }
+    if(data.place.coordinates.lng>this.bigestLng){
+      this.bigestLng=data.place.coordinates.lng;
+    }
+    if(data.place.coordinates.lng<this.smallestLng){
+      this.smallestLng=data.place.coordinates.lng;
+    }
+    this.lat=Number((this.bigestLat+this.smallestLat)/2);
+    this.lng=Number((this.bigestLng+this.smallestLng)/2);
     //this.map._mapsWrapper.setCenter({lat: this.lat, lng: this.lng}));
     if(data.images.poster.length===0){
       data.images.poster.push({url:'assets/img/defaults/event/default-'+this.localizeService.parser.currentLang+'.png'});      

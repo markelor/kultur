@@ -19,9 +19,9 @@ export class PlaceService {
 
   // Function to get all user places from the database
   public getPlacesCoordinates(province,municipality,language) {
-    this.route= encodeURIComponent(province)+'/'+encodeURIComponent(municipality)+'/';
     this.language=language;
-    return this.http.get<any>(this.domain + 'place/getPlacesCoordinates/'+this.route+language);
+    var data = {'province': province,'municipality': municipality, 'language': language };
+    return this.http.post<any>(this.domain + 'place/getPlacesCoordinates',data);
   }
    // Function to get all user places from the database
   public getPlacesGeonameId(filters,language) {

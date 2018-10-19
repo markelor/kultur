@@ -17,12 +17,11 @@ export class PlaceInterceptor implements HttpInterceptor {
       this.placeService = this.injector.get(PlaceService);
       this.localizeService=this.injector.get(LocalizeRouterService);
       this.domain = this.authService.domain;
-      if(request.url===this.domain+"place/getPlacesCoordinates/"+this.placeService.route+this.placeService.language){
+      if(request.url===this.domain+"place/getPlacesCoordinates"){
         request = request.clone({
           setHeaders: {
             'Content-Type': 'application/json', // Format set to JSON
-            'language':this.placeService.language,
-            'route':this.placeService.route
+            'language':this.placeService.language
           }
         });  
       }else if(request.url===this.domain+"place/getPlacesGeonameId"){
