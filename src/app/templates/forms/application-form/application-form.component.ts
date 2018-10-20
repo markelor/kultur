@@ -154,6 +154,7 @@ export class ApplicationFormComponent implements OnInit {
     this.license= this.form.controls['license'];
     this.condition= this.form.controls['condition'];
     this.price = this.form.controls['price'];
+    this.price.setValue(0);
     this.expiredAt=this.form.controls['expiredAt'];
   }
 

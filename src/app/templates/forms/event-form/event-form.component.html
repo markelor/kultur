@@ -15,7 +15,7 @@
     <div class="col-sm-3 col-xs-4">
       <div class="form-group required" [ngClass]="{'has-error': (!price.valid && price.dirty), 'has-success': (price.valid)}">
         <label for="inputPrice" translate>{{'application-form.price'}} </label>
-        <input [formControl]="price" type="number" [value]="0" min="0" class="form-control" id="inputPrice">
+        <input [formControl]="price" type="number" min="0" class="form-control" id="inputPrice">
         <!-- Validation -->
         <span *ngIf="price.errors?.required && price.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         <span *ngIf="price.errors?.validatePrice && price.dirty" class="help-block form-error" translate>{{'validation.price-validation'}}</span>

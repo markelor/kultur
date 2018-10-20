@@ -225,6 +225,7 @@ export class EventFormComponent implements OnInit {
     this.start = this.form.controls['start'];
     this.end = this.form.controls['end'];
     this.price = this.form.controls['price'];
+    this.price.setValue(0);
     this.locationsExists = this.form.controls['locationsExists'];
     this.location = this.form.controls['location'];
     this.lat = this.form.controls['lat'];

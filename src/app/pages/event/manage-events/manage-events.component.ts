@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { AuthGuard} from '../../guards/auth.guard';
 import { Router } from '@angular/router';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment-timezone';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -21,6 +23,7 @@ export class ManageEventsComponent implements OnInit {
   public minSize=0;
   public collectionSize;
   private subscription:Subscription;
+  private subscriptionObservable: Subscription;
   constructor(
   	private eventService:EventService,
     private observableService:ObservableService,
@@ -28,8 +31,36 @@ export class ManageEventsComponent implements OnInit {
     private localizeService:LocalizeRouterService,
     private translate:TranslateService,
     private router:Router,
-    private authGuard:AuthGuard
+    private authGuard:AuthGuard,
+        private modalService: NgbModal
   ) {
+  }
+  private staticModalShow() {
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
+    this.translate.get('modal.delete-event-header').subscribe(
+      data => {   
+        activeModal.componentInstance.modalHeader = data;
+    });
+    this.translate.get('modal.delete-event-content').subscribe(
+      data => {   
+       activeModal.componentInstance.modalContent = data;
+    });      
+  } 
+  public eventDeleteClick(index,event): void {
+    this.observableService.confirmationModalType="confirmation-modal-delete-event";
+    if(this.observableService.modalCount<1){
+      this.staticModalShow();
+      this.subscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
+        this.subscriptionObservable.unsubscribe();
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-event') {
+          this.eventService.deleteEvent(this.authService.user.id,event._id,this.localizeService.parser.currentLang).subscribe(data=>{
+            if(data.success){ 
+              this.events.splice(index,1);
+            }
+          });
+        }
+      });
+    }
   }
   // Function to get all user events from the database
   private getAllUserEvents() {

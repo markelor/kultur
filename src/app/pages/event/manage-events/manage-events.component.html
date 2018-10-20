@@ -13,6 +13,7 @@
                   </div>
                   <div class="col-sm-3 col-xs-4">
                     <span class="ks-text"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event col-sm-2 col-xs-4"></i></span>
+                    <span class="ks-text"><i (click)="eventDeleteClick(i,event)" class="fa fa-trash edit-event ks-color-danger col-sm-2 col-xs-4"></i></span>
                     <div class="dropdown col-sm-8 col-xs-6">
                       <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="la la-language" [ngClass]="event | translateCount"></i>
