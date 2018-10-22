@@ -19,10 +19,11 @@ import { AuthGuard} from '../../../pages/guards/auth.guard';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateModalComponent } from '../../../templates/modals/create-modal/create-modal.component';
+import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
-const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+//const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -120,6 +121,7 @@ export class EventFormComponent implements OnInit {
   private hasAnotherDropZoneOver:boolean = false;
   private subscriptionLanguage: Subscription;
   private subscriptionObservableMapClick: Subscription;
+  private eventTranslateDeleteSubscriptionObservable: Subscription;
   public disableCategories=false;
   public disableUploader=false;
   @Output() RefreshEvent = new EventEmitter();
@@ -431,7 +433,7 @@ export class EventFormComponent implements OnInit {
       } 
     }   
   }
-   private staticModalShow(success,operation,id) {
+  private staticModalShow(success,operation,id) {
     const activeModal = this.modalService.open(CreateModalComponent, {backdrop: 'static',keyboard: false, centered: true});
     this.translate.get('modal.'+operation+'-event-header').subscribe(
       data => {   
@@ -452,6 +454,54 @@ export class EventFormComponent implements OnInit {
       activeModal.componentInstance.animationClass="sa-error";
     }       
   }  
+  private deleteTranslateStaticModalShow() {
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
+    this.translate.get('modal.delete-translate-event-header').subscribe(
+      data => {   
+        activeModal.componentInstance.modalHeader = data;
+    });
+    this.translate.get('modal.delete-translate-event-'+this.inputLanguage+'-content').subscribe(
+      data => {   
+       activeModal.componentInstance.modalContent = data;
+    });      
+  } 
+  public eventTranslateDeleteClick(index,event): void {
+    this.observableService.confirmationModalType="confirmation-modal-delete-event";
+    if(this.observableService.modalCount<1){
+      this.deleteTranslateStaticModalShow();
+      this.eventTranslateDeleteSubscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
+        this.eventTranslateDeleteSubscriptionObservable.unsubscribe();
+        if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-event') {
+          //delete current Translate
+          for (var i = 0; i < this.inputEvent.translation.length; ++i) {
+            if(this.inputEvent.translation[i].language===this.inputLanguage){
+              this.inputEvent.deleteTranslationImagePoster=this.inputEvent.translation[i].images.poster;
+              this.inputEvent.deleteTranslationImageDescription=this.inputEvent.translation[i].images.description;
+              this.inputEvent.translation.splice(i,1);   
+            }
+          }
+          // Function to save event into database
+          this.eventService.editEvent(this.inputEvent).subscribe(data => {
+            // Check if event was saved to database or not
+            if (!data.success) {
+              this.deleteUploadImages('poster',this.imagesPoster);
+              this.deleteUploadImages('descriptionAll',this.imagesDescription);
+              this.messageClass = 'alert alert-danger ks-solid'; // Return error class
+              this.message = data.message; // Return error message
+              this.staticModalShow(false,'edit',this.inputEvent._id);    
+              this.enableForm(); // Enable form
+            } else {
+              this.messageClass = 'alert alert-success ks-solid'; // Return success class
+              this.message = data.message; // Return success message
+              this.staticModalShow(true,'edit',this.inputEvent._id);    
+              this.RefreshEvent.emit({event: this.inputEvent,categories:this.inputCategories});
+              this.submitted=false;
+            }
+          });
+        }
+      });
+    }
+  }
   private mapClickPlace(){
     this.subscriptionObservableMapClick=this.observableService.notifyObservable.subscribe(res => {
       if (res.hasOwnProperty('option') && res.option === this.observableService.mapClickType) {

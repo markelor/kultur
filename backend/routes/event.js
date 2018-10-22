@@ -181,7 +181,7 @@ module.exports = (router) => {
                                   if (err) {
                                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                     var mailOptions = {
-                                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                                      from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                                       to: [emailConfig.email], // list of receivers
                                       subject: ' Find 1 newEvent error ',
                                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -261,15 +261,15 @@ module.exports = (router) => {
         res.json({ success: false, message: eval(language + '.userEvents.userIdProvidedError') }); // Return error
       } else {
         if (req.body.filters.$and) {
-          if(req.body.filters.$and[0]){
+          if (req.body.filters.$and[0]) {
             req.body.filters.$and[0].$or[0].start.$gte = isodate(req.body.filters.$and[0].$or[0].start.$gte);
             req.body.filters.$and[0].$or[1].end.$gte = isodate(req.body.filters.$and[0].$or[1].end.$gte);
           }
-          if(req.body.filters.$and[1]){
+          if (req.body.filters.$and[1]) {
             req.body.filters.$and[1].$or[0].end.$lte = isodate(req.body.filters.$and[1].$or[0].end.$lte);
             req.body.filters.$and[1].$or[1].start.$lte = isodate(req.body.filters.$and[1].$or[1].start.$lte);
           }
-          
+
         }
         if (req.body.filters.categoryId) {
           for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
@@ -281,13 +281,13 @@ module.exports = (router) => {
             req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
           }
         }
-        if(req.body.filters.title){
-          req.body.filters.title.$regex=new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
+        if (req.body.filters.title) {
+          req.body.filters.title.$regex = new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
         }
-        if(req.body.filters.price){
-          req.body.filters.price.$lte=Number(req.body.filters.price.$lte);
+        if (req.body.filters.price) {
+          req.body.filters.price.$lte = Number(req.body.filters.price.$lte);
         }
-        req.body.filters.$or=[{ createdBy: ObjectId(req.body.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.body.userId) } } }];
+        req.body.filters.$or = [{ createdBy: ObjectId(req.body.userId) }, { translation: { $elemMatch: { createdBy: ObjectId(req.body.userId) } } }];
 
         Event.aggregate([
           // Join with Place table
@@ -325,7 +325,7 @@ module.exports = (router) => {
               if (err) {
                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                 var mailOptions = {
-                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                  from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                   to: [emailConfig.email], // list of receivers
                   subject: ' Find 3 getEvent error ',
                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -383,15 +383,15 @@ module.exports = (router) => {
       res.json({ success: false, message: "Ez da hizkuntza aurkitu" }); // Return error
     } else {
       if (req.body.filters.$and) {
-        if(req.body.filters.$and[0]){
+        if (req.body.filters.$and[0]) {
           req.body.filters.$and[0].$or[0].start.$gte = isodate(req.body.filters.$and[0].$or[0].start.$gte);
           req.body.filters.$and[0].$or[1].end.$gte = isodate(req.body.filters.$and[0].$or[1].end.$gte);
         }
-        if(req.body.filters.$and[1]){
+        if (req.body.filters.$and[1]) {
           req.body.filters.$and[1].$or[0].end.$lte = isodate(req.body.filters.$and[1].$or[0].end.$lte);
           req.body.filters.$and[1].$or[1].start.$lte = isodate(req.body.filters.$and[1].$or[1].start.$lte);
         }
-        
+
       }
       if (req.body.filters.categoryId) {
         for (var i = 0; i < req.body.filters.categoryId.$in.length; i++) {
@@ -403,11 +403,11 @@ module.exports = (router) => {
           req.body.filters.placeId.$in[i] = ObjectId(req.body.filters.placeId.$in[i]);
         }
       }
-      if(req.body.filters.title){
-        req.body.filters.title.$regex=new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
+      if (req.body.filters.title) {
+        req.body.filters.title.$regex = new RegExp(".*" + req.body.filters.title.$regex + ".*", "i")
       }
-      if(req.body.filters.price){
-        req.body.filters.price.$lte=Number(req.body.filters.price.$lte);
+      if (req.body.filters.price) {
+        req.body.filters.price.$lte = Number(req.body.filters.price.$lte);
       }
       //$gte: new Date()
       Event.aggregate([ // Join with Place table
@@ -455,7 +455,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 3 getEvent error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -540,7 +540,7 @@ module.exports = (router) => {
               if (err) {
                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                 var mailOptions = {
-                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                  from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                   to: [emailConfig.email], // list of receivers
                   subject: ' Find 3 getEvent error ',
                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -660,7 +660,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 edit event error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -709,7 +709,7 @@ module.exports = (router) => {
                     if (err) {
                       // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                       var mailOptions = {
-                        from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                        from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                         to: [emailConfig.email], // list of receivers
                         subject: ' Find one 2 edit event error ',
                         text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -760,7 +760,7 @@ module.exports = (router) => {
                               if (err) {
                                 // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                 var mailOptions = {
-                                  from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                                  from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                                   to: [emailConfig.email],
                                   subject: ' Find one 3 edit event error ',
                                   text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -842,6 +842,7 @@ module.exports = (router) => {
                           }
                         });
                       }
+
                       // Check if place were found in database
                       if (!findPlace) {
                         const place = new Place({
@@ -894,6 +895,63 @@ module.exports = (router) => {
                       } else {
                         eventSave(findPlace);
                       }
+
+                      function deleteImages(images, bucket) {
+                        var imagesKey = [];
+                        for (var i = 0; i < images.length; i++) {
+                          if (bucket === "event-poster") {
+                            var currentUrlSplit = images[i].url.split("/");
+                            let imageName = currentUrlSplit[currentUrlSplit.length - 1];
+                            var urlSplit = imageName.split("%2F");
+                            imagesKey.push({
+                              Key: bucket + "/" + urlSplit[0]
+                            });
+                          } else if (bucket === "event-description") {
+                            var currentUrlSplit = images[i].split("/");
+                            let imageName = currentUrlSplit[currentUrlSplit.length - 1];
+                            var urlSplit = imageName.split("%2F");
+                            imagesKey.push({
+                              Key: bucket + "/" + urlSplit[1]
+                            });
+                          }
+                        }
+                        s3.deleteObjects({
+                          Bucket: "culture-bucket",
+                          Delete: {
+                            Objects: imagesKey,
+                            Quiet: false
+                          }
+                        }, function(err, data) {
+                          if (err) {
+                            // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
+                            var mailOptions = {
+                              from: "Kulturekintzak" + "<" + emailConfig.email + ">",
+                              to: emailConfig.email,
+                              subject: 'Error delete images event',
+                              text: 'The following error has been reported in File Upload part: ' + 'Date:' + Date.now().toString() + err,
+                              html: 'The following error has been reported in the File Upload part:<br><br>' + 'Date:' + Date.now().toString() + err
+                            };
+                            // Function to send e-mail to myself
+                            transporter.sendMail(mailOptions, function(err, info) {
+                              if (err) {
+                                console.log(err); // If error with sending e-mail, log to console/terminal
+                              } else {
+                                console.log(info); // Log success message to console if sent
+                                console.log(user.email); // Display e-mail that it was sent to
+                              }
+                            });
+                            res.json({ success: false, message: eval(language + '.fileUpload.deleteError') });
+                          } else {}
+                        });
+                      }
+                      if (req.body.deleteTranslationImagePoster && req.body.deleteTranslationImagePoster.length > 0) {
+                        if (req.body.deleteTranslationImagePoster[0].url !== req.body.images.poster[0].url) {
+                          deleteImages(req.body.deleteTranslationImagePoster, "event-poster");
+                        }
+                      }
+                      if (req.body.deleteTranslationImageDescription && req.body.deleteTranslationImageDescription.length > 0) {
+                        deleteImages(req.body.deleteTranslationImageDescription, "event-description");
+                      }
                     }
                   });
                 }
@@ -926,7 +984,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: ' Find 1 allThemes error ',
               text: 'The following error has been reported in the kulturekintzak: ' + err,
@@ -979,7 +1037,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email],
                 subject: ' Find one 1 delete event error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1005,7 +1063,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                      from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                       to: [emailConfig.email],
                       subject: ' Find one 2 delete event error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1045,7 +1103,7 @@ module.exports = (router) => {
                           if (err) {
                             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                             var mailOptions = {
-                              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                               to: [emailConfig.email],
                               subject: ' Find one and remove for delete event ',
                               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1117,7 +1175,7 @@ module.exports = (router) => {
                                 if (err) {
                                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                                   var mailOptions = {
-                                    from: "Kulturekintzak" +"<"+emailConfig.email+">",
+                                    from: "Kulturekintzak" + "<" + emailConfig.email + ">",
                                     to: emailConfig.email,
                                     subject: 'Error delete images event',
                                     text: 'The following error has been reported in File Upload part: ' + 'Date:' + Date.now().toString() + err,
@@ -1190,7 +1248,7 @@ module.exports = (router) => {
             if (err) {
               // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
               var mailOptions = {
-                from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                 to: [emailConfig.email], // list of receivers
                 subject: ' Find 1 addReactionEvent error ',
                 text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1218,7 +1276,7 @@ module.exports = (router) => {
                   if (err) {
                     // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
                     var mailOptions = {
-                      from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                      from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                       to: [emailConfig.email], // list of receivers
                       subject: ' Find one 2 addReactionEvent event error ',
                       text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1302,7 +1360,7 @@ module.exports = (router) => {
           if (err) {
             // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
             var mailOptions = {
-              from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+              from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
               to: [emailConfig.email], // list of receivers
               subject: ' Find one 1 deleteReactionEvent error ',
               text: 'The following error has been reported in kulturekintzak: ' + err,
@@ -1330,7 +1388,7 @@ module.exports = (router) => {
                   // Create an e-mail object that contains the error. Set to automatically send it to myself for troubleshooting.
 
                   var mailOptions = {
-                    from: "Kulturekintzak" +"<"+emailConfig.email+">", // sender address
+                    from: "Kulturekintzak" + "<" + emailConfig.email + ">", // sender address
                     to: [emailConfig.email], // list of receivers
                     subject: ' Find one 2 deleteReactionEvent error ',
                     text: 'The following error has been reported in kulturekintzak: ' + err,
