@@ -128,7 +128,8 @@ export class SeeEventComponent implements OnInit{
   private addReaction(reaction){
     this.eventService.newReactionEvent(this.event._id,reaction,this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
-        this.getEvent();
+        var route=this.router.url.split("/");
+        this.router.navigate([this.localizeService.translateRoute("/"+route[2]+"/"+route[3]+"/"+route[4])]);
       }else{
         if(data.authentication===false){
           this.authService.logout();
@@ -141,7 +142,8 @@ export class SeeEventComponent implements OnInit{
   private deleteReaction(){
     this.eventService.deleteReactionEvent(this.event._id,this.localizeService.parser.currentLang).subscribe(data=>{
       if(data.success){
-        this.getEvent();
+        var route=this.router.url.split("/");
+        this.router.navigate([this.localizeService.translateRoute("/"+route[2]+"/"+route[3]+"/"+route[4])]);
       }
     });  
   }

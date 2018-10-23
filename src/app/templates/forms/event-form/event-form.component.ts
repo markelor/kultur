@@ -22,8 +22,8 @@ import { CreateModalComponent } from '../../../templates/modals/create-modal/cre
 import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
-const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
-//const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
+//const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -128,7 +128,7 @@ export class EventFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private categoryService: CategoryService,
     private eventService: EventService,
     private placeService: PlaceService,

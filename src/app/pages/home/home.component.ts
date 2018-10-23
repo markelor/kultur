@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   public minSize=0;
   public collectionSize;
   private subscription:Subscription;
+  public showFilter;
   constructor(
     private meta: Meta,
     private metaTitle: Title,

@@ -94,7 +94,7 @@ const applicationSchema = new Schema({
         conditions: { type: Array, required: true },
         _id: false
     }],
-    price: { type: Number, required: true },
+    price: { type: Number, required: true, default:0 },
     expiredAt: { type: Date, required: true },
     images: { type: Array, required: true },
     createdAt: { type: Date, required: true },
