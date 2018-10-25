@@ -1,4 +1,4 @@
-<span *ngIf="authService.user && ((inputEvent | translateLanguage:'createdBy':inputLanguage)===authService.user.id || authService.user.permission==='admin') && inputEvent.language!==inputLanguage && (inputEvent | hasBeenTranslatedPipe:inputLanguage)" class="ks-text"><i (click)="eventTranslateDeleteClick(i,event)" class="fa fa-trash ks-color-danger"></i></span>
+<span *ngIf="authService.user && inputEvent && inputLanguage && ((inputEvent | translateLanguage:'createdBy':inputLanguage)===authService.user.id || authService.user.permission==='admin') && inputEvent.language!==inputLanguage && (inputEvent | hasBeenTranslatedPipe:inputLanguage)" class="ks-text"><i (click)="eventTranslateDeleteClick(i,event)" class="fa fa-trash ks-color-danger"></i></span>
 <!-- Event Form -->
 <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
   <div class="row">

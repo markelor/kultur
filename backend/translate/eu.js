@@ -186,6 +186,7 @@ module.exports = {
         createdByProvidedError: "Ekintzaren sortzailea beharrezkoa da.",
         categoryIdProvidedError: "Kategoriaren IDa beharrezkoa da.",
         titleProvidedError: "Ekintzaren izenburua beharrezkoa da.",
+        priceProvidedError: "Ekintzaren prezioa beharrezkoa da.",
         startProvidedError: "Ekintzaren hasiera beharrezkoa da.",
         endProvidedError: "Ekintzaren bukaera beharrezkoa da.",
         descriptionProvidedError: "Ekintzaren deskribapena beharrezkoa da.",

@@ -57,7 +57,7 @@ module.exports = (router) => {
               res.json({ success: false, message: eval(language + '.newApplication.conditionsProvidedError') }); // Return error message
             } else {
               // Check if application price was provided
-              if (!req.body.price) {
+              if (!req.body.price && req.body.price!==0) {
                 res.json({ success: false, message: eval(language + '.newApplication.priceProvidedError') }); // Return error message
               } else {
                 // Check if application expiredAt was provided
@@ -793,7 +793,7 @@ module.exports = (router) => {
           if (req.body.entityName) var newEntityName = req.body.entityName; // Check if a change to entityName was requested
           if (req.body.liceseName) var newLicenseName = req.body.liceseName; // Check if a change to name was requested
           if (req.body.conditions) var newConditions = req.body.conditions; // Check if a change to conditions was requested
-          if (req.body.price) var newPrice = req.body.price; // Check if a change to price was requested
+          if (req.body.price || req.body.price===0) var newPrice = req.body.price; // Check if a change to price was requested
           if (req.body.expiredAt) var newExpiredAt = req.body.expiredAt; // Check if a change to expiredAt was requested
           if (req.body.images) var newImages = req.body.images; // Check if a change to images was requested
           if (req.body.translation) var newTranslation = req.body.translation; // Check if a change to translation was requested
@@ -910,7 +910,7 @@ module.exports = (router) => {
                                 application.licenseName = newLicenseName; // Assign new name to application in database
                               if (newConditions)
                                 application.conditions = newConditions; // Assign new conditions to application in database
-                              if (newPrice)
+                              if (newPrice || newPrice===0)
                                 application.price = newPrice; // Assign new price to application in database
                               if (newExpiredAt)
                                 application.expiredAt = newExpiredAt; // Assign new expiredAt to application in database

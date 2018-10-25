@@ -187,6 +187,7 @@ module.exports = {
         createdByProvidedError: "Event creator is required.",
         categoryIdProvidedError: "Category ID is required.",
         titleProvidedError: "Event title is required.",
+        priceProvidedError: "Event price is required.",
         startProvidedError: "Event start is required.",
         endProvidedError: "Event end is required.",
         descriptionProvidedError: "Event description is required.",
