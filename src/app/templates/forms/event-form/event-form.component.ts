@@ -640,7 +640,11 @@ export class EventFormComponent implements OnInit {
       this.inputEvent.participants=this.participants;
       this.inputEvent.start=new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute);
       this.inputEvent.end=new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute);
-      this.inputEvent.entries=this.form.get('entries').value;
+      if(!this.form.get('entries').value){
+          this.inputEvent.entries='';
+      }else{
+          this.inputEvent.entries=this.form.get('entries').value;
+      }
       this.inputEvent.price=this.form.get('price').value;
       this.inputEvent.categoryId=this.categoryId[this.categoryId.length-1];
       this.inputEvent.currentLanguage=this.inputLanguage;
@@ -688,19 +692,30 @@ export class EventFormComponent implements OnInit {
           //this.inputEvent.createdBy=this.authService.user.id;// Language field       
           this.inputEvent.title=this.form.get('title').value; // Title field
           this.inputEvent.description= this.form.get('description').value; // Description field
+          if(this.form.get('observations').value===''){
+            this.inputEvent.observations='';
+          }else{
+            this.inputEvent.observations=this.form.get('observations').value;
+          }
           this.inputEvent.observations=this.form.get('observations').value; // Observations field     
           this.inputEvent.images.description=this.imagesDescription;  
         }else{
           this.deleteEditImages(false);
           this.inputEvent.images.poster=this.inputEventCopy.images.poster;
           this.inputEvent.translate=this.inputEventCopy.images.poster;
+          var observations;
+           if(this.form.get('observations').value===''){
+            observations='';
+          }else{
+            observations=this.form.get('observations').value;
+          }
           //event push new translation
           var eventTranslationObj={
             language:this.inputLanguage,
             createdBy:this.authService.user.id,  
             title:this.form.get('title').value,
             description:this.form.get('description').value,
-            observations:this.form.get('observations').value,
+            observations:observations,
             images:{
               poster:JSON.parse(JSON.stringify(this.imagesPoster)),
               description:JSON.parse(JSON.stringify(this.imagesDescription))

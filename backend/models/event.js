@@ -29,7 +29,7 @@ const titleValidators = [
 // Validate Function to check if valid url format
 let validUrlChecker = (url) => {
   // Check if url exists
-  if (!url) {
+  if (!url && url!=='') {
     return false; // Return error
   } else {
     // Regular expression to test for a valid url

@@ -296,7 +296,7 @@ export class ObservationFormComponent implements OnInit {
             this.messageClass='alert alert-danger ks-solid';
             this.message=data.message
             this.enableFormNewObservationForm();
-            this.staticModalShow(false,'create',undefined;
+            this.staticModalShow(false,'create',undefined);
           }else{
             this.submitted = false;
             this.observation=new Observation();

@@ -655,13 +655,13 @@ module.exports = (router) => {
           if (req.body.categoryId) var newEventCategoryId = req.body.categoryId; // Check if a change to categoryId was requested
           if (req.body.language) var newEventLanguage = req.body.language; // Check if a change to language was requested
           if (req.body.title) var newEventTitle = req.body.title; // Check if a change to title was requested
-          if (req.body.entries) var newEventEntries = req.body.entries; // Check if a change to entries was requested
+          if (req.body.entries || req.body.entries==='') var newEventEntries = req.body.entries; // Check if a change to entries was requested
           if (req.body.participants) var newEventParticipants = req.body.participants; // Check if a change to participants was requested
           if (req.body.start) var newEventStart = req.body.start; // Check if a change to start was requested
           if (req.body.end) var newEventEnd = req.body.end; // Check if a change to end was requested
           if (req.body.price || req.body.price === 0) var newEventPrice = req.body.price; // Check if a change to price was requested
           if (req.body.description) var newEventDescription = req.body.description; // Check if a change to description was requested
-          if (req.body.observations) var newEventObservations = req.body.observations; // Check if a change to observations was requested
+          if (req.body.observations || req.body.observations==='') var newEventObservations = req.body.observations; // Check if a change to observations was requested
           if (req.body.images.poster) var newEventImagesPoster = req.body.images.poster; // Check if a change to imagesPoster was requested
           if (req.body.images.description) var newEventImagesDescription = req.body.images.description; // Check if a change to imagesDescription was requeste
           if (req.body.translation) var newEventTranslation = req.body.translation; //Check if a change to translation was requested
@@ -808,7 +808,7 @@ module.exports = (router) => {
                                     event.language = newEventLanguage; // Assign new language to event in database
                                   if (newEventTitle)
                                     event.title = newEventTitle; // Assign new title to event in database
-                                  if (newEventEntries)
+                                  if (newEventEntries || newEventEntries==='')
                                     event.entries = newEventEntries; // Assign new entries to event in database
                                   if (newEventParticipants)
                                     event.participants = newEventParticipants; // Assign new participants to event in database
@@ -820,7 +820,7 @@ module.exports = (router) => {
                                     event.price = newEventPrice; // Assign new price to event in database
                                   if (newEventDescription)
                                     event.description = newEventDescription; // Assign new description to event in database
-                                  if (newEventObservations)
+                                  if (newEventObservations || newEventObservations==='')
                                     event.observations = newEventObservations; // Assign new observations to event in database
                                   if (newEventImagesPoster)
                                     event.images.poster = newEventImagesPoster; // Assign new imagesPoster to event in database
