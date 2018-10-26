@@ -187,20 +187,14 @@ export class ObservationFormComponent implements OnInit {
       data => {   
       activeModal.componentInstance.modalHeader = data;
     });
+    activeModal.componentInstance.success=success;
     activeModal.componentInstance.operation = operation;
     activeModal.componentInstance.modalContent = this.message; 
     if(operation==="create"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/observation-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
     }else if(operation==="edit"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/observation-route')+"/"+this.localizeService.translateRoute('manage-route');
-    }
-     if(success){
-      activeModal.componentInstance.headerClass="success-head";
-      activeModal.componentInstance.animationClass="sa-success";
-    }else{
-      activeModal.componentInstance.headerClass="danger-head";
-      activeModal.componentInstance.animationClass="sa-error";
-    }          
+    }        
   } 
   public froalaOptions= {
      // Set max image size to 10MB.
@@ -302,7 +296,7 @@ export class ObservationFormComponent implements OnInit {
             this.messageClass='alert alert-danger ks-solid';
             this.message=data.message
             this.enableFormNewObservationForm();
-            this.staticModalShow(false,'create',data.observation._id);
+            this.staticModalShow(false,'create',undefined;
           }else{
             this.submitted = false;
             this.observation=new Observation();

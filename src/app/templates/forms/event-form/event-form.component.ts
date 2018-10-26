@@ -178,6 +178,7 @@ export class EventFormComponent implements OnInit {
         Validators.minLength(5)
       ])],
       entries: ['', Validators.compose([
+        UrlValidator.validate
       ])],
       categories: this.fb.array([ this.createItem('') ]),
       participant: ['', Validators.compose([

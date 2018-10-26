@@ -215,18 +215,12 @@ export class ApplicationFormComponent implements OnInit {
     });
     activeModal.componentInstance.operation = operation;
     activeModal.componentInstance.modalContent = this.message; 
+        activeModal.componentInstance.success=success;
     if(operation==="create"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/application-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
     }else if(operation==="edit"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/application-route')+"/"+this.localizeService.translateRoute('manage-route');
-    }
-    if(success){
-      activeModal.componentInstance.headerClass="success-head";
-      activeModal.componentInstance.animationClass="sa-success";
-    }else{
-      activeModal.componentInstance.headerClass="danger-head";
-      activeModal.componentInstance.animationClass="sa-error";
-    }          
+    }      
   } 
   // Function to disable the registration form
   private disableForm(){
@@ -281,7 +275,7 @@ export class ApplicationFormComponent implements OnInit {
         this.messageClass='alert alert-danger ks-solid';
         this.message=data.message
         this.enableForm();
-        this.staticModalShow(false,'create',data.application._id);
+        this.staticModalShow(false,'create',undefined);
       }else{
         this.submitted = false;
         this.application=new Application();

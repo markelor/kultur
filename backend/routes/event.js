@@ -131,7 +131,6 @@ module.exports = (router) => {
                                             res.json({ success: false, message: eval(language + err.errors['title'].message) }); // Return error message
                                           } else {
                                             if (err.errors['entries']) {
-                                              console.log(eval(language + err.errors['entries'].message));
                                               res.json({ success: false, message: eval(language + err.errors['entries'].message) }); // Return error message
                                             } else {
                                               if (err.errors['description']) {
