@@ -28,6 +28,27 @@ const titleValidators = [
         message: '.validation.titleLength'
     }
 ];
+// Validate Function to check if valid url format
+let validUrlChecker = (url) => {
+    console.log(url);
+  // Check if url exists
+  if (!url) {
+    return false; // Return error
+  } else {
+    // Regular expression to test for a valid url
+     const regExp = new RegExp(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g);
+    return regExp.test(url); // Return regular expression test results (true or false)
+  }
+};
+
+// Array of Url Validators
+const urlValidators = [
+  // First Url Validator
+  {
+    validator: validUrlChecker,
+    message: '.validation.urlValid'
+  }
+];
 
 // Validate Function to check description length
 let descriptionLengthChecker = (description) => {
@@ -82,6 +103,7 @@ const eventSchema = new Schema({
     participants: { type: Array, required: false },
     language: { type: String, required: true },
     title: { type: String, required: true, validate: titleValidators },
+    entries:{type: String, required: false, validate: urlValidators},
     description: { type: String, required: true, validate: descriptionValidators },
     observations: { type: String, validate: observationsValidators },
     images: {

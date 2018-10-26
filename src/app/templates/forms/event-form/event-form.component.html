@@ -97,36 +97,18 @@
         </div>
       </div>
     </div>
-    <!-- Participants input -->
+    <!-- Entries -->
     <div class="col-sm-6">
-      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
-        <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
-        <div class="input-group icon">
-          <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
-          <div class="input-group-append ">
-            <button (click)="addParticipant()" type="button" class="btn btn-success ks-light ks-no-text">
-              <span class="la la-plus ks-icon"></span>
-            </button>
-          </div>
-        </div>
+      <div class="form-group required" [ngClass]="{'has-error': (!entries.valid && entries.dirty), 'has-success': (entries.valid)}">
+        <label for="inputEntries" translate>{{'event-form.entries'}}</label>
+        <input [formControl]="entries" type="text" class="form-control" id="inputEntries">
         <!-- Validation -->
-        <!--<span *ngIf="participant.errors?.minlength && participant.dirty || participant.errors?.maxlength && participant.dirty " class="help-block form-error" translate>{{'validation.participant-length'}}</span>
-        <span *ngIf="participant.errors?.validateTitle && participant.dirty" class="help-block form-error" translate>
-                    {{'validation.participant-validation'}}</span>-->
+        <span *ngIf="entries.errors?.validateUrl && entries.dirty" class="help-block form-error" translate>{{'validation.url-validation'}}</span>
       </div>
     </div>
-    <!-- Participant list -->
-    <div class="col-sm-12">
-      <div class="form-group">
-        <label *ngFor="let participant of participants; let i=index;" class="custom-control custom-checkbox">
-          <input type="checkbox" [checked]="participant" (change)="deleteParticipant(i)" class="custom-control-input">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{participant}}</span>
-        </label>
-      </div>
-    </div>
+
     <!-- File upload start-->
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <div class="form-group required">
         <label for="fileUploadPoster" translate>{{'event-form.images'}}</label>
         <button [disabled]="disableUploader" class="btn btn-primary ks-btn-file d-block">
@@ -184,6 +166,34 @@
             <span class="fa fa-trash" translate>{{'event-form.delete-all'}}</span>
           </button>-->
         <!--</div>-->
+      </div>
+    </div>
+    <!-- Participants input -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
+        <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
+          <div class="input-group-append ">
+            <button (click)="addParticipant()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-plus ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Validation -->
+        <!--<span *ngIf="participant.errors?.minlength && participant.dirty || participant.errors?.maxlength && participant.dirty " class="help-block form-error" translate>{{'validation.participant-length'}}</span>
+        <span *ngIf="participant.errors?.validateTitle && participant.dirty" class="help-block form-error" translate>
+                    {{'validation.participant-validation'}}</span>-->
+      </div>
+    </div>
+    <!-- Participant list -->
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label *ngFor="let participant of participants; let i=index;" class="custom-control custom-checkbox">
+          <input type="checkbox" [checked]="participant" (change)="deleteParticipant(i)" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{participant}}</span>
+        </label>
       </div>
     </div>
     <!-- File upload end-->

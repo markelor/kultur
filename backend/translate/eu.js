@@ -17,6 +17,7 @@ module.exports = {
         aboutYourselfLength: "Zuri buruzek 500 karaktere baino gutxiago izan behar ditu.",
         titleLength: "Tituluak gutxienez 3 karaktere izan behar ditu, baina ez 35 baino gehiago.",
         titleValid: "Tituluak ezin du karaktere berezirik izan.",
+        urlValid:"Url helbideak, baliozkoa izan behar du.",
         locationLength: "Kokapenak 1000 karaktere baino gutxiago izan behar ditu.",
         categoryDescriptionLength: "Deskribapenak gutxienez 5 karaktere izan behar ditu, baina ez 200 baino gehiago.",
         eventDescriptionLength: "Deskribapenak gutxienez 50 karaktere izan behar ditu, baina ez 20000 baino gehiago.",

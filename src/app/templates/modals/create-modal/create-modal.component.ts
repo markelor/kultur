@@ -13,10 +13,11 @@ import { LocalizeRouterService } from 'localize-router';
 export class CreateModalComponent implements OnInit {
   public modalHeader;
   public modalContent;
-  @Input() headerClass;
+  public headerClass;
+  public animationClass;
   @Input() route;
   @Input() operation;
-  @Input() animationClass;
+  @Input() success;
   constructor(
     private localizeService:LocalizeRouterService,
     private activeModal: NgbActiveModal,
@@ -49,6 +50,13 @@ export class CreateModalComponent implements OnInit {
     return svg;
   }
   ngOnInit() {
+    if(this.success){
+      this.headerClass="success-head";
+      this.animationClass="sa-success";
+    }else{
+      this.headerClass="danger-head";
+      this.animationClass="sa-error";
+    }  
     this.observableService.modalCount=this.observableService.modalCount+1;
   }
 }

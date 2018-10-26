@@ -157,6 +157,7 @@
   {
     "created-by": "Publikatzailea",
     "title": "Izenburua",
+    "entries":"Sarrerak",
     "category": "Kategoria",
     "participants": "Parte Hartzaileak",
     "start": "Hasiera",
@@ -257,6 +258,7 @@
     "about-yourself-length": "Gehienezko karaktereak: 500.",
     "title-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
     "title-validation": "Tituluak ezin du karaktere berezirik izan.",
+    "url-validation": "Url helbideak, baliozkoa izan behar du.",
     "price-validation": "Gehienezko hamartarrak: 2.",
     "coordinator-length": "Gutxienezko karaktereak: 5, Gehienezko karaktereak: 35.",
     "coordinator-validation": "Koordinatzaileak ezin du karaktere berezirik izan.",

@@ -156,6 +156,7 @@
   {
     "created-by": "Creado por",
     "title": "Título",
+    "entries":"Entradas",
     "parent-id": "Padre Id",
     "level": "Nivel",
     "category": "Categoría",
@@ -258,6 +259,7 @@
     "about-yourself-length": "Máximo de caracteres: 500.",
     "title-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
     "title-validation": "El título no debe tener caracteres especiales.",
+    "url-validation": "Tiene que ser una dirección  url válida.",
     "price-validation": "Máximo de decimales: 2.",
     "coordinator-length": "Mínimo de caracteres: 5, Máximo de caracteres: 35.",
     "coordinator-validation": "El coordinador no debe tener caracteres especiales.",

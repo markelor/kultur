@@ -156,6 +156,7 @@
   {
     "created-by": "Created by",
     "title": "Title",
+    "entries":"Entries",
     "category": "Category",
     "participants": "Participants",
     "start": "Start",
@@ -254,6 +255,7 @@
     "about-yourself-length": "Maximum characters: 500.",
     "title-length": "Minimum characters: 5, Maximum characters: 35.",
     "title-validation": "Title must not have any special characters.",
+    "url-validation": "It has to be a valid url address.",
     "price-validation": "Maximum de decimals: 2.",
     "coordinator-length": "Minimum characters: 5, Maximum characters: 35.",
     "coordinator-validation": "Coordinator must not have any special characters.",

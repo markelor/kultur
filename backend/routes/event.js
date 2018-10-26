@@ -100,6 +100,7 @@ module.exports = (router) => {
                                       placeId: place._id,
                                       language: language,
                                       title: req.body.event.title,
+                                      entries: req.body.event.entries,
                                       participants: req.body.event.participants,
                                       start: req.body.event.start,
                                       end: req.body.event.end,
@@ -129,16 +130,20 @@ module.exports = (router) => {
                                           if (err.errors['title']) {
                                             res.json({ success: false, message: eval(language + err.errors['title'].message) }); // Return error message
                                           } else {
-                                            if (err.errors['description']) {
-                                              res.json({ success: false, message: eval(language + err.errors['description'].message) }); // Return error message
+                                            if (err.errors['entries']) {
+                                              console.log(eval(language + err.errors['entries'].message));
+                                              res.json({ success: false, message: eval(language + err.errors['entries'].message) }); // Return error message
                                             } else {
-                                              if (err.errors['observations']) {
-                                                res.json({ success: false, message: eval(language + err.errors['observations'].message) }); // Return error message
+                                              if (err.errors['description']) {
+                                                res.json({ success: false, message: eval(language + err.errors['description'].message) }); // Return error message
                                               } else {
-                                                res.json({ success: false, message: err }); // Return general error message
+                                                if (err.errors['observations']) {
+                                                  res.json({ success: false, message: eval(language + err.errors['observations'].message) }); // Return error message
+                                                } else {
+                                                  res.json({ success: false, message: err }); // Return general error message
+                                                }
                                               }
                                             }
-
                                           }
                                         } else {
                                           res.json({ success: false, message: eval(language + '.newEvent.saveError'), err }); // Return general error message
@@ -651,6 +656,7 @@ module.exports = (router) => {
           if (req.body.categoryId) var newEventCategoryId = req.body.categoryId; // Check if a change to categoryId was requested
           if (req.body.language) var newEventLanguage = req.body.language; // Check if a change to language was requested
           if (req.body.title) var newEventTitle = req.body.title; // Check if a change to title was requested
+          if (req.body.entries) var newEventEntries = req.body.entries; // Check if a change to entries was requested
           if (req.body.participants) var newEventParticipants = req.body.participants; // Check if a change to participants was requested
           if (req.body.start) var newEventStart = req.body.start; // Check if a change to start was requested
           if (req.body.end) var newEventEnd = req.body.end; // Check if a change to end was requested
@@ -795,13 +801,15 @@ module.exports = (router) => {
                                     event.language = newEventLanguage; // Assign new language to event in database
                                   if (newEventTitle)
                                     event.title = newEventTitle; // Assign new title to event in database
+                                  if (newEventEntries)
+                                    event.entries = newEventEntries; // Assign new entries to event in database
                                   if (newEventParticipants)
                                     event.participants = newEventParticipants; // Assign new participants to event in database
                                   if (newEventStart)
                                     event.start = newEventStart; // Assign new start to event in database
                                   if (newEventEnd)
                                     event.end = newEventEnd; // Assign new end to event in database
-                                  if (newEventPrice || newEventPrice===0)
+                                  if (newEventPrice || newEventPrice === 0)
                                     event.price = newEventPrice; // Assign new price to event in database
                                   if (newEventDescription)
                                     event.description = newEventDescription; // Assign new description to event in database
@@ -824,13 +832,17 @@ module.exports = (router) => {
                                         if (err.errors['title']) {
                                           res.json({ success: false, message: eval(language + err.errors['title'].message) }); // Return error message
                                         } else {
-                                          if (err.errors['description']) {
-                                            res.json({ success: false, message: eval(language + err.errors['description'].message) }); // Return error message
+                                          if (err.errors['entries']) {
+                                            res.json({ success: false, message: eval(language + err.errors['entries'].message) }); // Return error message
                                           } else {
-                                            if (err.errors['observations']) {
-                                              res.json({ success: false, message: eval(language + err.errors['observations'].message) }); // Return error message
+                                            if (err.errors['description']) {
+                                              res.json({ success: false, message: eval(language + err.errors['description'].message) }); // Return error message
                                             } else {
-                                              res.json({ success: false, message: err }); // Return general error message
+                                              if (err.errors['observations']) {
+                                                res.json({ success: false, message: eval(language + err.errors['observations'].message) }); // Return error message
+                                              } else {
+                                                res.json({ success: false, message: err }); // Return general error message
+                                              }
                                             }
                                           }
                                         }

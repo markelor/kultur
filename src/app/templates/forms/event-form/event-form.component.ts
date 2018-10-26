@@ -1,7 +1,7 @@
 import { Component, OnInit,ElementRef,Injectable,Input,Output,EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder,FormArray, Validators } from '@angular/forms';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { LatitudeValidator,LongitudeValidator,DateValidator,PriceValidator } from '../../../validators';
+import { LatitudeValidator,LongitudeValidator,DateValidator,PriceValidator,UrlValidator } from '../../../validators';
 import { AuthService } from '../../../services/auth.service';
 import { CategoryService } from '../../../services/category.service';
 import { EventService } from '../../../services/event.service';
@@ -22,8 +22,8 @@ import { CreateModalComponent } from '../../../templates/modals/create-modal/cre
 import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
-const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+//const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -85,6 +85,7 @@ export class EventFormComponent implements OnInit {
   @Input() inputCategories;
   private imagesDescription=[];
   public title:AbstractControl;
+  public entries:AbstractControl;
   public participant:AbstractControl;
   public province:AbstractControl;
   public municipality:AbstractControl;
@@ -176,6 +177,8 @@ export class EventFormComponent implements OnInit {
         Validators.maxLength(30),
         Validators.minLength(5)
       ])],
+      entries: ['', Validators.compose([
+      ])],
       categories: this.fb.array([ this.createItem('') ]),
       participant: ['', Validators.compose([
         /*Validators.maxLength(30),
@@ -221,6 +224,7 @@ export class EventFormComponent implements OnInit {
 
     })
     this.title = this.form.controls['title'];
+    this.entries = this.form.controls['entries'];
     this.participant = this.form.controls['participant'];
     this.province = this.form.controls['province'];
     this.municipality = this.form.controls['municipality'];
@@ -390,6 +394,8 @@ export class EventFormComponent implements OnInit {
       this.end.setValue(calendar); 
       this.timeEnd.hour=hour;
       this.timeEnd.minute=minute; 
+      //Get entries on page load
+      this.entries.setValue(this.inputEvent.entries);
       //Get price on page load
       this.price.setValue(this.inputEvent.price);
       //Get lat on page load
@@ -441,18 +447,12 @@ export class EventFormComponent implements OnInit {
     });
     activeModal.componentInstance.operation = operation;
     activeModal.componentInstance.modalContent = this.message; 
+    activeModal.componentInstance.success=success;
     if(operation==="create"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/event-route')+"/"+this.localizeService.translateRoute('manage-route')+"/"+this.localizeService.translateRoute('edit-route')+"/"+id;
     }else if(operation==="edit"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/event-route')+"/"+this.localizeService.translateRoute('manage-route');
-    }
-    if(success){
-      activeModal.componentInstance.headerClass="success-head";
-      activeModal.componentInstance.animationClass="sa-success";
-    }else{
-      activeModal.componentInstance.headerClass="danger-head";
-      activeModal.componentInstance.animationClass="sa-error";
-    }       
+    }     
   }  
   private deleteTranslateStaticModalShow() {
     const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'sm',backdrop: 'static'});
@@ -552,6 +552,7 @@ export class EventFormComponent implements OnInit {
     this.event.setLanguage=this.localizeService.parser.currentLang;// Language field
     this.event.setCreatedBy=this.authService.user.id; // CreatedBy field
     this.event.setTitle=this.form.get('title').value; // Title field
+    this.event.setEntries=this.form.get('entries').value;
     this.event.setParticipants=this.participants;
     this.event.setStart=new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute);
     this.event.setEnd=new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute);
@@ -591,7 +592,7 @@ export class EventFormComponent implements OnInit {
         this.deleteUploadImages('descriptionAll',this.imagesDescription);
         this.messageClass = 'alert alert-danger ks-solid'; // Return error class
         this.message = data.message; // Return error message
-        this.staticModalShow(false,'create',data.event._id);
+        this.staticModalShow(false,'create',undefined);
 
       } else {
         this.createNewEventForm(); // Reset all form fields
@@ -632,6 +633,7 @@ export class EventFormComponent implements OnInit {
       this.inputEvent.participants=this.participants;
       this.inputEvent.start=new Date(this.form.get('start').value.year,this.form.get('start').value.month-1,this.form.get('start').value.day,this.timeStart.hour,this.timeStart.minute);
       this.inputEvent.end=new Date(this.form.get('end').value.year,this.form.get('end').value.month-1,this.form.get('end').value.day,this.timeEnd.hour,this.timeEnd.minute);
+      this.inputEvent.entries=this.form.get('entries').value;
       this.inputEvent.price=this.form.get('price').value;
       this.inputEvent.categoryId=this.categoryId[this.categoryId.length-1];
       if(this.selectedPlace){

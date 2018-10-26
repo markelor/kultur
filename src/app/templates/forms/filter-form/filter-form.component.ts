@@ -258,7 +258,7 @@ export class FilterFormComponent  {
     }
     this.filtersEvent["title"]={$regex: this.form.get('title').value};
     //this.filtersEvent["price"]=null;
-    if(this.form.get('price').value){
+    if(this.form.get('price').value || this.form.get('price').value===0){
       this.filtersEvent["price"]={$lte: this.form.get('price').value};
     }else{
       delete this.filtersEvent["price"];

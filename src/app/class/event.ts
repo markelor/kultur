@@ -7,6 +7,7 @@ export class Event{
     visible: boolean;
     participants: Array<string>;
     title: string;
+    entries: string;
     start: Date;
     end: Date;
     price:number;
@@ -59,6 +60,12 @@ export class Event{
     set setTitle(title:string) {
         this.title = title;
     } 
+    get getEntries():string {
+        return this.entries;
+    }
+    set setEntries(entries:string) {
+        this.entries = entries;
+    }
     get getStart():Date {
         return this.start;
     }

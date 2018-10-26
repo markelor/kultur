@@ -17,6 +17,7 @@ module.exports = {
         aboutYourselfLength: "Acerca de ti no debe tener más de 500 caracteres.",
         titleLength: "El título debe tener al menos 3 caracteres pero no más de 35.",
         titleValid: "El título no debe tener caracteres especiales.",
+        urlValid:"Tiene que ser una dirección  url válida.",
         locationLength: "La localización no debe tener más de 1000 caracteres.",
         categoryDescriptionLength: "La descripción debe tener al menos 5 caracteres pero no más de 200.",
         eventDescriptionLength: "La descripción debe tener al menos 50 caracteres pero no más de 20000.",
