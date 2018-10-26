@@ -129,39 +129,14 @@
                         <li *ngFor="let reaction of allReactions">{{reaction}}</li>
                       </ul>
                     </ng-template>
-                    <!--like reaction-->
-                    <a (click)="reactionClick('like')" href="javascript:void(0);" placement="top" [ngbTooltip]="likeReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'likeBy').length" [ngClass]="'like-btn-like'"></span>
-                    </a>
-                    <!--love reaction-->
-                    <a (click)="reactionClick('love')" href="javascript:void(0);" placement="top" [ngbTooltip]="loveReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'loveBy').length" [ngClass]="'like-btn-love'"></span>
-                    </a>
-                    <!--haha reaction-->
-                    <a (click)="reactionClick('haha')" href="javascript:void(0);" placement="top" [ngbTooltip]="hahaReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'hahaBy').length" [ngClass]="'like-btn-haha'"></span>
-                    </a>
-                    <!--wow reaction-->
-                    <a (click)="reactionClick('wow')" href="javascript:void(0);" placement="top" [ngbTooltip]="wowReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'wowBy').length" [ngClass]="'like-btn-wow'"></span>
-                    </a>
-                    <!--sad reaction-->
-                    <a (click)="reactionClick('sad')" href="javascript:void(0);" placement="top" [ngbTooltip]="sadReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'sadBy').length" [ngClass]="'like-btn-sad'"></span>
-                    </a>
-                    <!--angry reaction-->
-                    <a (click)="reactionClick('angry')" href="javascript:void(0);" placement="top" [ngbTooltip]="angryReaction" class="like-emo">
-                      <!-- like emotions container -->
-                      <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'angryBy').length" [ngClass]="'like-btn-angry'"></span>
-                    </a>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'likeBy').length" (click)="reactionClick('like')" href="javascript:void(0);" [ngbTooltip]="likeReaction" class="small-reaction reaction-like" ></span>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'loveBy').length" (click)="reactionClick('love')" href="javascript:void(0);" [ngbTooltip]="loveReaction" class="small-reaction reaction-love"></span>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'hahaBy').length" (click)="reactionClick('haha')" href="javascript:void(0);" [ngbTooltip]="hahaReaction" class="small-reaction reaction-haha"></span>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'wowBy').length" (click)="reactionClick('wow')" href="javascript:void(0);" [ngbTooltip]="wowReaction" class="small-reaction reaction-wow"></span>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'sadBy').length" (click)="reactionClick('sad')" href="javascript:void(0);" [ngbTooltip]="sadReaction" class="small-reaction reaction-sad"></span>
+                    <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'angryBy').length" (click)="reactionClick('angry')" href="javascript:void(0);" [ngbTooltip]="angryReaction" class="small-reaction reaction-angry"></span>
                     <a (click)="reactionClick('all')" href="javascript:void(0);" placement="top" [ngbTooltip]="allReaction" class="like-details">
-                    </a>
-                    <!-- HTML to write -->
+                    </a>        
                   </div>
                 </div>
                 <br>

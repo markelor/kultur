@@ -11,7 +11,7 @@ agm-map {
 
 #iw-container {
   margin: 0;
-  height: 60vh;
+  height: auto;
 }
 
 .info-img {

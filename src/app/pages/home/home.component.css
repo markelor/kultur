@@ -312,10 +312,7 @@
     transform: rotate(-45deg);
 }
 
-.reaction:hover {
-    margin-right: 0px;
-    padding: 20px;
-}
+
 
 .reaction {
     display: inline-block;

@@ -64,6 +64,8 @@ ngx-gallery /deep/ ngx-gallery-image {
   text-decoration: underline;
 }
 
+
+
 .like-btn-default {
   background-image: url('../../../../assets/img/reactions/facebook.png');
   background-repeat: no-repeat;
@@ -111,6 +113,25 @@ ngx-gallery /deep/ ngx-gallery-image {
   border-radius: 44px 44px;
   display: none;
   background-color: #e7f3ff;
+}
+
+.small-reaction:hover {
+    margin-right: 0px;
+    padding: 20px;
+    cursor:pointer;
+}
+
+.small-reaction {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transform: scale(1, 1);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: -4px;
+    margin-right: -8px;
+    padding: 10px;
 }
 
 .reaction {
