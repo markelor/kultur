@@ -136,7 +136,7 @@
                     <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'sadBy').length" (click)="reactionClick('sad')" href="javascript:void(0);" [ngbTooltip]="sadReaction" class="small-reaction reaction-sad"></span>
                     <span *ngIf="(event | safeHtml : 'reactionsUsernames' : 'angryBy').length" (click)="reactionClick('angry')" href="javascript:void(0);" [ngbTooltip]="angryReaction" class="small-reaction reaction-angry"></span>
                     <a (click)="reactionClick('all')" href="javascript:void(0);" placement="top" [ngbTooltip]="allReaction" class="like-details">
-                    </a>        
+                    </a>
                   </div>
                 </div>
                 <br>
@@ -230,7 +230,8 @@
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group text-center">
-                    <button (click)="showMap = !showMap" type="submit" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
+                    <button [hidden]="showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.hide-map'}}</button>
+                    <button [hidden]="!showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
                     <single-event-map [hidden]="!showMap"></single-event-map>
                   </div>
                 </div>

@@ -125,6 +125,7 @@ export class EventFormComponent implements OnInit {
   private eventTranslateDeleteSubscriptionObservable: Subscription;
   public disableCategories=false;
   public disableUploader=false;
+  public showMap;
   @Output() RefreshEvent = new EventEmitter();
 
   constructor(

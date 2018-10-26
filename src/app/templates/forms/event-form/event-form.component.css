@@ -1,6 +1,10 @@
 .margin-top {
   margin-top: -6px;
 }
+.margin-bottom {
+  margin-bottom:  -40px;
+  z-index:1;
+}
 
 .table-btn {
   padding: 10px;

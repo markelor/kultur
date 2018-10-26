@@ -2058,7 +2058,7 @@ form.ks-light .form-group label {
 }
 
 .form-group>.btn+.btn {
-  margin-left: 10px
+  /*margin-left: 10px*/
 }
 
 .form-control {
