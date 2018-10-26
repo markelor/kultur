@@ -48,6 +48,12 @@ export class EventsAdministratorComponent implements OnInit {
     });      
   }  
   private createSettings(){
+    var currentTranslation='';
+    if(this.localizeService.parser.currentLang=="eu"){
+      currentTranslation='//cdn.datatables.net/plug-ins/1.10.19/i18n/Basque.json';
+    }else if(this.localizeService.parser.currentLang=="es"){
+      currentTranslation='//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json';
+    }
     this.dtOptions = {
       // Declare the use of the extension in the dom parameter
       dom: 'Bfrtip',
@@ -60,10 +66,13 @@ export class EventsAdministratorComponent implements OnInit {
         'csv',
 
       ],
+      language: {
+        url:currentTranslation,
+      },
       responsive: true,
       columnDefs: [
         { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 10, targets: 1 },
+        { responsivePriority: 10, targets: 1 ,class: 'description-column'},
         { responsivePriority: 3, targets: 2 },
         { responsivePriority: 8, targets: 3 },
         { responsivePriority: 4, targets: 4 },
@@ -126,8 +135,8 @@ export class EventsAdministratorComponent implements OnInit {
         this.router.navigate([this.localizeService.translateRoute('/sign-in-route')]); // Return error and route to login page
       }
     });
-    this.createSettings(); 
     this.getEvents();
+    this.createSettings(); 
   }
   ngOnDestroy(){
     this.dtTrigger.unsubscribe();

@@ -1,4 +1,4 @@
-<span *ngIf="authService.user && inputEvent && inputLanguage && ((inputEvent | translateLanguage:'createdBy':inputLanguage)===authService.user.id || authService.user.permission==='admin') && inputEvent.language!==inputLanguage && (inputEvent | hasBeenTranslatedPipe:inputLanguage)" class="ks-text"><i (click)="eventTranslateDeleteClick(i,event)" class="fa fa-trash ks-color-danger"></i></span>
+<div *ngIf="authService.user && inputEvent && inputLanguage && ((inputEvent | translateLanguage:'createdBy':inputLanguage)===authService.user.id || authService.user.permission==='admin') && inputEvent.language!==inputLanguage && (inputEvent | hasBeenTranslatedPipe:inputLanguage)" (click)="eventTranslateDeleteClick(i,event)" class="ribbon ribbon-top-left"><span class="delete-icon"><i  class="fa fa-trash"></i></span></div>
 <!-- Event Form -->
 <form [formGroup]="form" (ngSubmit)="onEventSubmit()" class="form-horizontal">
   <div class="row">

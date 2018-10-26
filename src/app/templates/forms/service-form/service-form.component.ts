@@ -300,11 +300,13 @@ export class ServiceFormComponent implements OnInit {
     }else if(operation==="edit"){
       activeModal.componentInstance.route=this.localizeService.translateRoute('/service-route')+"/"+this.localizeService.translateRoute('manage-route');
     }
-    if(success){
-      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/success.svg";
+     if(success){
+      activeModal.componentInstance.headerClass="success-head";
+      activeModal.componentInstance.animationClass="sa-success";
     }else{
-      activeModal.componentInstance.modalImage="assets/img/defaults/create-modal/error.svg";
-    }       
+      activeModal.componentInstance.headerClass="danger-head";
+      activeModal.componentInstance.animationClass="sa-error";
+    }          
   }   
   private mapClickPlace(){
     this.subscriptionObservableMapClick=this.observableService.notifyObservable.subscribe(res => {

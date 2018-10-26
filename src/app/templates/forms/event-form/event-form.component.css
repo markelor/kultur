@@ -43,3 +43,60 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before {
     width: 100px;
   }
 }
+
+.ribbon {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+
+.ribbon span {
+    position: absolute;
+    display: block;
+    width: 185px;
+    margin: -38px -44px 0 0;
+    padding: 23px 27px 5px 0px;
+    background-color: #f44336;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 12px 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ribbon span i{
+  font-size: large;
+  display: block;
+}
+/* top left*/
+
+.ribbon-top-left {
+    top: 115px;
+    left: 0px;
+}
+
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+.ribbon-top-left::before {
+    top: 0;
+    right: 17px;
+}
+
+.ribbon-top-left::after {
+    bottom: 17px;
+    left: 0;
+}
+
+.ribbon-top-left span {
+    right: 10px;
+    top: 12px;
+    transform: rotate(-45deg);
+}
