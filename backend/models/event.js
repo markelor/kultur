@@ -18,8 +18,6 @@ let titleLengthChecker = (title) => {
         }
     }
 };
-
-
 // Array of Title Validators
 const titleValidators = [
     // First Title Validator
@@ -30,13 +28,12 @@ const titleValidators = [
 ];
 // Validate Function to check if valid url format
 let validUrlChecker = (url) => {
-    console.log(url);
   // Check if url exists
   if (!url) {
     return false; // Return error
   } else {
     // Regular expression to test for a valid url
-     const regExp = new RegExp(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g);
+     const regExp = new RegExp(/^$|^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g);
     return regExp.test(url); // Return regular expression test results (true or false)
   }
 };

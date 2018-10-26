@@ -125,7 +125,6 @@ export class EventFormComponent implements OnInit {
   private eventTranslateDeleteSubscriptionObservable: Subscription;
   public disableCategories=false;
   public disableUploader=false;
-  public showMap;
   @Output() RefreshEvent = new EventEmitter();
 
   constructor(
@@ -474,6 +473,12 @@ export class EventFormComponent implements OnInit {
       this.eventTranslateDeleteSubscriptionObservable=this.observableService.notifyObservable.subscribe(res => {
         this.eventTranslateDeleteSubscriptionObservable.unsubscribe();
         if (res.hasOwnProperty('option') && res.option === 'confirmation-modal-delete-event') {
+          this.inputEvent.currentLanguage=this.inputLanguage;
+          if(this.inputEvent.language===this.inputLanguage){
+            this.inputEvent.hasTranslation=false;
+          }else{
+            this.inputEvent.hasTranslation=true;
+          }
           //delete current Translate
           for (var i = 0; i < this.inputEvent.translation.length; ++i) {
             if(this.inputEvent.translation[i].language===this.inputLanguage){
@@ -638,6 +643,12 @@ export class EventFormComponent implements OnInit {
       this.inputEvent.entries=this.form.get('entries').value;
       this.inputEvent.price=this.form.get('price').value;
       this.inputEvent.categoryId=this.categoryId[this.categoryId.length-1];
+      this.inputEvent.currentLanguage=this.inputLanguage;
+      if(this.inputEvent.language===this.inputLanguage){
+        this.inputEvent.hasTranslation=false;
+      }else{
+        this.inputEvent.hasTranslation=true;
+      }
       if(this.selectedPlace){
         this.inputEvent.place=this.selectedPlace;
       } 

@@ -691,11 +691,19 @@ module.exports = (router) => {
               if (!mainUser) {
                 res.json({ success: false, message: eval(language + '.editUser.userError') }); // Return error
               } else {
-                var saveErrorPermission = false;
-                // Check if is owner
-                if (mainUser.permission === "banned") {
-                  saveErrorPermission = language + '.general.permissionError';
+                var saveErrorPermission = true;
+                if(req.body.hasTranslation){
+                  for (var i = 0; i < req.body.translation.length; i++) {
+                    if(req.body.translation[i].language===req.body.currentLanguage){
+                      if(req.body.translation[i].createdBy.toString()===mainUser._id.toString()){
+                        var saveErrorPermission = false;
+                      }
+                    }
+                  }
                 }
+                if(req.body.createdBy.toString()===mainUser._id.toString() || mainUser.permission==="admin"){
+                  var saveErrorPermission = false;
+                }  
                 //check saveError permision to save changes or not
                 if (saveErrorPermission) {
                   res.json({ success: false, message: eval(saveErrorPermission) }); // Return error

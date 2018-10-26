@@ -23,7 +23,7 @@
       </div>
     </div>
     <!-- Start date-->
-    <div class="col-sm-3 col-xs-12 margin-bottom">
+    <div class="col-sm-3 col-xs-12">
       <div class="form-group required" [ngClass]="{'has-error': (!start.valid && start.dirty), 'has-success': (start.valid)}">
         <label for="inputStart" translate>{{'event-form.start'}}</label>
         <div class="input-group icon">
@@ -41,13 +41,13 @@
       </div>
     </div>
     <!-- Start time-->
-    <div class="col-sm-3 col-xs-12 margin-top margin-bottom">
+    <div class="col-sm-3 col-xs-12 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeStart" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
       </div>
     </div>
     <!-- End date -->
-    <div class="col-sm-3 col-xs-12 margin-bottom">
+    <div class="col-sm-3 col-xs-12">
       <div class="form-group required" [ngClass]="{'has-error': ((!end.valid && end.dirty) ||  end >= start), 'has-success': (end.valid &&  end < start)}">
         <label for="inputEnd" translate>{{'event-form.end'}}</label>
         <div class="input-group icon">
@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- End time-->
-    <div class="col-sm-3 col-xs-12 margin-top margin-bottom">
+    <div class="col-sm-3 col-xs-12 margin-top">
       <div class="form-group required">
         <ngb-timepicker [(ngModel)]="timeEnd" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
       </div>
@@ -103,7 +103,7 @@
         <label for="inputEntries" translate>{{'event-form.entries'}}</label>
         <input [formControl]="entries" type="text" class="form-control" id="inputEntries">
         <!-- Validation -->
-        <span *ngIf="entries.errors?.validateUrl && entries.dirty && entries.value" class="help-block form-error" translate>{{'validation.url-validation'}}</span>
+        <span *ngIf="entries.errors?.validateUrl && entries.dirty" class="help-block form-error" translate>{{'validation.url-validation'}}</span>
       </div>
     </div>
 
@@ -198,7 +198,7 @@
     </div>
     <!-- File upload end-->
     <!-- Province -->
-    <div class="col-sm-4 col-xs-6">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!province.value && province.dirty), 'has-success': (province.value && province.valid)}">
         <label for="selectProvinceEvent" translate>{{'event-form.province'}}</label>
         <select [formControl]="province" class="form-control" id="selectProvinceEvent" (change)="onSelectedProvince($event.target.selectedIndex-1)">
@@ -212,7 +212,7 @@
       </div>
     </div>
     <!-- Municipality -->
-    <div class="col-sm-4 col-xs-6">
+    <div class="col-sm-6 col-xs-6">
       <div class="form-group required" [ngClass]="{'has-error': (!municipality.value && municipality.dirty), 'has-success': (municipality.value && municipality.valid)}">
         <label for="selectMunicipalityEvent" translate>{{'event-form.municipality'}}</label>
         <select [formControl]="municipality" class="form-control" id="selectMunicipalityEvent" (change)="onSelectedMunicipality($event.target.selectedIndex-1)">
@@ -226,7 +226,7 @@
       </div>
     </div>
     <!-- Location exists-->
-    <div *ngIf="!location.value && locationsExistsEvent.length > 0" class="col-sm-4 col-xs-12">
+    <div *ngIf="!location.value && locationsExistsEvent.length > 0" class="col-sm-12">
       <div class="form-group required" [ngClass]="{'has-error': (!locationsExists.value && locationsExists.dirty), 'has-success': (locationsExists.value && location.valid)}">
         <label for="selectLocationsExistsEvent" translate>{{'event-form.locations-exists'}}</label>
         <select [formControl]="locationsExists" class="form-control" id="selectLocationsExistsEvent" (change)="onSelectedLocationsExists($event.target.selectedIndex-1)">
@@ -279,13 +279,11 @@
     </div>
     <div class="col-sm-12">
       <div class="form-group text-center">
-        <button [hidden]="showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.hide-map'}}</button>
-        <button [hidden]="!showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
-        <single-event-map [hidden]="showMap"></single-event-map>
+        <single-event-map></single-event-map>
       </div>
     </div>
     <!-- Maps Button with class -->
-    <div [hidden]="showMap" *ngIf="(form | formArrayPipe:'categories').length > 0" class="col-sm-12">
+    <div *ngIf="(form | formArrayPipe:'categories').length > 0" class="col-sm-12">
       <div class="form-group text-center">
         <button [disabled]="!lat.valid || !lng.valid" (click)="passCoordinates()" type="button" class="btn btn-default btn-auth" translate>{{'event-form.check'}}</button>
       </div>
