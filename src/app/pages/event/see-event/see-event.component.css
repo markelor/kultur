@@ -490,12 +490,28 @@ ngx-gallery /deep/ ngx-gallery-image {
     border: 5px solid #062e56;
 }
 
-.ribbon span {
+.ribbon span.span-price {
     position: absolute;
     display: block;
     width: 120px;
     padding: 10px 0;
     background-color: var(--main-color);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 14px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+.ribbon span.span-entries {
+    position: absolute;
+    display: block;
+    width: 88px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fe9124;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 14px/1 'Lato', sans-serif;
@@ -520,13 +536,28 @@ ngx-gallery /deep/ ngx-gallery-image {
     border: 5px solid #065620;
 }
 
-.ribbon-free span {
+.ribbon-free span.span-price {
     position: absolute;
     display: block;
     width: 120px;
     padding: 10px 0;
     background-color: #0ca23e;
     box-shadow: 0 -5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 14px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ribbon-free span.span-entries {
+    position: absolute;
+    display: block;
+    width: 88px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fe9124;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 14px/1 'Lato', sans-serif;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -589,10 +620,21 @@ ngx-gallery /deep/ ngx-gallery-image {
     right: 0;
 }
 
-.ribbon-top-right span {
+.ribbon-top-right span.span-price {
     left: 10px;
     top: 12px;
     transform: rotate(45deg);
+}
+
+.ribbon-top-right span.span-entries {
+    left: 8px;
+    top: 35px;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.ribbon-top-right span.span-entries:hover {
+    transform: rotate(30deg);
 }
 
 /* bottom right*/

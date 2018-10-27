@@ -106,7 +106,34 @@
         <span *ngIf="entries.errors?.validateUrl && entries.dirty" class="help-block form-error" translate>{{'validation.url-validation'}}</span>
       </div>
     </div>
-
+    <!-- Participants input -->
+    <div class="col-sm-6">
+      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
+        <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
+        <div class="input-group icon">
+          <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
+          <div class="input-group-append ">
+            <button (click)="addParticipant()" type="button" class="btn btn-success ks-light ks-no-text">
+              <span class="la la-plus ks-icon"></span>
+            </button>
+          </div>
+        </div>
+        <!-- Validation -->
+        <!--<span *ngIf="participant.errors?.minlength && participant.dirty || participant.errors?.maxlength && participant.dirty " class="help-block form-error" translate>{{'validation.participant-length'}}</span>
+        <span *ngIf="participant.errors?.validateTitle && participant.dirty" class="help-block form-error" translate>
+                    {{'validation.participant-validation'}}</span>-->
+      </div>
+      <!-- Participant list -->
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label *ngFor="let participant of participants; let i=index;" class="custom-control custom-checkbox">
+            <input type="checkbox" [checked]="participant" (change)="deleteParticipant(i)" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{participant}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
     <!-- File upload start-->
     <div class="col-sm-6">
       <div class="form-group required">
@@ -119,8 +146,8 @@
       </div>
       <div *ngIf="uploader?.queue?.length>0">
         <h3 translate>{{'event-form.list-images'}} <span>{{ uploader?.queue?.length }}</span> </h3>
-       <table datatable [dtOptions]="dtOptions" class="row-border hover" cellspacing="0" width="100%">
-       <!--<table class="table">-->
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" cellspacing="0" width="100%">
+          <!--<table class="table">-->
           <thead>
             <tr>
               <th translate>{{'event-form.preview'}}</th>
@@ -159,41 +186,13 @@
               </div>
             </div>
           </div>-->
-          <!--<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        <!--<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
                         <span class="glyphicon glyphicon-upload"></span> Upload all
                       </button>-->
-          <!--<button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+        <!--<button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
             <span class="fa fa-trash" translate>{{'event-form.delete-all'}}</span>
           </button>-->
         <!--</div>-->
-      </div>
-    </div>
-    <!-- Participants input -->
-    <div class="col-sm-6">
-      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
-        <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
-        <div class="input-group icon">
-          <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
-          <div class="input-group-append ">
-            <button (click)="addParticipant()" type="button" class="btn btn-success ks-light ks-no-text">
-              <span class="la la-plus ks-icon"></span>
-            </button>
-          </div>
-        </div>
-        <!-- Validation -->
-        <!--<span *ngIf="participant.errors?.minlength && participant.dirty || participant.errors?.maxlength && participant.dirty " class="help-block form-error" translate>{{'validation.participant-length'}}</span>
-        <span *ngIf="participant.errors?.validateTitle && participant.dirty" class="help-block form-error" translate>
-                    {{'validation.participant-validation'}}</span>-->
-      </div>
-    </div>
-    <!-- Participant list -->
-    <div class="col-sm-12">
-      <div class="form-group">
-        <label *ngFor="let participant of participants; let i=index;" class="custom-control custom-checkbox">
-          <input type="checkbox" [checked]="participant" (change)="deleteParticipant(i)" class="custom-control-input">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{participant}}</span>
-        </label>
       </div>
     </div>
     <!-- File upload end-->
@@ -233,15 +232,14 @@
           <option value="" translate>{{'event-form.select-locations-exists'}}</option>
           <ng-container *ngFor="let locationsExistsEvent of locationsExistsEvent">
             <option *ngIf="inputLanguage===locationsExistsEvent.language" [ngValue]="locationsExistsEvent.location">
-            {{locationsExistsEvent.location}}
+              {{locationsExistsEvent.location}}
             </option>
             <ng-container *ngFor="let translation of locationsExistsEvent.translation">
               <option *ngIf="inputLanguage===translation.language" [ngValue]="translation.location">
                 {{translation.location}}
               </option>
             </ng-container>
-            </ng-container>
-
+          </ng-container>
         </select>
         <!-- Validation -->
         <span *ngIf="!locationsExists.value && locationsExists.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
@@ -279,7 +277,9 @@
     </div>
     <div class="col-sm-12">
       <div class="form-group text-center">
-        <single-event-map></single-event-map>
+        <button [hidden]="showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.hide-map'}}</button>
+        <button [hidden]="!showMap" (click)="showMap = !showMap" type="button" class="btn btn-default btn-block" translate>{{'event.see-map'}}</button>
+        <single-event-map [hidden]="showMap"></single-event-map>
       </div>
     </div>
     <!-- Maps Button with class -->

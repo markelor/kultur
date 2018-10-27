@@ -265,6 +265,14 @@ export class SeeEventComponent implements OnInit{
     //var editor=$("#textareaComment").froalaEditor('events.focus', true);
   }
 
+  public externalLink(link){
+    if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
+      window.open(link);
+    }else{
+      window.open('http://'+link);
+    }
+  }
+
   ngOnInit() {
     //location.reload()
     this.activatedRoute.data.subscribe((data) => {
