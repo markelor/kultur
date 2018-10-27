@@ -8,13 +8,14 @@
               <article *ngIf="minSize<=i && maxSize>=i" [hidden]="event.showAll" class="card panel ks-widget ks-widget-post">
                  <div class="card-header">
                   <!--Title-->
-                  <div>
-                    <h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>
+                  <div class="event-title col-sm-8 col-xs-12">
+                    <span class="ks-text " [routerLink]="['/event-route','see-route',event._id] | localize"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </span>
+                    <!--<h2 class="ks-text event-title"> {{event | translateLanguage:'title':localizeService.parser.currentLang}} </h2>-->
                   </div>
-                  <div class="col-sm-3 col-xs-4">
-                    <span class="ks-text"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event col-sm-2 col-xs-4"></i></span>
-                    <span *ngIf="event.createdBy===authService.user.id" class="ks-text"><i (click)="eventDeleteClick(i,event)" class="fa fa-trash edit-event ks-color-danger col-sm-2 col-xs-4"></i></span>
-                    <div class="dropdown col-sm-8 col-xs-6">
+                  <div class="icon-container col-sm-4 col-xs-12">
+                    <div class="ks-text col-sm-4 col-xs-4"><i [routerLink]="['/event-route','manage-route','edit-route',event._id] | localize" class="la la-edit edit-event"></i></div>
+                    <div *ngIf="event.createdBy===authService.user.id" class="ks-text col-sm-4 col-xs-4"><i (click)="eventDeleteClick(i,event)" class="fa fa-trash edit-event ks-color-danger"></i></div>
+                    <div class="dropdown col-sm-4 col-xs-4">
                       <a class="translate-event dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="la la-language" [ngClass]="event | translateCount"></i>
                       </a>
@@ -66,10 +67,10 @@
                   </ng-container>
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length==0" src="assets/img/defaults/event/default-{{localizeService.parser.currentLang}}.png" class="post-image ks-thumbnail img-responsive">
                   <img *ngIf="(event.language===localizeService.parser.currentLang||event.translation.length===0)&&event.images.poster.length>0" src="{{event.images.poster[0].url}}" class="post-image ks-thumbnail img-responsive">
-                  <div class="ks-text description" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
-                  <div class="col-sm-12 details-container">
+                  <div class="ks-text description col-xs-12" [innerHTML]="(event | translateLanguage:'description':localizeService.parser.currentLang) | htmlText"></div>
+                  <div class="col-sm-12 col-xs-12 details-container">
                     <!-- Category info-->
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-12">
                       <p>
                         <span>
                           <strong translate>{{'event-form.category'}}</strong>: 
@@ -84,7 +85,7 @@
                         </ng-container>
                       </p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-12">
                       <p>
                         <span>
                           <strong translate>{{'event-form.location'}}</strong>: 
@@ -95,7 +96,7 @@
                         </ng-container>
                       </p>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 col-xs-12">
                       <p>
                         <span>
                           <strong translate>{{'application-form.price'}}</strong>: 

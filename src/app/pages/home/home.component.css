@@ -314,6 +314,58 @@
 
 
 
+.entries {
+    width: 116px;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.entries span {
+    position: absolute;
+    display: block;
+    width: 88px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fe9124;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 14px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* bottom right*/
+
+.entries-bottom-right {
+    bottom: -6px;
+    right: -11px;
+    z-index: 0;
+}
+
+.entries-bottom-right::before,
+.entries-bottom-right::after {
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+.entries-bottom-right::before {
+    bottom: 0;
+    left: 17px;
+}
+
+.entries-bottom-right::after {
+    bottom: 73px;
+    right: 0;
+}
+
+.entries-bottom-right span {
+    left: 24px;
+    bottom: 31px;
+    transform: rotate(-45deg);
+}
+
 .reaction {
     display: inline-block;
     width: 20px;

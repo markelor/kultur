@@ -1,5 +1,5 @@
 .post-image {
-  display:none;
+  display: none;
   float: left;
   margin: 5px 20px 15px 0px;
   width: auto;
@@ -16,8 +16,9 @@
   position: relative;
   border-color: #dee0e1;
 }
+
 .event-datetime-subcontainer {
-position: sticky;
+  position: sticky;
 }
 
 .event-datetime-month {
@@ -49,7 +50,7 @@ position: sticky;
   display: block;
   padding: 5px 5px 5px 5px;
   border-radius: 5px 5px 0 0;
-  color:#ffffff;
+  color: #ffffff;
   font-weight: bold;
   background-color: var(--main-color);
   text-align: center;
@@ -63,26 +64,35 @@ position: sticky;
 
 .event-datetime-hour {
   padding: 0 5px 0 5px;
-  font-size: 15pt;
+  font-size: 14pt;
   text-align: center;
 }
 
-.details-container{
-  border-top : solid 1px;
+.details-container {
+  border-top: solid 1px;
   border-color: #dee0e1;
   padding-top: 15px;
 
 }
 
+.event-title span {
+  color: #ffffff;
+  font-size: 25px;
+  white-space: nowrap;
+  padding: 0;
+}
+
 .event-title {
-  color:#ffffff;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .view-event {
   font-size: 20pt;
   padding: 4px 4px 4px 4px;
   border-radius: 50%;
-  color:#ffffff;
+  color: #ffffff;
   display: inline-block;
   /*
   margin-left: 30px;
@@ -96,15 +106,18 @@ position: sticky;
   cursor: pointer;
 }
 
-.edit-event{
-  font-size: 20pt;
+.icon-container{
+  height: 25px;
+}
+.edit-event {
+  font-size: 18pt;
   padding: 4px 4px 4px 4px;
   border-radius: 50%;
-  color:#ffffff;
+  color: #ffffff;
 
 }
 
-.edit-event:hover{
+.edit-event:hover {
   font-weight: bolder;
   font-size: 20pt;
   cursor: pointer;
@@ -121,7 +134,7 @@ position: sticky;
   border-left: solid 1px #79bcf4;
 }
 
-.language-done span{
+.language-done span {
   color: #0e58a2;
   font-weight: lighter;
   font-size: 14pt;
@@ -130,11 +143,12 @@ position: sticky;
   margin-left: 15%;
   width: 100%
 }
-.language-done{
-  padding:5px 0 5px 5px;
+
+.language-done {
+  padding: 5px 0 5px 5px;
 }
 
-.language-done span{
+.language-done span {
   color: #0e58a2;
   font-weight: lighter;
   font-size: 12pt;
@@ -143,19 +157,19 @@ position: sticky;
   margin-left: 15%;
 }
 
-.language-done span i{
-  color:#0ca23e;
+.language-done span i {
+  color: #0ca23e;
 }
 
 .language-done:hover {
-  background-color:#dffde9;
+  background-color: #dffde9;
 }
 
-.language-pendant{
-  padding:5px 0 5px 5px;
+.language-pendant {
+  padding: 5px 0 5px 5px;
 }
 
-.language-pendant span{
+.language-pendant span {
   color: #87bef5;
   font-weight: lighter;
   font-size: 12pt;
@@ -164,12 +178,12 @@ position: sticky;
   margin-left: 15%;
 }
 
-.language-pendant span i{
-  color:#fe9124;
+.language-pendant span i {
+  color: #fe9124;
 }
 
 .language-pendant:hover {
-  background-color:#ffe4caff;
+  background-color: #ffe4caff;
 }
 
 .description p {
@@ -179,6 +193,7 @@ position: sticky;
 .description {
   display: none;
   margin: 5px 20px 5px 0px;
+  text-align: justify;
 }
 
 .right {
@@ -194,32 +209,39 @@ position: sticky;
   color: #77b300;
 }
 
-.well-translation{
+.well-translation {
   text-shadow: 2px 2px #0ca23e;
 
-} 
-.needed-translation{
+}
+
+.needed-translation {
   text-shadow: 2px 2px #fe9124;
 }
 
-  .description {
-    display: -moz-box;
-    display: -webkit-box;
-    display: box;
-    -moz-box-orient: vertical;
-    -webkit-box-orient: vertical;
-    box-orient: vertical;
-    -webkit-line-clamp: 5;
-    -moz-line-clamp: 5;
-    line-clamp: 5;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /*
+.row section {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.description {
+  display: -moz-box;
+  display: -webkit-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 5;
+  -moz-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     */
-  }
+}
+
 @media (min-width: 600px) {
   .right {
     float: right;
@@ -231,6 +253,12 @@ position: sticky;
     margin: 5px 20px 15px 0px;
   }
 }
+
 .dropdown-toggle::after {
-    content: "";
+  content: "";
+}
+
+.card>.card-header {
+  line-height: unset;
+  display: block;
 }
