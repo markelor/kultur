@@ -11,8 +11,8 @@ import { FileUploader,FileUploaderOptions,FileItem } from 'ng2-file-upload';
 import { Category } from '../../../class/category';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthGuard} from '../../../pages/guards/auth.guard';
-//const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
-const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/category-icon';
+const URL = 'http://localhost:8080/fileUploader/uploadImages/category-icon';
+//const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/category-icon';
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',

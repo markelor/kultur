@@ -6,10 +6,12 @@
           <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <article *ngIf="event" class="card panel ks-widget ks-widget-post">
               <div *ngIf="event.price===0" class="ribbon-free ribbon-top-right">
-                <span>{{'event.free'|translate}} </span>
+                <span class="span-price">{{'event.free'|translate}} </span>
+                <a *ngIf="event.entries!=''" href="javascript:void(0);" (click)="externalLink(event.entries)" target="_blank"><span class="span-entries">{{'event.entries'|translate}}</span></a>
               </div>
               <div *ngIf="event.price!=0" class="ribbon ribbon-top-right">
-                <span>{{event.price}} €</span>
+                <span class="span-price">{{event.price}} €</span>
+                <a *ngIf="event.entries!=''" href="javascript:void(0);" (click)="externalLink(event.entries)" target="_blank"><span class="span-entries">{{'event.entries'|translate}}</span></a>
               </div>
               <h5 class="card-header">
                 <!--Title--> 

@@ -59,6 +59,15 @@ export class HomeComponent implements OnInit {
     this.minSize=(event*this.range)-this.range;
     this.maxSize=(event*this.range)-1;
   }
+  public externalLink(link){
+    if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
+      window.open(link);
+    }else{
+      window.open('http://'+link);
+    }
+    
+  }
+
   ngOnInit() {
     moment.locale(this.localizeService.parser.currentLang);
   	this.getEvents();

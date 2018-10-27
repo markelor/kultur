@@ -177,12 +177,27 @@
     border: 5px solid #062e56;
 }
 
-.ribbon span {
+.ribbon span.span-price {
     position: absolute;
     display: block;
     width: 120px;
     padding: 10px 0;
     background-color: var(--main-color);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 14px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ribbon span.span-entries {
+    position: absolute;
+    display: block;
+    width: 88px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fe9124;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 14px/1 'Lato', sans-serif;
@@ -207,13 +222,28 @@
     border: 5px solid #065620;
 }
 
-.ribbon-free span {
+.ribbon-free span.span-price {
     position: absolute;
     display: block;
     width: 120px;
     padding: 10px 0;
     background-color: #0ca23e;
     box-shadow: 0 -5px 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font: 700 14px/1 'Lato', sans-serif;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ribbon-free span.span-entries {
+    position: absolute;
+    display: block;
+    width: 88px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fe9124;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font: 700 14px/1 'Lato', sans-serif;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -306,14 +336,23 @@
     right: 0;
 }
 
-.ribbon-bottom-right span {
+.ribbon-bottom-right span.span-price {
     left: 10px;
     bottom: 12px;
     transform: rotate(-45deg);
 }
 
+.ribbon-bottom-right span.span-entries:hover {
+    transform: rotate(-30deg);
+}
 
-
+.ribbon-bottom-right span.span-entries {
+    left: 9px;
+    bottom: 36px;
+    transform: rotate(-45deg);
+    z-index: -1;
+}
+/*
 .entries {
     width: 116px;
     height: 100px;
@@ -335,9 +374,9 @@
     text-transform: uppercase;
     text-align: center;
 }
-
+*/
 /* bottom right*/
-
+/*
 .entries-bottom-right {
     bottom: -6px;
     right: -11px;
@@ -365,7 +404,7 @@
     bottom: 31px;
     transform: rotate(-45deg);
 }
-
+*/
 .reaction {
     display: inline-block;
     width: 20px;

@@ -816,7 +816,7 @@ export class EventFormComponent implements OnInit {
   public onSelectedCategory(value,level){
     var index;
     for (var i = 0; i < this.levelCategories[level].value.length; ++i) {
-      if(this.levelCategories[level].value[i].language===this.localizeService.parser.currentLang && this.levelCategories[level].value[i].title===value.split(' ')[1]){
+      if(this.levelCategories[level].value[i].language===this.localizeService.parser.currentLang && this.levelCategories[level].value[i].title===value.split(': ')[1]){
         index=i;
       }else{
         for (var j = 0; j < this.levelCategories[level].value[i].translation.length; ++j) {
@@ -836,15 +836,17 @@ export class EventFormComponent implements OnInit {
       }       
     }else{
       //hide categories
+      if(level+1!==this.levelCategories.length){
       this.categoryId[level+1] = this.levelCategories[level].value[index]._id;
       var newFormArray=false;
-        for (var i = 0; i < this.levelCategories[level].value.length; ++i) {
+        for (var i = 0; i < this.levelCategories[level+1].value.length; ++i) {
          if(this.levelCategories[level+1] && this.levelCategories[level+1].value[i]){
             if(this.levelCategories[level+1].value[i].parentId===this.levelCategories[level].value[index]._id){
               newFormArray=true;
             }
          }
-        }     
+        }  
+      }
       if((this.form.controls['categories'].value.length-1 <= level) && newFormArray===true){
         (this.form.controls['categories'] as FormArray).push(this.createItem(''));
       }else {
