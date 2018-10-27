@@ -1089,11 +1089,11 @@ export class EventFormComponent implements OnInit {
           this.chargeAll();
         }
     }); 
-    /*$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
      $($.fn.dataTable.tables(true)).DataTable()
         .columns.adjust()
         .responsive.recalc();
-    });*/
+    });
   }
   ngOnDestroy(){
     this.subscriptionLanguage.unsubscribe();
