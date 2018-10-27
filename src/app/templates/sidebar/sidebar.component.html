@@ -2,7 +2,7 @@
   <ul class="nav nav-pills nav-stacked">
     <!--Home item-->
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/'] | localize">
+      <a class="nav-link" (click)="closeSidebar();" [routerLink]="['/'] | localize">
         <span class="ks-icon la la-home"></span>
         <span translate>{{'menu.home'}}</span>
     </a>
@@ -15,7 +15,7 @@
       </div>
       <!--Create category-->
       <div class="dropdown-menu"> 
-        <a class="dropdown-item" [routerLink]="['/category-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/category-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
       </div>
     </li>
     <!--Event item-->
@@ -26,13 +26,13 @@
       </div>
       <!--Create event-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/event-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-calendar-plus-o"></span>{{'menu.create'}}</a>
-        <a class="dropdown-item" [routerLink]="['/event-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/event-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-calendar-plus-o"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/event-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
       </div>
     </li>
     <!--Map item-->
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/map-route'] | localize">
+      <a class="nav-link" (click)="closeSidebar();" [routerLink]="['/map-route'] | localize">
         <span class="ks-icon la la-map"></span>
         <span translate>{{'menu.map'}}</span>
     </a>
@@ -45,8 +45,8 @@
       </div>
       <!--Create application-->
       <div class="dropdown-menu">
-        <a [hidden]="permission!=='admin'" class="dropdown-item" [routerLink]="['/application-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
-        <a class="dropdown-item" [routerLink]="['/application-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+        <a [hidden]="permission!=='admin'" class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/application-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/application-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
       </div>
     </li>
      <!--Service item-->
@@ -57,8 +57,8 @@
       </div>
       <!--Create service & type-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/service-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
-        <a class="dropdown-item" [routerLink]="['/service-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/service-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/service-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
         <a [hidden]="permission!=='admin'" class="dropdown-item" [routerLink]="['/service-type-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.service-type'}}</a>
       </div>
     </li>   
@@ -70,8 +70,8 @@
       </div>
       <!--Create service-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/observation-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
-        <a class="dropdown-item" [routerLink]="['/observation-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/observation-route','create-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-plus-circle"></span>{{'menu.create'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/observation-route','manage-route'] | localize" routerLinkActive="ks-active" translate><span class="ks-icon la la-cog"></span>{{'menu.manage'}}</a>
       </div>
     </li>   
     <!--Administrator item-->
@@ -82,23 +82,23 @@
       </div>
       <!--Administrator users-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/admin-route','users-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.users'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/admin-route','users-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.users'}}</a>
       </div>
       <!--Administrator events-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/admin-route','events-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.events'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/admin-route','events-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.events'}}</a>
       </div>
       <!--Administrator services-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/admin-route','services-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.services'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/admin-route','services-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.services'}}</a>
       </div>
       <!--Administrator observations-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/admin-route','observations-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.observations'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/admin-route','observations-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.observations'}}</a>
       </div>
       <!--Administrator applications-->
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/admin-route','applications-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.applications'}}</a>
+        <a class="dropdown-item" (click)="closeSidebar();" [routerLink]="['/admin-route','applications-route'] | localize" routerLinkActive="ks-active" translate>{{'menu.applications'}}</a>
       </div>
     </li>
   </ul>
