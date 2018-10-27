@@ -18,6 +18,6 @@
 <div class="modal-footer justify-content-between">
   <button class="btn btn-primary confirm-btn" (click)="confirmModal()" translate>{{'modal.continue'}}</button>
   <button *ngIf="operation==='edit'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.manage'}}</button>
-  <button *ngIf="operation==='create'" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.edit'}}</button>
+  <button *ngIf="operation==='create' && success" class="btn btn-primary confirm-btn" (click)="routeModal()" translate>{{'modal.edit'}}</button>
   <button class="btn btn-primary confirm-btn" (click)="homeModal()" translate>{{'modal.home'}}</button>
 </div>
