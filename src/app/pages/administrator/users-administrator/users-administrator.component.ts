@@ -69,7 +69,7 @@ export class UsersAdministratorComponent implements OnInit {
         { responsivePriority: 6, targets: 4 },
         { responsivePriority: 7, targets: 5 },
         { responsivePriority: 8, targets: 6 },
-        { responsivePriority: 9, targets: 7 }
+        { responsivePriority: 9, targets: 7 },
         { responsivePriority: 2, targets: 8 }
       ]
     };
