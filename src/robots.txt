@@ -1,2 +1,92 @@
 User-agent: *
 Disallow: /
+
+#Disallow: /eu/saioa-hasi
+#Disallow: /es/iniciar-sesion
+#Disallow: /en/sign-in
+
+#Disallow: /eu/erregistratu
+#Disallow: /es/registrar
+#Disallow: /en/sign-up
+
+#Disallow: /eu/berrezarri-erabiltzaile-izena
+#Disallow: /es/reestablecer-usuario
+#Disallow: /en/reset-username
+
+#Disallow: /eu//berrezarri-pasahitza
+#Disallow: /es/reestablecer-contraseña
+#Disallow: /en/reset-password
+
+#Disallow: /eu/pasahitz-berria/?
+#Disallow: /es/nueva-contraseña/?
+#Disallow: /en/new-password/?
+
+#Disallow: /eu/birbidali
+#Disallow: /es/reenviar
+#Disallow: /en/resend
+
+#Disallow: /eu/aktibatu/?
+#Disallow: /es/activar/?
+#Disallow: /en/activate/?
+
+#Disallow: /eu/ekintza/sortu
+#Disallow: /es/evento/crear
+#Disallow: /en/event/create
+
+#Disallow: /eu/erabiltzailea
+#Disallow: /es/usuario
+#Disallow: /en/user
+
+#Disallow: /eu/kategoria/sortu
+#Disallow: /es/categoria/crear
+#Disallow: /en/category/create
+
+#Disallow: /eu/ekintza/kudeatu
+#Disallow: /es/evento/gestionar
+#Disallow: /en/event/manage
+
+#Disallow: /eu/aplikazioa/sortu
+#Disallow: /es/aplicacion/crear
+#Disallow: /en/application/create
+
+#Disallow: /eu/aplikazioa/kudeatu
+#Disallow: /es/aplicacion/gestionar
+#Disallow: /en/application/manage
+
+#Disallow: /eu/aplikazioa/kudeatu/?
+#Disallow: /es/aplicacion/gestionar/?
+#Disallow: /en/application/manage/?
+
+#Disallow: /eu/zerbitzua/sortu
+#Disallow: /es/servicio/crear
+#Disallow: /en/service/create
+
+#Disallow: /eu/zerbitzua/kudeatu
+#Disallow: /es/servicio/gestionar
+#Disallow: /en/service/manage
+
+#Disallow: /eu/zerbitzua/kudeatu/aldatu/?
+#Disallow: /es/servicio/gestionar/editar/?
+#Disallow: /en/service/manage/edit/?
+
+#Disallow: /eu/zerbitzu-mota/sortu
+#Disallow: /es/tipo-servicio/crear
+#Disallow: /en/service-type/create
+
+#Disallow: /eu/oharra/sortu
+#Disallow: /es/observaciones/crear
+#Disallow: /en/observation/create
+
+#Disallow: /eu/oharra/kudeatu
+#Disallow: /es/observaciones/gestionar
+#Disallow: /en/observation/manage
+
+#Disallow: /eu/oharra/kudeatu/aldatu/?
+#Disallow: /es/observaciones/gestionar/editar/?
+#Disallow: /en/observation/manage/edit/?
+
+#Disallow: /eu/admin/*?
+#Disallow: /es/admin/*?
+#Disallow: /en/admin/*?
+
+

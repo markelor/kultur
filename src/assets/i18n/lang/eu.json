@@ -25,6 +25,7 @@
   "details-route": "xehetasunak",
   "region-route": "eskualdea",
   "user-route": "erabiltzailea",
+  "profile-route": "profila",
   "map-route": "mapa",
   "all-route": "denak",
   "admin-route": "admin",
@@ -116,6 +117,7 @@
     "repeat-password": "Errepikatu pasahitza",
     "about-yourself": "Zuri buruz",
     "privacity-consent": "Pribatutasun baimena",
+    "use-consent": "Erabilpen baimena",
     "sign-up-title": "Eman izena",
     "sign-up-sign-in-link": "Dagoeneko baduzu kontua? Hasi saioa!",
     "sign-up": "Eman izena",
@@ -142,7 +144,7 @@
     "upload-image": "Irudia igo",
     "my-images": "Nire irudiak",
     "new-image": "Igo irudi berri bat",
-    "profile-image": "Perfil irudia",
+    "profile-image": "Profil irudia",
     "choose-image": "Aukeratu irudia"
   },
   "category-form":

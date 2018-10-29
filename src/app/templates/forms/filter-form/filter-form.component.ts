@@ -217,6 +217,8 @@ export class FilterFormComponent  {
       if(this.form.get('municipality').value){
         this.filtersPlace["municipality.geonameId"]=this.geonameIdMunicipality;
       }
+    }else{
+      delete this.filtersPlace["municipality.geonameId"];
     }
     this.getEvents();
   }
