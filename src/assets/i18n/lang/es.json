@@ -32,15 +32,12 @@
   "users-route": "usuarios",
   "metatag":
   {
-    "home-title": "Home",
-    "home-description": "Create",
-    "home-keywords": "Manage",
-    "see-event-title": "Home",
-    "see-event-description": "Create",
-    "see-event-keywords": "Manage",
-    "map-title": "Home",
-    "map-description": "Create",
-    "map-keywords": "Manage"
+    "home-title": "Agenda de actividades en el País Vasco",
+    "home-description": "kulturekintzak.eus, es la agenda de eventos deportivos y culturales organizados en el País Vasco. Además de crear vuestro usuario y expandir actuaciones del entorno, puede completar información sobre otras iniciativas y dejar opiniones y comentarios sobre ellas. ¡Aprovecha la oportunidad!",
+    "home-keywords": "deportes, acción, comentario, reacción, cultura, País Vasco, actividades, agenda",
+    "map-title": "Ubicación de las acciones en el País Vasco en mapa",
+    "map-description": "La ubicación geográfica de todas las actividades culturales y deportivas del País Vasco esta visible en el mapa. Aquí, puedes ver y filtrar tus actividades favoritas utilizando diferentes criterios. ¡Encuentra los mejores eventos en un clic!",
+    "map-keywords": "acción, mapa, cultura"
   },
   "menu":
   {

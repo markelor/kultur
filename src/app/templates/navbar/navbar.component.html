@@ -23,6 +23,7 @@
             <a *ngFor="let event of eventsSearch; let i=index" href="javascript:void(0);" [routerLink]="['/event-route','see-route',event._id] | localize" class="dropdown-item ks-message">
               <div class="ks-avatar">
                 <img [ngStyle]="i | imageMargin" *ngIf="event.images.poster[0]" src="{{event.images.poster[0].url}}" alt="{{event | translateLanguage:'title':localizeService.parser.currentLang}}" style="visibility:hidden;" class="clip-circle">
+                <img [ngStyle]="i | imageMargin" *ngIf="!event.images.poster[0]" src="assets/img/defaults/event/default-{{this.localizeService.parser.currentLang}}.png" alt="{{event | translateLanguage:'title':localizeService.parser.currentLang}}" style="visibility:hidden;" class="clip-circle">
               </div>
               <div class="ks-info">
                 <div class="ks-user-name">{{event | translateLanguage:'title':localizeService.parser.currentLang}}</div>

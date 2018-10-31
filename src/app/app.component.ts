@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalizeRouterService } from 'localize-router';
 import { Router,NavigationEnd } from '@angular/router';
@@ -10,6 +11,7 @@ import { Router,NavigationEnd } from '@angular/router';
 export class AppComponent {
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
   	private translate: TranslateService,
   	private localizeService: LocalizeRouterService,
   	public router: Router
@@ -17,9 +19,10 @@ export class AppComponent {
     translate.use(this.localizeService.parser.currentLang);
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-      	console.log(event.urlAfterRedirects);
-        (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
+        if (isPlatformBrowser(this.platformId)) {
+          (<any>window).ga('set', 'page', event.urlAfterRedirects);
+          (<any>window).ga('send', 'pageview');
+        }        
       }
     });
   }

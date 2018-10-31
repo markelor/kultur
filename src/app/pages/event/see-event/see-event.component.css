@@ -104,7 +104,8 @@ ngx-gallery /deep/ ngx-gallery-image {
 
 .reactions-box {
   height: 64px;
-  width: 356px;
+  /*width: 356px;*/
+  width: 300px;
   padding: 10px;
   position: absolute;
   top: -63px;

@@ -22,8 +22,8 @@ import { CreateModalComponent } from '../../../templates/modals/create-modal/cre
 import { ConfirmationModalComponent } from '../../../templates/modals/confirmation-modal/confirmation-modal.component';
 import * as moment from 'moment-timezone';
 declare let $: any;
-const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
-//const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
+//const URL = 'http://localhost:8080/fileUploader/uploadImages/event-poster';
+const URL = 'http://www.kulturekintzak.eus/fileUploader/uploadImages/event-poster';
 const I18N_VALUES = {
   'eu': {
     weekdays: ['Al', 'As', 'Az', 'Og', 'Or', 'Lr', 'Ig'],
@@ -125,6 +125,7 @@ export class EventFormComponent implements OnInit {
   private eventTranslateDeleteSubscriptionObservable: Subscription;
   public disableCategories=false;
   public disableUploader=false;
+  public showMap;
   @Output() RefreshEvent = new EventEmitter();
 
   constructor(
@@ -208,7 +209,7 @@ export class EventFormComponent implements OnInit {
         Validators.required,
         PriceValidator.validate
       ])],
-       lat: ['', Validators.compose([
+      lat: ['', Validators.compose([
         Validators.required,LatitudeValidator.validate
       ])],
       lng: ['', Validators.compose([
@@ -600,7 +601,7 @@ export class EventFormComponent implements OnInit {
         this.messageClass = 'alert alert-danger ks-solid'; // Return error class
         this.message = data.message; // Return error message
         this.staticModalShow(false,'create',undefined);
-
+        this.submitted = false; // Enable submit button
       } else {
         this.createNewEventForm(); // Reset all form fields
         this.uploader.clearQueue();
@@ -609,6 +610,8 @@ export class EventFormComponent implements OnInit {
         this.imagesDescription=[];
         this.participants=[];
         this.locationsExistsEvent=[];
+        this.locationsExists.setValidators([Validators.compose([Validators.maxLength(1000)])]);
+        this.locationsExists.updateValueAndValidity(); //Need to call this to trigger a update
         this.messageClass = 'alert alert-success ks-solid'; // Return success class
         this.message = data.message; // Return success message
         this.enableForm();
@@ -623,7 +626,7 @@ export class EventFormComponent implements OnInit {
     for (var i = 0; i < this.imagesPoster.length; ++i) {
       let file = new File([],decodeURIComponent(this.imagesPoster[i].url).split('https://s3.eu-west-1.amazonaws.com/culture-bucket/event-poster/')[1]);
       let fileItem = new FileItem(this.uploader, file, {});
-      if(this.uploader.queue.some(e => e.file.name !== fileItem.file.name)){
+      if(this.uploader.queue.some(e => e.file.name !== fileItem.file.name) || this.uploader.queue.length===0){
         deleteImages.push(this.imagesPoster[i]);
         this.imagesPoster.splice(i,1);            
       }
@@ -661,13 +664,23 @@ export class EventFormComponent implements OnInit {
       //event translation
       for (var i = 0; i < this.inputEvent.translation.length; ++i) {
         if(this.inputEvent.translation[i].language===this.inputLanguage){
-          this.deleteEditImages(true);
           hasTranslationEvent=true;
           this.inputEvent.translation[i].language=this.inputLanguage;// Language field  
           //this.inputEvent.translation[i].createdBy=this.authService.user.id;// Language field      
           this.inputEvent.translation[i].title=this.form.get('title').value; // Title field
           this.inputEvent.translation[i].description= this.form.get('description').value; // Description field
           this.inputEvent.translation[i].observations=this.form.get('observations').value; // Observations field
+          if(this.inputEvent.translation[i].images.poster[0].url!==this.inputEvent.images.poster[0].url){
+            this.deleteEditImages(true);
+            if(this.uploader.queue.length===0){
+              this.imagesPoster=[];
+            }
+          }
+          if(this.imagesPoster.length>0){
+            this.inputEvent.translation[i].images.poster=this.imagesPoster[this.imagesPoster.length-1];          
+          }else{
+            this.inputEvent.translation[i].images.poster= this.inputEvent.images.poster; 
+          }       
           this.inputEvent.translation[i].images.description=this.imagesDescription;
         }
       }
@@ -687,7 +700,21 @@ export class EventFormComponent implements OnInit {
       if(!hasTranslationEvent){
         //if event has original language and not has translation
         if(this.inputEvent.language===this.inputLanguage){
-          this.deleteEditImages(true);
+          if(this.uploader.queue.length===0){
+            //delete translate same img
+            if(this.inputEvent.translation){
+              for (var i = 0; i < this.inputEvent.translation.length; ++i) {
+                if(this.inputEvent.translation[i].images.poster[0].url===this.imagesPoster[0].url){
+                  this.inputEvent.translation[i].images.poster=[];
+                }
+              }
+            }
+          }
+        this.deleteEditImages(true); 
+        if(this.uploader.queue.length===0){
+            this.imagesPoster=[];
+        }
+
           this.inputEvent.language=this.inputLanguage;// Language field   
           //this.inputEvent.createdBy=this.authService.user.id;// Language field       
           this.inputEvent.title=this.form.get('title').value; // Title field
@@ -697,7 +724,8 @@ export class EventFormComponent implements OnInit {
           }else{
             this.inputEvent.observations=this.form.get('observations').value;
           }
-          this.inputEvent.observations=this.form.get('observations').value; // Observations field     
+          this.inputEvent.observations=this.form.get('observations').value; // Observations field  
+          this.inputEvent.images.poster=this.imagesPoster;    
           this.inputEvent.images.description=this.imagesDescription;  
         }else{
           this.deleteEditImages(false);
@@ -772,6 +800,7 @@ export class EventFormComponent implements OnInit {
         this.message = data.message; // Return error message
         this.staticModalShow(false,'edit',this.inputEvent._id);    
         this.enableForm(); // Enable form
+        this.submitted=false;
       } else {
         this.messageClass = 'alert alert-success ks-solid'; // Return success class
         this.message = data.message; // Return success message

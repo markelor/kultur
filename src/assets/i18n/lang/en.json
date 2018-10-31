@@ -32,15 +32,12 @@
   "users-route": "users",
   "metatag":
   {
-    "home-title": "Home",
-    "home-description": "Create",
-    "home-keywords": "Manage",
-    "see-event-title": "Home",
-    "see-event-description": "Create",
-    "see-event-keywords": "Manage",
-    "map-title": "Home",
-    "map-description": "Create",
-    "map-keywords": "Manage"
+    "home-title": "Agenda of activities in the Basque Country",
+    "home-description": "kulturekintzak.eus, is the agenda of sporting and cultural events organized in the Basque Country. In addition to creating your user and expanding actions of the surroundings, you can complete information about other initiatives and leave opinions and comments about them. Take the opportunity!",
+    "home-keywords": "sports, action, comment, reaction, culture, Basque Country, activities, agenda",
+    "map-title": "Location of actions in the Basque Country on map",
+    "map-description": "The geographical location of all cultural and sports activities of the Basque Country is visible on the map. Here, you can see and filter your favorite activities using different criteria. Find the best events in one click!",
+    "map-keywords": "action, map, culture"
   },
   "menu":
   {

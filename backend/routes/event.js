@@ -111,7 +111,6 @@ module.exports = (router) => {
                                         poster: req.body.event.imagesPoster,
                                         description: req.body.event.imagesDescription
                                       },
-
                                       createdAt: Date.now(),
                                       updatedAt: Date.now()
                                     });

@@ -71,7 +71,7 @@
                                         <span class="ks-amount">{{event.comments.length}}</span>
                                         </span>
                                         <span [routerLink]="['/event-route','see-route',event._id] | localize" class="ks-control reaction-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like">
-                                          <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
+                                        <span *ngIf="event.reactions.likeBy.length>0" class="reaction reaction-like" ></span>
                                         <span *ngIf="event.reactions.loveBy.length>0" class="reaction reaction-love"></span>
                                         <span *ngIf="event.reactions.hahaBy.length>0" class="reaction reaction-haha"></span>
                                         <span *ngIf="event.reactions.wowBy.length>0" class="reaction reaction-wow"></span>

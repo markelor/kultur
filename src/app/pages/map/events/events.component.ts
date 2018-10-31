@@ -1,4 +1,4 @@
-import { Component,OnDestroy,PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { Component,OnDestroy,PLATFORM_ID, Inject } from '@angular/core';
 import { ObservableService } from '../../../services/observable.service';
 import { LocalizeRouterService } from 'localize-router';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { GroupByPipe } from '../../../shared/pipes/group-by.pipe';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment-timezone';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser} from '@angular/common';
 import { Meta,Title } from '@angular/platform-browser';
 
 @Component({
@@ -16,7 +16,6 @@ import { Meta,Title } from '@angular/platform-browser';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent  {	
-  public title: string = 'Titulua';
   private startTimestamp;
   private endTimestamp;
   public lat: number = 42.88305555555556;
@@ -40,13 +39,24 @@ export class EventsComponent  {
     private translate:TranslateService,
     private bindPipe: BindContentPipe,
     private groupByPipe: GroupByPipe) { 
+    //twitter
+    //this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    //this.meta.updateTag({ name: 'twitter:site', content: '@kulturekintzak' });
+    //this.meta.updateTag({ name: 'twitter:image', content: 'assets/img/defaults/kulturekintzak.svg' });
+    //facebbok
+    //this.meta.updateTag({ property: 'og:type', content: 'article' });
+    //this.meta.updateTag({ property: 'og:image', content: 'assets/img/defaults/kulturekintzak.svg'});
     this.translate.get('metatag.map-title').subscribe(
       data => {        
       this.metaTitle.setTitle(data);
+      //this.meta.updateTag({ name: 'twitter:title', content: data });
+      //this.meta.updateTag({ property: 'og:title', content: data });
     });
     this.translate.get('metatag.map-description').subscribe(
       data => {         
       this.meta.addTag({ name: 'description', content: data });
+      //this.meta.updateTag({ name: 'twitter:description', content: data });
+      //this.meta.updateTag({ property: 'og:description', content: data });
     });
      this.translate.get('metatag.map-keywords').subscribe(
       data => {         

@@ -1,4 +1,4 @@
-import { Component,OnInit,PLATFORM_ID, APP_ID, Inject,HostListener } from '@angular/core';
+import { Component,OnInit,PLATFORM_ID, Inject,HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { EventService } from '../../../services/event.service';
 import { ObservableService } from '../../../services/observable.service';
@@ -12,7 +12,7 @@ import { TranslateLanguagePipe } from '../../../shared/pipes/translate-language.
 import { HtmlTextPipe } from '../../../shared/pipes/html-text.pipe';
 import { ReactionsModalComponent } from './reactions-modal/reactions-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { isPlatformBrowser, CommonModule,Location } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Meta,Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -60,14 +60,14 @@ export class SeeEventComponent implements OnInit{
   }
   private addSocialMetaTags(title,description,image){
     //twitter
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
-    this.meta.updateTag({ name: 'twitter:site', content: '@kulturekintzak' });
+    //this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    //this.meta.updateTag({ name: 'twitter:site', content: '@kulturekintzak' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.meta.updateTag({ name: 'twitter:image', content: image });
     //facebbok
+    //this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ property: 'og:title', content: title });
-    this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:image', content: image});
   }
@@ -266,15 +266,16 @@ export class SeeEventComponent implements OnInit{
   }
 
   public externalLink(link){
-    if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
-      window.open(link);
-    }else{
-      window.open('http://'+link);
+    if (isPlatformBrowser(this.platformId)) {
+      if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
+        window.open(link);
+      }else{
+        window.open('http://'+link);
+      }
     }
   }
 
   ngOnInit() {
-    //location.reload()
     this.activatedRoute.data.subscribe((data) => {
       this.currentUrl="http://www.kulturekintzak.eus"+this.router.url;
       this.onResize();

@@ -14,8 +14,8 @@ export class Event{
     description: string;
     observations:string;
     reactions: object;
-    imagesPoster: Array<string>;
-    imagesDescription: Array<string>;
+    imagesPoster: Array<string>=[];
+    imagesDescription: Array<string>=[];
     createdAt: Date;
     updatedAt: Date ;
     get getId():string {

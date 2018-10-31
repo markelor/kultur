@@ -104,8 +104,8 @@ const eventSchema = new Schema({
     description: { type: String, required: true, validate: descriptionValidators },
     observations: { type: String, validate: observationsValidators },
     images: {
-        poster: { type: Array, required: true },
-        description: { type: Array, required: false }
+        poster: { type: Array, required:false, default:[] },
+        description: { type: Array, required:false, default:[] }
     },
     translation: [{
         language: { type: String, required: true },
@@ -114,8 +114,8 @@ const eventSchema = new Schema({
         description: { type: String, required: true, validate: descriptionValidators },
         observations: { type: String, validate: observationsValidators },
         images: {
-            poster: { type: Array, required: true },
-            description: { type: Array, required: false }
+            poster: { type: Array, required: false,default:[] },
+            description: { type: Array, required: false,default:[] }
         },
         _id: false
     }],

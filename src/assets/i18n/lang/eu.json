@@ -32,15 +32,12 @@
   "users-route": "erabiltzaileak",
   "metatag":
   {
-    "home-title": "Hasiera",
-    "home-description": "Hasiera deskribapena",
-    "home-keywords": "Hasieragiltza1, hasiera giltza2",
-    "see-event-title": "Home",
-    "see-event-description": "Create",
-    "see-event-keywords": "Manage",
-    "map-title": "Home",
-    "map-description": "Create",
-    "map-keywords": "Manage"
+    "home-title": "Euskal Herriko ekintzen agenda",
+    "home-description": "Euskal Herrian zehar ematen diren kirol zein ekintza kulturalen agenda duzu kulturekintzak.eus. Zuen erabiltzailea sortu eta inguruko emanaldiak zabaltzeko aukera izateaz gain, beste ekimen batzuen informazioa osotu eta hauen gaineko iritzi eta iruzkinak uzteko aukera duzue. Aprobetxatu aukera!",
+    "home-keywords": "kirol, ekintza, iruzkin, erreakzio, kultura, Euskal Herria, aktibitate, agenda",
+    "map-title": "Euskal herriko ekintzen kokapena mapan",
+    "map-description": "Euskal Herriko kirol eta ekintza kultural guztien kokapen geografikoa mapan duzue ikusgai. Bertan, irizpide ezberdinak erabiliz, zure gustoko aktibitateak ikusi eta filtra ditzakezu. Aurkitu ondoen datozkizun ekintzak klik batean!",
+    "map-keywords": "ekintza, mapa, kultura"
   },
   "menu":
   {

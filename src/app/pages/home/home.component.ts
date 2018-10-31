@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { ObservableService } from '../../services/observable.service';
 import { TranslateService} from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment-timezone';
 import { Meta,Title } from '@angular/platform-browser';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   private subscription:Subscription;
   public showFilter;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private meta: Meta,
     private metaTitle: Title,
   	private eventService:EventService,
@@ -32,13 +34,24 @@ export class HomeComponent implements OnInit {
     private router:Router,
     private authGuard:AuthGuard
   ) {
+    //twitter
+    //this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    //this.meta.updateTag({ name: 'twitter:site', content: '@kulturekintzak' });
+    //this.meta.updateTag({ name: 'twitter:image', content: 'assets/img/defaults/kulturekintzak.svg' });
+    //facebbok
+    //this.meta.updateTag({ property: 'og:type', content: 'article' });
+    //this.meta.updateTag({ property: 'og:image', content: 'assets/img/defaults/kulturekintzak.svg'});
     this.translate.get('metatag.home-title').subscribe(
       data => {       
-      this.metaTitle.setTitle(data);
+      this.metaTitle.setTitle(data);     
+      //this.meta.updateTag({ name: 'twitter:title', content: data });
+      //this.meta.updateTag({ property: 'og:title', content: data });
     });
     this.translate.get('metatag.home-description').subscribe(
       data => {         
       this.meta.addTag({ name: 'description', content: data });
+      //this.meta.updateTag({ name: 'twitter:description', content: data });
+      //this.meta.updateTag({ property: 'og:description', content: data });
     });
     this.translate.get('metatag.home-keywords').subscribe(
       data => {         
@@ -60,10 +73,12 @@ export class HomeComponent implements OnInit {
     this.maxSize=(event*this.range)-1;
   }
   public externalLink(link){
-    if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
-      window.open(link);
-    }else{
-      window.open('http://'+link);
+    if (isPlatformBrowser(this.platformId)) {
+      if(link.split('://')[0]==='http' || link.split('://')[0]==='https'){
+        window.open(link);
+      }else{
+        window.open('http://'+link);
+      }
     }
     
   }
