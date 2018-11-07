@@ -142,12 +142,11 @@ export class FilterFormComponent  {
     this.end = this.form.controls['end'];
     this.price = this.form.controls['price'];
     }
-  
-     // Function on seleccted categories
+  // Function on seleccted categories
   public onSelectedCategory(value,level){
     var index;
     for (var i = 0; i < this.levelCategories[level].value.length; ++i) {
-      if(this.levelCategories[level].value[i].language===this.localizeService.parser.currentLang && this.levelCategories[level].value[i].title===value.split(' ')[1]){
+      if(this.levelCategories[level].value[i].language===this.localizeService.parser.currentLang && this.levelCategories[level].value[i].title===value.split(': ')[1]){
         index=i;
       }else{
         for (var j = 0; j < this.levelCategories[level].value[i].translation.length; ++j) {
@@ -159,23 +158,25 @@ export class FilterFormComponent  {
     }
     if (!value){
       // remove
-        for (var i = this.form.controls['categories'].value.length - 1; i >= level; i--) {
-          this.categoryId.splice(i+1,1);
-        } 
-        for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
-          (this.form.controls['categories'] as FormArray).removeAt(i);
-        }       
+      for (var i = this.form.controls['categories'].value.length - 1; i >= level; i--) {
+        this.categoryId.splice(i+1,1);
+      } 
+      for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
+        (this.form.controls['categories'] as FormArray).removeAt(i);
+      }       
     }else{
       //hide categories
+      if(level+1!==this.levelCategories.length){
       this.categoryId[level+1] = this.levelCategories[level].value[index]._id;
       var newFormArray=false;
-      if(this.levelCategories[level+1]){
-         for (var i = 0; i < this.levelCategories[level+1].value.length; ++i) {
-          if(this.levelCategories[level+1].value[i].parentId===this.levelCategories[level].value[index]._id){
-            newFormArray=true;
-          }
-        }
-      }     
+        for (var i = 0; i < this.levelCategories[level+1].value.length; ++i) {
+         if(this.levelCategories[level+1] && this.levelCategories[level+1].value[i]){
+            if(this.levelCategories[level+1].value[i].parentId===this.levelCategories[level].value[index]._id){
+              newFormArray=true;
+            }
+         }
+        }  
+      }
       if((this.form.controls['categories'].value.length-1 <= level) && newFormArray===true){
         (this.form.controls['categories'] as FormArray).push(this.createItem(''));
       }else {
@@ -183,6 +184,7 @@ export class FilterFormComponent  {
         for (var i = this.form.controls['categories'].value.length - 1; i >= level+1; i--) {
           (this.form.controls['categories'] as FormArray).removeAt(i);
           this.categoryId.splice(i+1,1);
+          this.categoryId[this.categoryId.length-1]=this.levelCategories[level].value[index]._id;
         }
         if(newFormArray){
          (this.form.controls['categories'] as FormArray).push(this.createItem('')); 
