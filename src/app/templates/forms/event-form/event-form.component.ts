@@ -895,7 +895,7 @@ export class EventFormComponent implements OnInit {
           this.categoryIcon=this.levelCategories[level].value[i].icons[0].url; 
         }
       }   
-  }
+    }
   }   
   // Function on seleccted event Continent
   public onSelectedProvince(index){

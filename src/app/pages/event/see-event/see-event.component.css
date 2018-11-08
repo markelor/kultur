@@ -104,6 +104,18 @@ ngx-gallery /deep/ ngx-gallery-image {
 
 .reactions-box {
   height: 64px;
+  width: 356px;
+  padding: 10px;
+  position: absolute;
+  top: -63px;
+  left: -14px;
+  box-shadow: 1px 1px 2px #cccccc, -1px 0px 2px #eeeeee;
+  border-radius: 44px 44px;
+  display: none;
+  background-color: #e7f3ff;
+}
+.share-box {
+  height: 64px;
   /*width: 356px;*/
   width: 300px;
   padding: 10px;
@@ -152,6 +164,9 @@ ngx-gallery /deep/ ngx-gallery-image {
 }
 
 .like-btn:hover .reactions-box {
+  display: block;
+}
+.like-btn:hover .share-box {
   display: block;
 }
 
