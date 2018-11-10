@@ -115,7 +115,7 @@
     </div>
     <!-- Contributor -->
     <div class="col-sm-12">
-      <div class="form-group required" [ngClass]="{'has-error': (!contributor.valid && contributor.dirty), 'has-success': (contributor.valid && contributor.value)}">
+      <div class="form-group" [ngClass]="{'has-error': (!contributor.valid && contributor.dirty), 'has-success': (contributor.valid && contributor.value)}">
         <label for="textareaContributor" translate>{{'application-form.contributors'}}</label>
         <div class="input-group icon">
           <input (keyup)="searchTermContributor.next($event.target.value)" [formControl]="contributor" capitalize type="text" class="form-control" id="inputContributor">
@@ -219,7 +219,7 @@
     <!-- Submit Button -->
     <div class="col-sm-12">
       <div class="form-group text-center">
-        <button [disabled]="!form.valid || selectedModerators.length<=0 || conditions.length<=0 || submitted" type="submit" class="btn btn-default btn-auth" translate>{{'application-form.send'}}</button>
+        <button [disabled]="!form.valid || selectedModerators.length<=0 || conditions.length<=0 || submitted || uploader?.queue?.length<1" type="submit" class="btn btn-default btn-auth" translate>{{'application-form.send'}}</button>
       </div>
     </div>
   </div>

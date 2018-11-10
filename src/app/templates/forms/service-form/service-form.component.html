@@ -13,7 +13,7 @@
     </div>
     <!-- Service type-->
     <div class="col-sm-12">
-      <div class="form-group" [ngClass]="{'has-success': (serviceType.value)}">
+      <div class="form-group required" [ngClass]="{'has-success': (serviceType.value)}">
         <label for="selectServiceType" translate>{{'service-form.service-type'}}</label>
         <select [formControl]="serviceType" class="form-control" id="selectServiceType" (change)="onSelectedServiceType($event.target.selectedIndex-1)">
           <option value="" translate>{{'service-form.select-service-type'}}</option>
@@ -104,7 +104,7 @@
     </div>
     <!-- Location -->
     <div [hidden]="locationsExists.value" class="col-sm-12">
-      <div class="form-group" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
+      <div class="form-group required" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
         <label for="textareaLocation" translate>{{'event-form.location'}}</label>
         <textarea [formControl]="location" autoresize capitalize class="form-control" id="textareaLocation"></textarea>
         <!-- Validation -->

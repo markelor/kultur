@@ -72,34 +72,36 @@
     </div>
     <!-- Category -->
     <div formArrayName="categories" class="col-sm-6">
-      <label for="selectCategory" translate>{{'event-form.category'}}</label>
-      <div *ngFor="let category of form | formArrayPipe:'categories' | disableCategories:disableCategories; let i = index;">
-        <div class="form-group required" [ngClass]="{'has-error': (!category.valid && category.dirty), 'has-success': (category.valid)}">
-          <div [formGroupName]="i">
-            <select formControlName="category" class="form-control" id="selectCategory" (change)="onSelectedCategory($event.target.value,i)">
-              <option value="" translate>{{'event-form.select-category'}}</option>
-              <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
-                <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===levelCategory.language" [ngValue]="levelCategory.title">
-                  {{levelCategory.title}}
-                </option>
-              </ng-container>
-              <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
-                <ng-container *ngFor="let translation of levelCategory.translation">
-                  <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===translation.language" [ngValue]="translation.title">
-                    {{translation.title}}
+      <div class="form-group required">
+        <label for="selectCategory" translate>{{'event-form.category'}}</label>
+        <div *ngFor="let category of form | formArrayPipe:'categories' | disableCategories:disableCategories; let i = index;">
+          <div class="form-group" [ngClass]="{'has-error': (!category.valid && category.dirty), 'has-success': (category.valid)}">
+            <div [formGroupName]="i">
+              <select formControlName="category" class="form-control" id="selectCategory" (change)="onSelectedCategory($event.target.value,i)">
+                <option value="" translate>{{'event-form.select-category'}}</option>
+                <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
+                  <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===levelCategory.language" [ngValue]="levelCategory.title">
+                    {{levelCategory.title}}
                   </option>
                 </ng-container>
-              </ng-container>
-            </select>
+                <ng-container *ngFor="let levelCategory of levelCategories | eventCategory:i">
+                  <ng-container *ngFor="let translation of levelCategory.translation">
+                    <option *ngIf="levelCategory.parentId===categoryId[i] && inputLanguage===translation.language" [ngValue]="translation.title">
+                      {{translation.title}}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </select>
+            </div>
+            <!-- Validation -->
+            <span *ngIf="!category.valid && category.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
           </div>
-          <!-- Validation -->
-          <span *ngIf="!category.valid && category.dirty" class="help-block form-error" translate>{{'validation.required'}}</span>
         </div>
       </div>
     </div>
     <!-- Entries -->
     <div class="col-sm-6">
-      <div class="form-group required" [ngClass]="{'has-error': (!entries.valid && entries.dirty), 'has-success': (entries.valid)}">
+      <div class="form-group" [ngClass]="{'has-error': (!entries.valid && entries.dirty), 'has-success': (entries.valid)}">
         <label for="inputEntries" translate>{{'event-form.entries'}}</label>
         <input [formControl]="entries" type="text" class="form-control" id="inputEntries">
         <!-- Validation -->
@@ -108,7 +110,7 @@
     </div>
     <!-- Participants input -->
     <div class="col-sm-6">
-      <div class="form-group required" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
+      <div class="form-group" [ngClass]="{'has-error': (!participant.valid && participant.dirty), 'has-success': (participant.valid && participant.value)}">
         <label for="inputParticipant" translate>{{'event-form.participants'}}</label>
         <div class="input-group icon">
           <input [formControl]="participant" capitalize type="text" class="form-control" id="inputParticipant">
@@ -136,7 +138,7 @@
     </div>
     <!-- File upload start-->
     <div class="col-sm-6">
-      <div class="form-group required">
+      <div class="form-group">
         <label for="fileUploadPoster" translate>{{'event-form.images'}}</label>
         <button [disabled]="disableUploader" class="btn btn-primary ks-btn-file d-block">
           <span class="la la-cloud-upload ks-icon"></span>
@@ -247,7 +249,7 @@
     </div>
     <!-- Location -->
     <div [hidden]="locationsExists.value" class="col-sm-12">
-      <div class="form-group" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
+      <div class="form-group required" [ngClass]="{'has-error': (!location.valid && location.dirty), 'has-success': (location.value)}">
         <label for="textareaLocation" translate>{{'event-form.location'}}</label>
         <textarea [formControl]="location" autoresize capitalize class="form-control" id="textareaLocation"></textarea>
         <!-- Validation -->
